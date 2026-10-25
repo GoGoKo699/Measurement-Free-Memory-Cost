@@ -24,7 +24,7 @@ A physical noise round applies
 ```math
 \mathcal N_\gamma^{\otimes N},\qquad
 \mathcal N_\gamma(\rho)
-=(1-\gamma)\rho+\frac{\gamma}{2}I\operatorname{Tr}\rho,
+=(1-\gamma)\rho+\frac{\gamma}{2}I\mathrm{Tr}\rho,
 ```
 
 to every allocated physical qubit. Noise is independent between qubits and between rounds. Equivalently, the one-qubit Pauli probabilities are
@@ -39,14 +39,14 @@ On a computational-basis record the bit-flip probability is $`\gamma/2`$. A phas
 Let $`\mathcal V`$ encode $`k`$ logical qubits into the memory, let $`\Phi_D`$ be the storage channel, and let $`\mathcal R`$ be the final recovery. We prove
 
 ```math
-\frac12\|\mathcal R\Phi_D\mathcal V-\operatorname{id}_{2^k}\|_\diamond
+\frac12\|\mathcal R\Phi_D\mathcal V-\mathrm{id}_{2^k}\|_\diamond
 \le\epsilon. \tag{1}
 ```
 
 In particular, with the squared-overlap convention,
 
 ```math
-F_e(\Lambda)=\langle\Omega_{2^k}|(\operatorname{id}\otimes\Lambda)
+F_e(\Lambda)=\langle\Omega_{2^k}|(\mathrm{id}\otimes\Lambda)
 (|\Omega_{2^k}\rangle\langle\Omega_{2^k}|)|\Omega_{2^k}\rangle,
 ```
 
@@ -173,10 +173,10 @@ Consequently the probability that $`S^\perp`$ contains any nonzero Pauli label o
 
 Some $`S`$ therefore has no such label. In particular, every nontrivial logical Pauli, whose label lies in $`S^\perp\setminus S`$, has weight at least $`2w+1`$. The resulting code corrects every Pauli error of weight at most $`w`$. This proves the lemma. The argument actually gives a pure code, which is stronger than required. $`\square`$
 
-Apply Lemma 2 with $`n=n_0`$. Let $`E_j`$ be the net Pauli error on the data during noise block $`j`$. Its weight has distribution $`\operatorname{Bin}(n_0,3\Gamma_j/4)`$, and the increments are independent between blocks. A binomial Chernoff bound and (3)–(5) give
+Apply Lemma 2 with $`n=n_0`$. Let $`E_j`$ be the net Pauli error on the data during noise block $`j`$. Its weight has distribution $`\mathrm{Bin}(n_0,3\Gamma_j/4)`$, and the increments are independent between blocks. A binomial Chernoff bound and (3)–(5) give
 
 ```math
-\Pr\{\operatorname{wt}(E_j)>w\}
+\Pr\{\mathrm{wt}(E_j)>w\}
 \le \exp(-n_0 c_\Gamma)
 \le\frac{\epsilon}{2J}. \tag{11}
 ```
@@ -185,7 +185,7 @@ Indeed, an integer exceeding $`\lfloor\alpha n_0\rfloor`$ exceeds $`\alpha n_0`$
 
 ## 3. Exact coherent syndrome extraction
 
-Choose independent stabilizer generators $`g_1,\ldots,g_s`$. For a Pauli $`A`$, define $`\operatorname{syn}(A)\in\mathbb F_2^s`$ through its commutation signs with these generators. The code has a Clifford encoder $`U`$ with
+Choose independent stabilizer generators $`g_1,\ldots,g_s`$. For a Pauli $`A`$, define $`\mathrm{syn}(A)\in\mathbb F_2^s`$ through its commutation signs with these generators. The code has a Clifford encoder $`U`$ with
 
 ```math
 V|\psi\rangle=U\bigl(|\psi\rangle\otimes|0\rangle^{\otimes s}\bigr),
@@ -203,7 +203,7 @@ For every Pauli $`A`$ and every logical state, including a state entangled with 
 ```math
 A V|\psi\rangle\otimes|0\rangle^{\otimes Bs}
 \longmapsto
-A V|\psi\rangle\otimes|\operatorname{syn}(A)\rangle^{\otimes B}.
+A V|\psi\rangle\otimes|\mathrm{syn}(A)\rangle^{\otimes B}.
 \tag{12}
 ```
 
@@ -217,7 +217,7 @@ Let
 
 ```math
 A_j=E_jE_{j-1}\cdots E_1,
-\qquad \sigma_j=\operatorname{syn}(A_j),
+\qquad \sigma_j=\mathrm{syn}(A_j),
 \qquad \sigma_0=0.
 ```
 
@@ -298,22 +298,22 @@ with the exact endpoint values $`\widehat\sigma_0=0`$ and $`\widehat\sigma_J=\si
 
 Consider the good event consisting of:
 
-1. $`\operatorname{wt}(E_j)\le w`$ for every data increment;
+1. $`\mathrm{wt}(E_j)\le w`$ for every data increment;
 2. every archived syndrome bit is reconstructed correctly.
 
 On this event, syndrome linearity gives
 
 ```math
-\widehat\delta_j=\operatorname{syn}(E_j).
+\widehat\delta_j=\mathrm{syn}(E_j).
 ```
 
-The minimum-weight representative satisfies $`\operatorname{wt}(C_j)\le w`$. Thus $`C_j^{-1}E_j`$ has zero syndrome and weight at most $`2w`$, strictly smaller than the code distance. It is a stabilizer up to a scalar phase. Since Pauli products commute up to scalar phase, the estimated cumulative Pauli differs from $`A_J`$ by a stabilizer and a global phase. Its inverse exactly restores the encoded logical state, including any entanglement with a reference.
+The minimum-weight representative satisfies $`\mathrm{wt}(C_j)\le w`$. Thus $`C_j^{-1}E_j`$ has zero syndrome and weight at most $`2w`$, strictly smaller than the code distance. It is a stabilizer up to a scalar phase. Since Pauli products commute up to scalar phase, the estimated cumulative Pauli differs from $`A_J`$ by a stabilizer and a global phase. Its inverse exactly restores the encoded logical state, including any entanglement with a reference.
 
 Equations (11) and (15) give a total bad-event probability $`\beta\le\epsilon`$. This probability does not depend on the logical input. More explicitly, all physical depolarization can be sampled as classical Pauli labels independently of the input. Syndrome extraction, record outcomes, and the good-event test are then deterministic functions of those labels. Every good branch induces precisely the identity channel on the logical input. Therefore the complete recovered channel can be written
 
 ```math
 \mathcal R\Phi_D\mathcal V
-=(1-\beta)\operatorname{id}+\beta\Lambda_{\rm bad},
+=(1-\beta)\mathrm{id}+\beta\Lambda_{\rm bad},
 \qquad 0\le\beta\le\epsilon, \tag{16}
 ```
 

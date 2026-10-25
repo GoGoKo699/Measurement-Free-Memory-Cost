@@ -15,7 +15,7 @@ There is a Clifford change of coordinates under which
 
 ```math
 \mathcal A_V
-\simeq M_{2^s}\otimes\operatorname{Diag}_{2^c}
+\simeq M_{2^s}\otimes\mathrm{Diag}_{2^c}
 \otimes I_{2^{n-s-c}}.
 \tag{C1}
 ```
@@ -45,7 +45,7 @@ Suppose a CPTP tail channel $`\Theta`$, including its fixed terminal decoder, ob
 
 
 ```math
-\operatorname{range}\Theta^\dagger\subseteq\mathcal A_V.
+\mathrm{range}\Theta^\dagger\subseteq\mathcal A_V.
 \tag{C3}
 ```
 
@@ -77,7 +77,7 @@ In the coordinates of (C1), write the memory as $`QCG`$, with $`Q`$ containing $
 
 
 ```math
-(\mathcal E_V\otimes\operatorname{id}_R)(\rho)
+(\mathcal E_V\otimes\mathrm{id}_R)(\rho)
 =\sum_{z\in\{0,1\}^c}
 \rho^{(z)}_{QR}\otimes|z\rangle\langle z|_C
 \otimes\frac{I_G}{\dim G},
@@ -87,7 +87,7 @@ In the coordinates of (C1), write the memory as $`QCG`$, with $`Q`$ containing $
 
 up to tensor ordering, where each $`\rho^{(z)}_{QR}`$ is positive and their traces sum to one. Every $`QR`$ block admits a pure-state decomposition of Schmidt rank at most $`\dim Q=2^s`$. Tensoring the memory-side factors and mixing the blocks preserves that bound. A local CPTP map also preserves an upper bound on Schmidt number: apply each Kraus operator to the memory side of each pure-state decomposition, which cannot increase the corresponding Schmidt rank. These are the standard Schmidt-number properties introduced by [Terhal and Horodecki, 2000](https://arxiv.org/abs/quant-ph/9911117).
 
-For completeness, any normalized pure state $`|\psi\rangle`$ of Schmidt rank at most $`S`$ has $`|\langle\Omega_K|\psi\rangle|^2\le S/K`$. In matrix form its coefficient matrix $`A`$ has Frobenius norm one and rank at most $`S`$, so $`|\operatorname{Tr}A|\le\|A\|_*\le\sqrt S`$. Dividing the squared overlap by $`K`$ gives the claim. The same inequality holds for a convex mixture of such states. Set $`S=2^s`$ and use $`2s\le r`$. $`\square`$
+For completeness, any normalized pure state $`|\psi\rangle`$ of Schmidt rank at most $`S`$ has $`|\langle\Omega_K|\psi\rangle|^2\le S/K`$. In matrix form its coefficient matrix $`A`$ has Frobenius norm one and rank at most $`S`$, so $`|\mathrm{Tr}A|\le\|A\|_*\le\sqrt S`$. Dividing the squared overlap by $`K`$ gives the claim. The same inequality holds for a convex mixture of such states. Set $`S=2^s`$ and use $`2s\le r`$. $`\square`$
 
 ### Lemma C2a — Superoperator rank and Bell entanglement fidelity
 
@@ -96,8 +96,8 @@ Let $`\Lambda`$ be a CPTP channel from a $`K`$-dimensional logical system to a $
 
 ```math
 F_{\mathrm e}(\Lambda)
-=\frac{\operatorname{Tr}_{\mathrm{sup}}\Lambda}{K^2}
-\le\frac{\operatorname{rank}_{\mathbb C}\Lambda}{K^2}.
+=\frac{\mathrm{Tr}_{\mathrm{sup}}\Lambda}{K^2}
+\le\frac{\mathrm{rank}_{\mathbb C}\Lambda}{K^2}.
 \tag{C5a}
 ```
 
@@ -116,8 +116,8 @@ F_{\mathrm e}(\Lambda)
 
 
 ```math
-\operatorname{Tr}_{\mathrm{sup}}\Lambda
-=\sum_\alpha|\operatorname{Tr}A_\alpha|^2
+\mathrm{Tr}_{\mathrm{sup}}\Lambda
+=\sum_\alpha|\mathrm{Tr}A_\alpha|^2
 =K^2F_{\mathrm e}(\Lambda)\ge0.
 \tag{C5c}
 ```
@@ -129,14 +129,14 @@ The number of nonzero eigenvalues, counted with algebraic multiplicity, is at mo
 
 
 ```math
-0\le\operatorname{Tr}_{\mathrm{sup}}\Lambda
+0\le\mathrm{Tr}_{\mathrm{sup}}\Lambda
 \le\sum_{\lambda\ne0}|\lambda|
-\le\operatorname{rank}_{\mathbb C}\Lambda.
+\le\mathrm{rank}_{\mathbb C}\Lambda.
 \tag{C5d}
 ```
 
 
-This proves (C5a). By (C3), $`\operatorname{rank}_{\mathbb C}\Theta\le\dim_{\mathbb C}\mathcal A_V=2^r`$. Composition with $`\Pi`$ cannot increase rank, which gives (C5b). $`\square`$
+This proves (C5a). By (C3), $`\mathrm{rank}_{\mathbb C}\Theta\le\dim_{\mathbb C}\mathcal A_V=2^r`$. Composition with $`\Pi`$ cannot increase rank, which gives (C5b). $`\square`$
 
 The superoperator bound is stronger than (C5) at small binary rank and gives the main rank floor below. The Schmidt-number statement remains complementary: for example, a large commuting algebra has $`s=0`$, so (C5) still limits Bell fidelity to $`1/K`$ even when its binary dimension makes (C5b) trivial. Unlike the state-uniform Schmidt-number bound, (C5b) is used on a complete logical CPTP channel with the maximally entangled input specified in its entanglement fidelity.
 
@@ -174,7 +174,7 @@ R_t\ge a.
 ```
 
 
-**Proof.** Fix a cut and any realization $`b`$ of the future noise. Average the earlier noise to obtain a CPTP prefix $`\Pi_t`$ from the logical input to the physical register at the cut. The Markov noise model makes this prefix independent of $`b`$. Let $`\Theta_{b,t}`$ be the sampled tail including its fixed decoder. Lemma E1 of [pauli_envelopes.md](pauli_envelopes.md) puts $`\operatorname{range}\Theta_{b,t}^\dagger`$ inside $`\mathcal A_{V_{b,t}}`$. Thus the full logical channel $`\Lambda_b=\Theta_{b,t}\circ\Pi_t`$ is CPTP and satisfies (C5b).
+**Proof.** Fix a cut and any realization $`b`$ of the future noise. Average the earlier noise to obtain a CPTP prefix $`\Pi_t`$ from the logical input to the physical register at the cut. The Markov noise model makes this prefix independent of $`b`$. Let $`\Theta_{b,t}`$ be the sampled tail including its fixed decoder. Lemma E1 of [pauli_envelopes.md](pauli_envelopes.md), together with the charged-gate envelope update in Lemma C4 below, puts $`\mathrm{range}\Theta_{b,t}^\dagger`$ inside $`\mathcal A_{V_{b,t}}`$. Thus the full logical channel $`\Lambda_b=\Theta_{b,t}\circ\Pi_t`$ is CPTP and satisfies (C5b).
 
 For every $`r\ge0`$,
 
@@ -494,8 +494,8 @@ Its Pauli-support span has dimension three, although the output is only one qubi
 
 
 ```math
-U=\operatorname{CNOT}_{1\to2}(I\otimes THT),
-\qquad \mathcal D(\rho)=\operatorname{Tr}_2(U\rho U^\dagger).
+U=\mathrm{CNOT}_{1\to2}(I\otimes THT),
+\qquad \mathcal D(\rho)=\mathrm{Tr}_2(U\rho U^\dagger).
 \tag{C33}
 ```
 
