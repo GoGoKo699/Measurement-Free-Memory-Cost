@@ -33,7 +33,7 @@ The public arXiv record still listed only v1 when checked. A related four-author
 The project's depolarizing layer is
 
 ```math
-\mathcal D_\gamma=(1-\gamma)\operatorname{id}
+\mathcal D_\gamma=(1-\gamma)\mathrm{id}
    +\gamma\,R_{I/2},
 ```
 
@@ -99,10 +99,10 @@ With $`L`$ concatenation levels, the number of internal nodes per code block is 
 ```math
 n=k5^L,
 \qquad
-m_T\le42kM\frac{5^L-1}{4},
+m_T\le42kJ\frac{5^L-1}{4},
 ```
 
-up to the convention about including an unnecessary final recovery inside the counted memory. Choosing $`L`$ to make $`kMp_L\le\epsilon`$, and using $`J\le40\gamma D+1`$, gives
+up to the convention about including an unnecessary final recovery inside the counted memory. Choosing $`L`$ to make $`kJp_L\le\epsilon`$, and using $`J\le40\gamma D+1`$, gives
 
 ```math
 \begin{aligned}
@@ -129,7 +129,7 @@ The construction combines established ingredients. The stabilizer existence and 
 
 **Operator algebras and channel fidelity.** The finite-dimensional matrix/direct-sum structure behind subsystem correction is standard operator quantum error correction; see Kribs, Laflamme, Poulin, and Lesosky, *Quantum Information & Computation* **6**, 382–399 (2006), [publisher record](https://www.rintonpress.com/journals/doi/QIC6.4-5-6.html), `kribs2006operator`. Schmidt number and its behavior under local operations are established by Terhal and Horodecki, PRA **61**, 040301(R) (2000), [DOI](https://doi.org/10.1103/PhysRevA.61.040301), `terhal2000schmidt`.
 
-The project uses the dimension $`2^r`$ of a binary-rank-$`r`$ Pauli algebra as a superoperator-rank bottleneck. For a logical channel on dimension $`K=2^k`$, its proof derives $`F_{\mathrm e}=\operatorname{Tr}_{\mathrm{super}}(\Lambda)/K^2\le\operatorname{rank}(\Lambda)/K^2`$.
+The project uses the dimension $`2^r`$ of a binary-rank-$`r`$ Pauli algebra as a superoperator-rank bottleneck. For a logical channel on dimension $`K=2^k`$, its proof derives $`F_{\mathrm e}=\mathrm{Tr}_{\mathrm{super}}(\Lambda)/K^2\le\mathrm{rank}(\Lambda)/K^2`$.
 
 The fidelity identity is standard: see Nielsen, [Physics Letters A **303**, 249–252 (2002), Eq. (16)](https://arxiv.org/pdf/quant-ph/0205035), *nielsen2002simple*, and the original entanglement-fidelity formulation of Schumacher, [PRA **54**, 2614–2628 (1996)](https://doi.org/10.1103/PhysRevA.54.2614), *schumacher1996sending*. The subsequent rank inequality uses that a channel has spectral radius at most one. This yields the sharper branch bound $`F_{\mathrm e}\le\min\{1,2^{r-2k}\}`$ and the rank floor stated above.
 
