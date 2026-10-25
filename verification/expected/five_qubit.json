@@ -1,0 +1,33 @@
+{
+  "T_count_per_recovery_node_upper": 42,
+  "additional_work_qubits": 0,
+  "all_pauli_errors_checked": 1024,
+  "bad_paulis_by_weight": [
+    0,
+    0,
+    90,
+    210,
+    270,
+    198
+  ],
+  "correctable_syndromes": 16,
+  "destabilizers": [
+    "IIIYY",
+    "IIYZX",
+    "IZZXX",
+    "IXXXX"
+  ],
+  "max_clifford_basis_residual": 0.0,
+  "max_decoder_unitarity_residual": 0.0,
+  "max_failure_bound_over_target": 0.9887695312500001,
+  "max_residual_pauli_check_error": 0.0,
+  "max_single_error_recovery_residual": 0.0,
+  "parameter_cases": 240,
+  "quadratic_terms": {
+    "logical_X": 3,
+    "logical_Z": 3
+  },
+  "scope": "Finite algebra and dense-matrix identities, not an asymptotic proof.",
+  "stabilizer_rank": 4,
+  "status": "PASS"
+}

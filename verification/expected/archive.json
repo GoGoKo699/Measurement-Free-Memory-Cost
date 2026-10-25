@@ -1,0 +1,165 @@
+{
+  "status": "all_checks_passed",
+  "scope": "Finite verification; universal statements are proved in science/clifford_lifetime.md.",
+  "five_qubit_pauli_history": {
+    "distance": 3,
+    "correctable_increment_count": 16,
+    "three_increment_histories_checked": 4096,
+    "histories_with_accumulated_weight_above_one": 3240,
+    "failures_if_only_final_syndrome_used": 2880,
+    "deferred_history_decoder_failures": 0,
+    "complementary_coherent_recovery_anf_rows_checked": 16
+  },
+  "broadcast": {
+    "endpoint_gamma": "1/16",
+    "invariant_image": "22831/131072",
+    "enumerated_heights": [
+      {
+        "height": 0,
+        "root_error": "0",
+        "true_syndrome_error": "1/32"
+      },
+      {
+        "height": 1,
+        "root_error": "47/16384",
+        "true_syndrome_error": "8897/262144"
+      },
+      {
+        "height": 2,
+        "root_error": "30421388814271/9007199254740992",
+        "true_syndrome_error": "4959920459584561/144115188075855872"
+      }
+    ],
+    "noise_patterns_checked": 12315,
+    "root_error_after_10000_generations": 0.0034936873326598694,
+    "true_syndrome_error_after_10000_generations": 0.034525331874368625
+  },
+  "workspace": {
+    "replicas": 3,
+    "syndrome_bits": 2,
+    "explicit_register_allocations": [
+      {
+        "blocks": 2,
+        "archive_peak": 6,
+        "target_preparations": 6
+      },
+      {
+        "blocks": 3,
+        "archive_peak": 30,
+        "target_preparations": 30
+      },
+      {
+        "blocks": 4,
+        "archive_peak": 102,
+        "target_preparations": 108
+      },
+      {
+        "blocks": 5,
+        "archive_peak": 318,
+        "target_preparations": 348
+      },
+      {
+        "blocks": 6,
+        "archive_peak": 966,
+        "target_preparations": 1074
+      },
+      {
+        "blocks": 7,
+        "archive_peak": 2910,
+        "target_preparations": 3258
+      },
+      {
+        "blocks": 8,
+        "archive_peak": 8742,
+        "target_preparations": 9816
+      },
+      {
+        "blocks": 9,
+        "archive_peak": 26238,
+        "target_preparations": 29496
+      }
+    ]
+  },
+  "finite_parameters": {
+    "R0": 0.2583152442102591,
+    "entropy_ball_lengths_checked": 256,
+    "maximum_entropy_bound_excess": -0.7416847557897409,
+    "examples": [
+      {
+        "gamma": "1/16",
+        "k": 1,
+        "physical_rounds": 1,
+        "epsilon": 0.05,
+        "tau": 1,
+        "blocks": 1,
+        "data_width": 1486,
+        "correctable_weight": 92,
+        "root_replicas": 0,
+        "width_decimal": "1486",
+        "log2_width": 10.537218400538595,
+        "exact_data_tail_union_bound": 0.00354513509088792,
+        "archive_hoeffding_union_bound": 0.0
+      },
+      {
+        "gamma": "1/16",
+        "k": 1,
+        "physical_rounds": 10,
+        "epsilon": 0.01,
+        "tau": 1,
+        "blocks": 10,
+        "data_width": 3061,
+        "correctable_weight": 191,
+        "root_replicas": 143,
+        "width_decimal": "5741490241",
+        "log2_width": 32.41877810033981,
+        "exact_data_tail_union_bound": 0.00043113709632620895,
+        "archive_hoeffding_union_bound": 0.004140020885017776
+      },
+      {
+        "gamma": "1/64",
+        "k": 10,
+        "physical_rounds": 100,
+        "epsilon": 0.001,
+        "tau": 4,
+        "blocks": 25,
+        "data_width": 3755,
+        "correctable_weight": 234,
+        "root_replicas": 173,
+        "width_decimal": "121987906828017660",
+        "log2_width": 56.759515747561814,
+        "exact_data_tail_union_bound": 4.1484283202042056e-05,
+        "archive_hoeffding_union_bound": 0.00047180682216872363
+      },
+      {
+        "gamma": "1/160",
+        "k": 100,
+        "physical_rounds": 1000,
+        "epsilon": 0.01,
+        "tau": 10,
+        "blocks": 100,
+        "data_width": 3343,
+        "correctable_weight": 208,
+        "root_replicas": 165,
+        "width_decimal": "61283540990243467373545592940430025537007605440607158",
+        "log2_width": 175.35576059337492,
+        "exact_data_tail_union_bound": 0.0004719634576317299,
+        "archive_hoeffding_union_bound": 0.004025982354335171
+      },
+      {
+        "gamma": "1/1000",
+        "k": 1,
+        "physical_rounds": 1,
+        "epsilon": 0.9,
+        "tau": 62,
+        "blocks": 1,
+        "data_width": 254,
+        "correctable_weight": 15,
+        "root_replicas": 0,
+        "width_decimal": "254",
+        "log2_width": 7.9886846867721655,
+        "exact_data_tail_union_bound": 0.11396554054449438,
+        "archive_hoeffding_union_bound": 0.0
+      }
+    ]
+  }
+}

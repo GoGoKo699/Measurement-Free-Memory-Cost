@@ -1,0 +1,64 @@
+# Measurement-Free Memory Cost
+
+This repository studies the internal non-Clifford processing needed to preserve
+unknown quantum information through independent depolarizing noise. The complete
+scientific account is organized by topic under science/.
+
+Canonical entrypoints:
+- README.md: question, principal bounds, reading routes, reproduction, scope,
+  purpose and contact.
+- science/model.md: authoritative operational model, noise convention, endpoints,
+  Bell-fidelity and half-diamond conventions, exact claims and reading route.
+- science/pauli_envelopes.md: binary support envelope, Clifford/reset updates,
+  expected-rank contraction, replacement branches and diamond forgetting.
+- science/control_cost.md: channel-rank and algebra bottlenecks, the 4^(-k)
+  fidelity floor, gate-growth charges, logarithmic and exact discrete budgets,
+  interval constraints and decoder-specific terminal rank.
+- science/clifford_lifetime.md: finite random-stabilizer existence proof, noisy
+  syndrome archive, exact chronology, full workspace accounting, final recovery
+  and matching order of zero-T quantum lifetime.
+- science/coherent_recovery.md: five-qubit syndrome polynomials, 42-T recovery
+  node, concatenation, batching, finite parameters and upper resources.
+- science/interpretation.md: width and continuing work, catastrophic-reset
+  baseline, endpoint/controller distinctions and remaining logarithmic gap.
+- references/RELATED_WORK.md: primary attribution and operational comparisons.
+- references/references.bib: structured primary-source bibliography.
+- verification/README.md: finite checks, dependencies and their limitations.
+- verification/run_all.py: deterministic suite and saved-output comparison.
+
+Reader routes:
+- For the story, read model.md and interpretation.md, then the relevant proof.
+- For the converse, read pauli_envelopes.md followed by control_cost.md.
+- For constructive storage, compare clifford_lifetime.md and coherent_recovery.md
+  under the same noise and endpoint convention.
+- For a theorem, use its full proof and assumptions, not an introductory summary.
+- For reproduction, follow verification/README.md and inspect the actual output.
+
+Preserve these distinctions:
+- gamma is the complete-depolarization mixing probability. Total nonidentity
+  Pauli-error probability is 3*gamma/4; a record bit flips with probability gamma/2.
+- D counts full noise rounds. Ideal processing between them can have arbitrary
+  elementary depth; hardware gate-time claims require another model.
+- Every persistent data, syndrome, controller and resource register is counted
+  and noisy. There is no protected bypass or external classical decoder.
+- Replacement states are independent of the retained memory and unknown input.
+  A correlated external source retaining memory across times is not free.
+- Actual surviving Pauli supports need not form a vector space. The proof uses
+  a linear enclosure and may overestimate retained information.
+- The main fidelity floor is a=2k*(1-epsilon-4^(-k))/(1-4^(-k)).
+- The scalar injection optimum is a lower bound from necessary rank constraints,
+  not an attained physical optimum for T-count.
+- A general final decoder can have support rank much larger than 2k.
+- Zero-T quantum storage uses exponential noisy width and defers nonlinear
+  computation to unrestricted final recovery.
+- The coherent construction uses the standard five-qubit code and exact
+  seven-T Toffoli synthesis. Its six Toffoli-equivalent gates need no extra
+  work qubits; their 42-T bound is not claimed optimal.
+- Both constructions give half-diamond error epsilon. The converse assumes only
+  Bell-overlap fidelity at least 1-epsilon.
+- Measured QEC with noiseless external classical feedback is a different model.
+  Do not claim that all QEC consumes magic or that fresh-state cost is T-count.
+- The qualitative no-go result and stochastic Pauli framework are prior work.
+- Finite checks establish their tested identities, not unrestricted asymptotic
+  truth or external peer review.
+
