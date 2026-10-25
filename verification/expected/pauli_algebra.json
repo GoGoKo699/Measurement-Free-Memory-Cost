@@ -1,0 +1,52 @@
+{
+  "algebras": {
+    "maximum_choi_partial_transpose_trace_norm_error": 8.881784197001252e-16,
+    "maximum_trace_preservation_residual": 0.0,
+    "maximum_twirl_projection_residual": 0.0,
+    "minimum_conditional_expectation_choi_eigenvalue": -2.313831305793879e-16,
+    "subspaces_checked": 67
+  },
+  "gate_envelopes": {
+    "T_and_T_dagger_cases": 268,
+    "generic_one_qubit_unitary_cases": 134,
+    "nonlocal_Pauli_rotation_cases": 67
+  },
+  "injection_optimization": {
+    "arithmetic": "exact rational (fractions.Fraction)",
+    "cap_feasible_cases": 1578,
+    "cap_infeasible_cases": 366,
+    "exact_coasting_boundary_cases": 96,
+    "primal_dual_certificate_cases": 1944
+  },
+  "joint_reset": {
+    "joint_reset_Pauli_cases": 64,
+    "maximum_joint_reset_adjoint_residual": 2.220499667131274e-16
+  },
+  "logical_channel_rank": {
+    "logical_CPTP_channels": 134,
+    "maximum_algebra_fidelity_bound_violation": 0.0,
+    "maximum_channel_eigenvalue_modulus": 1.0000000000000027,
+    "maximum_fidelity_superoperator_trace_residual": 1.1139521769569972e-16,
+    "maximum_trace_preservation_residual": 1.2212453270876722e-15
+  },
+  "mixed_circuits": {
+    "circuits": 200,
+    "maximum_factorization_residual": 5.551115123125783e-17,
+    "maximum_replacement_criterion_residual": 1.1102230246251565e-16,
+    "observed_T_envelope_rank_growth_events": 660,
+    "seed": 72461,
+    "steps_per_circuit": 24,
+    "zero_envelope_cuts": 2179
+  },
+  "numerical_tolerance": 1e-09,
+  "numpy_version": "2.3.5",
+  "python_version": "3.12.14",
+  "scope": "finite operator identities and exact scalar LP certificates",
+  "status": "PASS",
+  "terminal_decoder": {
+    "Clifford_decoder_support_rank": 2,
+    "maximum_decoder_formula_residual": 2.482534153247273e-16,
+    "non_Clifford_decoder_support_rank": 4,
+    "output_qubits": 1
+  }
+}
