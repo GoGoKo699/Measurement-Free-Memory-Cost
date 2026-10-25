@@ -26,6 +26,10 @@ Canonical entrypoints:
 - verification/README.md: finite checks, dependencies and their limitations.
 - verification/run_all.py: deterministic suite and saved-output comparison.
 
+Learning entrypoints:
+- learning/GOTTESMAN_BRIDGE.md: selected single educational anchor, its source-to-project notation and proof bridge.
+- learning/MILESTONES.md: exactly 30 learner-independent milestones (12 background, 18 innovation).
+
 Reader routes:
 - For the story, read model.md and interpretation.md, then the relevant proof.
 - For the converse, read pauli_envelopes.md followed by control_cost.md.
