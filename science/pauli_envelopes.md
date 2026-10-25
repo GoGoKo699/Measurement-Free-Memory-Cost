@@ -8,7 +8,7 @@ The memory occupies at most $`n`$ qubits, including every persistent workspace o
 
 
 ```math
-\mathcal R_{\tau,A}(X)=\tau_A\otimes\operatorname{Tr}_A X,
+\mathcal R_{\tau,A}(X)=\tau_A\otimes\mathrm{Tr}_A X,
 \tag{E1}
 ```
 
@@ -19,7 +19,7 @@ Each of $`D`$ noise layers applies, independently to every persistent qubit,
 
 
 ```math
-\mathcal N_q(X)=qX+(1-q)\frac{I}{2}\operatorname{Tr}X,
+\mathcal N_q(X)=qX+(1-q)\frac{I}{2}\mathrm{Tr}X,
 \qquad 0<q<1.
 \tag{E2}
 ```
@@ -43,7 +43,7 @@ For an operator $`O`$, its Pauli support is the set of labels with nonzero coeff
 
 
 ```math
-\mathcal A_V=\operatorname{span}_{\mathbb C}\{P_v:v\in V\}.
+\mathcal A_V=\mathrm{span}_{\mathbb C}\{P_v:v\in V\}.
 \tag{E4}
 ```
 
@@ -61,9 +61,9 @@ For the full physical output, initialize $`V=W_n`$. More generally, if a fixed d
 
 ```math
 V_{\mathrm{dec}}
-=\operatorname{span}_{\mathbb F_2}
+=\mathrm{span}_{\mathbb F_2}
 \bigcup_{P\text{ in an output Pauli basis}}
-\operatorname{supp}_{\mathrm P}\!\left(\mathcal D^\dagger(P)\right),
+\mathrm{supp}_{\mathrm P}\!\left(\mathcal D^\dagger(P)\right),
 \qquad M=\dim V_{\mathrm{dec}}\le 2n.
 \tag{E5}
 ```
@@ -85,7 +85,7 @@ The following backward updates preserve the envelope property.
 
 ```math
 \mathcal R_{\tau,A}^\dagger(P_A\otimes P_B)
-=\operatorname{Tr}(\tau_A P_A)I_A\otimes P_B.
+=\mathrm{Tr}(\tau_A P_A)I_A\otimes P_B.
 \tag{E6}
 ```
 
@@ -105,17 +105,17 @@ Let $`V\le W_n`$ be any fixed subspace of dimension $`r`$. Independently include
 ```
 
 
-**Proof.** Choose a full-row-rank $`r\times2n`$ generator matrix $`G`$ for $`V`$. Choose $`r`$ linearly independent columns of $`G`$. Let $`G_E`$ be the restriction to the coordinate columns of the qubits in $`E`$, and let $`K_E`$ count the chosen independent columns whose qubits belong to $`E`$. Those columns remain independent inside $`G_E`$, so $`\operatorname{rank}G_E\ge K_E`$. Each chosen column is retained in $`G_E`$ with marginal probability $`\gamma`$. The two coordinate columns of a single qubit are erased together; independence of the chosen columns is not needed for the expectation. Thus
+**Proof.** Choose a full-row-rank $`r\times2n`$ generator matrix $`G`$ for $`V`$. Choose $`r`$ linearly independent columns of $`G`$. Let $`G_E`$ be the restriction to the coordinate columns of the qubits in $`E`$, and let $`K_E`$ count the chosen independent columns whose qubits belong to $`E`$. Those columns remain independent inside $`G_E`$, so $`\mathrm{rank}G_E\ge K_E`$. Each chosen column is retained in $`G_E`$ with marginal probability $`\gamma`$. The two coordinate columns of a single qubit are erased together; independence of the chosen columns is not needed for the expectation. Thus
 
 
 ```math
-\mathbb E\operatorname{rank}G_E
+\mathbb E\mathrm{rank}G_E
 \ge\mathbb E K_E=\gamma r.
 \tag{E8}
 ```
 
 
-The kernel of the restricted coordinate map has dimension $`r-\operatorname{rank}G_E`$. Taking expectations proves (E7). $`\square`$
+The kernel of the restricted coordinate map has dimension $`r-\mathrm{rank}G_E`$. Taking expectations proves (E7). $`\square`$
 
 At a backward noise layer the current envelope is a function only of noise later in forward time. It is independent of the erasures sampled in the current layer. Consequently (E7) may be conditioned on the current envelope and iterated. Free operations from Lemma E1 can only decrease the rank between layers.
 
@@ -129,7 +129,7 @@ Let $`\Phi`$ be the storage channel, optionally composed with a fixed final deco
 ```math
 \frac12\|\Phi-\mathcal R_\tau\|_\diamond
 \le \min\{1,Mq^D\},
-\qquad \mathcal R_\tau(X)=\operatorname{Tr}(X)\tau.
+\qquad \mathcal R_\tau(X)=\mathrm{Tr}(X)\tau.
 \tag{E9}
 ```
 
@@ -139,7 +139,7 @@ Equivalently, for every finite reference system $`R`$ and joint input state $`\o
 
 ```math
 \frac12\left\|
-(\Phi\otimes\operatorname{id}_R)(\omega_{MR})
+(\Phi\otimes\mathrm{id}_R)(\omega_{MR})
 -\tau\otimes\omega_R
 \right\|_1
 \le \min\{1,Mq^D\}.
@@ -168,7 +168,7 @@ p:=\Pr(r_b>0)\le\min\{1,Mq^D\}.
 ```
 
 
-The second inequality uses that a positive integer rank is at least one. If $`r_b=0`$, the adjoint image of every output observable is a scalar multiple of the identity. Therefore $`\Phi_b`$ is exactly a replacement channel: all input states have the same output, and trace preservation extends the formula to $`\Phi_b(X)=\operatorname{Tr}(X)\tau_b`$.
+The second inequality uses that a positive integer rank is at least one. If $`r_b=0`$, the adjoint image of every output observable is a scalar multiple of the identity. Therefore $`\Phi_b`$ is exactly a replacement channel: all input states have the same output, and trace preservation extends the formula to $`\Phi_b(X)=\mathrm{Tr}(X)\tau_b`$.
 
 Separating the sampled circuits according to this event yields
 
