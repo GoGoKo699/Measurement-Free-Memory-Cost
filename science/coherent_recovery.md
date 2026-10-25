@@ -153,7 +153,7 @@ n=k5^L,
 \qquad
 m_T\le \frac{42kJ}{4}(5^L-1),
 \qquad
-\frac12\|\Lambda-\operatorname{id}_{2^k}\|_\diamond\le\epsilon,\qquad F_{\mathrm e}\ge1-\epsilon.
+\frac12\|\Lambda-\mathrm{id}_{2^k}\|_\diamond\le\epsilon,\qquad F_{\mathrm e}\ge1-\epsilon.
 ```
 
 For $`L=0`$ the recovery tree is empty and the gate count is zero; the same probability bound covers that case. Counting the recovery after the final noise interval makes the stated upper bound conservative. The free endpoint decoder can then be chosen Clifford.
