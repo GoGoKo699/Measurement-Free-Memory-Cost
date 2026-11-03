@@ -94,12 +94,12 @@ The probability that no complete-register erasure occurs is $`(1-\gamma^n)^D`$. 
 F_{\mathrm e}
 \le
 4^{-k}+(1-4^{-k})(1-\gamma^n)^D.
-\tag{I1}
+\qquad\text{(I1)}
 ```
 
 This argument permits arbitrary internal gates; it does not depend on the Clifford restriction or the T budget.
 
-For $`\epsilon<1-4^{-k}`$, requiring $`F_{\mathrm e}\ge1-\epsilon`$ in (I1) gives
+For $`\epsilon\lt 1-4^{-k}`$, requiring $`F_{\mathrm e}\ge1-\epsilon`$ in (I1) gives
 
 ```math
 (1-\gamma^n)^D
@@ -128,3 +128,4 @@ The [closest predecessor](../references/RELATED_WORK.md) established the qualita
 The constructive coherent recovery shows how to meet that requirement up to a power of a logarithm, with explicit finite circuits and a guarantee stronger than the converse's Bell-fidelity premise. The remaining gap is stated at the level of the full operational model: better coherent decoding could improve the achieved resource law. A restriction of this particular concatenated construction would not by itself prove that such an improvement is impossible.
 
 All conclusions retain independent depolarizing noise, fixed schedules, counted persistent workspace, and ideal processing between noise layers. Correlated noise, gate faults inside the processing intervals, geometric locality, and an external controller require their own model and analysis.
+

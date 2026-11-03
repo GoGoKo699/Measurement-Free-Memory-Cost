@@ -27,13 +27,19 @@ Canonical entrypoints:
 - verification/run_all.py: deterministic suite and saved-output comparison.
 
 Learning entrypoints:
+- learning/report/Measurement_Free_Memory_Cost_Report.pdf: continuous self-contained explanation of the model, converse, constructions and remaining resource gap.
+- learning/source/README.md: technical build instructions for the explanatory report and its matching editable source.
 - learning/GOTTESMAN_BRIDGE.md: selected single educational anchor, its source-to-project notation and proof bridge.
 - learning/MILESTONES.md: exactly 30 learner-independent milestones (12 background, 18 innovation).
 
 Reader routes:
-- For the story, read model.md and interpretation.md, then the relevant proof.
-- For the converse, read pauli_envelopes.md followed by control_cost.md.
-- For constructive storage, compare clifford_lifetime.md and coherent_recovery.md
+- For a continuous explanation, read learning/report/Measurement_Free_Memory_Cost_Report.pdf.
+- For the connected scientific account, read science/model.md and
+  science/interpretation.md, then the relevant proof.
+- For the converse, read science/pauli_envelopes.md followed by
+  science/control_cost.md.
+- For constructive storage, compare science/clifford_lifetime.md and
+  science/coherent_recovery.md
   under the same noise and endpoint convention.
 - For a theorem, use its full proof and assumptions, not an introductory summary.
 - For reproduction, follow verification/README.md and inspect the actual output.
@@ -65,4 +71,5 @@ Preserve these distinctions:
 - The qualitative no-go result and stochastic Pauli framework are prior work.
 - Finite checks establish their tested identities, not unrestricted asymptotic
   truth or external peer review.
+
 

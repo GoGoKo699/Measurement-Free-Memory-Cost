@@ -106,7 +106,7 @@ An earlier logical Pauli error does not change the probability estimate for a la
 
 ## 3. Batching weak noise
 
-Let $`0<\gamma\le1/20`$ and let storage last $`D\ge1`$ fully noisy rounds. Set
+Let $`0\lt \gamma\le1/20`$ and let storage last $`D\ge1`$ fully noisy rounds. Set
 
 ```math
 \tau=\left\lfloor\frac1{20\gamma}\right\rfloor,
@@ -136,7 +136,7 @@ The recovery circuit is ideal within its processing interval, exactly as in the 
 
 ## 4. Explicit resource guarantee
 
-For $`k,D\ge1`$, $`0<\epsilon<1/2`$, and $`0<\gamma\le1/20`$, define
+For $`k,D\ge1`$, $`0\lt \epsilon\lt 1/2`$, and $`0\lt \gamma\le1/20`$, define
 
 ```math
 A=\max\!\left\{1,\,
@@ -186,3 +186,4 @@ The [zero-non-Clifford construction](clifford_lifetime.md) realizes the alternat
 ## Verification
 
 The executable [five-qubit checker](../verification/verify_five_qubit.py) checks the stabilizer commutation and rank, all sixteen correctable-error syndromes, the two Boolean polynomials, every Pauli error on a five-qubit block, and the exact logical-error enumerator of this recovery rule. It also checks the chosen integer batching parameters and the conservative recursion. These finite calculations support the explicit construction; the unbounded concatenation statement follows from the independence and induction arguments above.
+

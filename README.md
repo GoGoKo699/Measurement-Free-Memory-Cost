@@ -6,6 +6,10 @@ This project studies a memory whose data and syndrome records all remain noisy, 
 
 The model permits arbitrary ideal global Clifford operations and input-independent replacement resets between independent depolarizing-noise layers. Fresh reset states may include magic states. Initial encoding and final recovery may be arbitrary. Every internal T/T-dagger gate is counted, and every persistent register belongs to the noisy physical width.
 
+## Explanatory report
+
+Read the [complete explanatory report (PDF)](learning/report/Measurement_Free_Memory_Cost_Report.pdf) for a self-contained explanation of the memory model, the processing lower bound, the two storage constructions, and the remaining resource gap.
+
 ## Principal results
 
 Let $`n`$ be physical width, $`k`$ the number of logical qubits, $`D`$ the number of noisy rounds, and $`\gamma`$ the depolarizing strength in the convention $`\mathcal N_\gamma=(1-\gamma)\mathrm{id}+\gamma\mathcal R_{I/2}`$.
@@ -14,7 +18,7 @@ For recovered Bell entanglement fidelity at least $`1-\epsilon`$, set
 
 ```math
 a=2k\,\frac{1-\epsilon-4^{-k}}{1-4^{-k}},
-\qquad 0\le\epsilon<1-4^{-k}.
+\qquad 0\le\epsilon\lt 1-4^{-k}.
 ```
 
 The necessary processing budget includes
@@ -33,45 +37,10 @@ Here $`[x]_+=\max\{x,0\}`$. At fixed high fidelity and sufficiently long storage
 |---|---|---|
 | Clifford/reset forgetting | Half-diamond distance to a replacement channel is at most $`\min\{1,2n(1-\gamma)^D\}`$ | [Binary Pauli envelopes](science/pauli_envelopes.md) |
 | Continuing processing | Extensive non-Clifford budget with fidelity, width, and timing dependence | [Control cost](science/control_cost.md) |
-| Sharp zero-T quantum lifetime | $`\Theta(\gamma^{-1}\ln n)`$ at fixed logical size and target fidelity strictly between # Measurement-Free Memory Cost
+| Sharp zero-T quantum lifetime | $`\Theta(\gamma^{-1}\ln n)`$ at fixed logical size and target fidelity $`4^{-k}\lt F_0\lt 1`$, for sufficiently weak noise | [Clifford quantum lifetime](science/clifford_lifetime.md) |
+| Explicit coherent recovery | Width and T count with a polylogarithmic overhead relative to the extensive lower bound | [Coherent recovery](science/coherent_recovery.md) |
 
-**How much non-Clifford processing is needed to keep unknown quantum information alive?**
-
-This project studies a memory whose data and syndrome records all remain noisy, with no protected external classical controller. It gives a quantitative lower bound on continuing non-Clifford processing, a sharp order for Clifford-only quantum lifetime, and explicit storage constructions.
-
-The model permits arbitrary ideal global Clifford operations and input-independent replacement resets between independent depolarizing-noise layers. Fresh reset states may include magic states. Initial encoding and final recovery may be arbitrary. Every internal T/T-dagger gate is counted, and every persistent register belongs to the noisy physical width.
-
-## Principal results
-
-Let $`n`$ be physical width, $`k`$ the number of logical qubits, $`D`$ the number of noisy rounds, and $`\gamma`$ the depolarizing strength in the convention $`\mathcal N_\gamma=(1-\gamma)\mathrm{id}+\gamma\mathcal R_{I/2}`$.
-
-For recovered Bell entanglement fidelity at least $`1-\epsilon`$, set
-
-```math
-a=2k\,\frac{1-\epsilon-4^{-k}}{1-4^{-k}},
-\qquad 0\le\epsilon<1-4^{-k}.
-```
-
-The necessary processing budget includes
-
-```math
-m_T\ge
-a\left[
-D\bigl(-\ln(1-\gamma)\bigr)
--\ln\!\left(\frac{2n}{a}\right)
-\right]_+.
-```
-
-Here $`[x]_+=\max\{x,0\}`$. At fixed high fidelity and sufficiently long storage, the required work is at least of order $`k\gamma D`$ after a finite logarithmic width allowance. [Control cost](science/control_cost.md) proves sharper finite-depth and integer-gate bounds, together with a constraint on every contiguous storage interval.
-
-| Result | Guarantee | Authoritative account |
-|---|---|---|
-| Clifford/reset forgetting | Half-diamond distance to a replacement channel is at most $`\min\{1,2n(1-\gamma)^D\}`$ | [Binary Pauli envelopes](science/pauli_envelopes.md) |
-| Continuing processing | Extensive non-Clifford budget with fidelity, width, and timing dependence | [Control cost](science/control_cost.md) |
-| Sharp zero-T quantum lifetime | $`\Theta(\gamma^{-1}\ln n)`$ at fixed logical size and 4^{-k}`$ and one, for sufficiently weak noise | [Clifford quantum lifetime](science/clifford_lifetime.md) |
-| Explicit coherent recovery | Width and T count within a power of a logarithm of the extensive lower bound | [Coherent recovery](science/coherent_recovery.md) |
-
-For the constructive recovery bound, let $`\alpha=\log_2 5`$ and $`\ell=1+\ln[k(\gamma D+1)/\epsilon]`$. For $`0<\gamma\le1/20`$ and $`0<\epsilon<1/2`$, an explicit concatenated five-qubit construction achieves
+For the constructive recovery bound, let $`\alpha=\log_2 5`$ and $`\ell=1+\ln[k(\gamma D+1)/\epsilon]`$. For $`0\lt \gamma\le1/20`$ and $`0\lt \epsilon\lt 1/2`$, an explicit concatenated five-qubit construction achieves
 
 ```math
 n=O(k\ell^\alpha),
@@ -121,8 +90,9 @@ Finite computations validate the stated finite identities. General converses, co
 
 All persistent qubits undergo independent depolarizing noise. Processing between noise layers is ideal and may be global. The constructions do not include extra noisy rounds proportional to elementary gate depth, geometric locality, or a protected external controller. Final recovery lies outside the charged storage interval.
 
-Both constructions protect arbitrary unknown inputs and their reference correlations. The zero-T construction pays exponential noisy width and uses unrestricted final nonlinear decoding. Continuing recovery pays internal T count and a power-of-logarithm reliability overhead. The complete optimum between them remains open.
+Both constructions protect arbitrary unknown inputs and their reference correlations. The zero-T construction pays exponential noisy width and uses unrestricted final nonlinear decoding. Continuing recovery pays internal T count and a polylogarithmic reliability overhead. The complete optimum between them remains open.
 
 ## Purpose and contact
 
-This repository serves as a record of the work and a guide for the author’s self-directed learning. For discussion or potential collaboration, please contact Ruge Lin at [gogoko699@gmail.com](mailto:gogoko699@gmail.com).
+The project is currently under collaboration, and the manuscript is being written. For questions, please contact Ruge Lin at [gogoko699@gmail.com](mailto:gogoko699@gmail.com).
+
