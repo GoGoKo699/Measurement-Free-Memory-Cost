@@ -24,6 +24,8 @@ jobs:
           docker pull "$TEXLIVE_IMAGE"
           docker image inspect "$TEXLIVE_IMAGE" --format '{{index .RepoDigests 0}}' > export/container-image.txt
           docker run --rm -v "$GITHUB_WORKSPACE:/workspace" -w /workspace "$TEXLIVE_IMAGE" bash manuscript-build/export-texlive2025.sh export
+          xz -T2 -2 -c export/texlive2025.tar > export/texlive2025.tar.xz
+          sha256sum export/texlive2025.tar.xz > export/texlive2025.tar.xz.sha256
       - name: Retain the public portable toolchain and evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

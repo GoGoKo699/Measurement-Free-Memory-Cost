@@ -88,6 +88,6 @@ done < "$output_dir/smoke.fls"
 
 du -sk "$portable" > "$output_dir/uncompressed-size-kib.txt"
 find "$portable" -type f | wc -l > "$output_dir/file-count.txt"
-XZ_OPT='-T2 -2' tar -C "$output_dir" -cJf "$output_dir/texlive2025.tar.xz" texlive2025
-sha256sum "$output_dir/texlive2025.tar.xz" > "$output_dir/texlive2025.tar.xz.sha256"
-ls -lh "$output_dir/texlive2025.tar.xz"
+# The historic container omits xz. Archive here; the Ubuntu runner compresses it.
+tar -C "$output_dir" -cf "$output_dir/texlive2025.tar" texlive2025
+ls -lh "$output_dir/texlive2025.tar"
