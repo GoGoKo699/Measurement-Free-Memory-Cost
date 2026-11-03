@@ -31,15 +31,23 @@ ln -s pdftex "$portable/bin/x86_64-linux/pdflatex"
 ln -s pdftex "$portable/bin/x86_64-linux/latex"
 ldd "$portable/bin/x86_64-linux/pdftex" > "$output_dir/pdftex-ldd.txt" || true
 
-# Preserve complete package code, not a fragile list inferred from one paper.
-# pdfLaTeX uses Type1/TFM/VF/encoding/map resources; omit OTF/TTF/doc/source bulk.
-for relative in tex web2c dvips fonts/afm fonts/enc fonts/map fonts/tfm fonts/type1 fonts/vf; do
+# Preserve complete package code, metrics, encodings and maps. AFM is not a
+# pdfLaTeX runtime dependency. Retain only the complete Type1 font families
+# required by this document's explicit Latin Modern/AMS/RSFS font contract.
+for relative in tex web2c dvips fonts/enc fonts/map fonts/tfm fonts/vf; do
   if test -d "$texdist/$relative"; then
     mkdir -p "$portable/texmf-dist/$(dirname "$relative")"
     cp -aL "$texdist/$relative" "$portable/texmf-dist/$relative"
   fi
 done
-for relative in web2c/pdftex fonts; do
+for family in public/amsfonts public/lm public/cm-super public/rsfs; do
+  relative="fonts/type1/$family"
+  if test -d "$texdist/$relative"; then
+    mkdir -p "$portable/texmf-dist/$(dirname "$relative")"
+    cp -aL "$texdist/$relative" "$portable/texmf-dist/$relative"
+  fi
+done
+for relative in web2c/pdftex fonts/map; do
   if test -d "$texvar/$relative"; then
     mkdir -p "$portable/texmf-var/$(dirname "$relative")"
     cp -aL "$texvar/$relative" "$portable/texmf-var/$relative"
@@ -87,6 +95,8 @@ while IFS= read -r line; do
 done < "$output_dir/smoke.fls"
 
 du -sk "$portable" > "$output_dir/uncompressed-size-kib.txt"
+du -sk "$portable/texmf-dist/tex" "$portable/texmf-dist/fonts/"* > "$output_dir/directory-sizes-kib.txt"
+cat "$output_dir/directory-sizes-kib.txt"
 find "$portable" -type f | wc -l > "$output_dir/file-count.txt"
 # The historic container omits xz. Archive here; the Ubuntu runner compresses it.
 tar -C "$output_dir" -cf "$output_dir/texlive2025.tar" texlive2025

@@ -44,6 +44,7 @@ jobs:
             export/smoke.fls
             export/smoke-console.txt
             export/uncompressed-size-kib.txt
+            export/directory-sizes-kib.txt
             export/file-count.txt
             export/exported-revtex-location.txt
             export/exported-format-location.txt
