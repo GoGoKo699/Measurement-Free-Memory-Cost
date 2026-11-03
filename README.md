@@ -18,7 +18,7 @@ For recovered Bell entanglement fidelity at least $`1-\epsilon`$, set
 
 ```math
 a=2k\,\frac{1-\epsilon-4^{-k}}{1-4^{-k}},
-\qquad 0\le\epsilon<1-4^{-k}.
+\qquad 0\le\epsilon\lt 1-4^{-k}.
 ```
 
 The necessary processing budget includes

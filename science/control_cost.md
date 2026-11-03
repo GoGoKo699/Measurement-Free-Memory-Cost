@@ -147,7 +147,7 @@ Encode $`k\ge1`$ logical qubits by an arbitrary CPTP encoder. Pass the physical 
 
 ```math
 F\ge1-\epsilon,
-\qquad 0\le\epsilon<1-4^{-k}.
+\qquad 0\le\epsilon\lt 1-4^{-k}.
 \qquad\text{(C7)}
 ```
 
@@ -370,7 +370,7 @@ Minimize $`\sum_i b_i`$ over nonnegative real $`b_i`$ subject to (C23). Every ph
 ```math
 \sum_{j=i}^D\lambda_jq^{j-i+1}
 =\begin{cases}
-q^{\ell-i},&i<\ell,\\
+q^{\ell-i},&i\lt \ell,\\
 1,&i\ge\ell.
 \end{cases}
 \qquad\text{(C24)}

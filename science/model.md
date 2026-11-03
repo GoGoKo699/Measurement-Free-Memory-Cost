@@ -27,7 +27,7 @@ The noise is independent across qubits and time. We write
 ```math
 q=1-\gamma,\qquad
 \kappa=-\ln q,
-\qquad 0<\gamma<1.
+\qquad 0\lt \gamma\lt 1.
 ```
 
 Equivalently, the single-qubit Pauli probabilities are $`1-3\gamma/4`$ for identity and $`\gamma/4`$ each for $`X,Y,Z`$. A computational-basis bit flips with probability $`\gamma/2`$. The noise-strength convention matters when comparing thresholds or batching intervals.

@@ -20,7 +20,7 @@ Each of $`D`$ noise layers applies, independently to every persistent qubit,
 
 ```math
 \mathcal N_q(X)=qX+(1-q)\frac{I}{2}\mathrm{Tr}X,
-\qquad 0<q<1.
+\qquad 0\lt q\lt 1.
 \qquad\text{(E2)}
 ```
 

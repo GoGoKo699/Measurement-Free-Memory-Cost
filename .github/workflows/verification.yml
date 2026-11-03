@@ -41,6 +41,8 @@ jobs:
         with:
           ref: ${{ env.SOURCE_REVISION }}
           persist-credentials: false
+      - name: Create the report output directory
+        run: mkdir -p learning/report
       - name: Compile with TeX Live 2025
         uses: xu-cheng/latex-action@6549dc21effb2730855a1281407ecfcececc6c1b
         with:
@@ -63,6 +65,7 @@ jobs:
       - name: Record the resolved container image
         run: docker image inspect ghcr.io/xu-cheng/texlive-historic-debian:2025 --format '{{index .RepoDigests 0}}' > learning/report/container-image.txt
       - name: Retain the fresh PDF and matching build evidence
+        if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: explanatory-report-texlive-2025

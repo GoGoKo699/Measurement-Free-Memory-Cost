@@ -56,7 +56,7 @@ Assume initially that
 
 ```math
 k,D\in\mathbb N_{\ge1},\qquad
-0<\epsilon<1,\qquad 0<\gamma\le\frac1{16}.
+0\lt \epsilon\lt 1,\qquad 0\lt \gamma\le\frac1{16}.
 ```
 
 Batch the physical rounds into intervals of length at most
@@ -83,7 +83,7 @@ R_0=1-h_2(1/8)-\frac18\log_2 3>0,
 ```
 
 ```math
-p_* = \frac{3\Gamma}{4}<\alpha,
+p_* = \frac{3\Gamma}{4}\lt \alpha,
 \qquad
 c_\Gamma=D_{\mathrm{bin}}(\alpha\|p_*)>0, \qquad\text{(4)}
 ```
@@ -168,7 +168,7 @@ Consequently the probability that $`S^\perp`$ contains any nonzero Pauli label o
 ```math
 \frac43\,2^{k-n}\sum_{j=1}^{2w}3^j\binom nj
 \le\frac43\,2^{k-R_0n}
-\le\frac23<1. \qquad\text{(10)}
+\le\frac23\lt 1. \qquad\text{(10)}
 ```
 
 Some $`S`$ therefore has no such label. In particular, every nontrivial logical Pauli, whose label lies in $`S^\perp\setminus S`$, has weight at least $`2w+1`$. The resulting code corrects every Pauli error of weight at most $`w`$. This proves the lemma. The argument actually gives a pure code, which is stronger than required. $`\square`$
@@ -226,7 +226,7 @@ At the beginning of noise block $`j`$, the current data syndrome is $`\sigma_{j-
 | Stage | Operation |
 |---|---|
 | Start of block 1 | Keep the encoded data; no archive is needed for the known zero syndrome. |
-| Start of block $`j\ge2`$ | Reset all designated new targets to $`|0\rangle`$. Extract $`B`$ copies of each bit of $`\sigma_{j-1}`$. For every old live archive leaf, copy its bit into three fresh children by CNOTs. |
+| Start of block $`j\ge2`$ | Reset all designated new targets to $`\lvert0\rangle`$. Extract $`B`$ copies of each bit of $`\sigma_{j-1}`$. For every old live archive leaf, copy its bit into three fresh children by CNOTs. |
 | Remaining control in the block | Retire the old parent slots from the live archive; they are ignored and may be reset for reuse at a later block. All other physical control is the identity. |
 | Noise in block $`j`$ | Apply $`\ell_j`$ ordinary all-qubit noise rounds. All allocated slots, including inactive and retired ones, are noisy. |
 | After physical round $`D`$ | Use the unrestricted final recovery to read archive leaves and measure the data syndrome $`\sigma_J`$. |
@@ -261,7 +261,7 @@ If $`\eta_h\le1/4`$, then
 ```math
 e_*+Q\eta_h\le\frac{1+\Gamma}{4}\le\frac{17}{64},
 \qquad
-f_3(17/64)=\frac{22831}{131072}<\frac14.
+f_3(17/64)=\frac{22831}{131072}\lt \frac14.
 ```
 
 Induction proves the first claim. The initially extracted root also undergoes noise before its first descendants are made. Restoring this initial noise gives error at most
