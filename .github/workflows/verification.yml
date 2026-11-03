@@ -50,6 +50,7 @@ jobs:
           os: debian
           args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode -outdir=../report
           pre_compile: |
+            mkdir -p ../report
             rm -f ../report/Measurement_Free_Memory_Cost_Report.pdf ../report/Measurement_Free_Memory_Cost_Report.log
             pdflatex --version | tee ../report/compiler-version.txt
             grep -F 'TeX Live 2025' ../report/compiler-version.txt

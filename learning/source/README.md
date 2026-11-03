@@ -6,6 +6,7 @@ no external figure or bibliography file is required.
 From the repository root, using pdfLaTeX from TeX Live 2025:
 
 ```bash
+mkdir -p learning/report
 pdflatex -interaction=nonstopmode -halt-on-error -output-directory learning/report learning/source/Measurement_Free_Memory_Cost_Report.tex
 pdflatex -interaction=nonstopmode -halt-on-error -output-directory learning/report learning/source/Measurement_Free_Memory_Cost_Report.tex
 ```

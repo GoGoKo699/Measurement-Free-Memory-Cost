@@ -19,7 +19,7 @@ A storage circuit contains exactly $`D`$ noise layers. Each layer applies the pr
 \qquad
 \mathcal N_\gamma(X)
 =(1-\gamma)X+\gamma\,\frac I2\mathrm{Tr}X.
-\tag{M1}
+\qquad\text{(M1)}
 ```
 
 The noise is independent across qubits and time. We write
@@ -48,7 +48,7 @@ A reset on $`A`$ is the replacement channel
 ```math
 \mathcal R_{\tau,A}(X)
 =\tau_A\otimes\mathrm{Tr}_A X,
-\tag{M2}
+\qquad\text{(M2)}
 ```
 
 with tensor factors restored to their original order. The replacement state is independent of the unknown input and of the retained register. It may be mixed, nonstabilizer, or entangled within the simultaneously prepared subsystem. An external source that retains correlations across different preparation times is a persistent memory and is not supplied for free.
@@ -63,7 +63,7 @@ Let $`K=2^k`$, with $`k\ge1`$. An arbitrary CPTP encoder $`\mathcal E`$ maps the
 
 ```math
 \Lambda=\mathcal D\circ\Phi_D\circ\mathcal E.
-\tag{M3}
+\qquad\text{(M3)}
 ```
 
 The reference system is untouched. No protected quantum side channel connects encoder and decoder.
@@ -83,7 +83,7 @@ F_{\mathrm e}(\Lambda)
 (\mathrm{id}\otimes\Lambda)
 (|\Omega_K\rangle\langle\Omega_K|)
 |\Omega_K\rangle.
-\tag{M4}
+\qquad\text{(M4)}
 ```
 
 This is the squared-overlap convention. The converse assumes only $`F_{\mathrm e}\ge1-\epsilon`$. The two constructions prove the stronger worst-case, reference-stable guarantee
@@ -92,7 +92,7 @@ This is the squared-overlap convention. The converse assumes only $`F_{\mathrm e
 \delta_\diamond(\Lambda)
 :=\frac12\|\Lambda-\mathrm{id}_K\|_\diamond
 \le\epsilon,
-\tag{M5}
+\qquad\text{(M5)}
 ```
 
 which implies the fidelity condition.
@@ -108,25 +108,25 @@ For a storage circuit using only Clifford operations and replacement resets, and
 ```math
 \frac12\|\Phi_D-\mathcal R_\tau\|_\diamond
 \le\min\{1,2nq^D\}.
-\tag{M6}
+\qquad\text{(M6)}
 ```
 
 Thus all input dependence, including correlations with an arbitrary reference, is lost to accuracy $`\delta`$ after
 
 ```math
 D\ge \frac{\ln(2n/\delta)}{-\ln(1-\gamma)}.
-\tag{M7}
+\qquad\text{(M7)}
 ```
 
 The proof in [Binary Pauli envelopes](pauli_envelopes.md) tracks the dimension of one binary linear envelope containing every pulled-back Pauli support. Resets project its coordinates; one noise layer contracts its expected rank by a factor $`q`$. A zero envelope identifies an exactly input-independent sampled channel.
 
 ### An extensive budget for non-Clifford processing
 
-Suppose $`F_{\mathrm e}\ge1-\epsilon`$ and $`0\le\epsilon<1-4^{-k}`$. Define
+Suppose $`F_{\mathrm e}\ge1-\epsilon`$ and $`0\le\epsilon\lt 1-4^{-k}`$. Define
 
 ```math
 a=2k\,\frac{1-\epsilon-4^{-k}}{1-4^{-k}}>0.
-\tag{M8}
+\qquad\text{(M8)}
 ```
 
 Every Clifford+T memory obeys the simple bound
@@ -135,7 +135,7 @@ Every Clifford+T memory obeys the simple bound
 m_T\ge
 a\left[D\kappa-\ln\!\left(\frac{2n}{a}\right)\right]_+,
 \qquad [x]_+=\max\{x,0\}.
-\tag{M9}
+\qquad\text{(M9)}
 ```
 
 The count includes both $`T`$ and $`T^\dagger`$. At fixed error bounded away from the trivial threshold and weak noise, this is an extensive cost of order $`k\gamma D`$ once $`D\kappa`$ exceeds the width allowance $`\ln(2n/a)`$ by a fixed factor greater than one. This is a necessary condition; it does not assert that spending those gates suffices.
@@ -146,27 +146,27 @@ The improved fidelity floor (M8) follows from an elementary channel fact. A logi
 
 ```math
 F_{\mathrm e}\le\min\{1,2^{r-2k}\}.
-\tag{M10}
+\qquad\text{(M10)}
 ```
 
 Indeed, the superoperator trace equals $`K^2 F_{\mathrm e}`$, all eigenvalues of a CPTP map have modulus at most one, and the number of its nonzero eigenvalues is at most its rank. Averaging the convex secant bound forces expected envelope rank at least $`a`$ at every cut. Every T gate can add at most one binary generator.
 
 ### Sharp order of the zero-T quantum lifetime
 
-For fixed $`k`$ and target fidelity $`4^{-k}<F_0<1`$, the largest lifetime achievable with Clifford operations and resets alone satisfies
+For fixed $`k`$ and target fidelity $`4^{-k}\lt F_0\lt 1`$, the largest lifetime achievable with Clifford operations and resets alone satisfies
 
 ```math
 D_{\max}(n)=\Theta(\gamma^{-1}\ln n)
-\tag{M11}
+\qquad\text{(M11)}
 ```
 
-for sufficiently large width and $`0<\gamma\le1/16`$, with constants depending on the fixed target parameters.
+for sufficiently large width and $`0\lt \gamma\le1/16`$, with constants depending on the fixed target parameters.
 
 The constructive direction in [Clifford quantum lifetime](clifford_lifetime.md) stores unknown quantum states, rather than only a classical bit. A stabilizer code produces a history of syndrome bits; many noisy copies of each bit are propagated through ternary trees. All majority voting and nonlinear decoding occur at the final endpoint. Every tree node remains a counted noisy qubit. Its exponential width and ideal global fanout are essential resources.
 
 ### Explicit coherent recovery within logarithmic factors
 
-For $`0<\gamma\le1/20`$ and $`0<\epsilon<1/2`$, put
+For $`0\lt \gamma\le1/20`$ and $`0\lt \epsilon\lt 1/2`$, put
 
 ```math
 \ell=1+\ln\frac{k(\gamma D+1)}{\epsilon},
@@ -179,7 +179,7 @@ The [coherent recovery construction](coherent_recovery.md) achieves (M5) with
 n=O(k\ell^\alpha),
 \qquad
 m_T=O\bigl(k(\gamma D+1)\ell^\alpha\bigr).
-\tag{M12}
+\qquad\text{(M12)}
 ```
 
 It concatenates the five-qubit code, batches weak noise, and applies an explicit syndrome correction using at most 42 T/T-dagger gates per decoding node. No additional work qubits are needed beyond the code block. The constants and finite integer parameter choices are given in the construction.

@@ -9,7 +9,7 @@ The memory occupies at most $`n`$ qubits, including every persistent workspace o
 
 ```math
 \mathcal R_{\tau,A}(X)=\tau_A\otimes\mathrm{Tr}_A X,
-\tag{E1}
+\qquad\text{(E1)}
 ```
 
 
@@ -21,7 +21,7 @@ Each of $`D`$ noise layers applies, independently to every persistent qubit,
 ```math
 \mathcal N_q(X)=qX+(1-q)\frac{I}{2}\mathrm{Tr}X,
 \qquad 0<q<1.
-\tag{E2}
+\qquad\text{(E2)}
 ```
 
 
@@ -35,7 +35,7 @@ Let $`W_n=\mathbb F_2^{2n}`$, and label Hermitian tensor-product Paulis by $`v=(
 ```math
 [v,w]=x\cdot z'+z\cdot x'\pmod 2,
 \qquad w=(x',z').
-\tag{E3}
+\qquad\text{(E3)}
 ```
 
 
@@ -44,7 +44,7 @@ For an operator $`O`$, its Pauli support is the set of labels with nonzero coeff
 
 ```math
 \mathcal A_V=\mathrm{span}_{\mathbb C}\{P_v:v\in V\}.
-\tag{E4}
+\qquad\text{(E4)}
 ```
 
 
@@ -65,7 +65,7 @@ V_{\mathrm{dec}}
 \bigcup_{P\text{ in an output Pauli basis}}
 \mathrm{supp}_{\mathrm P}\!\left(\mathcal D^\dagger(P)\right),
 \qquad M=\dim V_{\mathrm{dec}}\le 2n.
-\tag{E5}
+\qquad\text{(E5)}
 ```
 
 
@@ -86,7 +86,7 @@ The following backward updates preserve the envelope property.
 ```math
 \mathcal R_{\tau,A}^\dagger(P_A\otimes P_B)
 =\mathrm{Tr}(\tau_A P_A)I_A\otimes P_B.
-\tag{E6}
+\qquad\text{(E6)}
 ```
 
 
@@ -101,7 +101,7 @@ Let $`V\le W_n`$ be any fixed subspace of dimension $`r`$. Independently include
 
 ```math
 \mathbb E_E\dim(V\cap\ker\pi_E)\le qr.
-\tag{E7}
+\qquad\text{(E7)}
 ```
 
 
@@ -111,7 +111,7 @@ Let $`V\le W_n`$ be any fixed subspace of dimension $`r`$. Independently include
 ```math
 \mathbb E\mathrm{rank}G_E
 \ge\mathbb E K_E=\gamma r.
-\tag{E8}
+\qquad\text{(E8)}
 ```
 
 
@@ -130,7 +130,7 @@ Let $`\Phi`$ be the storage channel, optionally composed with a fixed final deco
 \frac12\|\Phi-\mathcal R_\tau\|_\diamond
 \le \min\{1,Mq^D\},
 \qquad \mathcal R_\tau(X)=\mathrm{Tr}(X)\tau.
-\tag{E9}
+\qquad\text{(E9)}
 ```
 
 
@@ -143,7 +143,7 @@ Equivalently, for every finite reference system $`R`$ and joint input state $`\o
 -\tau\otimes\omega_R
 \right\|_1
 \le \min\{1,Mq^D\}.
-\tag{E10}
+\qquad\text{(E10)}
 ```
 
 
@@ -153,7 +153,7 @@ In particular, any two input states obey
 ```math
 \|\Phi(\rho)-\Phi(\sigma)\|_1
 \le 2\min\{1,Mq^D\}.
-\tag{E11}
+\qquad\text{(E11)}
 ```
 
 
@@ -164,7 +164,7 @@ In particular, any two input states obey
 \mathbb E_b r_b\le Mq^D,
 \qquad
 p:=\Pr(r_b>0)\le\min\{1,Mq^D\}.
-\tag{E12}
+\qquad\text{(E12)}
 ```
 
 
@@ -175,7 +175,7 @@ Separating the sampled circuits according to this event yields
 
 ```math
 \Phi=(1-p)\mathcal R_{\tau_G}+p\Psi,
-\tag{E13}
+\qquad\text{(E13)}
 ```
 
 
@@ -185,7 +185,7 @@ where $`\Psi`$ is a CPTP channel and the first term is the average of the replac
 ```math
 \Phi-\mathcal R_\tau
 =p\bigl(\Psi-\mathcal R_{\Psi(\omega_0)}\bigr).
-\tag{E14}
+\qquad\text{(E14)}
 ```
 
 
@@ -196,7 +196,7 @@ For $`M>0`$, a sufficient depth for the right side of (E9) to be at most $`\delt
 
 ```math
 D\ge \frac{\ln(M/\delta)}{-\ln q}.
-\tag{E15}
+\qquad\text{(E15)}
 ```
 
 
@@ -221,3 +221,4 @@ The result concerns an explicitly bounded processing model. It does not assert t
 ## 6. Finite verification
 
 The deterministic verification program in [verification/verify_pauli_algebra.py](../verification/verify_pauli_algebra.py) constructs dense two-qubit Pauli matrices independently of the circuit rank simulator. It checks every binary subspace of $`\mathbb F_2^4`$, the conditional expectations used in the companion chapter, the local rotation envelopes, and mixed backward circuits with nonstabilizer resets. Its numerical checks detect finite operator and sign errors; the dimension-independent assertions are established by the proofs above. The accompanying exact-rational verification checks the finite-depth scalar optimization used in [control_cost.md](control_cost.md).
+

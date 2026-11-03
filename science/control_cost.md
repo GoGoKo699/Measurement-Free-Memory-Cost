@@ -17,7 +17,7 @@ There is a Clifford change of coordinates under which
 \mathcal A_V
 \simeq M_{2^s}\otimes\mathrm{Diag}_{2^c}
 \otimes I_{2^{n-s-c}}.
-\tag{C1}
+\qquad\text{(C1)}
 ```
 
 
@@ -29,7 +29,7 @@ The trace-preserving conditional expectation onto this algebra is
 =\frac{1}{|V^\perp|}\sum_{w\in V^\perp}P_wXP_w,
 \qquad
 V^\perp=\{w:[v,w]=0\text{ for all }v\in V\}.
-\tag{C2}
+\qquad\text{(C2)}
 ```
 
 
@@ -46,7 +46,7 @@ Suppose a CPTP tail channel $`\Theta`$, including its fixed terminal decoder, ob
 
 ```math
 \mathrm{range}\Theta^\dagger\subseteq\mathcal A_V.
-\tag{C3}
+\qquad\text{(C3)}
 ```
 
 
@@ -55,7 +55,7 @@ Then
 
 ```math
 \Theta=\Theta\circ\mathcal E_V.
-\tag{C4}
+\qquad\text{(C4)}
 ```
 
 
@@ -65,7 +65,7 @@ For every state shared between the memory and an arbitrary reference, the output
 ```math
 F\le\min\{1,2^{s-k}\}
 \le\min\{1,2^{r/2-k}\}.
-\tag{C5}
+\qquad\text{(C5)}
 ```
 
 
@@ -81,7 +81,7 @@ In the coordinates of (C1), write the memory as $`QCG`$, with $`Q`$ containing $
 =\sum_{z\in\{0,1\}^c}
 \rho^{(z)}_{QR}\otimes|z\rangle\langle z|_C
 \otimes\frac{I_G}{\dim G},
-\tag{C6}
+\qquad\text{(C6)}
 ```
 
 
@@ -98,7 +98,7 @@ Let $`\Lambda`$ be a CPTP channel from a $`K`$-dimensional logical system to a $
 F_{\mathrm e}(\Lambda)
 =\frac{\mathrm{Tr}_{\mathrm{sup}}\Lambda}{K^2}
 \le\frac{\mathrm{rank}_{\mathbb C}\Lambda}{K^2}.
-\tag{C5a}
+\qquad\text{(C5a)}
 ```
 
 
@@ -108,7 +108,7 @@ If $`\Lambda=\Theta\circ\Pi`$, where $`\Pi`$ is any CPTP prefix and the tail obe
 ```math
 F_{\mathrm e}(\Lambda)
 \le\min\{1,2^{r}/K^2\}.
-\tag{C5b}
+\qquad\text{(C5b)}
 ```
 
 
@@ -119,7 +119,7 @@ F_{\mathrm e}(\Lambda)
 \mathrm{Tr}_{\mathrm{sup}}\Lambda
 =\sum_\alpha|\mathrm{Tr}A_\alpha|^2
 =K^2F_{\mathrm e}(\Lambda)\ge0.
-\tag{C5c}
+\qquad\text{(C5c)}
 ```
 
 
@@ -132,7 +132,7 @@ The number of nonzero eigenvalues, counted with algebraic multiplicity, is at mo
 0\le\mathrm{Tr}_{\mathrm{sup}}\Lambda
 \le\sum_{\lambda\ne0}|\lambda|
 \le\mathrm{rank}_{\mathbb C}\Lambda.
-\tag{C5d}
+\qquad\text{(C5d)}
 ```
 
 
@@ -148,7 +148,7 @@ Encode $`k\ge1`$ logical qubits by an arbitrary CPTP encoder. Pass the physical 
 ```math
 F\ge1-\epsilon,
 \qquad 0\le\epsilon<1-4^{-k}.
-\tag{C7}
+\qquad\text{(C7)}
 ```
 
 
@@ -159,7 +159,7 @@ At each primitive circuit cut $`t`$, construct the sampled backward envelope $`V
 R_t=\mathbb E_b\dim V_{b,t},
 \qquad
 a=\frac{2k(1-\epsilon-4^{-k})}{1-4^{-k}}>0.
-\tag{C8}
+\qquad\text{(C8)}
 ```
 
 
@@ -170,7 +170,7 @@ At every primitive cut, including cuts immediately before and after each gate or
 
 ```math
 R_t\ge a.
-\tag{C9}
+\qquad\text{(C9)}
 ```
 
 
@@ -182,7 +182,7 @@ For every $`r\ge0`$,
 ```math
 \min\{1,2^{r-2k}\}
 \le 4^{-k}+(1-4^{-k})\frac{r}{2k}.
-\tag{C10}
+\qquad\text{(C10)}
 ```
 
 
@@ -192,7 +192,7 @@ On $`[0,2k]`$, this is the secant-line bound for a convex exponential; for $`r\g
 ```math
 1-\epsilon\le F
 \le 4^{-k}+(1-4^{-k})\frac{R_t}{2k}.
-\tag{C11}
+\qquad\text{(C11)}
 ```
 
 
@@ -207,7 +207,7 @@ A rank-growth charge $`b_g\ge0`$ for a gate is valid if an envelope can be updat
 
 ```math
 \dim V'\le\dim V+b_g
-\tag{C12}
+\qquad\text{(C12)}
 ```
 
 
@@ -223,7 +223,7 @@ A physical $`T`$ or $`T^\dagger`$ gate has charge one. More generally, a fixed r
 ```math
 V'\subseteq V+\langle w\rangle,
 \qquad \dim V'\le\dim V+1.
-\tag{C13}
+\qquad\text{(C13)}
 ```
 
 
@@ -236,7 +236,7 @@ For a unitary on a set $`J`$ of $`s_g`$ qubits, conjugation changes only the Pau
 V'=\pi_{J^c}V+W_J,
 \qquad
 \dim V'\le\dim V+2s_g,
-\tag{C14}
+\qquad\text{(C14)}
 ```
 
 
@@ -258,7 +258,7 @@ Every memory satisfying (C7) obeys
 ```math
 B\ge a\left[D\kappa-\ln\!\left(\frac Ma\right)\right]_+,
 \qquad [x]_+=\max\{0,x\}.
-\tag{C15}
+\qquad\text{(C15)}
 ```
 
 
@@ -269,7 +269,7 @@ For a Clifford+T implementation, the stronger individual-gate version is
 m_T\ge
 \frac{\left[D\kappa-\ln(M/a)\right]_+}
 {\ln(1+1/a)}.
-\tag{C16}
+\qquad\text{(C16)}
 ```
 
 
@@ -282,7 +282,7 @@ The right side may be rounded up because $`m_T`$ is an integer.
 \ln R'-\ln R
 \le\ln(1+b_g/R)
 \le b_g/a.
-\tag{C17}
+\qquad\text{(C17)}
 ```
 
 
@@ -293,7 +293,7 @@ Summing the logarithmic increments over the entire backward circuit gives
 \ln(a/M)
 \le\ln(R_{\mathrm{end}}/M)
 \le D\ln q+B/a.
-\tag{C18}
+\qquad\text{(C18)}
 ```
 
 
@@ -314,7 +314,7 @@ Define, for an integer $`D\ge1`$, $`M\ge a>0`$, and $`q\in(0,1)`$,
 \frac aq+(D-\ell)\frac{(1-q)a}{q}
 -Mq^{\ell-1}
 \right]\right\}.
-\tag{C19}
+\qquad\text{(C19)}
 ```
 
 
@@ -327,7 +327,7 @@ Every circuit satisfying (C7) and the rank-growth assumptions satisfies
 
 ```math
 B\ge\mathcal L(D,M,a,q).
-\tag{C20}
+\qquad\text{(C20)}
 ```
 
 
@@ -336,7 +336,7 @@ For Clifford+T circuits one may replace $`B`$ by $`m_T`$ and round the right sid
 
 ```math
 B\ge\left[\frac{(1-q)a}{q}D-(M-a)\right]_+.
-\tag{C21}
+\qquad\text{(C21)}
 ```
 
 
@@ -348,7 +348,7 @@ The bound (C19) is exactly the optimum of the continuous scalar injection proble
 ```math
 R_j\le q(R_{j-1}+b_j),
 \qquad R_j\ge a.
-\tag{C22}
+\qquad\text{(C22)}
 ```
 
 
@@ -360,11 +360,11 @@ Define the dominating recurrence $`x_0=M`$, $`x_j=q(x_{j-1}+b_j)`$. Induction gi
 ```math
 \sum_{i=1}^j q^{j-i+1}b_i\ge a-Mq^j,
 \qquad j=1,\ldots,D.
-\tag{C23}
+\qquad\text{(C23)}
 ```
 
 
-Minimize $`\sum_i b_i`$ over nonnegative real $`b_i`$ subject to (C23). Every physical circuit supplies a feasible point in this relaxation. For a chosen $`\ell\in\{1,\ldots,D\}`$, multiply the constraint at $`j<D`$ by $`\lambda_j=(1-q)/q`$ if $`j\ge\ell`$, and zero otherwise; multiply the constraint at $`j=D`$ by $`\lambda_D=1/q`$. The total coefficient of $`b_i`$ is
+Minimize $`\sum_i b_i`$ over nonnegative real $`b_i`$ subject to (C23). Every physical circuit supplies a feasible point in this relaxation. For a chosen $`\ell\in\{1,\ldots,D\}`$, multiply the constraint at $`j\lt D`$ by $`\lambda_j=(1-q)/q`$ if $`j\ge\ell`$, and zero otherwise; multiply the constraint at $`j=D`$ by $`\lambda_D=1/q`$. The total coefficient of $`b_i`$ is
 
 
 ```math
@@ -373,7 +373,7 @@ Minimize $`\sum_i b_i`$ over nonnegative real $`b_i`$ subject to (C23). Every ph
 q^{\ell-i},&i<\ell,\\
 1,&i\ge\ell.
 \end{cases}
-\tag{C24}
+\qquad\text{(C24)}
 ```
 
 
@@ -383,7 +383,7 @@ Every coefficient is at most one. The weighted right sides telescope to
 ```math
 \sum_{j=1}^D\lambda_j(a-Mq^j)
 =\frac aq+(D-\ell)\frac{(1-q)a}{q}-Mq^{\ell-1}.
-\tag{C25}
+\qquad\text{(C25)}
 ```
 
 
@@ -395,7 +395,7 @@ To prove exactness for the scalar relaxation, choose the greedy injections
 ```math
 b_j=\left[\frac aq-x_{j-1}\right]_+,
 \qquad x_j=q(x_{j-1}+b_j).
-\tag{C26}
+\qquad\text{(C26)}
 ```
 
 
@@ -406,7 +406,7 @@ Let $`t_0=\lfloor\ln(M/a)/\kappa\rfloor`$. If $`D\le t_0`$, the zero-injection t
 b_{t_0+1}=\frac aq-Mq^{t_0},
 \qquad
 b_j=\frac{(1-q)a}{q}\quad(j>t_0+1).
-\tag{C27}
+\qquad\text{(C27)}
 ```
 
 
@@ -418,7 +418,7 @@ Its cost equals the dual value (C25) at $`\ell=t_0+1`$, namely
 =\frac aq-Mq^{t_0}
 +(D-t_0-1)\frac{(1-q)a}{q}
 \quad(D>t_0).
-\tag{C28}
+\qquad\text{(C28)}
 ```
 
 
@@ -431,7 +431,7 @@ The physical envelope rank never exceeds $`C=2n`$. Thus if $`D\ge1`$, the rank f
 
 ```math
 a\le qC=2nq.
-\tag{C29}
+\qquad\text{(C29)}
 ```
 
 
@@ -445,7 +445,7 @@ For fixed $`M,a,q`$, the necessary-bound function has the asymptotic slope
 ```math
 \lim_{D\to\infty}\frac{\mathcal L(D,M,a,q)}{D}
 =\frac{(1-q)a}{q}.
-\tag{C30}
+\qquad\text{(C30)}
 ```
 
 
@@ -464,7 +464,7 @@ Choose any two primitive cuts and the contiguous interval between them. Let $`D_
 B_I\ge\mathcal L(D_I,M_I,a,q),
 \qquad
 B_I\ge a\left[D_I\kappa-\ln(M_I/a)\right]_+.
-\tag{C31}
+\qquad\text{(C31)}
 ```
 
 
@@ -486,7 +486,7 @@ An arbitrary free decoder does not admit this simplification. For a concrete exa
 ```math
 \mathcal D^\dagger(Z)
 =\frac12(Z_1+Z_2+Z_3-Z_1Z_2Z_3).
-\tag{C32}
+\qquad\text{(C32)}
 ```
 
 
@@ -496,7 +496,7 @@ Its Pauli-support span has dimension three, although the output is only one qubi
 ```math
 U=\mathrm{CNOT}_{1\to2}(I\otimes THT),
 \qquad \mathcal D(\rho)=\mathrm{Tr}_2(U\rho U^\dagger).
-\tag{C33}
+\qquad\text{(C33)}
 ```
 
 
@@ -506,7 +506,7 @@ Then $`\mathcal D^\dagger(Z)=Z_1`$, while
 ```math
 \mathcal D^\dagger(X)
 =X_1\left(\frac{Z_2}{\sqrt2}+\frac{X_2+Y_2}{2}\right).
-\tag{C34}
+\qquad\text{(C34)}
 ```
 
 
@@ -523,3 +523,4 @@ These theorems establish a necessary processing budget beyond the free Clifford-
 The theorems do not establish a physically optimal T-count, a universal gate-depth threshold, or a lower bound on measurement-based QEC with a noiseless external classical decoder. A measured controller must be included in a separate operational model. A coherent implementation of its nonlinear processing can be covered by charging its actual gate decomposition or a proved local rank-growth budget.
 
 The program [verification/verify_pauli_algebra.py](../verification/verify_pauli_algebra.py) checks the finite Pauli-algebra identities by dense matrices, verifies the superoperator fidelity identity and rank bound for explicit logical CPTP channels, and verifies primal/dual equality of (C19)–(C28) over an exact-rational parameter grid. These tests address support propagation, the CPTP conditional expectation, the terminal-decoder distinction, the logical-channel bottleneck, and the discrete placement optimization. They do not replace the analytic proof or claim asymptotic evidence from small systems.
+

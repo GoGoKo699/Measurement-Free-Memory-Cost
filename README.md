@@ -37,10 +37,10 @@ Here $`[x]_+=\max\{x,0\}`$. At fixed high fidelity and sufficiently long storage
 |---|---|---|
 | Clifford/reset forgetting | Half-diamond distance to a replacement channel is at most $`\min\{1,2n(1-\gamma)^D\}`$ | [Binary Pauli envelopes](science/pauli_envelopes.md) |
 | Continuing processing | Extensive non-Clifford budget with fidelity, width, and timing dependence | [Control cost](science/control_cost.md) |
-| Sharp zero-T quantum lifetime | $`\Theta(\gamma^{-1}\ln n)`$ at fixed logical size and target fidelity $`4^{-k}<F_0<1`$, for sufficiently weak noise | [Clifford quantum lifetime](science/clifford_lifetime.md) |
+| Sharp zero-T quantum lifetime | $`\Theta(\gamma^{-1}\ln n)`$ at fixed logical size and target fidelity $`4^{-k}\lt F_0\lt 1`$, for sufficiently weak noise | [Clifford quantum lifetime](science/clifford_lifetime.md) |
 | Explicit coherent recovery | Width and T count with a polylogarithmic overhead relative to the extensive lower bound | [Coherent recovery](science/coherent_recovery.md) |
 
-For the constructive recovery bound, let $`\alpha=\log_2 5`$ and $`\ell=1+\ln[k(\gamma D+1)/\epsilon]`$. For $`0<\gamma\le1/20`$ and $`0<\epsilon<1/2`$, an explicit concatenated five-qubit construction achieves
+For the constructive recovery bound, let $`\alpha=\log_2 5`$ and $`\ell=1+\ln[k(\gamma D+1)/\epsilon]`$. For $`0\lt \gamma\le1/20`$ and $`0\lt \epsilon\lt 1/2`$, an explicit concatenated five-qubit construction achieves
 
 ```math
 n=O(k\ell^\alpha),
