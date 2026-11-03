@@ -2,7 +2,12 @@ name: Verify science and report
 
 on:
   push:
+    branches: [main]
   pull_request:
+
+concurrency:
+  group: verify-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -12,7 +17,7 @@ env:
 
 jobs:
   finite-checks:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Check out the source revision
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -29,7 +34,7 @@ jobs:
           python verification/run_all.py
 
   report-texlive-2025:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Check out the source revision
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -72,7 +77,7 @@ jobs:
             learning/report/compiled.sha256
 
   hosted-mathematics:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Check out the source revision
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
