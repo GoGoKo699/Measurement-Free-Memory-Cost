@@ -1,0 +1,47 @@
+name: Export portable TeX Live 2025
+
+on:
+  push:
+    branches: [texlive2025-toolchain-export]
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Check out public toolchain export sources
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Export and test the portable 2025 distribution
+        env:
+          TEXLIVE_IMAGE: ghcr.io/xu-cheng/texlive-historic-debian@sha256:d3e42adc0c8d84bc913bfc33571feaf7037616260a771bb6f027504661568bf6
+        run: |
+          mkdir -p export
+          docker pull "$TEXLIVE_IMAGE"
+          docker image inspect "$TEXLIVE_IMAGE" --format '{{index .RepoDigests 0}}' > export/container-image.txt
+          docker run --rm -v "$GITHUB_WORKSPACE:/workspace" -w /workspace "$TEXLIVE_IMAGE" bash manuscript-build/export-texlive2025.sh export
+      - name: Retain the public portable toolchain and evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: portable-texlive-2025
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 7
+          path: |
+            export/texlive2025.tar.xz
+            export/texlive2025.tar.xz.sha256
+            export/compiler-version.txt
+            export/container-image.txt
+            export/pdftex-ldd.txt
+            export/smoke.log
+            export/smoke.fls
+            export/smoke-console.txt
+            export/uncompressed-size-kib.txt
+            export/file-count.txt
+            export/exported-revtex-location.txt
+            export/exported-format-location.txt
