@@ -15,17 +15,17 @@ The memory occupies at most $`n`$ qubits, including every persistent workspace o
 
 with tensor factors returned to their original order. The prepared state $`\tau_A`$ is fixed and independent of the retained subsystem and the unknown logical input. It may be mixed, entangled within $`A`$, or nonstabilizer. The reset channel does not supply a hidden memory correlated with preparations at other times.
 
-Each of $`D`$ noise layers applies, independently to every persistent qubit,
+Put $`q=1-\gamma\in(0,1)`$ and $`\kappa=-\ln q`$. Each of $`D`$ noise layers applies, independently to every persistent qubit,
 
 
 ```math
-\mathcal N_q(X)=qX+(1-q)\frac{I}{2}\mathrm{Tr}X,
+\mathcal N_\gamma(X)=qX+(1-q)\frac{I}{2}\mathrm{Tr}X,
 \qquad 0\lt q\lt 1.
 \qquad\text{(E2)}
 ```
 
 
-The noise is independent across layers and locations. Write $`\gamma=1-q`$ and $`\kappa=-\ln q`$. Gates and resets between these layers are ideal operations in this model; gate depth is not silently converted into additional noise layers.
+The noise is independent across layers and locations. Gates and resets between these layers are ideal operations in this model; their elementary depth does not add noise layers.
 
 An arbitrary initial encoder and fixed final decoder may be placed outside the storage interval. There is no protected quantum bypass, free adaptive classical controller, or intermediate postselection. Any mutable classical information retained during storage must be represented in the counted noisy registers, with its processing implemented by the allowed circuit. Unrecorded Pauli measurements can be added without changing the proof below. General measurement and feedback operations require a separate resource accounting.
 
@@ -69,7 +69,7 @@ V_{\mathrm{dec}}
 ```
 
 
-All statements below are valid with $`M=2n`$; the smaller value in (E5) is available when the decoder is specified. The Pauli-support rank of a general decoder is not bounded by twice the number of output qubits; see Section 7 of [control_cost.md](control_cost.md).
+For the full physical output, use $`M=2n`$. With the decoder-specific value in (E5), the statements below apply to storage followed by that decoder. A general decoder's Pauli-support rank can exceed twice its number of output qubits; see Section 7 of [control_cost.md](control_cost.md).
 
 ### Lemma E1 — Envelope invariant
 
@@ -216,7 +216,7 @@ Nelson, Rajakumar, and Gullans prove forgetting at depth $`O(\gamma^{-1}\log n\l
 
 The additional ingredient here is the simultaneous binary linear envelope and its one-layer expected-rank contraction (E7). It replaces counting individual surviving Paulis. The replacement decomposition then yields the reference-stable statement (E9). The theorem permits arbitrary joint replacement states because their adjoint label action remains a coordinate projection.
 
-The result concerns an explicitly bounded processing model. It does not assert that all implementations of quantum error correction require magic states or that a noiseless classical decoder is free during storage. The quantum-memory construction in [clifford_lifetime.md](clifford_lifetime.md) and the charged recovery construction in [coherent_recovery.md](coherent_recovery.md) address different ways to approach the resulting resource frontier.
+The result concerns internal operations in the stated storage model. Fixed replacement states, including magic states, are free; protected external classical decoding uses a different controller resource. The quantum-memory construction in [clifford_lifetime.md](clifford_lifetime.md) and the charged recovery construction in [coherent_recovery.md](coherent_recovery.md) address different ways to approach the resulting resource frontier.
 
 ## 6. Finite verification
 

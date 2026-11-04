@@ -11,4 +11,6 @@ learning/report/*.fdb_latexmk
 learning/report/*version.txt
 learning/report/*.sha256
 learning/report/container-image.txt
+learning/report/report-comparison.json
+learning/report/stored-report-before-build.pdf
 

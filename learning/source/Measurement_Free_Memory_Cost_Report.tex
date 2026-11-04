@@ -257,7 +257,7 @@ Taking $M=2n$ gives a lifetime upper bound of order $\gamma^{-1}\ln n$ at weak n
 
 For a recovered logical channel near a replacement, Bell fidelity is at most $4^{-k}+\delta$. A replacement has Bell fidelity exactly $K^{-2}=4^{-k}$, whatever output state it prepares. Hence any fixed fidelity target $F_0>4^{-k}$ is incompatible with arbitrarily long zero-T storage at fixed width.
 
-The qualitative Clifford-memory obstruction and the stochastic Pauli approach are established ingredients. The simultaneous-rank argument sharpens the forgetting scale to a single logarithm and makes the reference-stable statement direct. The next sections use the same rank to quantify continuing processing.
+The Clifford-memory obstruction and the stochastic Pauli approach are established ingredients. The simultaneous-rank argument sharpens the forgetting scale to a single logarithm and makes the reference-stable statement direct. The next sections use the same rank to quantify continuing processing.
 
 \section{High fidelity requires an envelope at every temporal cut}
 \subsection{From binary rank to an operator algebra}
@@ -429,12 +429,12 @@ B\ge\positive{\frac{(1-q)a}{q}D-(M-a)}.
 At fixed $M,a,q$, the slope of the scalar bound tends to $(1-q)a/q$. This is a statement about the bound; a separate erasure ceiling will prevent indefinite storage at fixed finite width.
 
 \subsection{Every interior interval has its own budget}
-Choose two primitive cuts enclosing a contiguous interval $I$. Let $D_I$ count its full noise layers, $B_I$ its internal charge, and $M_I$ an upper bound on expected envelope rank at its later cut. Boundary gates are assigned according to the cuts so they are counted once. The same global fidelity guarantee supplies the floor $a$ throughout the interval. Its noise is independent of the later suffix, so
+Choose two primitive cuts enclosing a contiguous interval $I$. Let $D_I$ count its full noise layers, $B_I$ its internal charge, and $M_I$ a deterministic upper bound on expected decoded-tail envelope rank at its later cut. Boundary gates are assigned according to the cuts so they are counted once. The same global fidelity guarantee supplies the floor $a$ throughout the interval. Its noise is independent of the later suffix, so
 \begin{equation}
 B_I\ge\mathcal L(D_I,M_I,a,q),\qquad
 B_I\ge a\positive{D_I\kappa-\ln(M_I/a)}.
 \end{equation}
-One can always use $M_I=2n$. Thus gates placed entirely before or after an arbitrarily long interior segment cannot support that segment. The resource requirement concerns timing as well as a total count.
+One can always use $M_I=2n$. Gates in the later suffix can enlarge this envelope beyond the decoder's terminal value $M$, so a smaller terminal reserve cannot automatically be reused inside the interval. Thus gates placed entirely before or after an arbitrarily long interior segment cannot support that segment. The resource requirement concerns timing as well as a total count.
 
 \subsection{Why an arbitrary final decoder changes the reserve}
 A decoder with $k$ output qubits need not have terminal support rank $2k$. Define its envelope by taking the binary span of every Pauli label in every pulled-back output Pauli. A single pulled-back observable can have many independent labels.
@@ -532,11 +532,11 @@ The $b_{\mathrm{rep}}$ replicas use disjoint trees and independent future noise 
 \begin{equation}
 \exp(-b_{\mathrm{rep}}Q^2/8).
 \end{equation}
-For $J\ge2$, choose $b_{\mathrm{rep}}$ as the smallest positive odd integer with
+For $J\ge2$, let $H_{\mathrm{arc}}=s(J-1)$ be the number of intermediate syndrome bits to archive. Choose $b_{\mathrm{rep}}$ as the smallest positive odd integer with
 \begin{equation}
-b_{\mathrm{rep}}\ge\frac8{Q^2}\ln\frac{2s(J-1)}\eps.
+b_{\mathrm{rep}}\ge\frac8{Q^2}\ln\frac{2H_{\mathrm{arc}}}\eps.
 \end{equation}
-There are $s(J-1)$ archived bits, so all records are reconstructed correctly except with probability at most $\eps/2$. For $J=1$, set $b_{\mathrm{rep}}=0$ and omit the archive entirely.
+There are $H_{\mathrm{arc}}$ archived bits, so all records are reconstructed correctly except with probability at most $\eps/2$. For $J=1$, set $b_{\mathrm{rep}}=0$ and omit the archive entirely.
 
 \subsection{Why the history corrects a quantum state}
 At the endpoint, reconstruct the intermediate syndromes and form successive differences
@@ -600,7 +600,7 @@ f_X(s)&=s_1\xor s_4\xor s_1s_3\xor s_2s_3\xor s_2s_4,\\
 f_Z(s)&=s_2\xor s_3\xor s_1s_2\xor s_1s_4\xor s_3s_4.
 \label{eq:polynomials}
 \end{align}
-Products are binary AND and $\xor$ is addition modulo two. Applying $X^{f_X(s)}Z^{f_Z(s)}$ restores every error of weight at most one. The syndrome table in the appendix specifies the finite truth table behind these polynomials.
+Products are binary AND and $\xor$ is addition modulo two. Applying $X^{f_X(s)}Z^{f_Z(s)}$ to the decoded logical wire restores every error of weight at most one. The syndrome table in the appendix specifies the finite truth table behind these polynomials.
 
 Each linear term is a Clifford controlled correction. The three quadratic terms of $f_X$ use three Toffoli gates, each applying a NOT when both control qubits are set. Those of $f_Z$ use three controlled-controlled-$Z$ gates. A Hadamard on the target converts between these two three-qubit gates. Their seven-T implementation follows from the integer identity, for bits $u,v,w$,
 \begin{align*}
@@ -630,7 +630,7 @@ p_L\le\frac{(10p_0)^{2^L}}{10}.
 This deliberately conservative bound does not say that every weight-two error fails.
 
 \subsection{Batching makes the weak-noise dependence explicit}
-Assume $0<\gamma\le1/20$. Choose
+Assume integers $k,D\ge1$, $0<\eps<1/2$, and $0<\gamma\le1/20$. Choose
 \begin{equation}
 \tau=\left\lfloor\frac1{20\gamma}\right\rfloor,
 \qquad J=\left\lceil\frac D\tau\right\rceil\le40\gamma D+1.
@@ -641,10 +641,10 @@ p_L\le\frac1{10}(3/8)^{2^L}.
 \end{equation}
 Batching gives a cost proportional to $\gamma D+1$ rather than $D$, uniformly at weak noise, because recovery is performed after a batch instead of every arbitrarily short noise step.
 
-For $k$ logical blocks and $J$ recovery batches, the probability of any residual logical error is at most $kJp_L$. Earlier logical Paulis do not change the probability of later, independently sampled errors. The event of no residual error acts as identity on all logical qubits and their reference. It therefore gives $\dd(\Lambda)\le kJp_L$.
+For $k$ logical blocks and $J$ recovery batches, the probability of any residual logical error is at most $kJp_L$. Earlier logical Paulis do not change the probability of later, independently sampled errors. The event of no residual error is input-independent and acts as identity on all logical qubits and their reference. As in the archive construction, it gives an identity/bad-event channel mixture and hence $\dd(\Lambda)\le kJp_L$.
 
 \subsection{Finite choices and the achieved resource law}
-For $0<\eps<1/2$, set
+With these parameters, set
 \begin{equation}
 A=\max\left\{1,\frac{\ln[kJ/(10\eps)]}{\ln(8/3)}\right\},
 \qquad L=\left\lceil\log_2 A\right\rceil.
@@ -676,7 +676,7 @@ The probability that this never happens in $D$ independent layers is $(1-\gamma^
 \boxed{\Fe\le4^{-k}+(1-4^{-k})(1-\gamma^n)^D.}
 \label{eq:ceiling}
 \end{equation}
-For $0<\eps<1-4^{-k}$, put $\eta=\eps/(1-4^{-k})$. High fidelity requires
+For $D\ge1$ and $0<\eps<1-4^{-k}$, put $\eta=\eps/(1-4^{-k})$. High fidelity requires
 \begin{equation}
 (1-\gamma^n)^D\ge1-\eta.
 \end{equation}
@@ -773,10 +773,12 @@ $m_T$ & Number of internal physical T and T-dagger gates.\\
 $V$, $r$ & Binary Pauli envelope and its binary dimension.\\
 $\A_V$ & Complex Pauli algebra, of dimension $2^r$.\\
 $M$ & Terminal envelope dimension, at most $2n$.\\
+$M_I$ & Upper bound on expected decoded-tail envelope rank at an interval's later cut.\\
 $R_t$, $a$ & Expected envelope rank at a cut and its fidelity-dependent floor.\\
 $B$, $b_{\mathrm{rep}}$ & Total structural rank-growth charge and number of archive root replicas, respectively.\\
 $\tau$, $J$ & Batch length and number of batches; constants differ between the two constructions.\\
 $n_0$, $s$ & Archive data-block width and number of its stabilizer generators.\\
+$H_{\mathrm{arc}}$ & Number $s(J-1)$ of intermediate syndrome bits to archive.\\
 $L$ & Concatenation level of the five-qubit code.\\
 \bottomrule
 \end{tabularx}

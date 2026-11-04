@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "kind": "finite resource-comparison reference outputs",
+  "files": {
+    "resource_comparison.csv": {
+      "sha256": "26ae91e7c8716135a9a3d43977a2f849098bfbf1c4017fa150ee56c8d6c34745",
+      "size_bytes": 390123
+    },
+    "resource_comparison.json": {
+      "sha256": "05f4154ce9ed74af0271d501585b5079082396ef9fad9eba44a493c3d9693d9c",
+      "size_bytes": 3025
+    },
+    "resource_comparison.pdf": {
+      "sha256": "05ce6867e3cffd7696ab62143e45aa7a67da8fba28c93cd5c2326a0611bef852",
+      "size_bytes": 31643
+    }
+  }
+}
