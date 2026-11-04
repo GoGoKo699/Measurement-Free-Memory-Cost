@@ -31,7 +31,7 @@ Watrous supplies the finite-dimensional channel language. Binary symplectic Paul
 
 ## Translate the conventions
 
-Watrous's adjoint symbol $`*`$ is written $`\dagger`$ here. A channel maps states forward; its adjoint pulls observables backward. The equality $`\operatorname{Tr}[O\Phi(\rho)]=\operatorname{Tr}[\Phi^\dagger(O)\rho]`$ lets a final readout be studied at earlier cuts without changing any outcome probabilities.
+Watrous's adjoint symbol $`*`$ is written $`\dagger`$ here. A channel maps states forward; its adjoint pulls observables backward. The equality $`\mathrm{Tr}[O\Phi(\rho)]=\mathrm{Tr}[\Phi^\dagger(O)\rho]`$ lets a final readout be studied at earlier cuts without changing any outcome probabilities.
 
 The physical width is $`n`$, the quantum payload or BB84 challenge length is $`k`$, and the number of full noise rounds is $`D`$. The noise convention is
 

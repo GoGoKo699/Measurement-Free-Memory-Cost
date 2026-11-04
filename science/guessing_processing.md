@@ -6,7 +6,7 @@ Exact recovery of a hidden BB84 string supplies an operational premise for the p
 
 ```math
 R_t\ge a_k(p):=2k\left[\frac{p-2^{-k}}{1-2^{-k}}\right]_+.
-\tag{G1}
+\qquad\text{(G1)}
 ```
 
 The full-output envelope and dynamical ledger belong to this project. The finite quantum-memory guessing theorem used below belongs to [Lattice Memory Certification](https://github.com/GoGoKo699/Lattice-Memory-Certification/blob/dcff3be0246b27b07fb325c31293199e6fddbcf7/science/guessing-bound.md); its original input-length and dimension notation is translated here to $`k`$ challenge qubits and $`2^s`$ retained quantum dimension. The channel factorization and score-based composition are shared results. Established recovery reductions already yield (G1) for $`k\ge9`$, so this transfer establishes an operational corollary, rather than an additional asymptotic processing law. Sections 5 and A give the comparison, including scores at or below one half.
@@ -17,7 +17,7 @@ Choose $`X,\Theta\in\{0,1\}^k`$ independently and uniformly. Give the device onl
 
 ```math
 p=\Pr[\widehat X=X].
-\tag{G2}
+\qquad\text{(G2)}
 ```
 
 An abort is a failure. An accepted run or a score conditioned on a favorable event is not (G2).
@@ -33,16 +33,16 @@ Let $`\Phi`$ be the channel to the full physical output **before** basis-depende
 At a primitive cut $`t`$, average the earlier noise into a CPTP prefix $`\Pi_t`$ from the challenge input to the memory. A realization $`b`$ of future identity/replacement choices selects a CPTP tail $`S_{b,t}`$ to the full physical output. Independent Markov noise makes $`\Pi_t`$ independent of $`b`$. The [envelope invariant](pauli_envelopes.md) and [charged-gate updates](control_cost.md#3-rank-growth-charges-for-gates) give
 
 ```math
-\operatorname{range}S_{b,t}^\dagger\subseteq\mathcal A_{V_{b,t}}.
-\tag{G3}
+\mathrm{range}S_{b,t}^\dagger\subseteq\mathcal A_{V_{b,t}}.
+\qquad\text{(G3)}
 ```
 
 Write $`r=\dim V`$, let $`2s`$ be the rank of its restricted symplectic form, and put $`c=r-2s`$. In Clifford coordinates $`U`$, [Lemma C1](control_cost.md#lemma-c1--canonical-algebra-and-conditional-expectation) identifies
 
 ```math
-\mathcal A_V\simeq M_{2^s}\otimes\operatorname{Diag}_{2^c}\otimes I_G,
+\mathcal A_V\simeq M_{2^s}\otimes\mathrm{Diag}_{2^c}\otimes I_G,
 \qquad \dim G=2^{n-s-c}.
-\tag{G4}
+\qquad\text{(G4)}
 ```
 
 The trace-preserving conditional expectation $`\mathcal E_V`$ onto this algebra is CPTP, self-adjoint, and satisfies $`S_{b,t}=S_{b,t}\mathcal E_V`$. Its explicit factorization is
@@ -50,13 +50,13 @@ The trace-preserving conditional expectation $`\mathcal E_V`$ onto this algebra 
 ```math
 \begin{aligned}
 F_V(\rho)&=\sum_{z\in\{0,1\}^c}
-\operatorname{Tr}_G\!\left[\langle z|_C U\rho U^\dagger|z\rangle_C\right]
+\mathrm{Tr}_G\!\left[\langle z|_C U\rho U^\dagger|z\rangle_C\right]
 \otimes|z\rangle\langle z|_C,\\
 J_V(\sigma_{QC})&=U^\dagger
 \left(\sigma_{QC}\otimes\frac{I_G}{\dim G}\right)U,
 \qquad \mathcal E_V=J_VF_V.
 \end{aligned}
-\tag{G5}
+\qquad\text{(G5)}
 ```
 
 The classical blocks in $`F_V(\rho)`$ are positive and their traces sum to one. Both maps are CPTP, and $`F_V`$ has a genuine output of $`s`$ quantum qubits and a classical register with $`2^c`$ values. For an actual endpoint decoder $`\mathcal D_\theta`$, define
@@ -64,7 +64,7 @@ The classical blocks in $`F_V(\rho)`$ are positive and their traces sum to one. 
 ```math
 K_{b,t}=F_V\Pi_t,
 \qquad L_{b,t,\theta}=\mathcal D_\theta S_{b,t}J_V.
-\tag{G6}
+\qquad\text{(G6)}
 ```
 
 These are normalized CPTP encoding and decoding maps whose composition reproduces every actual outcome distribution. This is a channel factorization, not a conditioning on a subnormalized state or a purification with uncounted quantum memory.
@@ -73,7 +73,7 @@ The flags $`b`$ are only independent random **channel choices** in a convex deco
 
 ```math
 p=\mathbb E_b p_{b,t}
-\tag{G7}
+\qquad\text{(G7)}
 ```
 
 at every primitive cut, on either side of every gate and noise layer. Coupling the future flags across cuts supplies the same adjacent-cut envelope recurrence as in the original processing proof.
@@ -84,16 +84,16 @@ Apply two separate bounds to the original CPTP encoder $`K_{b,t}`$:
 
 ```math
 p_{b,t}\le\min\left\{1,\ 2^{(s-k)/6},\ 2^{s+c-k}\right\}.
-\tag{G8}
+\qquad\text{(G8)}
 ```
 
 The quantum-dimension term is Lattice's finite BB84 theorem, which permits unlimited classical information. For the last term, fix a basis. Its $`d=2^k`$ uniform inputs give normalized output states $`\rho_x\le I_{QC}`$. Every guessing POVM therefore obeys
 
 ```math
-\frac1d\sum_x\operatorname{Tr}(M_x\rho_x)
-\le\frac1d\sum_x\operatorname{Tr}M_x
+\frac1d\sum_x\mathrm{Tr}(M_x\rho_x)
+\le\frac1d\sum_x\mathrm{Tr}M_x
 =\frac{2^{s+c}}d.
-\tag{G9}
+\qquad\text{(G9)}
 ```
 
 Use (G9) before the optional classical pure-state refinement in Lattice's proof: those extra mathematical labels need not fit in the physical $`c`$-bit register. Uniform $`X`$ and the absence of an extra supplied label are essential here.
@@ -107,7 +107,7 @@ p_{b,t}\le h_k(r):=
 2^{(r-2k)/7},&5k/6\le r\le2k,\\
 1,&r\ge2k.
 \end{cases}
-\tag{G10}
+\qquad\text{(G10)}
 ```
 
 Integer $`s,c`$ and the constraint $`s+c\le n`$ can only lower this upper curve. It is not claimed to be an attainable optimum.
@@ -116,7 +116,7 @@ Put $`b_0=2^{-k}`$, $`H_k=2^{-k/6}`$, and $`t_0=5k/6`$. Each exponential piece i
 
 ```math
 H_k\le b_0+(1-b_0)\frac5{12}.
-\tag{G11}
+\qquad\text{(G11)}
 ```
 
 It holds directly at $`k=8`$ and persists: with $`x=2^{-k/6}`$, the ratio $`(H_k-b_0)/(1-b_0)=(x-x^6)/(1-x^6)`$ increases with $`x\in(0,1)`$. Its derivative has numerator $`1-6x^5+5x^6\ge0`$. Convexity on the two pieces now puts $`h_k`$ below the chord from $`(0,b_0)`$ to $`(2k,1)`$; for $`r\ge2k`$ that chord is at least one. Average this affine bound using (G7) to obtain (G1) at **every** cut.
@@ -130,7 +130,7 @@ a_k(p)=
 t_0\dfrac{p-b_0}{H_k-b_0},&b_0\lt p\le H_k,\\
 t_0+(2k-t_0)\dfrac{p-H_k}{1-H_k},&H_k\le p\le1.
 \end{cases}
-\tag{G12}
+\qquad\text{(G12)}
 ```
 
 Its decreasing slopes are equivalent to the reversed inequality in (G11), which holds for these seven integers. A simple affine alternative, valid for all $`k`$, is
@@ -139,7 +139,7 @@ Its decreasing slopes are equivalent to the reversed inequality in (G11), which 
 R_t\ge
 \frac{[p-b_0]_+}
 {\max\{(H_k-b_0)/t_0,\ (1-b_0)/(2k)\}}.
-\tag{G13}
+\qquad\text{(G13)}
 ```
 
 Thus every above-chance score supplies a positive rank floor, including scores at or below one half. Averaging an inverted exponential, or demanding the floor on each noise branch individually, would not establish this conclusion.
@@ -154,7 +154,7 @@ B\ge a[D\kappa-\ln(2n/a)]_+,
 m_T\ge\left\lceil
 \frac{[D\kappa-\ln(2n/a)]_+}{\ln(1+1/a)}
 \right\rceil.
-\tag{G14}
+\qquad\text{(G14)}
 ```
 
 The second inequality applies to an actual Clifford+T implementation and counts both T and T-dagger. The stronger [discrete injection bound](control_cost.md#5-exact-finite-depth-bound-from-discrete-injections) is
@@ -166,7 +166,7 @@ B&\ge\mathcal L(D,2n,a,q),\\
 &=\max\left\{0,\max_{1\le\ell\le D}
 \left[\frac aq+(D-\ell)\frac{(1-q)a}{q}-Mq^{\ell-1}\right]\right\}.
 \end{aligned}
-\tag{G15}
+\qquad\text{(G15)}
 ```
 
 Set $`\mathcal L(0,M,a,q)=0`$. For integer T count, round this lower bound upward and retain the stronger applicable inequality. The function is the exact optimum of necessary continuous scalar injection constraints, not a sufficient processing budget or a matching physical construction.
@@ -181,14 +181,14 @@ Let $`F_{\rm rec}`$ be the optimum squared Bell-overlap fidelity after CPTP reco
 
 ```math
 F_{\rm rec}\le\min\{1,2^{r-2k},2^{s-k}\}.
-\tag{G16}
+\qquad\text{(G16)}
 ```
 
 For clarity, the following comparison uses an optimal average guessing score $`p_*\ge\max\{p,1/d\}`$, with $`d=2^k`$. Replacing it by an actual lower score $`p\ge1/d`$ preserves the inequalities below. [Renes (2017), Eq. (12)](https://arxiv.org/abs/1707.01114), applied basis by basis and then averaged by convexity, gives
 
 ```math
 g_d(p_*):=p_*^2+\frac{(1-p_*)^2}{d-1}\le u.
-\tag{G17}
+\qquad\text{(G17)}
 ```
 
 Barnum–Knill's weaker $`p_*^2\le u`$ suffices for the proposition below. With $`S_\ell=\sum_{j=0}^{\ell}\binom kj`$, [Dupuis–Fawzi–Wehner (2015), Eq. (27) and Appendix C](https://arxiv.org/abs/1305.1316v3) imply
@@ -197,7 +197,7 @@ Barnum–Knill's weaker $`p_*^2\le u`$ suffices for the proposition below. With 
 u\le S_\ell F_{\rm pg}
 +2^{-\ell-1}\mathbf1_{\ell\lt k},
 \qquad 0\le\ell\le k.
-\tag{G18}
+\qquad\text{(G18)}
 ```
 
 Here $`2^{-H_2(R|B)}=dF_{\rm pg}`$ for the normalized channel Bell state. The fidelity in the cited operational interpretation is a root fidelity; $`F_{\rm pg}`$ here is its square. Equations (G17)–(G18) yield
@@ -206,7 +206,7 @@ Here $`2^{-H_2(R|B)}=dF_{\rm pg}`$ for the normalized channel Bell state. The fi
 F_{\rm rec}\ge
 \max_{0\le\ell\le k}
 \frac{[g_d(p_*)-2^{-\ell-1}\mathbf1_{\ell\lt k}]_+}{S_\ell}.
-\tag{G19}
+\qquad\text{(G19)}
 ```
 
 This comparison is useful below one half. At $`p_*=1/2`$, for example, $`\ell=2`$ gives a positive lower bound of order $`k^{-2}`$. For fixed positive score, a fixed $`\ell`$ with $`2^{-\ell-1}\lt p_*^2`$ gives a polynomial-in-$`k`$ fidelity lower bound.
@@ -217,7 +217,7 @@ Two further reductions matter. Measuring with a chosen basis decoder and prepari
 u\le\frac{1+F_{\rm pg}}2,
 \qquad
 F_{\rm rec}\ge[2g_d(p_*)-1]_+.
-\tag{G20}
+\qquad\text{(G20)}
 ```
 
 The whole collection of product BB84 bases is not a complete mutually unbiased set or a 2-design. Only the complementary-pair reduction is used in (G20).
@@ -225,8 +225,8 @@ The whole collection of product BB84 bases is not a complete mutually unbiased s
 **Prior-recovery comparison.** For every integer $`k\ge9`$, (G16), (G18), (G20), and $`p_*^2\le u`$ already imply, branch by branch,
 
 ```math
-p_*\le2^{-k}+(1-2^{-k})\min\{r/(2k),1\}.
-\tag{G21}
+p_*\le2^{-k}+(1-2^{-k})\min\left\{\frac r{2k},1\right\}.
+\qquad\text{(G21)}
 ```
 
 Appendix A proves the statement analytically for $`k\ge11`$ and supplies exact rational certificates for $`k=9,10`$. Averaging it gives precisely (G1). The comparison must be performed before averaging future noise: using only a recovery bound for the already averaged score can lose strength. Thus the direct quantum-plus-classical proof supplies a short operational route, but no additional asymptotic gate or interval consequence is established. The displayed prior-recovery family does not itself reproduce the same chord at $`k=8`$; that finite limitation is neither an operational counterexample nor a theorem of optimal recovery.
@@ -239,7 +239,7 @@ At fixed width, a mathematical noise branch replaces all $`n`$ registers in one 
 
 ```math
 p\le2^{-k}+(1-2^{-k})(1-\gamma^n)^D.
-\tag{G22}
+\qquad\text{(G22)}
 ```
 
 The continuing budget is a necessary law along feasible families, not proof of indefinitely reliable storage at fixed width. The flags in this argument remain mathematical proof aids.
@@ -257,10 +257,12 @@ We use an endpoint criterion. For $`G(x)=A2^x+c-x^2/(4k^2)`$ with $`A\gt0`$, $`G
 **Second range, $`4k/5\le r\le k`$.** Set $`S_2=(k^2+k+2)/2`$. Equations (G16) and (G18) with $`\ell=2`$ give $`p_*^2\le S_2 2^{r-2k}+1/8`$. The endpoint criterion with $`L=4k/5,U=k`$ applies if
 
 ```math
-S_2 2^{-6k/5}\le7/200,
-\qquad S_2 2^{-k}\le1/8,
-\qquad (\ln2)kS_2 2^{-6k/5}\le2/5.
-\tag{A1}
+\begin{aligned}
+S_2 2^{-6k/5}&\le7/200,\\
+S_2 2^{-k}&\le1/8,\\
+(\ln2)kS_2 2^{-6k/5}&\le2/5.
+\end{aligned}
+\qquad\text{(A1)}
 ```
 
 At $`k=11`$, $`S_2=67`$ and $`2^{-66/5}\lt2^{-13}`$ verify all three inequalities, using $`\ln2\lt1`$. They persist for larger $`k`$ because $`(\ln S_2)'\le2/k`$, so each left side decreases on $`[11,\infty)`$. Thus $`p_*^2\le r^2/(4k^2)`$.
@@ -268,10 +270,12 @@ At $`k=11`$, $`S_2=67`$ and $`2^{-66/5}\lt2^{-13}`$ verify all three inequalitie
 **Third range, $`k+1\le r\le3k/2`$.** With $`\ell=1`$, $`p_*^2\le(k+1)2^{r-2k}+1/4`$. Apply the endpoint criterion with $`L=k+1,U=3k/2`$. Sufficient conditions are
 
 ```math
-(k+1)2^{1-k}\le\frac1{2k}\lt\frac{2k+1}{4k^2},
-\qquad (k+1)2^{-k/2}\le5/16,
-\qquad (\ln2)k^2 2^{1-k}\le1/2.
-\tag{A2}
+\begin{aligned}
+(k+1)2^{1-k}&\le\frac1{2k}\lt\frac{2k+1}{4k^2},\\
+(k+1)2^{-k/2}&\le5/16,\\
+(\ln2)k^2 2^{1-k}&\le1/2.
+\end{aligned}
+\qquad\text{(A2)}
 ```
 
 At $`k=11`$, the first and third follow from $`132/1024\lt1/2`$ and $`121/1024\lt1/2`$. The middle one is $`12/(32\sqrt2)\le5/16`$, equivalent after squaring to $`36\le50`$. Their left sides, after multiplying the first by $`k`$, decrease thereafter by their logarithmic derivatives. These conditions bound both endpoint values by zero and ensure the left derivative is nonpositive. No integer rank is omitted between the second and third ranges.
@@ -280,7 +284,7 @@ At $`k=11`$, the first and third follow from $`132/1024\lt1/2`$ and $`121/1024\l
 
 ```math
 H''(r)=\frac{(\ln2)^2z(z+2)}{4\sqrt2(1+z)^{3/2}}\gt0.
-\tag{A3}
+\qquad\text{(A3)}
 ```
 
 The right endpoint satisfies $`H(2k)=1`$. At the left, $`H(3k/2)\le3/4`$ follows from $`2^{-k/2}\le1/8`$, valid for $`k\ge6`$. Convexity puts the entire curve below $`r/(2k)`$. The four ranges finish the analytic proof.
