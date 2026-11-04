@@ -1,6 +1,6 @@
 # Coherent recovery with an explicit gate budget
 
-This construction complements the lower bounds in [Control cost](control_cost.md). It stores unknown quantum states using only the operations and noise schedule of the [memory model](model.md), with every nonlinear correction performed coherently and charged. It gives a constructive upper bound within a power of a logarithm of the long-time lower bound. It does not establish optimal $`T`$ count.
+This construction complements the lower bounds in [Control cost](control_cost.md). It stores unknown quantum states using the operations and noise schedule of the [memory model](model.md), with nonlinear correction performed coherently and charged. The explicit bounds below quantify its width and internal T budget.
 
 The ingredients are the standard five-qubit perfect code, concatenation, and an exact seven-$`T`$ implementation of a Toffoli gate; their attribution is in [Related work](../references/RELATED_WORK.md). The syndrome polynomials and resource accounting below make their use explicit.
 
@@ -50,7 +50,7 @@ For each single-site $`X`$, $`Y`$, or $`Z`$ error, these bits are respectively $
 | 0111 | Y on qubit 5 | 1 | 1 |
 | 1111 | Y on qubit 4 | 1 | 1 |
 
-These tables have the following algebraic normal forms over $`\mathbb F_2`$:
+The correction table has the following algebraic normal forms over $`\mathbb F_2`$:
 
 ```math
 f_X(s)=s_1\oplus s_4\oplus s_1s_3
@@ -62,9 +62,20 @@ f_Z(s)=s_2\oplus s_3\oplus s_1s_2
        \oplus s_1s_4\oplus s_3s_4.
 ```
 
-Apply the conditional logical correction $`X^{f_X(s)}`$ and $`Z^{f_Z(s)}`$, then reset the four syndrome wires. The order changes only a syndrome-dependent phase, which does not change the recovered logical channel after those wires are discarded.
+Apply $`X^{f_X(s)}Z^{f_Z(s)}`$ to the decoded logical wire, then reset the four syndrome wires. Reversing the two conditional Pauli corrections changes only a syndrome-dependent phase, which does not change the recovered logical channel after those wires are discarded.
 
-The two linear terms in each polynomial require CNOT or controlled-$`Z`$ gates. The three quadratic terms in $`f_X`$ require three Toffoli gates; the three in $`f_Z`$ require three controlled-controlled-$`Z`$ gates. A controlled-controlled-$`Z`$ is Clifford-equivalent to Toffoli. Thus an exact implementation uses at most
+The two linear terms in each polynomial require CNOT or controlled-$`Z`$ gates. The three quadratic terms in $`f_X`$ require three Toffoli gates; the three in $`f_Z`$ require three controlled-controlled-$`Z`$ gates. Conjugating the target by Hadamards converts between these two three-qubit gates.
+
+Their exact seven-T implementation follows from the integer identity for bits $`u,v,w`$:
+
+```math
+\begin{aligned}
+4uvw={}&u+v+w-(u\oplus v)-(u\oplus w)-(v\oplus w)\\
+&+(u\oplus v\oplus w).
+\end{aligned}
+```
+
+Apply T phases to the four positive parity terms and T-dagger phases to the three negative terms. Their product is $`\exp(i\pi uvw)`$, the controlled-controlled-$`Z`$ phase. Each parity can be computed by CNOTs into one of the original three wires, phased, and uncomputed before the next term. This uses seven T/T-dagger gates and no ancillary parity wire. The six quadratic corrections therefore use at most
 
 ```math
 6\times 7=42
@@ -86,7 +97,7 @@ The number of recovery nodes in one top-level block is
 
 The operation uses only the original $`5^L`$ wires. The released syndrome wires become the clean inputs for reencoding. A global Clifford layer may route the surviving wires as needed. Gate duration and geometric locality are not charged in this model.
 
-Suppose each physical qubit has an independent Pauli error with probability at most $`p_0`$. Different child blocks depend on disjoint physical-error samples. Their residual logical Paulis are therefore independent, even when the encoded logical state is entangled across blocks or with a reference. A parent block certainly succeeds if at most one child has a nonidentity residual Pauli. Consequently,
+Suppose each physical qubit has an independent Pauli error with probability at most $`p_0`$. The residual Pauli label of each child is a deterministic function of its physical-error samples. Different children use disjoint samples, so their residual labels are independent even when the encoded logical state is entangled across blocks or with a reference. A parent block certainly succeeds if at most one child has a nonidentity residual Pauli. Consequently,
 
 ```math
 p_{\ell+1}\le {5\choose2}p_\ell^2=10p_\ell^2,
@@ -102,7 +113,18 @@ For $`k`$ separately encoded logical qubits and $`J`$ recovery intervals, a unio
 F_{\mathrm e}\ge1-kJp_L.
 ```
 
-An earlier logical Pauli error does not change the probability estimate for a later interval: after each operation the system is back in the encoded space, and the next physical noise samples are independent. The good event of no logical error in any block or interval acts as the identity on the complete $`k`$-qubit logical state. Its probability is input independent. The recovered channel is therefore a convex combination of the identity channel and a CPTP bad-event channel, with bad-event probability at most $`kJp_L`$. Consequently the same bound also gives half-diamond error at most $`kJp_L`$.
+After each recovery the system is back in the encoded space, possibly with a logical Pauli error. This does not change the estimate for the next independently sampled noise interval. The event of no residual logical error in any block or interval is input independent and acts as identity on the complete logical state and its reference. Hence
+
+```math
+\Lambda=(1-\beta)\mathrm{id}_{2^k}+\beta\Lambda_{\mathrm{bad}},
+\qquad 0\le\beta\le kJp_L,
+```
+
+where $`\Lambda_{\mathrm{bad}}`$ is CPTP when $`\beta>0`$. The diamond distance between two channels is at most two, so
+
+```math
+\frac12\|\Lambda-\mathrm{id}_{2^k}\|_\diamond\le\beta\le kJp_L.
+```
 
 ## 3. Batching weak noise
 
@@ -157,6 +179,15 @@ m_T\le \frac{42kJ}{4}(5^L-1),
 ```
 
 For $`L=0`$ the recovery tree is empty and the gate count is zero; the same probability bound covers that case. Counting the recovery after the final noise interval makes the stated upper bound conservative. The free endpoint decoder can then be chosen Clifford.
+
+For example, $`k=1`$, $`\gamma=0.01`$, $`D=1000`$, and $`\epsilon=0.01`$ give $`\tau=5`$, $`J=200`$, $`A\simeq7.7495`$, and $`L=3`$. The construction uses $`n=125`$ and $`m_T\le260400`$, with conservative error certificate
+
+```math
+\frac{kJ}{10}\left(\frac38\right)^{2^L}
+=20\left(\frac38\right)^8\simeq0.0078213\lt0.01.
+```
+
+These are the costs of the explicit integer prescription; its constants have not been optimized.
 
 With $`\alpha=\log_2 5`$, the integer choice obeys $`5^L\le5A^\alpha`$. Uniformly in the weak-noise range above, this gives
 

@@ -6,8 +6,8 @@ An exponentially growing archive of syndrome information gives a quantum memory 
 
 ```math
 N=\exp\!\bigl(O(\gamma D)\bigr)\,
- O\!\left((k+\log(J/\epsilon))
- \log\frac{2J(k+\log(J/\epsilon))}{\epsilon}\right),
+ O\!\left((k+\ln(J/\epsilon))
+ \ln\frac{2J(k+\ln(J/\epsilon))}{\epsilon}\right),
 \qquad J=O(1+\gamma D).
 ```
 
@@ -78,14 +78,13 @@ Put $`t_j=\min\{j\tau,D\}`$, $`t_0=0`$, and $`\ell_j=t_j-t_{j-1}`$. The effectiv
 Write $`Q=1-\Gamma`$, so $`Q\ge15/16`$, and define
 
 ```math
-\alpha=\frac1{16},\qquad
 R_0=1-h_2(1/8)-\frac18\log_2 3>0,
 ```
 
 ```math
-p_* = \frac{3\Gamma}{4}\lt \alpha,
+p_* = \frac{3\Gamma}{4}\lt \frac1{16},
 \qquad
-c_\Gamma=D_{\mathrm{bin}}(\alpha\|p_*)>0, \qquad\text{(4)}
+c_\Gamma=D_{\mathrm{bin}}(1/16\|p_*)>0, \qquad\text{(4)}
 ```
 
 where $`h_2`$ is the binary entropy in bits and
@@ -110,13 +109,13 @@ w=\lfloor n_0/16\rfloor. \qquad\text{(5)}
 
 Here $`n_0`$ is the data-block width, $`s`$ the number of stabilizer generators, and $`w`$ the guaranteed number of correctable errors per block. The choice implies $`s>0`$.
 
-When $`J\ge2`$, put $`M=s(J-1)`$ and choose $`B`$ as the smallest positive odd integer satisfying
+When $`J\ge2`$, put $`H_{\mathrm{arc}}=s(J-1)`$ and choose $`b_{\mathrm{rep}}`$ as the smallest positive odd integer satisfying
 
 ```math
-B\ge\frac8{Q^2}\ln\frac{2M}{\epsilon}. \qquad\text{(6)}
+b_{\mathrm{rep}}\ge\frac8{Q^2}\ln\frac{2H_{\mathrm{arc}}}{\epsilon}. \qquad\text{(6)}
 ```
 
-When $`J=1`$, set $`B=0`$ and omit the syndrome archive.
+When $`J=1`$, set $`b_{\mathrm{rep}}=0`$ and omit the syndrome archive.
 
 ### Theorem 1 — finite-parameter Clifford quantum memory
 
@@ -126,7 +125,7 @@ For the above parameters, an encoding, a fixed measurement-free Clifford/reset s
 N=
 \begin{cases}
 n_0,&J=1,\\[2mm]
-n_0+Bs\bigl(2\cdot3^{J-2}-1\bigr),&J\ge2.
+n_0+b_{\mathrm{rep}}s\bigl(2\cdot3^{J-2}-1\bigr),&J\ge2.
 \end{cases} \qquad\text{(7)}
 ```
 
@@ -181,7 +180,7 @@ Apply Lemma 2 with $`n=n_0`$. Let $`E_j`$ be the net Pauli error on the data dur
 \le\frac{\epsilon}{2J}. \qquad\text{(11)}
 ```
 
-Indeed, an integer exceeding $`\lfloor\alpha n_0\rfloor`$ exceeds $`\alpha n_0`$, and the tail is increasing in its Bernoulli parameter. The probability that any data increment is uncorrectable by this weight guarantee is at most $`\epsilon/2`$.
+Indeed, an integer exceeding $`\lfloor n_0/16\rfloor`$ exceeds $`n_0/16`$, and the tail is increasing in its Bernoulli parameter. The probability that any data increment is uncorrectable by this weight guarantee is at most $`\epsilon/2`$.
 
 ## 3. Exact coherent syndrome extraction
 
@@ -192,22 +191,22 @@ V|\psi\rangle=U\bigl(|\psi\rangle\otimes|0\rangle^{\otimes s}\bigr),
 \qquad U Z_{k+a}U^\dagger=g_a.
 ```
 
-One global Clifford operation extracts $`B`$ replicas of each syndrome bit using only the data and $`Bs`$ fresh record targets:
+One global Clifford operation extracts $`b_{\mathrm{rep}}`$ replicas of each syndrome bit using only the data and $`b_{\mathrm{rep}}s`$ fresh record targets:
 
 1. Apply $`U^\dagger`$ to the data.
-2. Apply CNOTs from the $`s`$ decoded syndrome coordinates to their respective $`B`$ fresh targets.
+2. Apply CNOTs from the $`s`$ decoded syndrome coordinates to their respective $`b_{\mathrm{rep}}`$ fresh targets.
 3. Apply $`U`$ to the data.
 
 For every Pauli $`A`$ and every logical state, including a state entangled with an untouched reference, the transformation is
 
 ```math
-A V|\psi\rangle\otimes|0\rangle^{\otimes Bs}
+A V|\psi\rangle\otimes|0\rangle^{\otimes b_{\mathrm{rep}}s}
 \longmapsto
-A V|\psi\rangle\otimes|\mathrm{syn}(A)\rangle^{\otimes B}.
+A V|\psi\rangle\otimes|\mathrm{syn}(A)\rangle^{\otimes b_{\mathrm{rep}}}.
 \qquad\text{(12)}
 ```
 
-To see this, $`U^\dagger A U`$ is a Pauli. Its action on the final $`s`$ input coordinates produces a definite computational-basis syndrome; these coordinates are unentangled with the logical input in each Pauli branch. Copying them therefore leaves the data unchanged after re-encoding. There is no temporary syndrome register besides the $`Bs`$ targets themselves.
+To see this, $`U^\dagger A U`$ is a Pauli. Its action on the final $`s`$ input coordinates produces a definite computational-basis syndrome; these coordinates are unentangled with the logical input in each Pauli branch. Copying them therefore leaves the data unchanged after re-encoding. There is no temporary syndrome register besides the $`b_{\mathrm{rep}}s`$ targets themselves.
 
 Throughout storage, record qubits are never used as controls or targets of a gate acting on data after their extraction. A live record is used only as a CNOT control on fresh record children. Conditional on the complete data Pauli history, all such records are computational-basis bits subjected to independent classical bit flips. This is an exact description of the conditional quantum channel. It does not assume the unknown logical state is classical and does not copy quantum logical information.
 
@@ -226,7 +225,7 @@ At the beginning of noise block $`j`$, the current data syndrome is $`\sigma_{j-
 | Stage | Operation |
 |---|---|
 | Start of block 1 | Keep the encoded data; no archive is needed for the known zero syndrome. |
-| Start of block $`j\ge2`$ | Reset all designated new targets to $`\lvert0\rangle`$. Extract $`B`$ copies of each bit of $`\sigma_{j-1}`$. For every old live archive leaf, copy its bit into three fresh children by CNOTs. |
+| Start of block $`j\ge2`$ | Reset all designated new targets to $`\lvert0\rangle`$. Extract $`b_{\mathrm{rep}}`$ copies of each bit of $`\sigma_{j-1}`$. For every old live archive leaf, copy its bit into three fresh children by CNOTs. |
 | Remaining control in the block | Retire the old parent slots from the live archive; they are ignored and may be reset for reuse at a later block. All other physical control is the identity. |
 | Noise in block $`j`$ | Apply $`\ell_j`$ ordinary all-qubit noise rounds. All allocated slots, including inactive and retired ones, are noisy. |
 | After physical round $`D`$ | Use the unrestricted final recovery to read archive leaves and measure the data syndrome $`\sigma_J`$. |
@@ -274,14 +273,14 @@ which proves (13). $`\square`$
 
 The initial root noise must be included: $`1/4`$ is a bound for reconstructing an already noisy root, not for reconstructing the syndrome before that root's first noisy block.
 
-For each syndrome bit, the $`B`$ initial replicas and all their descendant trees use disjoint physical registers at any common time. Reused registers are reset, and their future noise is independent of past noise. Conditional on the data history, the $`B`$ reconstruction errors are consequently independent. Hoeffding's inequality and (13) imply
+For each syndrome bit, the $`b_{\mathrm{rep}}`$ initial replicas and all their descendant trees use disjoint physical registers at any common time. Reused registers are reset, and their future noise is independent of past noise. Conditional on the data history, the $`b_{\mathrm{rep}}`$ reconstruction errors are consequently independent. Hoeffding's inequality and (13) imply
 
 ```math
-\Pr\{\text{majority of the }B\text{ replicas is wrong}\}
-\le\exp(-BQ^2/8). \qquad\text{(15)}
+\Pr\{\text{majority of the }b_{\mathrm{rep}}\text{ replicas is wrong}\}
+\le\exp(-b_{\mathrm{rep}}Q^2/8). \qquad\text{(15)}
 ```
 
-There are $`M=s(J-1)`$ archived syndrome bits. Equation (6) and a union bound show that all are correctly reconstructed with probability at least $`1-\epsilon/2`$, uniformly in the data history.
+There are $`H_{\mathrm{arc}}=s(J-1)`$ archived syndrome bits. Equation (6) and a union bound show that all are correctly reconstructed with probability at least $`1-\epsilon/2`$, uniformly in the data history.
 
 The broadcast process is a classical, established model [3]. The elementary recursion (14) is sufficient here; neither an optimal tree-reconstruction threshold nor optimality of recursive majority is used or claimed.
 
@@ -327,14 +326,14 @@ Let $`L_j`$ denote the number of live archive leaves immediately after block $`j
 
 ```math
 L_1=0,\qquad
-L_j=3L_{j-1}+Bs
-=\frac{Bs}{2}(3^{j-1}-1),\quad j\ge2. \qquad\text{(17)}
+L_j=3L_{j-1}+b_{\mathrm{rep}}s
+=\frac{b_{\mathrm{rep}}s}{2}(3^{j-1}-1),\quad j\ge2. \qquad\text{(17)}
 ```
 
-At the start of block $`j`$, the $`L_{j-1}`$ old leaves coexist with all $`L_j`$ fresh targets: three children per parent, plus the $`Bs`$ new roots. This parent/child overlap is essential to the workspace count. A pool of
+At the start of block $`j`$, the $`L_{j-1}`$ old leaves coexist with all $`L_j`$ fresh targets: three children per parent, plus the $`b_{\mathrm{rep}}s`$ new roots. This parent/child overlap is essential to the workspace count. A pool of
 
 ```math
-L_{J-1}+L_J=Bs(2\cdot3^{J-2}-1) \qquad\text{(18)}
+L_{J-1}+L_J=b_{\mathrm{rep}}s(2\cdot3^{J-2}-1) \qquad\text{(18)}
 ```
 
 archive slots suffices, because $`L_{j-1}+L_j`$ increases with $`j`$. At each block, reset $`L_j`$ slots outside the current live set, use them as targets, and then designate only those targets as live. Retired slots need no further access until a later reset. Equation (18), together with the $`n_0`$ data qubits, is exactly (7).
@@ -343,10 +342,10 @@ For completeness, the number of fresh record-target preparations over the entire
 
 ```math
 \sum_{j=2}^J L_j
-=\frac{Bs}{4}\bigl(3^J-2J-1\bigr), \qquad\text{(19)}
+=\frac{b_{\mathrm{rep}}s}{4}\bigl(3^J-2J-1\bigr), \qquad\text{(19)}
 ```
 
-and the total number of record-to-record CNOTs is $`3\sum_{j=2}^J L_{j-1}`$. There are $`Bs(J-1)`$ data-to-record CNOTs in the extraction circuits, in addition to the Clifford encoder and its inverse for each extraction. These are finite predetermined circuits. Their elementary gate depth is not charged in the global-control model. They introduce no additional quantum work registers beyond (7).
+and the total number of record-to-record CNOTs is $`3\sum_{j=2}^J L_{j-1}`$. There are $`b_{\mathrm{rep}}s(J-1)`$ data-to-record CNOTs in the extraction circuits, in addition to the Clifford encoder and its inverse for each extraction. These are finite predetermined circuits. Their elementary gate depth is not charged in the global-control model. They introduce no additional quantum work registers beyond (7).
 
 The two endpoints may use arbitrary computational work as permitted by their channel definition. In particular, minimum-weight decoding need not be computationally efficient. Endpoint work is not hidden noiseless memory used during the $`D`$ physical noise rounds. The archive is allowed to be discarded after recovery; a requirement that every register be returned clean would define a different endpoint condition.
 
@@ -361,7 +360,7 @@ Thus
 
 ```math
 n_0=O(k+\ln(J/\epsilon)),\qquad
-B=O\!\left(\ln\frac{2J(k+\ln(J/\epsilon))}{\epsilon}\right),
+b_{\mathrm{rep}}=O\!\left(\ln\frac{2J(k+\ln(J/\epsilon))}{\epsilon}\right),
 \qquad\text{(20)}
 ```
 
@@ -380,10 +379,10 @@ Since $`\lfloor x\rfloor\ge x/2`$ for $`x\ge1`$, equation (2) implies
 J\le32\gamma D+1. \qquad\text{(22)}
 ```
 
-For fixed $`k`$ and $`0\lt \epsilon\lt 1`$, the family therefore has $`\ln N=O(1+\gamma D)`$, with logarithmic corrections already absorbed for large $`D`$. Conversely, for every sufficiently large available width one can select $`J`$ of order $`\log N`$, pad unused slots if necessary, and obtain a lifetime of order $`\gamma^{-1}\log N`$. For example, selecting $`J\le(\ln N)/(2\ln3)`$ leaves room for the factors in (21) once $`N`$ is large enough. Fix a fidelity target $`4^{-k}\lt F_0\lt 1`$ and take $`\epsilon\le1-F_0`$. Together with the Clifford-memory converse, the optimal lifetime at this fixed logical size and target fidelity has order
+For fixed $`k`$ and $`0\lt \epsilon\lt 1`$, the family therefore has $`\ln N=O(1+\gamma D)`$, with logarithmic corrections already absorbed for large $`D`$. Conversely, for every sufficiently large available width one can select $`J`$ of order $`\ln N`$, pad unused slots if necessary, and obtain a lifetime of order $`\gamma^{-1}\ln N`$. For example, selecting $`J\le(\ln N)/(2\ln3)`$ leaves room for the factors in (21) once $`N`$ is large enough. Fix a fidelity target $`4^{-k}\lt F_0\lt 1`$ and take $`\epsilon\le1-F_0`$. Together with the Clifford-memory converse, the optimal lifetime at this fixed logical size and target fidelity has order
 
 ```math
-D_{\max}(N)=\Theta(\gamma^{-1}\log N)
+D_{\max}(N)=\Theta(\gamma^{-1}\ln N)
 ```
 
 throughout the stated small-noise regime, with constants depending on the fixed logical size and error tolerance. This is a comparison of lifetime order in the same endpoint and global-control model. The exact best exponent relating width and lifetime is not determined.
@@ -392,7 +391,7 @@ throughout the stated small-noise regime, with constants depending on the fixed 
 
 - If $`D=0`$, use $`N=k`$ and the identity channel. No code or archive is needed.
 - If $`\gamma=0`$, $`N=k`$ suffices for every finite $`D`$; the batching formula is unnecessary.
-- If $`J=1`$, the ordinary code and final recovery handle the single noise block, with no archived syndrome and no $`\log0`$ parameter.
+- If $`J=1`$, the ordinary code and final recovery handle the single noise block, with no archived syndrome and no $`\ln0`$ parameter.
 - If $`k=0`$, the storage task has a one-dimensional logical system and is vacuous; zero data qubits suffice under the convention allowing an empty memory.
 - The theorem concerns $`0\lt \epsilon\lt 1`$. Exact error zero under nonzero depolarization is not asserted. For $`\epsilon\ge1`$, the stated approximation target is vacuous.
 - The explicit constant $`1/16`$ is a convenient sufficient noise range, not a threshold claim. Better codes, larger branching factors, or better tree decoders can change constants.

@@ -12,7 +12,7 @@ Read the [complete explanatory report (PDF)](learning/report/Measurement_Free_Me
 
 ## Principal results
 
-Let $`n`$ be physical width, $`k`$ the number of logical qubits, $`D`$ the number of noisy rounds, and $`\gamma`$ the depolarizing strength in the convention $`\mathcal N_\gamma=(1-\gamma)\mathrm{id}+\gamma\mathcal R_{I/2}`$.
+Let $`n\ge k\ge1`$ be integer physical and logical widths, $`D\ge0`$ the integer number of noisy rounds, and $`0\lt\gamma\lt1`$ the depolarizing strength in the convention $`\mathcal N_\gamma=(1-\gamma)\mathrm{id}+\gamma\mathcal R_{I/2}`$. Write $`q=1-\gamma`$ and $`\kappa=-\ln q`$.
 
 For recovered Bell entanglement fidelity at least $`1-\epsilon`$, set
 
@@ -26,7 +26,7 @@ The necessary processing budget includes
 ```math
 m_T\ge
 a\left[
-D\bigl(-\ln(1-\gamma)\bigr)
+D\kappa
 -\ln\!\left(\frac{2n}{a}\right)
 \right]_+.
 ```
@@ -40,7 +40,7 @@ Here $`[x]_+=\max\{x,0\}`$. At fixed high fidelity and sufficiently long storage
 | Sharp zero-T quantum lifetime | $`\Theta(\gamma^{-1}\ln n)`$ at fixed logical size and target fidelity $`4^{-k}\lt F_0\lt 1`$, for sufficiently weak noise | [Clifford quantum lifetime](science/clifford_lifetime.md) |
 | Explicit coherent recovery | Width and T count with a polylogarithmic overhead relative to the extensive lower bound | [Coherent recovery](science/coherent_recovery.md) |
 
-For the constructive recovery bound, let $`\alpha=\log_2 5`$ and $`\ell=1+\ln[k(\gamma D+1)/\epsilon]`$. For $`0\lt \gamma\le1/20`$ and $`0\lt \epsilon\lt 1/2`$, an explicit concatenated five-qubit construction achieves
+For the constructive recovery bound with $`k,D\ge1`$, let $`\alpha=\log_2 5`$ and $`\ell=1+\ln[k(\gamma D+1)/\epsilon]`$. For $`0\lt \gamma\le1/20`$ and $`0\lt \epsilon\lt 1/2`$, an explicit concatenated five-qubit construction achieves
 
 ```math
 n=O(k\ell^\alpha),
@@ -52,7 +52,7 @@ m_T=O\bigl(k(\gamma D+1)\ell^\alpha\bigr),
 
 Each decoding node uses at most **42 T/T-dagger gates and no additional work qubits**. The logarithmic overhead is an upper bound for this construction; optimal T count is not established.
 
-The qualitative Clifford-memory obstruction and stochastic Pauli framework are prior work of Nelson, Rajakumar, and Gullans. The [literature comparison](references/RELATED_WORK.md) identifies inherited ingredients and the quantitative strengthening developed here.
+Nelson, Rajakumar, and Gullans proved a quantitative Clifford-memory forgetting bound and introduced the stochastic Pauli framework used here. The [literature comparison](references/RELATED_WORK.md) explains the sharper reference-stable contraction, the processing and timing laws, and the inherited coding and circuit ingredients.
 
 ## Read the science
 
@@ -83,6 +83,10 @@ python3 verification/run_all.py
 ```
 
 The suite checks Pauli-algebra and channel-rank identities, the exact finite-depth scalar optimization, the syndrome archive and workspace schedule, and the explicit five-qubit recovery. [Verification](verification/README.md) records the environment, expected outputs, and scope.
+
+The [finite resource comparison](verification/Graph/README.md) provides the
+Python-generated width and processing curves, pinned dependencies, and a check
+against the committed plot and numerical certificates.
 
 Finite computations validate the stated finite identities. General converses, concatenation guarantees, and asymptotic resource laws rely on the written proofs.
 

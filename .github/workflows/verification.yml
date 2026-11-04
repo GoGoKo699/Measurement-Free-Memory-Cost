@@ -1,4 +1,4 @@
-name: Verify science and report
+name: Verify science, resource figures, and report
 
 on:
   push:
@@ -33,6 +33,23 @@ jobs:
           python -m pip install -r verification/requirements.txt
           python verification/run_all.py
 
+  resource-comparison:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out the source revision
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ env.SOURCE_REVISION }}
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Reproduce the resource curves and finite certificates
+        run: |
+          python -m pip install -r verification/Graph/requirements.txt
+          python verification/Graph/generate_plots.py --check
+
   report-texlive-2025:
     runs-on: ubuntu-24.04
     steps:
@@ -41,10 +58,17 @@ jobs:
         with:
           ref: ${{ env.SOURCE_REVISION }}
           persist-credentials: false
+      - name: Set up Python for PDF comparison
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
       - name: Create the report output directory
         run: mkdir -p learning/report
       - name: Compile with TeX Live 2025
         uses: xu-cheng/latex-action@6549dc21effb2730855a1281407ecfcececc6c1b
+        env:
+          SOURCE_DATE_EPOCH: '1793769331'
+          FORCE_SOURCE_DATE: '1'
         with:
           working_directory: learning/source
           root_file: Measurement_Free_Memory_Cost_Report.tex
@@ -53,6 +77,7 @@ jobs:
           args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode -outdir=../report
           pre_compile: |
             mkdir -p ../report
+            cp ../report/Measurement_Free_Memory_Cost_Report.pdf ../report/stored-report-before-build.pdf
             rm -f ../report/Measurement_Free_Memory_Cost_Report.pdf ../report/Measurement_Free_Memory_Cost_Report.log
             pdflatex --version | tee ../report/compiler-version.txt
             grep -F 'TeX Live 2025' ../report/compiler-version.txt
@@ -62,6 +87,11 @@ jobs:
             test -s ../report/Measurement_Free_Memory_Cost_Report.pdf
             grep -F 'TeX Live 2025' ../report/Measurement_Free_Memory_Cost_Report.log
             sha256sum Measurement_Free_Memory_Cost_Report.tex ../report/Measurement_Free_Memory_Cost_Report.pdf > ../report/compiled.sha256
+      - name: Compare the fresh report with the checked PDF
+        run: |
+          python -m pip install -r verification/report-requirements.txt
+          python verification/compare_report.py learning/report/stored-report-before-build.pdf learning/report/Measurement_Free_Memory_Cost_Report.pdf --output learning/report/report-comparison.json
+          rm learning/report/stored-report-before-build.pdf
       - name: Record the resolved container image
         run: docker image inspect ghcr.io/xu-cheng/texlive-historic-debian:2025 --format '{{index .RepoDigests 0}}' > learning/report/container-image.txt
       - name: Retain the fresh PDF and matching build evidence
@@ -79,6 +109,7 @@ jobs:
             learning/report/container-image.txt
             learning/report/source.sha256
             learning/report/compiled.sha256
+            learning/report/report-comparison.json
 
   hosted-mathematics:
     runs-on: ubuntu-24.04

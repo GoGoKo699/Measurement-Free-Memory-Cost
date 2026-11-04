@@ -1,8 +1,9 @@
 # Literature, contribution, and operational comparison
 
 **Project:** Measurement-Free-Memory-Cost  
-**Literature checked:** 25 October 2026  
-**Scope:** primary literature checked through this date. Bibliography keys refer to `references.bib`.
+**Supporting-literature audit:** 25 October 2026  
+**Manuscript citation check:** 3 November 2026; repository alignment 4 November 2026  
+**Scope:** the later check covers the manuscript's cited primary references and its comparison with the closest prior work. It is not a new exhaustive novelty search. Bibliography keys refer to `references.bib`.
 
 ## 1. Contribution in relation to prior work
 
@@ -18,15 +19,15 @@ a = \frac{2k(1-\epsilon-4^{-k})}{1-4^{-k}}.
 
 The nontrivial regime is $`\epsilon<1-4^{-k}`$. At fixed acceptable infidelity and beyond the width allowance, this gives $`m_T=\Omega(k\gamma D)`$. The companion zero-$`T`$ statement gives replacement-channel convergence on the scale $`\gamma^{-1}\log(n/\epsilon)`$, including a diamond-norm formulation. These statements are proved in the project's Pauli-envelope and control-cost chapters.
 
-The new element is the rank contraction and the resulting quantitative lifetime/work laws. The idea that Clifford processing with resets cannot sustain memory is prior work. Pauli symplectic coordinates, operator-algebra decomposition, Schmidt-number bounds, concatenated codes, and seven-$`T`$ Toffoli circuits are standard ingredients.
+The new step is contraction of the simultaneous binary Pauli-envelope rank and its conversion into reference-stable forgetting, fidelity-dependent gate counts, and temporal interval laws. Nelson, Rajakumar, and Gullans already proved a quantitative forgetting theorem for noisy Clifford processing with resets. The present result sharpens its width dependence and relates the rank bottleneck to continuing internal work. Pauli symplectic coordinates, operator-algebra decomposition, Schmidt-number bounds, concatenated codes, and seven-$`T`$ Toffoli circuits are standard ingredients.
 
 ## 2. Direct prior: Nelson, Rajakumar, and Gullans
 
 The essential predecessor is **Nelson, Rajakumar, and Gullans, “Non-Clifford Gates Are Required for Long-Term Memory,” CCC 2026**, DOI [10.4230/LIPIcs.CCC.2026.38](https://doi.org/10.4230/LIPIcs.CCC.2026.38), first posted as [arXiv:2510.08451](https://arxiv.org/abs/2510.08451) in October 2025. The comparison here uses the final proceedings paper (`nelson2026nonclifford`).
 
-Its Theorem 1 and Lemma 6 give loss of pairwise trace distinguishability after $`O(\gamma^{-1}\log n\log(n/\epsilon))`$ layers. Section 2.3, Eq. (4), already permits replacement by **arbitrary single-qubit states**; Eqs. (8)–(11) specify the reset adjoint. Fresh magic states are therefore already allowed. Backward Pauli evolution and stochastic complete-depolarization trajectories also belong to this predecessor. The project sharpens the dependence to a single logarithm and obtains an explicit extensive gate-budget lower bound. Allowing joint replacement states is a model extension, not the headline novelty.
+Its Theorem 1 gives loss of pairwise trace distinguishability after $`O(\gamma^{-1}\log n\log(n/\delta))`$ layers at tolerance $`\delta`$. Lemma 6 controls simultaneous survival of nontrivial Pauli labels. Section 2.3, Eq. (4), already permits replacement by **arbitrary single-qubit states**; Eqs. (8)–(11) specify the reset adjoint. Fresh magic states are therefore already allowed. Backward Pauli evolution and stochastic complete-depolarization trajectories also belong to this predecessor. The project's expected-rank contraction sharpens the width dependence to a single logarithm, gives a reference-stable channel bound, and yields a fidelity-dependent gate budget at every temporal cut. Allowing joint replacement states is a model extension, not the headline novelty.
 
-The public arXiv record still listed only v1 when checked. A related four-author QCTiP 2026 abstract adds Dominik Hangleiter and uses the title “Limitations on Measurement-free Fault-tolerant Protocols using Clifford Circuits”; it states broader qualitative results but no quantitative replacement for the published bound. See the [conference abstract, p. 38](https://qctipconf.github.io/qctip_2026/QCTiP2026_Book_of_Abstracts_002.pdf). This audit cannot exclude an unpublished refinement.
+The public arXiv record still listed only v1 at the 3 November manuscript check. A related four-author QCTiP 2026 abstract adds Dominik Hangleiter and uses the title “Limitations on Measurement-free Fault-tolerant Protocols using Clifford Circuits”; it states broader qualitative results but no quantitative replacement for the published bound. See the [conference abstract, p. 38](https://qctipconf.github.io/qctip_2026/QCTiP2026_Book_of_Abstracts_002.pdf). This audit cannot exclude an unpublished refinement.
 
 ## 3. Model boundaries that matter for comparison
 
@@ -37,7 +38,7 @@ The project's depolarizing layer is
    +\gamma\,R_{I/2},
 ```
 
-independently on every persistent qubit. Its processing intervals can contain arbitrary ideal Clifford gates, replacement resets, and counted $`T/T^\dagger`$ gates. Consequently, $`D`$ is a number of noisy intervals, **not automatically the depth of an elementary noisy gate circuit**.
+independently across persistent qubits and rounds. Its processing intervals can contain arbitrary ideal Clifford gates, replacement resets, and counted $`T/T^\dagger`$ gates. Consequently, $`D`$ is a number of noisy intervals, **not automatically the depth of an elementary noisy gate circuit**.
 
 These conventions determine which comparisons with other memory models are valid.
 
@@ -133,7 +134,7 @@ The project uses the dimension $`2^r`$ of a binary-rank-$`r`$ Pauli algebra as a
 
 The fidelity identity is standard: see Nielsen, [Physics Letters A **303**, 249–252 (2002), Eq. (16)](https://arxiv.org/pdf/quant-ph/0205035), *nielsen2002simple*, and the original entanglement-fidelity formulation of Schumacher, [PRA **54**, 2614–2628 (1996)](https://doi.org/10.1103/PhysRevA.54.2614), *schumacher1996sending*. The subsequent rank inequality uses that a channel has spectral radius at most one. This yields the sharper branch bound $`F_{\mathrm e}\le\min\{1,2^{r-2k}\}`$ and the rank floor stated above.
 
-The Pauli algebra's coherent matrix blocks also have size at most $`2^{r/2}`$, giving a complementary Schmidt-number bound. Keeping only the total rank yields a weaker scalar floor, while retaining the coherent block size also detects purely classical algebras. General algebra and Schmidt-number theory are established ingredients; the rank contraction and its dynamical resource consequences are the new application.
+The Pauli algebra's coherent matrix blocks also have size at most $`2^{r/2}`$, giving a complementary Schmidt-number bound. The channel-rank argument supplies the $`4^{-k}`$ replacement baseline and the theorem's scalar rank floor. Retaining the coherent block size also detects purely classical algebras, even when their total rank is large. General algebra and Schmidt-number theory are established ingredients; the rank contraction and its dynamical resource consequences are the new application.
 
 **Magic-resource lower bounds.** Beverland, Campbell, Howard, and Kliuchnikov, *Quantum Science and Technology* **5**, 035009 (2020), [arXiv:1904.01124](https://arxiv.org/abs/1904.01124), `beverland2020lower`, study resource-state conversion, synthesis, and computational lower bounds with stabilizer operations free. Their setting allows adaptive measurement and charges nonstabilizer resource states. Because the present model permits arbitrary replacement states but restricts coherent dynamics, its memory bound is not a direct application of those state-magic monotones.
 

@@ -12,7 +12,7 @@ The model deliberately permits very powerful ideal operations between noise laye
 
 There are at most $`n`$ physical qubits at any instant during storage. This includes all data, syndrome records, temporary work qubits, controller registers, and any resource that retains information between noisy rounds. Variable active width is represented by a fixed pool of $`n`$ slots; a slot may be reset before reuse.
 
-A storage circuit contains exactly $`D`$ noise layers. Each layer applies the product channel
+A storage circuit contains exactly $`D\ge0`$ noise layers, with $`D`$ an integer. Each layer applies the product channel
 
 ```math
 \mathcal N_\gamma^{\otimes n},
@@ -29,6 +29,8 @@ q=1-\gamma,\qquad
 \kappa=-\ln q,
 \qquad 0\lt \gamma\lt 1.
 ```
+
+The symbol $`\ln`$ denotes the natural logarithm; $`\log_2`$ has base two.
 
 Equivalently, the single-qubit Pauli probabilities are $`1-3\gamma/4`$ for identity and $`\gamma/4`$ each for $`X,Y,Z`$. A computational-basis bit flips with probability $`\gamma/2`$. The noise-strength convention matters when comparing thresholds or batching intervals.
 
@@ -86,7 +88,7 @@ F_{\mathrm e}(\Lambda)
 \qquad\text{(M4)}
 ```
 
-This is the squared-overlap convention. The converse assumes only $`F_{\mathrm e}\ge1-\epsilon`$. The two constructions prove the stronger worst-case, reference-stable guarantee
+This is the squared-overlap convention. A replacement logical channel has fidelity exactly $`K^{-2}=4^{-k}`$. The converse assumes only $`F_{\mathrm e}\ge1-\epsilon`$. The two constructions prove the stronger worst-case, reference-stable guarantee
 
 ```math
 \delta_\diamond(\Lambda)
@@ -138,7 +140,7 @@ a\left[D\kappa-\ln\!\left(\frac{2n}{a}\right)\right]_+,
 \qquad\text{(M9)}
 ```
 
-The count includes both $`T`$ and $`T^\dagger`$. At fixed error bounded away from the trivial threshold and weak noise, this is an extensive cost of order $`k\gamma D`$ once $`D\kappa`$ exceeds the width allowance $`\ln(2n/a)`$ by a fixed factor greater than one. This is a necessary condition; it does not assert that spending those gates suffices.
+The count includes both $`T`$ and $`T^\dagger`$. At fixed error bounded away from the trivial threshold and weak noise, this is an extensive cost of order $`k\gamma D`$ once $`D\kappa`$ exceeds the width allowance $`\ln(2n/a)`$ by a fixed factor greater than one. This is a necessary gate budget; the constructions below give sufficient resources in the same model.
 
 [Control cost](control_cost.md) gives sharper integer-gate and finite-depth inequalities, an exact optimization of the corresponding scalar rank constraints, and a bound for every contiguous storage interval. It also replaces $`2n`$ by a smaller decoder-specific terminal rank when justified. A fixed Pauli-axis rotation has rank-growth charge at most one, while a general operation on $`s`$ qubits has a safe charge at most $`2s`$; those structural charges are not automatically physical T counts.
 
@@ -149,7 +151,7 @@ F_{\mathrm e}\le\min\{1,2^{r-2k}\}.
 \qquad\text{(M10)}
 ```
 
-Indeed, the superoperator trace equals $`K^2 F_{\mathrm e}`$, all eigenvalues of a CPTP map have modulus at most one, and the number of its nonzero eigenvalues is at most its rank. Averaging the convex secant bound forces expected envelope rank at least $`a`$ at every cut. Every T gate can add at most one binary generator.
+Indeed, the superoperator trace equals $`K^2 F_{\mathrm e}`$, all eigenvalues of a CPTP map have modulus at most one, and the number of its nonzero eigenvalues, counted with algebraic multiplicity, is at most its rank. Applying the convex secant bound to each branch before averaging forces expected envelope rank at least $`a`$ at every cut. Every T gate can add at most one binary generator.
 
 ### Sharp order of the zero-T quantum lifetime
 
@@ -184,7 +186,7 @@ m_T=O\bigl(k(\gamma D+1)\ell^\alpha\bigr).
 
 It concatenates the five-qubit code, batches weak noise, and applies an explicit syndrome correction using at most 42 T/T-dagger gates per decoding node. No additional work qubits are needed beyond the code block. The constants and finite integer parameter choices are given in the construction.
 
-This upper bound establishes a concrete comparison with (M9). The polylogarithmic overhead has not been removed; neither optimal T count nor optimal physical width is asserted.
+This upper bound establishes a concrete comparison with (M9). The optimal T count and physical width remain open; the construction retains a polylogarithmic reliability overhead.
 
 ## 4. How the results fit together
 

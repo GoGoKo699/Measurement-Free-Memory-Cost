@@ -27,20 +27,20 @@ In particular, a large commuting algebra can retain much classical information w
 
 ## 2. What the initial width allowance buys
 
-For the general decoder-independent statement, the terminal envelope has rank at most $`2n`$. At fidelity $`F_{\mathrm e}\ge1-\epsilon`$, define
+For the general decoder-independent bound, use the full terminal envelope $`M=2n`$. At fidelity $`F_{\mathrm e}\ge1-\epsilon`$ with $`0\le\epsilon\lt1-4^{-k}`$, define
 
 ```math
 a=2k\,\frac{1-\epsilon-4^{-k}}{1-4^{-k}}.
 ```
 
-When $`a>0`$, the simple necessary budget is
+Set $`\kappa=-\ln q`$. The simple necessary budget is
 
 ```math
 m_T\ge
-a\left[D(-\ln q)-\ln(2n/a)\right]_+.
+a\left[D\kappa-\ln(2n/a)\right]_+.
 ```
 
-The first term grows with noisy storage duration. Physical width contributes the finite logarithmic allowance $`\ln(2n/a)`$. For fixed acceptable error and weak noise, long storage therefore requires a total T count of order $`k\gamma D`$. At finite encoding rate $`k/n=\Theta(1)`$, the allowance corresponds to only order $`1/\gamma`$ noisy rounds.
+The first term grows with noisy storage duration. Physical width contributes the finite logarithmic allowance $`\ln(2n/a)`$. At fixed high fidelity, if $`D\kappa`$ exceeds that allowance by a fixed factor greater than one, the necessary T count is $`\Omega(k\gamma D)`$. At weak noise $`\kappa=\gamma+O(\gamma^2)`$. For finite encoding rate $`k/n=\Theta(1)`$, the allowance corresponds to only order $`1/\gamma`$ noisy rounds.
 
 The exact finite-depth law in [Control cost](control_cost.md) improves the constants and gives a precise scalar optimization. Its optimum can first consume the initial rank reserve, then restore the minimum necessary rank before each subsequent noise layer. That is an optimization of necessary rank constraints. It does not construct a memory realizing those ranks.
 
@@ -52,13 +52,13 @@ The [Clifford-only construction](clifford_lifetime.md) extracts a stabilizer-syn
 
 This construction preserves an unknown quantum state and its reference correlations. Only the syndrome record is copied. In each Pauli-noise branch, syndrome extraction acts on a definite syndrome sector and reveals no logical amplitudes.
 
-All records remain physical noisy qubits. Their exponential growth is the resource that permits decoding to be deferred until the endpoint. The resulting lifetime order matches the converse:
+All records remain physical noisy qubits, including old parents and their fresh children while they coexist at a branching boundary. Retired slots also remain noisy until reset for reuse. This counted width permits decoding to be deferred until the endpoint. The resulting lifetime order matches the converse:
 
 ```math
 D_{\max}(n)=\Theta(\gamma^{-1}\ln n)
 ```
 
-at fixed logical size and nontrivial fidelity target, within the stated weak-noise range. The constants and exact width exponent are not optimized.
+at fixed $`k`$ and target $`4^{-k}\lt F_0\lt1`$, for $`0\lt\gamma\le1/16`$ and sufficiently large width. The constants depend on the fixed target parameters; the exact width exponent is not optimized.
 
 The endpoint recovery is unrestricted and may be computationally expensive. This is part of the operational statement: the memory must preserve recoverability during storage, while the final computation needed to recover the state is outside the interval.
 
@@ -66,18 +66,20 @@ The endpoint recovery is unrestricted and may be computationally expensive. This
 
 The [coherent recovery construction](coherent_recovery.md) uses a different allocation of resources. A five-qubit Clifford decoder exposes four syndrome bits and one logical wire. Two quadratic Boolean polynomials specify the logical Pauli correction. Each polynomial has three quadratic terms, so six Toffoli-equivalent gates suffice. Exact seven-T decompositions give the stated upper bound of 42 T/T-dagger gates per decoding node.
 
-Concatenating the code suppresses the error quadratically per level. Batching order $`1/\gamma`$ weak-noise rounds between recoveries prevents the operation count from paying a constant correction cost in every arbitrarily short noise step. With $`\alpha=\log_2 5`$ and
+Concatenating the code gives the conservative recursion $`p_{\ell+1}\le10p_\ell^2`$ for residual Pauli-label error probabilities. Batching order $`1/\gamma`$ weak-noise rounds between recoveries prevents the operation count from paying a constant correction cost in every arbitrarily short noise step. For integers $`k,D\ge1`$, $`0\lt\gamma\le1/20`$, and $`0\lt\epsilon\lt1/2`$, set $`\alpha=\log_2 5`$ and
 
 ```math
-\ell=1+\ln\frac{k(\gamma D+1)}{\epsilon},
+\ell=1+\ln\frac{k(\gamma D+1)}{\epsilon}.
 ```
 
-the explicit construction has
+The explicit construction has
 
 ```math
 n=O(k\ell^\alpha),
 \qquad
-m_T=O\bigl(k(\gamma D+1)\ell^\alpha\bigr).
+m_T=O\bigl(k(\gamma D+1)\ell^\alpha\bigr),
+\qquad
+\frac12\|\Lambda-\mathrm{id}_{2^k}\|_\diamond\le\epsilon.
 ```
 
 All correction controls are counted quantum registers. The decoded syndrome wires are reset and reused for reencoding, so the construction needs no work qubits beyond the code block. It provides a physical circuit witness inside the ideal processing model, rather than an assumption that classical decoder running time equals coherent gate complexity.
@@ -99,7 +101,7 @@ F_{\mathrm e}
 
 This argument permits arbitrary internal gates; it does not depend on the Clifford restriction or the T budget.
 
-For $`\epsilon\lt 1-4^{-k}`$, requiring $`F_{\mathrm e}\ge1-\epsilon`$ in (I1) gives
+For $`D\ge1`$ and $`0\lt\epsilon\lt1-4^{-k}`$, requiring $`F_{\mathrm e}\ge1-\epsilon`$ in (I1) gives
 
 ```math
 (1-\gamma^n)^D
@@ -107,7 +109,14 @@ For $`\epsilon\lt 1-4^{-k}`$, requiring $`F_{\mathrm e}\ge1-\epsilon`$ in (I1) g
 1-\frac{\epsilon}{1-4^{-k}}.
 ```
 
-At fixed $`\gamma`$ and small error, this requires at least logarithmic width in $`D/\epsilon`$. Thus the long-time slope of a gate-budget lower bound is a necessary resource statement for feasible families with adequate width. It does not establish indefinitely reliable storage at fixed finite width.
+Set $`\eta=\epsilon/(1-4^{-k})`$. Using $`\ln(1-x)\le-x`$ gives the necessary consequence
+
+```math
+n\ge\frac{\ln D-\ln[-\ln(1-\eta)]}{|\ln\gamma|}.
+\qquad\text{(I2)}
+```
+
+When its right side is useful, this makes the width requirement explicit. At fixed $`\gamma`$ and small error, it grows logarithmically in $`D/\epsilon`$. The continuing-processing slope concerns feasible families with adequate width; fixed finite width still has the lifetime ceiling (I1).
 
 The explicit coherent construction uses a power of a logarithm in the storage horizon. Closing that exponent gap, and closing the corresponding gate-count gap, are distinct optimality questions.
 

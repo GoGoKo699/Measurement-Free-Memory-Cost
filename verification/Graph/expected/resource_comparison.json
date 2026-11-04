@@ -1,0 +1,83 @@
+{
+  "kind": "Finite analytical certificates, no empirical data or fitted curves",
+  "scientific_source_commit": "3bc227af0dcb359c211dee7caf13e223f7358873",
+  "parameters": {
+    "k": 1,
+    "gamma": "1/100",
+    "epsilon": "1/100",
+    "D_range": [
+      1,
+      1000
+    ]
+  },
+  "curves": {
+    "zero_T_necessary_width": "max(k,a*exp(D*kappa)/2)",
+    "processing_lower_at_coherent_width": "a*max(0,D*kappa-ln(2*n_coherent(D)/a))",
+    "coherent": "Finite integer prescription in coherent_recovery.md, section4",
+    "archive": "Finite integer prescription in clifford_lifetime.md, equations2-7; complete parent/child overlap"
+  },
+  "checked_points": 1000,
+  "all_error_certificates_le_target": true,
+  "all_lower_bounds_le_sufficient_costs": true,
+  "archive_overlap_checked": true,
+  "first_D_positive_T_lower": 482,
+  "D1000_example": {
+    "D": 1000,
+    "k": 1,
+    "gamma": 0.01,
+    "epsilon": 0.01,
+    "gamma_D": 10.0,
+    "a": 1.9733333333333334,
+    "kappa": 0.010050335853501442,
+    "logarithmic_reserve": 4.8417367576344414,
+    "zero_T_width_necessary": 22854.7175688761,
+    "coherent_T_log_lower": 10.278302215844215,
+    "coherent_T_log_lower_integer": 11,
+    "coherent_tau": 5,
+    "coherent_J": 200,
+    "coherent_A": 7.7494655019747976,
+    "coherent_L": 3,
+    "coherent_n": 125,
+    "coherent_T_upper": 260400,
+    "coherent_error_certificate": 0.007821321487426761,
+    "archive_tau": 6,
+    "archive_J": 167,
+    "archive_Gamma": 0.058519850599,
+    "archive_Q": 0.941480149401,
+    "archive_R0": 0.2583152442102591,
+    "archive_c": 0.00366485486767908,
+    "archive_n0": 2843,
+    "archive_s": 2842,
+    "archive_B": 167,
+    "archive_N_decimal": "5039385350457819809372191879477960826509798508387627559083807446027364562740044091433",
+    "archive_log10_N": 84.70237756914732,
+    "archive_data_error_certificate": 0.004985664540670108,
+    "archive_record_error_certificate": 0.004343681145985978,
+    "archive_error_certificate": 0.009329345686656085,
+    "archive_T": 0
+  },
+  "limits": [
+    "Lower bounds and sufficient construction costs do not give an exact frontier.",
+    "The zero-T width bound does not constrain the T-using coherent construction.",
+    "Both constructions satisfy half-diamond error<=epsilon, implying the converse Bell-fidelity premise.",
+    "All control between noise layers is ideal/global; no hardware-gate-time conclusion follows.",
+    "Zero processing lower bounds remain in the CSV and are masked on logarithmic axes."
+  ],
+  "python": "3.12.14",
+  "dependencies": {
+    "matplotlib": "3.10.8",
+    "numpy": "2.3.5",
+    "contourpy": "1.3.3",
+    "cycler": "0.12.1",
+    "fonttools": "4.61.1",
+    "kiwisolver": "1.4.9",
+    "packaging": "26.3",
+    "pillow": "12.3.0",
+    "pyparsing": "3.3.2",
+    "python-dateutil": "2.9.0.post0",
+    "six": "1.17.0"
+  },
+  "pdf_sha256": "05ce6867e3cffd7696ab62143e45aa7a67da8fba28c93cd5c2326a0611bef852",
+  "csv_sha256": "26ae91e7c8716135a9a3d43977a2f849098bfbf1c4017fa150ee56c8d6c34745",
+  "pdf_dates": "omitted"
+}

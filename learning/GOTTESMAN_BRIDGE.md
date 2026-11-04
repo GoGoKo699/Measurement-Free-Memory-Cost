@@ -27,4 +27,4 @@ The physical noise is `N_gamma=(1-gamma) id + gamma R_(I/2)`. The probability of
 
 **From syndrome correction to charged constructions.** One zero-T construction copies only syndrome records into a growing, noisy archive and defers nonlinear decoding to the endpoint. Another performs coherent five-qubit correction with at most 42 T/T-dagger gates per decoding node, followed by concatenation and batching. Read [Clifford lifetime](../science/clifford_lifetime.md) and [coherent recovery](../science/coherent_recovery.md).
 
-These are exact statements only under the specified ideal processing model. No hardware gate-noise threshold, optimal T count, or matching constant-factor construction is claimed. Use the [30-milestone map](MILESTONES.md) to follow the complete story from prerequisites to resource frontier.
+These are exact statements only under the specified ideal processing model. No hardware gate-noise threshold, optimal T count, or matching constant-factor construction is claimed. Use the [30-milestone map](MILESTONES.md) to follow the complete story from prerequisites to the proved resource bounds and remaining gap.

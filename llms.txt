@@ -25,6 +25,8 @@ Canonical entrypoints:
 - references/references.bib: structured primary-source bibliography.
 - verification/README.md: finite checks, dependencies and their limitations.
 - verification/run_all.py: deterministic suite and saved-output comparison.
+- verification/Graph/README.md: reproducible finite width/processing comparison,
+  Python generator, pinned dependencies and numerical certificates.
 
 Learning entrypoints:
 - learning/report/Measurement_Free_Memory_Cost_Report.pdf: continuous self-contained explanation of the model, converse, constructions and remaining resource gap.
@@ -56,9 +58,12 @@ Preserve these distinctions:
 - Actual surviving Pauli supports need not form a vector space. The proof uses
   a linear enclosure and may overestimate retained information.
 - The main fidelity floor is a=2k*(1-epsilon-4^(-k))/(1-4^(-k)).
+- q=1-gamma and kappa=-ln(q); logarithms in the processing law are natural.
 - The scalar injection optimum is a lower bound from necessary rank constraints,
   not an attained physical optimum for T-count.
 - A general final decoder can have support rank much larger than 2k.
+- An interior interval needs its own entering-rank bound M_I. Later internal
+  gates can enlarge that envelope; M_I=2n is always valid.
 - Zero-T quantum storage uses exponential noisy width and defers nonlinear
   computation to unrestricted final recovery.
 - The coherent construction uses the standard five-qubit code and exact
@@ -68,7 +73,9 @@ Preserve these distinctions:
   Bell-overlap fidelity at least 1-epsilon.
 - Measured QEC with noiseless external classical feedback is a different model.
   Do not claim that all QEC consumes magic or that fresh-state cost is T-count.
-- The qualitative no-go result and stochastic Pauli framework are prior work.
+- The prior quantitative Clifford-forgetting theorem and stochastic Pauli
+  framework are due to Nelson, Rajakumar and Gullans. The literature comparison
+  distinguishes the sharper reference-stable rate and continuing-processing law.
 - Finite checks establish their tested identities, not unrestricted asymptotic
   truth or external peer review.
 

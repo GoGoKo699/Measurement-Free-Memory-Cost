@@ -146,7 +146,7 @@ Encode $`k\ge1`$ logical qubits by an arbitrary CPTP encoder. Pass the physical 
 
 
 ```math
-F\ge1-\epsilon,
+F_{\mathrm e}\ge1-\epsilon,
 \qquad 0\le\epsilon\lt 1-4^{-k}.
 \qquad\text{(C7)}
 ```
@@ -190,7 +190,7 @@ On $`[0,2k]`$, this is the secant-line bound for a convex exponential; for $`r\g
 
 
 ```math
-1-\epsilon\le F
+1-\epsilon\le F_{\mathrm e}
 \le 4^{-k}+(1-4^{-k})\frac{R_t}{2k}.
 \qquad\text{(C11)}
 ```
@@ -267,13 +267,15 @@ For a Clifford+T implementation, the stronger individual-gate version is
 
 ```math
 m_T\ge
+\left\lceil
 \frac{\left[D\kappa-\ln(M/a)\right]_+}
-{\ln(1+1/a)}.
+{\ln(1+1/a)}
+\right\rceil.
 \qquad\text{(C16)}
 ```
 
 
-The right side may be rounded up because $`m_T`$ is an integer.
+The ceiling records that $`m_T`$ is an integer.
 
 **Proof.** Traverse the circuit backward. At every cut $`R\ge a`$. A noise layer gives $`R'\le qR`$ by Lemma E2. A free operation gives $`R'\le R`$. A gate of charge $`b_g`$ gives $`R'\le R+b_g`$, hence
 
@@ -297,7 +299,7 @@ Summing the logarithmic increments over the entire backward circuit gives
 ```
 
 
-This proves (C15). When each charged gate is T or $`T^\dagger`$, replace its increment by the sharper $`\ln(1+1/a)`$ before summing, which gives (C16). $`\square`$
+This proves (C15). When each charged gate is T or $`T^\dagger`$, replace its increment by the sharper $`\ln(1+1/a)`$ before summing, and use the integrality of $`m_T`$, which gives (C16). $`\square`$
 
 The dimension reserve $`M`$ contributes only the finite term $`\ln(M/a)`$. For $`M=2n`$, long storage needs a total charge of order $`k\gamma D`$ at weak noise and fixed sufficiently small error. The next theorem gives a stronger exact optimization of the scalar rank inequalities, including the finite initial reserve.
 
@@ -342,12 +344,13 @@ B\ge\left[\frac{(1-q)a}{q}D-(M-a)\right]_+.
 
 The bound (C19) is exactly the optimum of the continuous scalar injection problem induced by the rank inequalities. It is not a claim of a matching physical T-count construction.
 
-**Proof.** Number the noise layers in backward order, $`j=1,\ldots,D`$. Let $`b_j`$ be the total charge between the previous backward noise layer and layer $`j`$, with $`b_1`$ including all charged gates between the terminal cut and the first backward noise. Let $`R_j`$ be the expected envelope rank immediately after processing backward through layer $`j`$, and set $`R_0=M`$. Combining gate growth, free rank loss, and one-layer contraction gives
+**Proof.** Number the noise layers in backward order, $`j=1,\ldots,D`$. Let $`b_j`$ be the total charge between the previous backward noise layer and layer $`j`$, with $`b_1`$ including all charged gates between the terminal cut and the first backward noise. Let $`R_j`$ be the expected envelope rank immediately after processing backward through layer $`j`$, and bound the entering expectation by $`R_0\le M`$. Equality holds when $`M`$ is the exact terminal envelope dimension. Combining gate growth, free rank loss, and one-layer contraction gives
 
 
 ```math
 R_j\le q(R_{j-1}+b_j),
-\qquad R_j\ge a.
+\qquad R_j\ge a,
+\qquad R_0\le M.
 \qquad\text{(C22)}
 ```
 
@@ -468,15 +471,17 @@ B_I\ge a\left[D_I\kappa-\ln(M_I/a)\right]_+.
 ```
 
 
-One may always take $`M_I=2n`$. If the physical width at the later cut is smaller and all its persistent registers are represented there, the corresponding twice-width bound is available.
+One may always take $`M_I=2n`$. If the physical width at the later cut is smaller and all its persistent registers are represented there, the corresponding twice-width bound is available. Use an interval-specific entering-rank bound: gates in the later suffix can enlarge that envelope beyond the decoder's terminal rank $`M`$.
 
 **Proof.** The global fidelity guarantee gives the same rank floor $`a`$ at every cut of the selected interval by Theorem C3. Start backward propagation at its later cut. The entering envelope can depend on noise and gates in the later suffix, but its expected rank is at most $`M_I`$, and noise inside the interval is independent of that suffix. The recurrence (C22) and logarithmic argument (C17) therefore hold unchanged. The earlier prefix can be any CPTP channel; the proof of Theorem C3 imposes no further condition on it or on the actual state it produces. $`\square`$
 
-If only an upper bound $`M_I`$ is used, the dominating recurrence starts at that upper bound rather than the exact expectation; this preserves every inequality. The interval theorem shows that an arbitrarily long interior segment cannot be supported solely by gates outside that segment. The allowed initial reserve for each interval is still finite, at most $`2n`$.
+If only an upper bound $`M_I`$ is used, the dominating recurrence starts at that upper bound rather than the exact expectation; this preserves every inequality. In particular, an interval containing no charged gates satisfies $`D_I\le\ln(M_I/a)/\kappa`$. The reserve for each interval is finite, at most $`2n`$.
 
 ## 7. The final decoder and the meaning of the terminal rank
 
 For a fixed decoder $`\mathcal D`$, its Pauli-support envelope $`V_{\mathrm{dec}}`$ is defined by (E5). Starting at $`M=\dim V_{\mathrm{dec}}`$ is valid because every pulled-back terminal observable already lies in $`\mathcal A_{V_{\mathrm{dec}}}`$. The decoder is not subsequently charged as an internal operation. Its complete action is included in the initial support condition.
+
+If $`M=0`$, the decoded storage channel is a replacement channel, so its composition with any encoder has Bell fidelity $`4^{-k}`$. The strict fidelity regime defining $`a>0`$ is then infeasible. The logarithmic and scalar budget formulas use $`M\ge a>0`$.
 
 If $`\mathcal D`$ is a Clifford unitary followed by discarding all but $`k`$ physical output qubits, then the $`2k`$ independent output Pauli generators pull back to $`2k`$ independent Pauli labels. Hence $`M=2k`$. A decoder built solely from the free primitives after selecting $`k`$ output qubits has $`M\le2k`$, by the same backward rank argument. In that case the logarithmic reserve is $`\ln(2k/a)`$, independent of the physical storage width.
 
@@ -520,7 +525,7 @@ Arbitrary final local recovery cannot invalidate the Schmidt-number bottleneck. 
 
 These theorems establish a necessary processing budget beyond the free Clifford-and-replacement primitives. Their strength is that resets may inject arbitrary fixed magic states, the encoder and final decoder may be arbitrary, and logical entanglement with a reference is retained in the analysis. The obstruction is the loss of the algebra capable of carrying a sufficiently high-fidelity logical channel through every temporal cut. Its complex dimension supplies the main fidelity bound; its coherent block size gives the complementary Schmidt-number restriction.
 
-The theorems do not establish a physically optimal T-count, a universal gate-depth threshold, or a lower bound on measurement-based QEC with a noiseless external classical decoder. A measured controller must be included in a separate operational model. A coherent implementation of its nonlinear processing can be covered by charging its actual gate decomposition or a proved local rank-growth budget.
+The optimal physical T count remains open. Noise during elementary gate execution and measurement-based correction with protected classical decoding require their own resource accounts. A coherent implementation of nonlinear controller processing can be covered by charging its actual gate decomposition or a proved local rank-growth budget.
 
 The program [verification/verify_pauli_algebra.py](../verification/verify_pauli_algebra.py) checks the finite Pauli-algebra identities by dense matrices, verifies the superoperator fidelity identity and rank bound for explicit logical CPTP channels, and verifies primal/dual equality of (C19)–(C28) over an exact-rational parameter grid. These tests address support propagation, the CPTP conditional expectation, the terminal-decoder distinction, the logical-channel bottleneck, and the discrete placement optimization. They do not replace the analytic proof or claim asymptotic evidence from small systems.
 
