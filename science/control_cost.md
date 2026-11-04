@@ -4,7 +4,7 @@ This chapter proves necessary gate budgets for the memory model in [model.md](mo
 
 Write $`q=1-\gamma\in(0,1)`$, $`\kappa=-\ln q`$, and let $`D`$ be the number of full noise layers. The width bound $`n`$ includes every persistent physical register. A gate count is a necessary resource in this precise model, not an assertion that every implementation of quantum error correction requires a particular non-Clifford resource.
 
-The [delayed-basis guessing corollary](guessing_processing.md) supplies an alternative all-cut expected-rank floor from unconditional BB84 whole-string success. Once that floor is proved, the scalar gate and interval arguments in Sections 4–6 apply unchanged. Its full-output envelope starts at $`M=2n`$ before basis-dependent readout; it does not assume a single fixed logical decoder or charge the free endpoint decoder.
+The [delayed-basis guessing corollary](guessing_processing.md) supplies an alternative all-cut expected-rank floor from unconditional BB84 whole-string success. Once that floor is proved, the scalar gate and interval arguments in Sections 4–6 apply unchanged. The [exponential-moment extension](moment_processing.md) applies the same scalar optimization to $`X_z=\log_z\mathbb E[z^r]`$, with its own floor and noise-contraction factor. The common envelope starts at the full physical output with reserve $`2n`$ before basis-dependent readout; neither route charges the free endpoint decoder.
 
 ## 1. From a binary subspace to a quantum bottleneck
 

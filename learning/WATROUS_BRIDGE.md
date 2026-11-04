@@ -85,7 +85,19 @@ R_t\ge a_k(p),
 
 For example, $`k=12`$ and $`p=0.4`$ give $`a_k(p)\simeq9.5965`$. The smaller-$`k`$ bounds and the all-cut averaging proof are given in the authoritative chapter. A rank floor supplies a necessary gate budget only when the storage duration exceeds its width allowance.
 
-Retaining spectral normalization in existing recovery inequalities reproduces every displayed score floor when applied branchwise before averaging. The direct factorization explains the operational mechanism; these floors yield no additional gate or interval consequence over that recovery route. The test also does not establish that the assumed noise, counted controller or processing restrictions hold. Arbitrary uncharged feedback and postselection change the model, and the Lattice project's conditional LWE wrapper is not automatically inherited.
+Retaining spectral normalization in existing recovery inequalities reproduces the convenient mean-rank score floors when applied branchwise before averaging. The direct factorization explains the operational mechanism; these floors yield no additional gate or interval consequence over that recovery route. The test also does not establish that the assumed noise, counted controller or processing restrictions hold. Arbitrary uncharged feedback and postselection change the model, and the Lattice project's conditional LWE wrapper is not automatically inherited.
+
+## Retaining the noise distribution
+
+The [moment-processing proof](../science/moment_processing.md) uses the same counted device model. Choose independent coordinate pivots for a rank-$`r`$ Pauli envelope. At a noise layer, a surviving subspace can use only pivots on retained physical qubits. This gives, for $`1<z\le2`$,
+
+```math
+\mathbb E[z^{r'}\mid V]\le(1-q+qz^2)^{r/2}.
+```
+
+Jensen's inequality therefore makes $`X_z=\log_z\mathbb E[z^r]`$ contract by $`\alpha_z=\ln(1-q+qz^2)/(2\ln z)`$. A charged T-type gate still adds at most one. Applying the direct quantum-plus-classical branch score curve in the moment variable supplies one all-cut floor; fixing a recovery of the averaged channel supplies a complementary floor. The existing scalar optimization now applies to this potential. The source-to-project step is the pivot argument and its dynamical composition; it is not attributed to Watrous as a textbook theorem.
+
+This strengthening keeps information lost by mean-rank concavification. It does not make the mathematical noise flags available to a controller. An interval entry bound must control $`X_z`$ itself; $`2n`$ is safe, while a bound only on $`\mathbb E[r]`$ need not be.
 
 ## Two ways to pay for reliable storage
 

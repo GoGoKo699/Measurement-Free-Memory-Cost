@@ -1,0 +1,139 @@
+{
+  "status": "PASS",
+  "moment_noise": {
+    "status": "pass",
+    "subspace_sets": [
+      {
+        "n": 1,
+        "binary_subspaces": 5
+      },
+      {
+        "n": 2,
+        "binary_subspaces": 67
+      },
+      {
+        "n": 3,
+        "binary_subspaces": 2825
+      }
+    ],
+    "rational_moment_cases": 34764,
+    "pivot_coupling_checks": 22878,
+    "reset_rank_checks": 22878,
+    "T_growth_checks": 1020,
+    "moment_statement": "E[t^r_after | V]^2 <= (1-q+q*t^2)^r_before, t>=1",
+    "stochastic_domination_counterexample": {
+      "q": "1/10",
+      "span_Z1_Z2_survival": "19/100",
+      "span_X1_Z1_survival": "1/10"
+    },
+    "packed_kernel_convexity_counterexample": {
+      "q": "1/10",
+      "t": "2",
+      "second_difference_at_rank2": "-7/100"
+    },
+    "limits": "Finite exact checks support the pivot/pairing proof; no physical-achievability or universal branch-adaptive-controller claim."
+  },
+  "combined_branch_certificate": {
+    "status": "pass",
+    "parameters": {
+      "k": 12,
+      "n": 120,
+      "p": "2/5",
+      "q": "99/100",
+      "z": "27/25"
+    },
+    "polygon_ranks": [
+      0,
+      11,
+      24
+    ],
+    "polygon_scores": [
+      "1/4096",
+      "1/4",
+      "1"
+    ],
+    "concavity_slopes": [
+      "2439022064208984375/13004287080611422208",
+      "3552713678800500929355621337890625/18993005048104775823681761293967688"
+    ],
+    "pairs_checked": 169,
+    "moment_lower_exact": "55662982580381544588155455491960141/17763568394002504646778106689453125",
+    "moment_lower_formula": "(4*z^11+z^24)/5",
+    "log_moment_floor_interval": [
+      "1484082963327/100000000000",
+      "14840829633271/1000000000000"
+    ],
+    "effective_retention_interval": [
+      "990724980097/1000000000000",
+      "495362490049/500000000000"
+    ],
+    "cases": [
+      {
+        "D": 2000,
+        "combined_moment_individual_T_interval": [
+          "243117317956157/1000000000000",
+          "121558658978079/500000000000"
+        ],
+        "rounded_necessary_count": 244
+      },
+      {
+        "D": 700,
+        "combined_moment_individual_T_interval": [
+          "11469507429241/200000000000",
+          "28673768573103/500000000000"
+        ],
+        "rounded_necessary_count": 58
+      }
+    ],
+    "scope": "Valid combined branch-profile upper polygon and conditional necessary count. No globally optimal z, exact physical score curve or feasible physical circuit is asserted.",
+    "witness_methods": {
+      "output_dimension": 84,
+      "known_classical_BB84": 1,
+      "direct_quantum_dimension_sixth_power": 84
+    },
+    "pair_witness_sha256": "109564a67374e1bf0ae20dc1619c16ab0c06b3b6d97d146fb1de6f7553d09bb6"
+  },
+  "specified_recovery_family_ceiling": {
+    "status": "pass",
+    "parameters": {
+      "k": 12,
+      "n": 120,
+      "p": "2/5",
+      "q": "99/100"
+    },
+    "specified_family": "Normalized DFW/Renes branch cap + measure-and-prepare + finite output dimension + known classical-memory bound, then rank maximization and exact concavification in z^r.",
+    "recovery_rank16_pair": {
+      "s": 4,
+      "c": 8,
+      "Fcap": "1/256",
+      "ell": 1,
+      "u": "283/1024",
+      "score_cap_lower": "262827054097/500000000000",
+      "g_of_cap_lower": "1079295761879737720231/3905296325683593750000"
+    },
+    "feasible_profile_mixture": {
+      "ranks": [
+        0,
+        16
+      ],
+      "weight_at_rank16": "399755859375/525409967569"
+    },
+    "coverage": "Adaptive exact rational subintervals cover1<z<=2; monotone analytic tail coversz>=2.",
+    "tail_z_at_least_2": {
+      "2000": "67485286316689/500000000000",
+      "700": "18204754256637/1000000000000"
+    },
+    "largest_rounded_ledger_count_at_most": {
+      "2000": 223,
+      "700": 52
+    },
+    "scope": "An upper ceiling on the strength of the specified recovery-only moment formulas, including individual-T and continuous-injection ledgers. Not a physical gate upper bound or a comparison with all possible recovery theorems.",
+    "interval_count": 67,
+    "interval_certificate_sha256": "23c8b518a43886e5cc783e43634d713fe933f772de060ad71bb44548f0bda142",
+    "finite_interval_maximum_upper": {
+      "2000": "222987025455003/1000000000000",
+      "700": "5199832591747/100000000000"
+    }
+  },
+  "scope": "Finite algebra and exact scalar certificates supplement the written proofs; no physical-feasibility or model-verification claim."
+}

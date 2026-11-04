@@ -115,3 +115,8 @@ Small-system matrix identities do not certify all possible channels or circuit s
 
 No sampled hardware threshold or noisy-gate implementation is inferred from this suite. The constructions retain ideal global control between the specified noise layers.
 
+
+
+## Exponential-moment processing checks
+
+Run `python verification/verify_moment_processing.py`, or use `python verification/run_all.py` to compare all five scientific suites with their committed expected outputs. The moment suite checks the pivot/noise inequality on all subspaces at widths one through three, reset and T updates, the 169 exact integer-algebra witnesses for the combined finite polygon, rational logarithm enclosures for the 244/58 counts, and the specified recovery-family comparison. All bound and rounding decisions use exact integer or rational arithmetic. These checks supplement the general proof in [Moment processing](../science/moment_processing.md); they do not establish physical feasibility or optimal T cost.

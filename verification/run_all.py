@@ -14,6 +14,7 @@ CHECKS = (
     ("archive", "verify_archive.py"),
     ("five_qubit", "verify_five_qubit.py"),
     ("guessing_processing", "verify_guessing_processing.py"),
+    ("moment_processing", "verify_moment_processing.py"),
 )
 METADATA = {"python_version", "numpy_version"}
 
