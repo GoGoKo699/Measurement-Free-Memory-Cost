@@ -85,7 +85,7 @@ R_t\ge a_k(p),
 
 For example, $`k=12`$ and $`p=0.4`$ give $`a_k(p)\simeq9.5965`$. The smaller-$`k`$ bounds and the all-cut averaging proof are given in the authoritative chapter. A rank floor supplies a necessary gate budget only when the storage duration exceeds its width allowance.
 
-Existing recovery inequalities already imply the same large-block floor when applied branchwise before averaging. The direct factorization is therefore a useful account of the mechanism, not a new asymptotic low-score law. The test also does not establish that the assumed noise, counted controller or processing restrictions hold. Arbitrary uncharged feedback and postselection change the model, and the Lattice project's conditional LWE wrapper is not automatically inherited.
+Retaining spectral normalization in existing recovery inequalities reproduces every displayed score floor when applied branchwise before averaging. The direct factorization explains the operational mechanism; these floors yield no additional gate or interval consequence over that recovery route. The test also does not establish that the assumed noise, counted controller or processing restrictions hold. Arbitrary uncharged feedback and postselection change the model, and the Lattice project's conditional LWE wrapper is not automatically inherited.
 
 ## Two ways to pay for reliable storage
 

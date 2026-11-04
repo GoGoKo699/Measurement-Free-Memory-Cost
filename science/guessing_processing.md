@@ -9,7 +9,7 @@ R_t\ge a_k(p):=2k\left[\frac{p-2^{-k}}{1-2^{-k}}\right]_+.
 \qquad\text{(G1)}
 ```
 
-The full-output envelope and dynamical ledger belong to this project. The finite quantum-memory guessing theorem used below belongs to [Lattice Memory Certification](https://github.com/GoGoKo699/Lattice-Memory-Certification/blob/dcff3be0246b27b07fb325c31293199e6fddbcf7/science/guessing-bound.md); its original input-length and dimension notation is translated here to $`k`$ challenge qubits and $`2^s`$ retained quantum dimension. The channel factorization and score-based composition are shared results. Established recovery reductions already yield (G1) for $`k\ge9`$, so this transfer establishes an operational corollary, rather than an additional asymptotic processing law. Sections 5 and A give the comparison, including scores at or below one half.
+The full-output envelope and dynamical ledger belong to this project. The finite quantum-memory guessing theorem used below belongs to [Lattice Memory Certification](https://github.com/GoGoKo699/Lattice-Memory-Certification/blob/dcff3be0246b27b07fb325c31293199e6fddbcf7/science/guessing-bound.md); its original input-length and dimension notation is translated here to $`k`$ challenge qubits and $`2^s`$ retained quantum dimension. The channel factorization and score-based composition are shared results. Established recovery reductions already yield both (G1) and the small-block floor below. The transfer supplies a direct operational proof of these consequences; it adds no processing budget beyond that recovery route. Section 5 and Appendices A–B give the comparison, including scores at or below one half.
 
 ## 1. Challenge, chronology, and counted device
 
@@ -173,7 +173,7 @@ Set $`\mathcal L(0,M,a,q)=0`$. For integer T count, round this lower bound upwar
 
 For any contiguous interval $`I`$ between primitive cuts, the **same global floor** holds throughout. Replace $`D,B,2n`$ in (G14)–(G15) by $`D_I,B_I,M_I`$, where $`M_I\le2n`$ is an upper bound on expected envelope rank at its later cut. The later suffix can determine that entering random envelope, but noise within $`I`$ is independent of the suffix. Hence the contraction and charge recurrence hold unchanged. Assign boundary gates consistently. If $`D_I\ge1`$, feasibility also requires $`a\le2nq`$.
 
-For $`k=12,p=0.4,n=120,\gamma=0.01,D=2000`$, (G1) gives $`a=9.5964835\ldots`$. The individual-gate bound requires at least 171 T/T-dagger gates; (G15) alone requires 163. A 700-round contiguous interval requires at least 37. These are conditional necessary statements, not an assertion that these parameters are achievable.
+For $`k=12,p=0.4,n=120,\gamma=0.01,D=2000`$, (G1) gives $`a=9.5964835\ldots`$. The individual-gate bound requires at least 171 T/T-dagger gates; (G15) alone requires 163. For a 700-round contiguous interval, the individual-gate bound requires at least 39; (G15) alone requires 37. These are conditional necessary statements, not an assertion that these parameters are achievable.
 
 ## 5. Comparison with existing fidelity and recovery reductions
 
@@ -200,18 +200,38 @@ u\le S_\ell F_{\rm pg}
 \qquad\text{(G18)}
 ```
 
-Here $`2^{-H_2(R|B)}=dF_{\rm pg}`$ for the normalized channel Bell state. The fidelity in the cited operational interpretation is a root fidelity; $`F_{\rm pg}`$ here is its square. Equations (G17)–(G18) yield
+Here $`2^{-H_2(R|B)}=dF_{\rm pg}`$ for the normalized channel Bell state. The fidelity in the cited operational interpretation is a root fidelity; $`F_{\rm pg}`$ here is its square.
+
+Keeping normalization in the same proof gives a sharper finite bound. Set
+
+```math
+\begin{aligned}
+\tau_\ell&=2^{-\ell-1}\mathbf1_{\ell\lt k},\\
+A_\ell&=\sum_{j=0}^{\ell}\binom kj(1-2^j\tau_\ell).
+\end{aligned}
+\qquad\text{(G18a)}
+```
+
+The spectral weights in [Dupuis–Fawzi–Wehner, Eqs. (13)–(15)](https://arxiv.org/abs/1305.1316v3), divided by $`d`$, give numbers $`w_v\ge0`$ with $`\sum_vw_v=1`$ and $`w_v\le F_{\rm pg}`$. For product BB84 measurements, their spectrum gives
+
+```math
+u=\sum_{v\in\{0,1,3\}^k}2^{-|v|}w_v
+\le\tau_\ell+A_\ell F_{\rm pg}.
+\qquad\text{(G18b)}
+```
+
+Here $`|v|`$ counts nonidentity Pauli labels; labels containing $`2`$ have spectral coefficient zero. To prove the inequality, subtract $`\tau_\ell\sum_vw_v=\tau_\ell`$ from the spectral sum. Discard nonpositive terms, and apply $`w_v\le F_{\rm pg}`$ to the remaining $`2^j\binom kj`$ coefficients at each weight $`j\le\ell`$. This retains the probability mass already assigned to those terms. Since $`A_\ell\le S_\ell`$, it strengthens (G18), with equality at $`\ell=k`$. This is a consequence of the cited spectral constraints, not a separately assumed uncertainty relation. Equations (G17) and (G18b) yield
 
 ```math
 F_{\rm rec}\ge
 \max_{0\le\ell\le k}
-\frac{[g_d(p_*)-2^{-\ell-1}\mathbf1_{\ell\lt k}]_+}{S_\ell}.
+\frac{[g_d(p_*)-\tau_\ell]_+}{A_\ell}.
 \qquad\text{(G19)}
 ```
 
 This comparison is useful below one half. At $`p_*=1/2`$, for example, $`\ell=2`$ gives a positive lower bound of order $`k^{-2}`$. For fixed positive score, a fixed $`\ell`$ with $`2^{-\ell-1}\lt p_*^2`$ gives a polynomial-in-$`k`$ fidelity lower bound.
 
-Two further reductions matter. Measuring with a chosen basis decoder and preparing the guessed basis vector gives exactly $`F_{\rm rec}\ge p_*/d`$. Combining this with (G16) yields $`p_*\le\min\{1,2^{r-k}\}`$. Also, the complementary product bases $`\theta`$ and $`\theta\oplus1^k`$ form a mutually unbiased pair that extends to a complete stabilizer MUB set in dimension $`d=2^k`$. Subtracting the omitted bases' pretty-good scores, each at least $`F_{\rm pg}`$, from the complete-MUB identity gives the pair bound. [Berta–Coles–Wehner (2014), Eq. (B23)](https://arxiv.org/abs/1302.5902v2), averaged over these pairs, gives
+Two simple consequences complete the comparison. For each basis, applying its guessing POVM and preparing the guessed basis vector gives Bell fidelity $`p_\theta/d`$. A recovery channel that samples the basis internally therefore gives $`F_{\rm rec}\ge p_*/d`$. Combining this with (G16) yields $`p_*\le\min\{1,2^{r-k}\}`$. In addition, (G18b) with $`\ell=0`$ gives
 
 ```math
 u\le\frac{1+F_{\rm pg}}2,
@@ -220,16 +240,18 @@ F_{\rm rec}\ge[2g_d(p_*)-1]_+.
 \qquad\text{(G20)}
 ```
 
-The whole collection of product BB84 bases is not a complete mutually unbiased set or a 2-design. Only the complementary-pair reduction is used in (G20).
+The first inequality also agrees with the complementary-pair bound in [Berta–Coles–Wehner (2014), Eq. (B23)](https://arxiv.org/abs/1302.5902v2). The spectral proof above applies directly to product BB84 measurements and needs no completion to a mutually unbiased set. The entire product-BB84 collection is not a complete mutually unbiased set or a 2-design.
 
-**Prior-recovery comparison.** For every integer $`k\ge9`$, (G16), (G18), (G20), and $`p_*^2\le u`$ already imply, branch by branch,
+**Prior-recovery comparison.** For every integer $`k\ge8`$, (G16), (G18b), and $`p_*^2\le u`$, together with the measure-and-prepare reduction, already imply, branch by branch,
 
 ```math
 p_*\le2^{-k}+(1-2^{-k})\min\left\{\frac r{2k},1\right\}.
 \qquad\text{(G21)}
 ```
 
-Appendix A proves the statement analytically for $`k\ge11`$ and supplies exact rational certificates for $`k=9,10`$. Averaging it gives precisely (G1). The comparison must be performed before averaging future noise: using only a recovery bound for the already averaged score can lose strength. Thus the direct quantum-plus-classical proof supplies a short operational route, but no additional asymptotic gate or interval consequence is established. The displayed prior-recovery family does not itself reproduce the same chord at $`k=8`$; that finite limitation is neither an operational counterexample nor a theorem of optimal recovery.
+Appendix A proves the statement analytically for $`k\ge11`$ and supplies exact rational certificates for $`k=8,9,10`$. Averaging it gives precisely (G1). Appendix B gives 49 exact rational certificates that the same prior-recovery family lies below the concave polygon used for (G12), at every interior integer rank for $`1\le k\le7`$. Thus prior recovery already implies **both displayed all-cut floors**, and therefore all gate and interval consequences obtained from them.
+
+The comparison must be performed before averaging future noise: using only a recovery bound for the already averaged score can lose strength. The direct quantum-plus-classical proof supplies a short operational route. This conclusion concerns the convenient floors (G1) and (G12), not optimal guessing or every stronger bound obtainable by optimizing integer quantum/classical block sizes.
 
 ## 6. Exact boundaries and interpretation
 
@@ -289,23 +311,51 @@ H''(r)=\frac{(\ln2)^2z(z+2)}{4\sqrt2(1+z)^{3/2}}\gt0.
 
 The right endpoint satisfies $`H(2k)=1`$. At the left, $`H(3k/2)\le3/4`$ follows from $`2^{-k/2}\le1/8`$, valid for $`k\ge6`$. Convexity puts the entire curve below $`r/(2k)`$. The four ranges finish the analytic proof.
 
-For $`k=9,10`$, the following exact rational calculation verifies all 38 remaining integer ranks. For each, either measure-and-prepare directly bounds the score by $`r/(2k)`$, or the PGM reductions bound its square by $`r^2/(4k^2)`$:
+For $`k=8,9,10`$, the following exact rational calculation verifies all 54 remaining integer ranks. For each, either measure-and-prepare directly bounds the score by $`r/(2k)`$, or the normalized spectral bound (G18b) bounds its square by $`r^2/(4k^2)`$:
 
 ```python
 from fractions import Fraction as F
 from math import comb
 
-for k in (9, 10):
+for k in (8, 9, 10):
     for r in range(1, 2*k + 1):
         f = F(2**r, 2**(2*k))
-        z = min(
-            [F(1, 2)*(1+f)] +
-            [sum(comb(k, j) for j in range(ell+1))*f +
-             (F(1, 2**(ell+1)) if ell < k else 0)
-             for ell in range(k+1)]
-        )
+        candidates = []
+        for ell in range(k+1):
+            tau = F(1, 2**(ell+1)) if ell < k else F(0)
+            A = sum(comb(k, j)*(1-2**j*tau)
+                    for j in range(ell+1))
+            candidates.append(tau + A*f)
+        z = min(candidates)
         line = F(r, 2*k)
         assert F(2**r, 2**k) <= line or z <= line*line
 ```
 
 These finite certificates complete (G21); they do not replace the cited general recovery theorems.
+
+## B. Small-block recovery comparison
+
+For $`1\le k\le7`$, let $`P_k(r;H)`$ be the polygon from Section 3 with vertices $`(0,b_0),(t_0,H),(2k,1)`$. We show that the same recovery inequalities already give $`p_*\le P_k(r;H_k)`$ at every integer rank. Rank zero is a replacement channel; ranks at least $`2k`$ have the trivial upper bound one. Only $`\sum_{k=1}^7(2k-1)=49`$ interior cases remain.
+
+These cases admit exact rational certificates. Put $`N=2^{40}`$ and choose the integer $`m`$ by bisection so that
+
+```math
+m^6 2^k\le N^6\lt(m+1)^6 2^k.
+\qquad\text{(B1)}
+```
+
+Then $`H_-=m/N\le H_k\lt(m+1)/N`$. At fixed interior rank, both polygon pieces increase with $`H`$: their derivatives are $`r/t_0`$ and $`(2k-r)/(2k-t_0)`$. Hence the rational value $`L=P_k(r;H_-)`$ is no greater than $`P_k(r;H_k)`$ and lies in $`[1/d,1]`$.
+
+For each of the 49 cases, exact fraction arithmetic verifies at least one of
+
+```math
+2^{r-k}\le L,
+\qquad\text{or}\qquad
+\min_{0\le\ell\le k}
+\left(\tau_\ell+A_\ell2^{r-2k}\right)\le g_d(L).
+\qquad\text{(B2)}
+```
+
+The first is the measure-and-prepare bound. The second, together with (G16)–(G18b), gives $`g_d(p_*)\le g_d(L)`$. Since $`p_*\ge1/d`$ and $`g_d`$ increases on $`[1/d,1]`$, it implies $`p_*\le L`$. Averaging the resulting polygon bound and applying Jensen's inequality reproduces (G12).
+
+The [canonical verifier](../verification/verify_guessing_processing.py) implements the integer bisection and all 49 checks in `exact_small_block_recovery_certificates`; the [reference output](../verification/expected/guessing_processing.json) records every rational endpoint and witness. No floating-point tolerance enters these certificates. They establish this finite comparison of the displayed bounds, not an optimal operational score curve.

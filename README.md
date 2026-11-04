@@ -12,7 +12,7 @@ The model permits arbitrary ideal global Clifford operations and input-independe
 
 The [complete transfer and recovery comparison](science/guessing_processing.md) live in this repository; Lattice supplies the [finite guessing theorem](https://github.com/GoGoKo699/Lattice-Memory-Certification/blob/main/science/guessing-bound.md) and its [operational application](https://github.com/GoGoKo699/Lattice-Memory-Certification/blob/main/science/noisy-processing.md). The device receives only the quantum challenge; the hidden string stays secret and only the bases arrive after storage. The common terminal envelope is the full physical output, with $`M=2n`$. All persistent controller records are noisy and counted, and their processing must use the charged circuit model. Noise flags remain proof aids.
 
-The transfer can be useful below one-half success. Existing recovery inequalities already yield the same large-block rank floor, so low-score applicability is not claimed as a new asymptotic result. The score does not verify the device's noise or controller assumptions, and no LWE compilation is imported here.
+The transfer is useful below one-half success. Keeping normalization in existing recovery inequalities already reproduces every displayed score floor, for all challenge sizes. The direct factorization supplies a short operational proof; these floors add no gate or interval consequence to that recovery route. The score does not verify the device's noise or controller assumptions, and no LWE compilation is imported here.
 
 ## Explanatory report
 
@@ -90,9 +90,10 @@ From the repository root:
 ```bash
 python3 -m pip install -r verification/requirements.txt
 python3 verification/run_all.py
+python3 verification/check_learning.py
 ```
 
-The suite checks Pauli-algebra and channel-rank identities, the exact finite-depth scalar optimization, the syndrome archive and workspace schedule, and the explicit five-qubit recovery. [Verification](verification/README.md) records the environment, expected outputs, and scope.
+The four scientific checks cover Pauli-algebra and channel-rank identities, the exact finite-depth scalar optimization, the syndrome archive and workspace schedule, the explicit five-qubit recovery, and the guessing-score transfer with its prior-recovery comparison. The learning check verifies the 30-milestone route and local links. [Verification](verification/README.md) records the environment, expected outputs, and scope.
 
 The [finite resource comparison](verification/Graph/README.md) provides the
 Python-generated width and processing curves, pinned dependencies, and a check

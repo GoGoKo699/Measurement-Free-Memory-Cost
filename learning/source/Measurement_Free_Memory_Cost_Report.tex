@@ -690,7 +690,7 @@ whenever the numerator is positive. For fixed $\gamma$ and small error this is l
 
 At any fixed finite width, the right side of \eqref{eq:ceiling} tends to $4^{-k}$ as $D\to\infty$. Consequently, the long-time slope of the processing lower bound must be interpreted along families with adequate growing width, not as a promise of indefinitely reliable storage in one finite device.
 
-\section{What has been established, and what remains open}
+\section{Comparing the storage resource guarantees}
 The two constructions make different resource choices. The archive retains noisy syndrome history for nonlinear recovery at the endpoint; the coherent construction evaluates corrections during storage. Their guarantees and the necessary resource bounds are compared below.
 
 \begin{table}[ht]
@@ -738,7 +738,7 @@ S_{b,t}=S_{b,t}\mathcal E_V,\qquad
 \]
 The projection $\mathcal E_V$ factors as $J_VF_V$. The CPTP map $F_V$ changes to canonical coordinates, dephases the $c$-bit factor, and discards $G$. The CPTP map $J_V$ reinserts the maximally mixed gauge factor and reverses the coordinates. Thus $F_V\Pi_t$ is a genuine encoder into $s$ quantum qubits and $c$ classical bits. Composing $J_V$ with the tail and final readout reproduces the actual outcome distribution for each basis.
 
-For such an encoder, delayed-basis BB84 guessing obeys
+Let $p_{b,t}$ be the actual endpoint decoder's success probability on the sampled channel. For this encoder, delayed-basis BB84 guessing obeys
 \begin{equation}
 p_{b,t}\le\min\{1,\,2^{(s-k)/6},\,2^{s+c-k}\}.
 \label{eq:guess-branch}
@@ -761,26 +761,25 @@ Insert any positive score-derived floor into the earlier balance laws. In partic
 B\ge a_p\positive{D\kappa-\ln(2n/a_p)},\qquad
 B\ge\mathcal L(D,2n,a_p,q).
 \end{equation}
-The individual-T refinement \eqref{eq:integer} also applies. Every contiguous interval has the same global floor, with its own $D_I,B_I$ and entering reserve $M_I\le2n$. Gates outside the interval supply no additional reserve beyond that bound. For $k=12,p=0.4,n=120,\gamma=0.01,D=2000$, the floor is $a_p\simeq9.59648$ and the individual-gate refinement requires at least $171$ internal T/T-dagger gates. This is a necessary condition, not an achievable circuit specification.
+The individual-T refinement \eqref{eq:integer} also applies. Every contiguous interval has the same global floor, with its own $D_I,B_I$ and entering reserve $M_I\le2n$. Gates outside the interval supply no additional reserve beyond that bound. For $k=12,p=0.4,n=120,\gamma=0.01,D=2000$, the floor is $a_p\simeq9.59648$ and the individual-gate refinement requires at least $171$ internal T/T-dagger gates. Every 700-round contiguous interval requires at least $39$ such gates by the same refinement; the scalar injection bound alone gives $37$. These necessary conditions do not specify an achievable circuit.
 
-The low-score implication should be compared with recovery estimates applied \emph{before} noise averaging. For one complete branch channel, let $F_{\rm rec}$ be its best squared Bell-overlap fidelity, $u$ its average pretty-good guessing success, and $z\ge1/d$ its optimized guessing score. Define
+The recovery comparison remains informative even at scores at or below one half, provided it is applied \emph{before} noise averaging. For one complete branch channel, let $F_{\rm rec}$ be its best squared Bell-overlap fidelity, $F_{\rm pg}\le F_{\rm rec}$ its pretty-good value, $u$ its average pretty-good guessing success, and $z\ge1/d$ its optimized guessing score. Define
 \[
 g_d(z)=z^2+\frac{(1-z)^2}{d-1},\qquad
-S_\ell=\sum_{j=0}^{\ell}\binom kj.
+A_\ell=\sum_{j=0}^{\ell}\binom kj(1-2^j\tau_\ell),
 \]
-Established discrimination and recovery estimates give
+where $\tau_\ell=2^{-\ell-1}$ for $\ell<k$ and $\tau_k=0$. Established discrimination and recovery estimates give
 \begin{align}
 g_d(z)&\le u,\qquad F_{\rm rec}\ge z/d,\notag\\
-u&\le\frac{1+F_{\rm pg}}2,\qquad
-u\le S_\ell F_{\rm pg}+2^{-\ell-1}\mathbf1_{\ell<k},
-\quad 0\le\ell\le k,
+u&\le\tau_\ell+A_\ell F_{\rm pg},\qquad 0\le\ell\le k.
 \label{eq:guess-recovery}
 \end{align}
-where $F_{\rm pg}\le F_{\rm rec}$ is the squared fidelity of pretty-good recovery. For example, at $z=1/2$ the choice $\ell=2$ already gives a positive recovery-fidelity lower bound of order $k^{-2}$. Each branch also has $F_{\rm rec}\le\min\{1,2^{r-2k}\}$. Combining these inequalities branchwise and then averaging reproduces \eqref{eq:guess-floor} for every $k\ge9$. Thus the direct factorization gives a short operational corollary; low-score applicability alone establishes no additional large-block processing law.
+The underlying spectral reduction writes $u=\sum_v\lambda_vw_v$, where $w_v\ge0$, $\sum_vw_v=1$, and $w_v\le F_{\rm pg}$. Its nonzero eigenvalues are $2^{-j}$ with multiplicities $2^j\binom kj$. Bounding all terms at or below $\tau_\ell$ by that threshold, then applying the cap to the excess, gives $u\le\tau_\ell+F_{\rm pg}\sum_{\lambda_v>\tau_\ell}(\lambda_v-\tau_\ell)$, which is the displayed estimate. At $\ell=0$ it gives $u\le(1+F_{\rm pg})/2$. At $z=1/2$, taking $\ell=2$ gives a positive recovery-fidelity lower bound of order $k^{-2}$.
+
+Each branch also has $F_{\rm rec}\le\min\{1,2^{r-2k}\}$. Combining these inequalities branchwise and then averaging reproduces \eqref{eq:guess-floor} for every $k\ge8$. Exact finite-rank checks also imply the weaker floor stated above for $1\le k\le7$. Every displayed score floor and its gate or interval consequence therefore already follows from the recovery route. The direct factorization provides a short operational proof; the comparison establishes neither an optimal attainable score nor dominance over every possible stronger direct bound.
 
 At chance $p=b_0$, discarding the challenge and guessing needs zero gates. Full-register replacement gives $p\le b_0+(1-b_0)(1-\gamma^n)^D$, regardless of gates. The score does not verify noise, controller or side-channel premises. It can witness processing to retain classical as well as quantum information. A remote-preparation wrapper needs its own model- and resource-preserving reduction.
 
-\clearpage
 \appendix
 \section{Finite identities, verification, and notation}
 \subsection{The five-qubit correction truth table}
@@ -818,7 +817,7 @@ The five-qubit calculation evaluates every one of the $4^5=1024$ Pauli errors, c
 \begin{equation}
 [0,\ 0,\ 90,\ 210,\ 270,\ 198].
 \end{equation}
-In particular, all weight-zero and weight-one errors are corrected. Integer batching and concatenation parameters are checked in 240 finite cases.
+In particular, all weight-zero and weight-one errors are corrected. Integer batching and concatenation parameters are checked in 240 finite cases. A separate score-transfer suite checks finite quantum-plus-classical rank cases, unconditional branch mixtures, exact rational recovery-comparison certificates, and independently solved scalar injection programs. These calculations test the stated finite implications; the written factorization and averaging arguments establish the all-cut conclusion.
 
 These checks support the finite algebra and circuits. They do not prove an asymptotic statement by extrapolation. General forgetting follows from the envelope induction; the processing converse follows from channel-rank and scalar inequalities; arbitrary-depth archives and concatenation follow from their conditioning and induction arguments. No finite test establishes optimality of 42 gates, an optimal hardware threshold, or attainment of the scalar relaxation by a memory circuit.
 

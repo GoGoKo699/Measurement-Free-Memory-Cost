@@ -88,8 +88,9 @@ Preserve these distinctions:
 - Mathematical noise flags are independent channel choices used in the proof,
   not device information. Noisy counted controller records must also be
   processed through permitted charged primitives; arbitrary feedback is not free.
-- Existing recovery inequalities already imply the same large-block low-score
-  rank floor. The direct score transfer is not a new asymptotic processing law.
+- Existing recovery inequalities, with spectral normalization retained, already
+  imply every displayed score floor for all k and their gate/interval budgets.
+  The direct score transfer provides an operational proof of those consequences.
   It neither verifies noise/controller assumptions nor imports an LWE wrapper.
 - Watrous (2018) is the single educational anchor shared by both projects.
   Gottesman and other stabilizer sources remain primary scholarly references.
