@@ -71,7 +71,7 @@ Central mechanism & Noise contracts a binary envelope of backward Pauli observab
 \newpage
 \tableofcontents
 \vspace{4mm}
-\textbf{Reading route.} Sections 1--3 define the task and the forgetting mechanism. Sections 4--6 turn that mechanism into a quantitative processing budget. Sections 7--8 explain the two storage constructions. Sections 9--10 compare their resources and state the remaining questions. The appendix records the finite checks and a compact notation guide.
+\textbf{Reading route.} Sections 1--3 define the task and the forgetting mechanism. Sections 4--6 turn that mechanism into a quantitative processing budget. Sections 7--8 explain the two storage constructions. Sections 9--10 compare their resources and state the remaining questions. Section~\ref{sec:guessing} derives an alternative operational premise from a delayed-basis guessing score. The appendix records the finite checks and a compact notation guide.
 
 \textbf{Conventions.} All systems are finite-dimensional. A quantum channel is a completely positive, trace-preserving linear map, abbreviated CPTP. Logarithms written as $\ln$ are natural; $\log_2$ has base two. Probabilities, gate counts, qubit counts, and numbers of rounds are dimensionless. No physical clock time is assigned to a round.
 
@@ -715,6 +715,71 @@ Several questions remain. Can coherent coding and decoding remove the power-of-l
 
 The present guarantees do not include noisy elementary gates, restricted connectivity, finite processing time, correlated noise, or preparation faults. Both constructions use the stated ideal processing model. A measured protected controller also changes the available resources and requires a separate analysis. These boundaries prevent a direct reinterpretation of $D$ as hardware depth.
 
+\section{A delayed-basis score as an alternative premise}
+\label{sec:guessing}
+\subsection{The device receives only a quantum challenge}
+The same rank ledger can be tested through a classical answer rather than a prescribed Bell-fidelity target. Choose independent uniform strings $X,\Theta\in\{0,1\}^k$ and supply the $k$-qubit state
+\[
+\ket X_\Theta=\bigotimes_{i=1}^k H^{\Theta_i}\ket{X_i},
+\qquad H=\frac1{\sqrt2}\begin{pmatrix}1&1\\1&-1\end{pmatrix}.
+\]
+Keep $X$ secret and reveal only $\Theta$ after all charged storage. The final decoder may depend arbitrarily on $\Theta$. Let $p=\Pr[\widehat X=X]$ be unconditional \emph{whole-string} success, counting aborts as failures. Write $d=2^k$ and $b_0=1/d$.
+
+The width remains $n$ and the number of independent depolarizing layers remains $D$. Every persistent controller is noisy, counted and processed through the allowed fixed primitives. Counting records does not make arbitrary feedback or data-dependent resets free. Input-independent resets and arbitrary endpoint decoding retain their earlier meaning, without protected side channels or postselection.
+
+Start one common backward envelope at the full physical output \emph{before} basis-dependent readout, with rank $M=2n$. The guessed output length does not reduce this reserve to $2k$.
+
+\subsection{A quantum-plus-classical bottleneck at every cut}
+At a cut $t$, average earlier noise into a CPTP prefix $\Pi_t$. An independent future-noise realization $b$ selects a CPTP tail $S_{b,t}$ to the full physical output. The Pauli algebra from Section~4 gives
+\[
+S_{b,t}=S_{b,t}\mathcal E_V,\qquad
+\A_V\simeq M_{2^s}\otimes\operatorname{Diag}_{2^c}\otimes I_G,
+\qquad r=2s+c.
+\]
+The projection $\mathcal E_V$ factors as $J_VF_V$. The CPTP map $F_V$ changes to canonical coordinates, dephases the $c$-bit factor, and discards $G$. The CPTP map $J_V$ reinserts the maximally mixed gauge factor and reverses the coordinates. Thus $F_V\Pi_t$ is a genuine encoder into $s$ quantum qubits and $c$ classical bits. Composing $J_V$ with the tail and final readout reproduces the actual outcome distribution for each basis.
+
+For such an encoder, delayed-basis BB84 guessing obeys
+\begin{equation}
+p_{b,t}\le\min\{1,\,2^{(s-k)/6},\,2^{s+c-k}\}.
+\label{eq:guess-branch}
+\end{equation}
+The first nontrivial bound permits unlimited classical records. The second uses the finite output dimension: at each fixed basis, $d$ equiprobable output states satisfy $\rho_x\le I$, so their discrimination success is at most $\Tr I/d=2^{s+c-k}$. This count uses the original normalized encoder, before any additional mathematical classical refinement of its states.
+
+The noise flags are proof aids, not information supplied to the device. They select channels independently of the input and basis, so $p=\E_b p_{b,t}$ at every primitive cut. Each branch may be upper-bounded by its optimum decoder without physically revealing a flag.
+
+For $k\ge8$, the two bounds in \eqref{eq:guess-branch} give
+\begin{equation}
+p_{b,t}\le b_0+(1-b_0)\frac r{2k},\qquad
+R_t\ge a_p:=2k\frac{[p-b_0]_+}{1-b_0}.
+\label{eq:guess-floor}
+\end{equation}
+One way to see the first inequality is to maximize the branch bound at fixed $r$. Relaxing $s$ continuously gives $2^{r-k}$ up to $r=5k/6$, then $2^{(r-2k)/7}$ up to $r=2k$, and one thereafter. For $k\ge8$, both convex exponential pieces lie below the chord from $(0,b_0)$ to $(2k,1)$. Averaging that chord proves the floor. For every $k\ge1$, a convenient weaker floor is $k[p-b_0]_+/(1-b_0)$, obtained from the finite-output dimension bound alone. Smaller-block refinements can retain the full concave polygon instead.
+
+\subsection{Processing, timing, and the recovery comparison}
+Insert any positive score-derived floor into the earlier balance laws. In particular, \eqref{eq:guess-floor} gives
+\begin{equation}
+B\ge a_p\positive{D\kappa-\ln(2n/a_p)},\qquad
+B\ge\mathcal L(D,2n,a_p,q).
+\end{equation}
+The individual-T refinement \eqref{eq:integer} also applies. Every contiguous interval has the same global floor, with its own $D_I,B_I$ and entering reserve $M_I\le2n$. Gates outside the interval supply no additional reserve beyond that bound. For $k=12,p=0.4,n=120,\gamma=0.01,D=2000$, the floor is $a_p\simeq9.59648$ and the individual-gate refinement requires at least $171$ internal T/T-dagger gates. This is a necessary condition, not an achievable circuit specification.
+
+The low-score implication should be compared with recovery estimates applied \emph{before} noise averaging. For one complete branch channel, let $F_{\rm rec}$ be its best squared Bell-overlap fidelity, $u$ its average pretty-good guessing success, and $z\ge1/d$ its optimized guessing score. Define
+\[
+g_d(z)=z^2+\frac{(1-z)^2}{d-1},\qquad
+S_\ell=\sum_{j=0}^{\ell}\binom kj.
+\]
+Established discrimination and recovery estimates give
+\begin{align}
+g_d(z)&\le u,\qquad F_{\rm rec}\ge z/d,\notag\\
+u&\le\frac{1+F_{\rm pg}}2,\qquad
+u\le S_\ell F_{\rm pg}+2^{-\ell-1}\mathbf1_{\ell<k},
+\quad 0\le\ell\le k,
+\label{eq:guess-recovery}
+\end{align}
+where $F_{\rm pg}\le F_{\rm rec}$ is the squared fidelity of pretty-good recovery. For example, at $z=1/2$ the choice $\ell=2$ already gives a positive recovery-fidelity lower bound of order $k^{-2}$. Each branch also has $F_{\rm rec}\le\min\{1,2^{r-2k}\}$. Combining these inequalities branchwise and then averaging reproduces \eqref{eq:guess-floor} for every $k\ge9$. Thus the direct factorization gives a short operational corollary; low-score applicability alone establishes no additional large-block processing law.
+
+At chance $p=b_0$, discarding the challenge and guessing needs zero gates. Full-register replacement gives $p\le b_0+(1-b_0)(1-\gamma^n)^D$, regardless of gates. The score does not verify noise, controller or side-channel premises. It can witness processing to retain classical as well as quantum information. A remote-preparation wrapper needs its own model- and resource-preserving reduction.
+
 \clearpage
 \appendix
 \section{Finite identities, verification, and notation}
@@ -774,7 +839,7 @@ $V$, $r$ & Binary Pauli envelope and its binary dimension.\\
 $\A_V$ & Complex Pauli algebra, of dimension $2^r$.\\
 $M$ & Terminal envelope dimension, at most $2n$.\\
 $M_I$ & Upper bound on expected decoded-tail envelope rank at an interval's later cut.\\
-$R_t$, $a$ & Expected envelope rank at a cut and its fidelity-dependent floor.\\
+$R_t$, $a$, $a_p$ & Expected envelope rank and its fidelity- or guessing-score-derived floor.\\
 $B$, $b_{\mathrm{rep}}$ & Total structural rank-growth charge and number of archive root replicas, respectively.\\
 $\tau$, $J$ & Batch length and number of batches; constants differ between the two constructions.\\
 $n_0$, $s$ & Archive data-block width and number of its stabilizer generators.\\
@@ -783,3 +848,4 @@ $L$ & Concatenation level of the five-qubit code.\\
 \bottomrule
 \end{tabularx}
 \end{document}
+

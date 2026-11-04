@@ -4,6 +4,8 @@ This chapter proves necessary gate budgets for the memory model in [model.md](mo
 
 Write $`q=1-\gamma\in(0,1)`$, $`\kappa=-\ln q`$, and let $`D`$ be the number of full noise layers. The width bound $`n`$ includes every persistent physical register. A gate count is a necessary resource in this precise model, not an assertion that every implementation of quantum error correction requires a particular non-Clifford resource.
 
+The [delayed-basis guessing corollary](guessing_processing.md) supplies an alternative all-cut expected-rank floor from unconditional BB84 whole-string success. Once that floor is proved, the scalar gate and interval arguments in Sections 4–6 apply unchanged. Its full-output envelope starts at $`M=2n`$ before basis-dependent readout; it does not assume a single fixed logical decoder or charge the free endpoint decoder.
+
 ## 1. From a binary subspace to a quantum bottleneck
 
 For $`V\le\mathbb F_2^{2n}`$, let $`r=\dim V`$. Its Pauli span $`\mathcal A_V`$ is a unital $`*`$-algebra: multiplication adds binary labels, up to a phase, and each Pauli is Hermitian. Let the symplectic form restricted to $`V`$ have rank $`2s`$, with radical dimension $`c=r-2s`$.
@@ -199,6 +201,8 @@ On $`[0,2k]`$, this is the secant-line bound for a convex exponential; for $`r\g
 Rearrangement proves (C9). $`\square`$
 
 The lower bound applies to the expectation of the envelope rank. The prefix may be any CPTP encoder-and-evolution channel, including a noisy, nonisometric one. No special form of its actual state at the cut is required. The theorem does not require every sampled branch to retain rank $`a`$, and it does not identify the envelope rank with the actual amount of transmitted quantum information. A larger envelope only weakens the ensuing necessary bound.
+
+An alternative operational premise is exact delayed-basis BB84 guessing. [The CPTP quantum-plus-classical factorization](guessing_processing.md#2-one-envelope-and-a-quantum-plus-classical-cptp-bottleneck) and [all-cut averaging argument](guessing_processing.md#3-from-branch-scores-to-an-all-cut-rank-floor) prove $`R_t\ge a_k(p)`$, with $`a_k(p)=2k[(p-2^{-k})/(1-2^{-k})]_+`$ for $`k\ge8`$ and the stated piecewise floor for smaller blocks. This floor may replace $`a`$ in Theorems C5–C6 and Corollary C7. It follows from a separate score argument, not from identifying guessing probability with Bell fidelity. Existing recovery reductions reproduce the same large-block result as explained there.
 
 ## 3. Rank-growth charges for gates
 
@@ -528,4 +532,5 @@ These theorems establish a necessary processing budget beyond the free Clifford-
 The optimal physical T count remains open. Noise during elementary gate execution and measurement-based correction with protected classical decoding require their own resource accounts. A coherent implementation of nonlinear controller processing can be covered by charging its actual gate decomposition or a proved local rank-growth budget.
 
 The program [verification/verify_pauli_algebra.py](../verification/verify_pauli_algebra.py) checks the finite Pauli-algebra identities by dense matrices, verifies the superoperator fidelity identity and rank bound for explicit logical CPTP channels, and verifies primal/dual equality of (C19)–(C28) over an exact-rational parameter grid. These tests address support propagation, the CPTP conditional expectation, the terminal-decoder distinction, the logical-channel bottleneck, and the discrete placement optimization. They do not replace the analytic proof or claim asymptotic evidence from small systems.
+
 

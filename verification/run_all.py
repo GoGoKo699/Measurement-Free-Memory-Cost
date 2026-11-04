@@ -13,6 +13,7 @@ CHECKS = (
     ("pauli_algebra", "verify_pauli_algebra.py"),
     ("archive", "verify_archive.py"),
     ("five_qubit", "verify_five_qubit.py"),
+    ("guessing_processing", "verify_guessing_processing.py"),
 )
 METADATA = {"python_version", "numpy_version"}
 
@@ -63,4 +64,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
