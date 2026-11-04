@@ -479,7 +479,7 @@ One may always take $`M_I=2n`$. If the physical width at the later cut is smalle
 
 **Proof.** The global fidelity guarantee gives the same rank floor $`a`$ at every cut of the selected interval by Theorem C3. Start backward propagation at its later cut. The entering envelope can depend on noise and gates in the later suffix, but its expected rank is at most $`M_I`$, and noise inside the interval is independent of that suffix. The recurrence (C22) and logarithmic argument (C17) therefore hold unchanged. The earlier prefix can be any CPTP channel; the proof of Theorem C3 imposes no further condition on it or on the actual state it produces. $`\square`$
 
-If only an upper bound $`M_I`$ is used, the dominating recurrence starts at that upper bound rather than the exact expectation; this preserves every inequality. In particular, an interval containing no charged gates satisfies $`D_I\le\ln(M_I/a)/\kappa`$. The reserve for each interval is finite, at most $`2n`$.
+If only an upper bound $`M_I`$ is used, the dominating recurrence starts at that upper bound rather than the exact expectation; this preserves every inequality. In particular, an interval containing no charged gates satisfies $`D_I\le\ln(M_I/a)/\kappa`$. Since $`D_I`$ counts full noise rounds, round this upper bound down to the nearest integer. The reserve for each interval is finite, at most $`2n`$.
 
 ## 7. The final decoder and the meaning of the terminal rank
 

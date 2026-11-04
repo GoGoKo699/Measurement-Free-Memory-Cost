@@ -2,6 +2,8 @@
 
 ## Result and scope
 
+This chapter writes the total noisy physical width as $`N`$ to distinguish it from the data-block width $`n_0`$. It is the same resource denoted $`n`$ in the [general model](model.md).
+
 An exponentially growing archive of syndrome information gives a quantum memory with zero non-Clifford gates during storage. For sufficiently small independent depolarizing noise, the construction stores any $`k`$ logical qubits, including their entanglement with a reference, for $`D`$ noise rounds with recovered half-diamond error at most $`\epsilon`$. Its total noisy width is
 
 ```math

@@ -210,7 +210,7 @@ The [guessing-to-processing transfer](guessing_processing.md) applies the same l
 R_t\ge a_k(p)=2k\left[\frac{p-2^{-k}}{1-2^{-k}}\right]_+.
 ```
 
-Whenever $`a_k(p)\gt0`$, substitute this floor for $`a`$ in the gate and every-contiguous-interval bounds; the transfer also gives a positive all-size floor for $`1\le k\le7`$. The proof factors each sampled CPTP tail through a finite quantum-plus-classical Pauli algebra before any basis-dependent readout. All persistent controller records remain noisy and counted, and mathematical noise flags are not physically supplied. Established branchwise recovery reductions already imply the same large-block floor for $`k\ge9`$. The score does not verify the device-model premises or automatically import a cryptographic preparation wrapper.
+Whenever $`a_k(p)\gt0`$, substitute this floor for $`a`$ in the gate and every-contiguous-interval bounds; the transfer also gives a positive all-size floor for $`1\le k\le7`$. The proof factors each sampled CPTP tail through a finite quantum-plus-classical Pauli algebra before any basis-dependent readout. All persistent controller records remain noisy and counted, and mathematical noise flags are not physically supplied. Established branchwise recovery reductions, with spectral normalization retained, reproduce both displayed floor formulas for every challenge size. The score does not verify the device-model premises or automatically import a cryptographic preparation wrapper.
 
 ## 5. Reading and verification routes
 

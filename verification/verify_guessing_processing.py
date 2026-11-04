@@ -111,6 +111,35 @@ def inverse_hull(hull: list[tuple[float, float]], p: float) -> float:
     return hull[-1][0]
 
 
+def normalized_spectral_pgm_bound(k: int, f: float) -> float:
+    """DFW spectral constraints with their total probability mass retained."""
+    candidates = []
+    for ell in range(k + 1):
+        tau = 2.0 ** (-ell - 1) if ell < k else 0.0
+        coefficient = sum(math.comb(k, j) * (1 - 2**j * tau)
+                          for j in range(ell + 1))
+        candidates.append(tau + coefficient * f)
+    return min(candidates)
+
+
+def spectral_weight_lp(k: int, f: float) -> float:
+    """Independently maximize the BB84 spectrum over capped probabilities.
+
+    Variables aggregate equal spectral coefficients. The last variable holds
+    Pauli labels containing Y, whose coefficient is zero. This LP checks the
+    finite optimization, not the quantum derivation of the spectral weights.
+    """
+    coefficients = np.array([2.0**(-j) for j in range(k + 1)] + [0.0])
+    multiplicities = [2**j * math.comb(k, j) for j in range(k + 1)]
+    multiplicities.append(4**k - 3**k)
+    result = linprog(-coefficients, A_eq=np.ones((1, k + 2)), b_eq=[1.0],
+                     bounds=[(0.0, count * f) for count in multiplicities],
+                     method="highs")
+    if not result.success:
+        raise AssertionError(result.message)
+    return -float(result.fun)
+
+
 def inherited_recovery_bound(k: int, r: int, s: int | None = None,
                              include_bcw: bool = True) -> float:
     """Primary-literature reductions supplied by the recovery review.
@@ -125,10 +154,7 @@ def inherited_recovery_bound(k: int, r: int, s: int | None = None,
     if s is not None:
         f = min(f, 2.0 ** (s - k))
         dimension_bound = 2.0 ** (r - s - k)
-    u = min((1 + f) / 2,
-            min(sum(math.comb(k, j) for j in range(ell + 1)) * f
-                + (2.0 ** (-ell - 1) if ell < k else 0.0)
-                for ell in range(k + 1)))
+    u = normalized_spectral_pgm_bound(k, f)
     if include_bcw:
         u = min(u, (d * f + 1 / d) / 2)
     inverse_g = (1 + math.sqrt(max(0.0, (d - 1) * (d * u - 1)))) / d
@@ -148,19 +174,18 @@ def exact_recovery_chord_certificates() -> list[dict]:
     Rank zero is treated separately by its exact random-guess bound 2^-k.
     """
     certificates = []
-    for k in (9, 10):
+    for k in (8, 9, 10):
         witnesses = []
         for r in range(1, 2 * k + 1):
             f = pow2_fraction(r - 2 * k)
             candidates = {
                 "dimension_squared": pow2_fraction(2 * (r - k)),
-                "pair_MUB_PGM": (1 + f) / 2,
-                "BCW_R3": (2**k * f + Fraction(1, 2**k)) / 2,
             }
             for ell in range(k + 1):
                 tail = pow2_fraction(-ell - 1) if ell < k else Fraction(0)
-                candidates[f"DFW_ell_{ell}"] = sum(math.comb(k, j)
-                                                   for j in range(ell + 1)) * f + tail
+                coefficient = sum(math.comb(k, j) * (1 - 2**j * tail)
+                                  for j in range(ell + 1))
+                candidates[f"DFW_normalized_ell_{ell}"] = coefficient * f + tail
             name, value = min(candidates.items(), key=lambda item: item[1])
             target = Fraction(r, 2 * k) ** 2
             assert value <= target
@@ -170,6 +195,56 @@ def exact_recovery_chord_certificates() -> list[dict]:
                              "all_positive_integer_ranks_certified": True,
                              "rank_zero_score": str(pow2_fraction(-k)),
                              "witnesses": witnesses})
+    return certificates
+
+
+def exact_small_block_recovery_certificates() -> dict:
+    """Prior recovery majorizes G12's polygon at all 49 interior ranks.
+
+    Bound H=2^(-k/6) below by a dyadic rational using only integer sixth
+    powers. Both polygon pieces increase with H, so a certificate against
+    this rational polygon also certifies the stated algebraic polygon.
+    """
+    certificates = {"arithmetic": "exact Fraction/integer", "bits": 40,
+                    "interior_ranks": 0, "cases": []}
+    scale = 1 << 40
+    for k in range(1, 8):
+        lo, hi = 0, scale
+        while hi - lo > 1:
+            mid = (lo + hi) // 2
+            if mid**6 * 2**k <= scale**6:
+                lo = mid
+            else:
+                hi = mid
+        lower, upper = Fraction(lo, scale), Fraction(hi, scale)
+        b, t0, d = Fraction(1, 2**k), Fraction(5 * k, 6), 2**k
+        assert lower**6 <= b < upper**6
+        for r in range(1, 2 * k):
+            if r <= t0:
+                polygon = b + (lower - b) * r / t0
+            else:
+                polygon = lower + (1 - lower) * (r - t0) / (2 * k - t0)
+            assert b <= polygon <= 1
+            f = pow2_fraction(r - 2 * k)
+            candidates = []
+            for ell in range(k + 1):
+                tau = pow2_fraction(-ell - 1) if ell < k else Fraction(0)
+                coefficient = sum(math.comb(k, j) * (1 - 2**j * tau)
+                                  for j in range(ell + 1))
+                candidates.append(tau + coefficient * f)
+            best = min(candidates)
+            renes = polygon**2 + (1 - polygon)**2 / (d - 1)
+            dimension = pow2_fraction(r - k)
+            assert dimension <= polygon or best <= renes
+            certificates["cases"].append({
+                "k": k, "r": r, "H_lower": str(lower), "H_upper": str(upper),
+                "polygon_lower": str(polygon), "spectral_bound": str(best),
+                "renes_at_polygon_lower": str(renes),
+                "ell": candidates.index(best), "dimension_bound": str(dimension),
+                "witness": "dimension" if dimension <= polygon else "spectral/Renes",
+            })
+            certificates["interior_ranks"] += 1
+    assert certificates["interior_ranks"] == 49
     return certificates
 
 
@@ -247,10 +322,23 @@ def main() -> None:
                     lp_worst_absolute_error = max(lp_worst_absolute_error, error)
                     lp_count += 1
 
+    spectral_lp_count = 0
+    spectral_lp_worst_error = 0.0
+    for k_lp in range(1, 9):
+        for rank in np.linspace(0, 2 * k_lp, 17):
+            f = 2.0 ** (rank - 2 * k_lp)
+            formula = normalized_spectral_pgm_bound(k_lp, f)
+            optimum = spectral_weight_lp(k_lp, f)
+            error = abs(formula - optimum)
+            assert error < 1e-10
+            spectral_lp_worst_error = max(spectral_lp_worst_error, error)
+            spectral_lp_count += 1
+
     k, p, n, gamma, D = 12, 0.4, 120, 0.01, 2000
     q = 1 - gamma
     a = polygon_floor(k, p)
     gap = max(0.0, D * -math.log(q) - math.log(2 * n / a))
+    interval_gap = max(0.0, 700 * -math.log(q) - math.log(2 * n / a))
     example = {
         "k": k, "p": p, "n": n, "gamma": gamma, "D": D,
         "random_guess_baseline": 2.0 ** (-k),
@@ -265,6 +353,9 @@ def main() -> None:
         "discrete_injection_ceiling": math.ceil(injection_formula(D, 2 * n, a, q)),
         "interval_example_D": 700,
         "interval_discrete_real_bound": injection_formula(700, 2 * n, a, q),
+        "interval_discrete_ceiling": math.ceil(injection_formula(700, 2 * n, a, q)),
+        "interval_integer_gate_logarithmic_real_bound": interval_gap / math.log1p(1 / a),
+        "interval_integer_gate_logarithmic_ceiling": math.ceil(interval_gap / math.log1p(1 / a)),
         "width_feasibility_check_a_le_2nq": a <= q * 2 * n,
     }
     recovery_comparison = []
@@ -323,16 +414,19 @@ def main() -> None:
         "independent_injection_LP_cases": lp_count,
         "LP_relative_tolerance": 1e-7,
         "LP_checks_passed": True,
+        "normalized_spectral_LP_cases": spectral_lp_count,
+        "normalized_spectral_LP_max_absolute_error": spectral_lp_worst_error,
         "low_score_example": example,
         "recovery_comparison": recovery_comparison,
         "recovery_comparison_limit": "Only the supplied primary-source formula family was compared; finite k=1..40 does not prove the all-k simplification or absolute optimality.",
         "recovery_families_compared": {
-            "rank_only": "f=min(1,2^(r-2k)); dimension score<=min(1,2^(r-k)); refined discrimination inverse applied to min(pair MUB PGM (1+f)/2, BCW R3 (d*f+1/d)/2, DFW binomial family)",
+            "rank_only": "f=min(1,2^(r-2k)); dimension score<=min(1,2^(r-k)); refined discrimination inverse applied to normalized DFW spectral family tau_l+A_l*f and BCW R3 (d*f+1/d)/2; l=0 includes pair MUB PGM (1+f)/2",
             "algebra_aware": "f=min(1,2^(r-2k),2^(s-k)); dimension score<=min(1,2^(r-s-k)); same refined discrimination and recovery family including BCW R3; maximize over integer s with c=r-2s>=0",
             "algebra_aware_equality_proof": "For r<=k choose s=0,c=r. For k<=r<=2k choose s=r-k,c=2k-r. Both choices attain the rank-only family. They fit every width n>=k when r<=2n. Consequently adding the existing coherent-block bottleneck does not alter the rank-only upper curve in this width regime.",
             "finite_width_limit": "The stored unconstrained-rank comparison allows every s with c>=0 and fits n>=k. If n<k, enforce s+c<=n; this can strengthen either family.",
         },
         "exact_recovery_chord_certificates": exact_recovery_chord_certificates(),
+        "exact_small_block_recovery_certificates": exact_small_block_recovery_certificates(),
     }
     report = json.dumps(output, indent=2) + "\n"
     if args.output:

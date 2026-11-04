@@ -88,6 +88,8 @@
   "independent_injection_LP_cases": 216,
   "LP_relative_tolerance": 1e-07,
   "LP_checks_passed": true,
+  "normalized_spectral_LP_cases": 136,
+  "normalized_spectral_LP_max_absolute_error": 1.1102230246251565e-16,
   "low_score_example": {
     "k": 12,
     "p": 0.4,
@@ -105,6 +107,9 @@
     "discrete_injection_ceiling": 163,
     "interval_example_D": 700,
     "interval_discrete_real_bound": 36.80485775462068,
+    "interval_discrete_ceiling": 37,
+    "interval_integer_gate_logarithmic_real_bound": 38.49659278514671,
+    "interval_integer_gate_logarithmic_ceiling": 39,
     "width_feasibility_check_a_le_2nq": true
   },
   "recovery_comparison": [
@@ -263,7 +268,7 @@
         ],
         [
           3,
-          0.7437184335382291
+          0.721212000885591
         ],
         [
           6,
@@ -277,7 +282,7 @@
         ],
         [
           3,
-          0.7437184335382291
+          0.721212000885591
         ],
         [
           6,
@@ -300,7 +305,7 @@
       ],
       "example_score": 0.4,
       "direct_rank_floor_at_example": 1.4172657434403133,
-      "inherited_rank_floor_at_example": 1.3334013588089182,
+      "inherited_rank_floor_at_example": 1.3837359844729322,
       "combined_rank_floor_at_example": 1.4172657434403133,
       "inherited_hull_is_endpoint_chord": false,
       "algebra_aware_family_equals_rank_only_family": true,
@@ -332,8 +337,16 @@
           0.0625
         ],
         [
+          3,
+          0.5
+        ],
+        [
           4,
-          0.7254126073623883
+          0.6429429881564597
+        ],
+        [
+          5,
+          0.7471531968814576
         ],
         [
           8,
@@ -346,8 +359,16 @@
           0.0625
         ],
         [
+          3,
+          0.5
+        ],
+        [
           4,
-          0.7254126073623883
+          0.6429429881564597
+        ],
+        [
+          5,
+          0.7471531968814576
         ],
         [
           8,
@@ -374,7 +395,7 @@
       ],
       "example_score": 0.4,
       "direct_rank_floor_at_example": 2.3142857142857145,
-      "inherited_rank_floor_at_example": 2.0364675298172568,
+      "inherited_rank_floor_at_example": 2.3142857142857145,
       "combined_rank_floor_at_example": 2.3142857142857145,
       "inherited_hull_is_endpoint_chord": false,
       "algebra_aware_family_equals_rank_only_family": true,
@@ -402,12 +423,12 @@
           0.03125
         ],
         [
-          5,
-          0.6585893718713979
+          4,
+          0.5
         ],
         [
-          6,
-          0.7272205453537527
+          5,
+          0.5882982334367465
         ],
         [
           10,
@@ -420,12 +441,12 @@
           0.03125
         ],
         [
-          5,
-          0.6585893718713979
+          4,
+          0.5
         ],
         [
-          6,
-          0.7272205453537527
+          5,
+          0.5882982334367465
         ],
         [
           10,
@@ -448,7 +469,7 @@
       ],
       "example_score": 0.4,
       "direct_rank_floor_at_example": 3.146666666666667,
-      "inherited_rank_floor_at_example": 2.9389993401816357,
+      "inherited_rank_floor_at_example": 3.146666666666667,
       "combined_rank_floor_at_example": 3.146666666666667,
       "inherited_hull_is_endpoint_chord": false,
       "algebra_aware_family_equals_rank_only_family": true,
@@ -476,12 +497,12 @@
           0.015625
         ],
         [
-          6,
-          0.5973284521558214
+          5,
+          0.4702460486235349
         ],
         [
-          7,
-          0.6834909460363284
+          6,
+          0.5526455892526375
         ],
         [
           12,
@@ -494,12 +515,12 @@
           0.015625
         ],
         [
-          6,
-          0.5973284521558214
+          5,
+          0.4702460486235349
         ],
         [
-          7,
-          0.6834909460363284
+          6,
+          0.5526455892526375
         ],
         [
           12,
@@ -513,7 +534,7 @@
         ],
         [
           5,
-          0.5
+          0.4702460486235349
         ],
         [
           12,
@@ -522,8 +543,8 @@
       ],
       "example_score": 0.4,
       "direct_rank_floor_at_example": 3.967741935483871,
-      "inherited_rank_floor_at_example": 3.9646489830048717,
-      "combined_rank_floor_at_example": 3.967741935483871,
+      "inherited_rank_floor_at_example": 4.22742195025703,
+      "combined_rank_floor_at_example": 4.22742195025703,
       "inherited_hull_is_endpoint_chord": false,
       "algebra_aware_family_equals_rank_only_family": true,
       "BCW_R3_addition_leaves_maximized_curve_unchanged": true
@@ -550,12 +571,8 @@
           0.0078125
         ],
         [
-          6,
-          0.4860051524849843
-        ],
-        [
-          9,
-          0.7066274148066676
+          10,
+          0.7176330511562412
         ],
         [
           14,
@@ -568,12 +585,8 @@
           0.0078125
         ],
         [
-          6,
-          0.4860051524849843
-        ],
-        [
-          9,
-          0.7066274148066676
+          10,
+          0.7176330511562412
         ],
         [
           14,
@@ -586,18 +599,14 @@
           0.0078125
         ],
         [
-          6,
-          0.44544935907016964
-        ],
-        [
           14,
           1.0
         ]
       ],
       "example_score": 0.4,
       "direct_rank_floor_at_example": 5.376889426086266,
-      "inherited_rank_floor_at_example": 4.920872346682263,
-      "combined_rank_floor_at_example": 5.376889426086266,
+      "inherited_rank_floor_at_example": 5.525164062397993,
+      "combined_rank_floor_at_example": 5.5338582677165356,
       "inherited_hull_is_endpoint_chord": false,
       "algebra_aware_family_equals_rank_only_family": true,
       "BCW_R3_addition_leaves_maximized_curve_unchanged": true
@@ -620,10 +629,6 @@
           0.00390625
         ],
         [
-          11,
-          0.7178529207204485
-        ],
-        [
           16,
           1.0
         ]
@@ -632,10 +637,6 @@
         [
           0,
           0.00390625
-        ],
-        [
-          11,
-          0.7178529207204485
         ],
         [
           16,
@@ -654,9 +655,9 @@
       ],
       "example_score": 0.4,
       "direct_rank_floor_at_example": 6.3623529411764705,
-      "inherited_rank_floor_at_example": 6.1027404828476755,
+      "inherited_rank_floor_at_example": 6.3623529411764705,
       "combined_rank_floor_at_example": 6.3623529411764705,
-      "inherited_hull_is_endpoint_chord": false,
+      "inherited_hull_is_endpoint_chord": true,
       "algebra_aware_family_equals_rank_only_family": true,
       "BCW_R3_addition_leaves_maximized_curve_unchanged": true
     },
@@ -2263,12 +2264,116 @@
   ],
   "recovery_comparison_limit": "Only the supplied primary-source formula family was compared; finite k=1..40 does not prove the all-k simplification or absolute optimality.",
   "recovery_families_compared": {
-    "rank_only": "f=min(1,2^(r-2k)); dimension score<=min(1,2^(r-k)); refined discrimination inverse applied to min(pair MUB PGM (1+f)/2, BCW R3 (d*f+1/d)/2, DFW binomial family)",
+    "rank_only": "f=min(1,2^(r-2k)); dimension score<=min(1,2^(r-k)); refined discrimination inverse applied to normalized DFW spectral family tau_l+A_l*f and BCW R3 (d*f+1/d)/2; l=0 includes pair MUB PGM (1+f)/2",
     "algebra_aware": "f=min(1,2^(r-2k),2^(s-k)); dimension score<=min(1,2^(r-s-k)); same refined discrimination and recovery family including BCW R3; maximize over integer s with c=r-2s>=0",
     "algebra_aware_equality_proof": "For r<=k choose s=0,c=r. For k<=r<=2k choose s=r-k,c=2k-r. Both choices attain the rank-only family. They fit every width n>=k when r<=2n. Consequently adding the existing coherent-block bottleneck does not alter the rank-only upper curve in this width regime.",
     "finite_width_limit": "The stored unconstrained-rank comparison allows every s with c>=0 and fits n>=k. If n<k, enforce s+c<=n; this can strengthen either family."
   },
   "exact_recovery_chord_certificates": [
+    {
+      "k": 8,
+      "arithmetic": "exact Fraction",
+      "all_positive_integer_ranks_certified": true,
+      "rank_zero_score": "1/256",
+      "witnesses": [
+        {
+          "r": 1,
+          "bound": "dimension_squared",
+          "value": "1/16384",
+          "target": "1/256"
+        },
+        {
+          "r": 2,
+          "bound": "dimension_squared",
+          "value": "1/4096",
+          "target": "1/64"
+        },
+        {
+          "r": 3,
+          "bound": "dimension_squared",
+          "value": "1/1024",
+          "target": "9/256"
+        },
+        {
+          "r": 4,
+          "bound": "dimension_squared",
+          "value": "1/256",
+          "target": "1/16"
+        },
+        {
+          "r": 5,
+          "bound": "dimension_squared",
+          "value": "1/64",
+          "target": "25/256"
+        },
+        {
+          "r": 6,
+          "bound": "dimension_squared",
+          "value": "1/16",
+          "target": "9/64"
+        },
+        {
+          "r": 7,
+          "bound": "DFW_normalized_ell_2",
+          "value": "679/4096",
+          "target": "49/256"
+        },
+        {
+          "r": 8,
+          "bound": "DFW_normalized_ell_2",
+          "value": "423/2048",
+          "target": "1/4"
+        },
+        {
+          "r": 9,
+          "bound": "DFW_normalized_ell_1",
+          "value": "147/512",
+          "target": "81/256"
+        },
+        {
+          "r": 10,
+          "bound": "DFW_normalized_ell_1",
+          "value": "83/256",
+          "target": "25/64"
+        },
+        {
+          "r": 11,
+          "bound": "DFW_normalized_ell_1",
+          "value": "51/128",
+          "target": "121/256"
+        },
+        {
+          "r": 12,
+          "bound": "DFW_normalized_ell_0",
+          "value": "17/32",
+          "target": "9/16"
+        },
+        {
+          "r": 13,
+          "bound": "DFW_normalized_ell_0",
+          "value": "9/16",
+          "target": "169/256"
+        },
+        {
+          "r": 14,
+          "bound": "DFW_normalized_ell_0",
+          "value": "5/8",
+          "target": "49/64"
+        },
+        {
+          "r": 15,
+          "bound": "DFW_normalized_ell_0",
+          "value": "3/4",
+          "target": "225/256"
+        },
+        {
+          "r": 16,
+          "bound": "DFW_normalized_ell_0",
+          "value": "1",
+          "target": "1"
+        }
+      ]
+    },
     {
       "k": 9,
       "arithmetic": "exact Fraction",
@@ -2319,67 +2424,67 @@
         },
         {
           "r": 8,
-          "bound": "DFW_ell_2",
-          "value": "87/512",
+          "bound": "DFW_normalized_ell_3",
+          "value": "2269/16384",
           "target": "16/81"
         },
         {
           "r": 9,
-          "bound": "DFW_ell_2",
-          "value": "55/256",
+          "bound": "DFW_normalized_ell_2",
+          "value": "717/4096",
           "target": "1/4"
         },
         {
           "r": 10,
-          "bound": "DFW_ell_1",
-          "value": "37/128",
+          "bound": "DFW_normalized_ell_2",
+          "value": "461/2048",
           "target": "25/81"
         },
         {
           "r": 11,
-          "bound": "DFW_ell_1",
-          "value": "21/64",
+          "bound": "DFW_normalized_ell_1",
+          "value": "149/512",
           "target": "121/324"
         },
         {
           "r": 12,
-          "bound": "DFW_ell_1",
-          "value": "13/32",
+          "bound": "DFW_normalized_ell_1",
+          "value": "85/256",
           "target": "4/9"
         },
         {
           "r": 13,
-          "bound": "pair_MUB_PGM",
-          "value": "33/64",
+          "bound": "DFW_normalized_ell_1",
+          "value": "53/128",
           "target": "169/324"
         },
         {
           "r": 14,
-          "bound": "pair_MUB_PGM",
+          "bound": "DFW_normalized_ell_0",
           "value": "17/32",
           "target": "49/81"
         },
         {
           "r": 15,
-          "bound": "pair_MUB_PGM",
+          "bound": "DFW_normalized_ell_0",
           "value": "9/16",
           "target": "25/36"
         },
         {
           "r": 16,
-          "bound": "pair_MUB_PGM",
+          "bound": "DFW_normalized_ell_0",
           "value": "5/8",
           "target": "64/81"
         },
         {
           "r": 17,
-          "bound": "pair_MUB_PGM",
+          "bound": "DFW_normalized_ell_0",
           "value": "3/4",
           "target": "289/324"
         },
         {
           "r": 18,
-          "bound": "pair_MUB_PGM",
+          "bound": "DFW_normalized_ell_0",
           "value": "1",
           "target": "1"
         }
@@ -2441,77 +2546,672 @@
         },
         {
           "r": 9,
-          "bound": "DFW_ell_3",
-          "value": "19/128",
+          "bound": "DFW_normalized_ell_3",
+          "value": "3703/32768",
           "target": "81/400"
         },
         {
           "r": 10,
-          "bound": "DFW_ell_2",
-          "value": "23/128",
+          "bound": "DFW_normalized_ell_2",
+          "value": "1271/8192",
           "target": "1/4"
         },
         {
           "r": 11,
-          "bound": "DFW_ell_2",
-          "value": "15/64",
+          "bound": "DFW_normalized_ell_2",
+          "value": "759/4096",
           "target": "121/400"
         },
         {
           "r": 12,
-          "bound": "DFW_ell_1",
-          "value": "75/256",
+          "bound": "DFW_normalized_ell_2",
+          "value": "503/2048",
           "target": "9/25"
         },
         {
           "r": 13,
-          "bound": "DFW_ell_1",
-          "value": "43/128",
+          "bound": "DFW_normalized_ell_1",
+          "value": "151/512",
           "target": "169/400"
         },
         {
           "r": 14,
-          "bound": "DFW_ell_1",
-          "value": "27/64",
+          "bound": "DFW_normalized_ell_1",
+          "value": "87/256",
           "target": "49/100"
         },
         {
           "r": 15,
-          "bound": "pair_MUB_PGM",
-          "value": "33/64",
+          "bound": "DFW_normalized_ell_1",
+          "value": "55/128",
           "target": "9/16"
         },
         {
           "r": 16,
-          "bound": "pair_MUB_PGM",
+          "bound": "DFW_normalized_ell_0",
           "value": "17/32",
           "target": "16/25"
         },
         {
           "r": 17,
-          "bound": "pair_MUB_PGM",
+          "bound": "DFW_normalized_ell_0",
           "value": "9/16",
           "target": "289/400"
         },
         {
           "r": 18,
-          "bound": "pair_MUB_PGM",
+          "bound": "DFW_normalized_ell_0",
           "value": "5/8",
           "target": "81/100"
         },
         {
           "r": 19,
-          "bound": "pair_MUB_PGM",
+          "bound": "DFW_normalized_ell_0",
           "value": "3/4",
           "target": "361/400"
         },
         {
           "r": 20,
-          "bound": "pair_MUB_PGM",
+          "bound": "DFW_normalized_ell_0",
           "value": "1",
           "target": "1"
         }
       ]
     }
-  ]
+  ],
+  "exact_small_block_recovery_certificates": {
+    "arithmetic": "exact Fraction/integer",
+    "bits": 40,
+    "interior_ranks": 49,
+    "cases": [
+      {
+        "k": 1,
+        "r": 1,
+        "H_lower": "489776749883/549755813888",
+        "H_upper": "979553499767/1099511627776",
+        "polygon_lower": "249172593799/274877906944",
+        "spectral_bound": "3/4",
+        "renes_at_polygon_lower": "31373872312201981521713/37778931862957161709568",
+        "ell": 0,
+        "dimension_bound": "1",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 2,
+        "r": 1,
+        "H_lower": "872682957291/1099511627776",
+        "H_upper": "218170739323/274877906944",
+        "polygon_lower": "3167804685761/5497558138880",
+        "spectral_bound": "15/32",
+        "renes_at_polygon_lower": "2961059227808995699939627/7555786372591432341913600",
+        "ell": 1,
+        "dimension_bound": "1/2",
+        "witness": "dimension"
+      },
+      {
+        "k": 2,
+        "r": 2,
+        "H_lower": "872682957291/1099511627776",
+        "H_upper": "218170739323/274877906944",
+        "polygon_lower": "3167804685761/3848290697216",
+        "spectral_bound": "5/8",
+        "renes_at_polygon_lower": "2547335066097831521638699/3702335322569801847537664",
+        "ell": 0,
+        "dimension_bound": "1",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 2,
+        "r": 3,
+        "H_lower": "872682957291/1099511627776",
+        "H_upper": "218170739323/274877906944",
+        "polygon_lower": "7016095382977/7696581394432",
+        "spectral_bound": "3/4",
+        "renes_at_polygon_lower": "12344987040073288607947051/14809341290279207390150656",
+        "ell": 0,
+        "dimension_bound": "2",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 3,
+        "r": 1,
+        "H_lower": "777472127993/1099511627776",
+        "H_upper": "388736063997/549755813888",
+        "polygon_lower": "983630558201/2748779069440",
+        "spectral_bound": "1/4",
+        "renes_at_polygon_lower": "1236056598989616755976241/6611313076017503299174400",
+        "ell": 3,
+        "dimension_bound": "1/4",
+        "witness": "dimension"
+      },
+      {
+        "k": 3,
+        "r": 2,
+        "H_lower": "777472127993/1099511627776",
+        "H_upper": "388736063997/549755813888",
+        "polygon_lower": "811831866361/1374389534720",
+        "spectral_bound": "25/64",
+        "renes_at_polygon_lower": "616245998112975821678641/1652828269004375824793600",
+        "ell": 1,
+        "dimension_bound": "1/2",
+        "witness": "dimension"
+      },
+      {
+        "k": 3,
+        "r": 3,
+        "H_lower": "777472127993/1099511627776",
+        "H_upper": "388736063997/549755813888",
+        "polygon_lower": "2882172197867/3848290697216",
+        "spectral_bound": "17/32",
+        "renes_at_polygon_lower": "7385225125235852188608953/12958173628994306466381824",
+        "ell": 1,
+        "dimension_bound": "1",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 3,
+        "r": 4,
+        "H_lower": "777472127993/1099511627776",
+        "H_upper": "388736063997/549755813888",
+        "polygon_lower": "1602105848825/1924145348608",
+        "spectral_bound": "5/8",
+        "renes_at_polygon_lower": "2258863936911925141776433/3239543407248576616595456",
+        "ell": 0,
+        "dimension_bound": "2",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 3,
+        "r": 5,
+        "H_lower": "777472127993/1099511627776",
+        "H_upper": "388736063997/549755813888",
+        "polygon_lower": "3526251197433/3848290697216",
+        "spectral_bound": "3/4",
+        "renes_at_polygon_lower": "10893105248900518659696689/12958173628994306466381824",
+        "ell": 0,
+        "dimension_bound": "4",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 4,
+        "r": 1,
+        "H_lower": "692648922219/1099511627776",
+        "H_upper": "173162230555/274877906944",
+        "polygon_lower": "2558983103809/10995116277760",
+        "spectral_bound": "1/8",
+        "renes_at_polygon_lower": "3529047100256994214157867/37778931862957161709568000",
+        "ell": 4,
+        "dimension_bound": "1/8",
+        "witness": "dimension"
+      },
+      {
+        "k": 4,
+        "r": 2,
+        "H_lower": "692648922219/1099511627776",
+        "H_upper": "173162230555/274877906944",
+        "polygon_lower": "2215385720129/5497558138880",
+        "spectral_bound": "119/512",
+        "renes_at_polygon_lower": "1758159669180877259021867/9444732965739290427392000",
+        "ell": 2,
+        "dimension_bound": "1/4",
+        "witness": "dimension"
+      },
+      {
+        "k": 4,
+        "r": 3,
+        "H_lower": "692648922219/1099511627776",
+        "H_upper": "173162230555/274877906944",
+        "polygon_lower": "6302559776707/10995116277760",
+        "spectral_bound": "43/128",
+        "renes_at_polygon_lower": "12871957970834367072636803/37778931862957161709568000",
+        "ell": 1,
+        "dimension_bound": "1/2",
+        "witness": "dimension"
+      },
+      {
+        "k": 4,
+        "r": 4,
+        "H_lower": "692648922219/1099511627776",
+        "H_upper": "173162230555/274877906944",
+        "polygon_lower": "375386082935/549755813888",
+        "spectral_bound": "27/64",
+        "renes_at_polygon_lower": "44669280666497126656283/94447329657392904273920",
+        "ell": 1,
+        "dimension_bound": "1",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 4,
+        "r": 5,
+        "H_lower": "692648922219/1099511627776",
+        "H_upper": "173162230555/274877906944",
+        "polygon_lower": "1675914062693/2199023255552",
+        "spectral_bound": "9/16",
+        "renes_at_polygon_lower": "883415883554915530682867/1511157274518286468382720",
+        "ell": 0,
+        "dimension_bound": "2",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 4,
+        "r": 6,
+        "H_lower": "692648922219/1099511627776",
+        "H_upper": "173162230555/274877906944",
+        "polygon_lower": "925141896823/1099511627776",
+        "spectral_bound": "5/8",
+        "renes_at_polygon_lower": "268098286290239526431003/377789318629571617095680",
+        "ell": 0,
+        "dimension_bound": "4",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 4,
+        "r": 7,
+        "H_lower": "692648922219/1099511627776",
+        "H_upper": "173162230555/274877906944",
+        "polygon_lower": "2024653524599/2199023255552",
+        "spectral_bound": "3/4",
+        "renes_at_polygon_lower": "1281640275482081751623963/1511157274518286468382720",
+        "ell": 0,
+        "dimension_bound": "8",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 5,
+        "r": 1,
+        "H_lower": "308540018463/549755813888",
+        "H_upper": "617080036927/1099511627776",
+        "polygon_lower": "1088828812637/6871947673600",
+        "spectral_bound": "1/16",
+        "renes_at_polygon_lower": "2193639295003420728218569/45747925302799688007680000",
+        "ell": 5,
+        "dimension_bound": "1/16",
+        "witness": "dimension"
+      },
+      {
+        "k": 5,
+        "r": 2,
+        "H_lower": "308540018463/549755813888",
+        "H_upper": "617080036927/1099511627776",
+        "polygon_lower": "981454630237/3435973836800",
+        "spectral_bound": "1/8",
+        "renes_at_polygon_lower": "1121422295719053040538569/11436981325699922001920000",
+        "ell": 5,
+        "dimension_bound": "1/8",
+        "witness": "dimension"
+      },
+      {
+        "k": 5,
+        "r": 3,
+        "H_lower": "308540018463/549755813888",
+        "H_upper": "617080036927/1099511627776",
+        "polygon_lower": "2836989708311/6871947673600",
+        "spectral_bound": "205/1024",
+        "renes_at_polygon_lower": "8305772329330864552047121/45747925302799688007680000",
+        "ell": 2,
+        "dimension_bound": "1/4",
+        "witness": "dimension"
+      },
+      {
+        "k": 5,
+        "r": 4,
+        "H_lower": "308540018463/549755813888",
+        "H_upper": "617080036927/1099511627776",
+        "polygon_lower": "927767539037/1717986918400",
+        "spectral_bound": "141/512",
+        "renes_at_polygon_lower": "853368045897961118618569/2859245331424980500480000",
+        "ell": 2,
+        "dimension_bound": "1/2",
+        "witness": "dimension"
+      },
+      {
+        "k": 5,
+        "r": 5,
+        "H_lower": "308540018463/549755813888",
+        "H_upper": "617080036927/1099511627776",
+        "polygon_lower": "1200497962333/1924145348608",
+        "spectral_bound": "45/128",
+        "renes_at_polygon_lower": "1412522550756214898414537/3586637343739495539802112",
+        "ell": 1,
+        "dimension_bound": "1",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 5,
+        "r": 6,
+        "H_lower": "308540018463/549755813888",
+        "H_upper": "617080036927/1099511627776",
+        "polygon_lower": "336306859897/481036337152",
+        "spectral_bound": "29/64",
+        "renes_at_polygon_lower": "110222438937928048584497/224164833983718471237632",
+        "ell": 1,
+        "dimension_bound": "2",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 5,
+        "r": 7,
+        "H_lower": "308540018463/549755813888",
+        "H_upper": "617080036927/1099511627776",
+        "polygon_lower": "1489956916843/1924145348608",
+        "spectral_bound": "9/16",
+        "renes_at_polygon_lower": "2156488738430493780959417/3586637343739495539802112",
+        "ell": 0,
+        "dimension_bound": "4",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 5,
+        "r": 8,
+        "H_lower": "308540018463/549755813888",
+        "H_upper": "617080036927/1099511627776",
+        "polygon_lower": "817343197049/962072674304",
+        "spectral_bound": "5/8",
+        "renes_at_polygon_lower": "647827924256787477309233/896659335934873884950528",
+        "ell": 0,
+        "dimension_bound": "8",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 5,
+        "r": 9,
+        "H_lower": "308540018463/549755813888",
+        "H_upper": "617080036927/1099511627776",
+        "polygon_lower": "1779415871353/1924145348608",
+        "spectral_bound": "3/4",
+        "renes_at_polygon_lower": "3068027898796817162184497/3586637343739495539802112",
+        "ell": 0,
+        "dimension_bound": "16",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 6,
+        "r": 1,
+        "H_lower": "1/2",
+        "H_upper": "549755813889/1099511627776",
+        "polygon_lower": "9/80",
+        "spectral_bound": "1/32",
+        "renes_at_polygon_lower": "317/12600",
+        "ell": 6,
+        "dimension_bound": "1/32",
+        "witness": "dimension"
+      },
+      {
+        "k": 6,
+        "r": 2,
+        "H_lower": "1/2",
+        "H_upper": "549755813889/1099511627776",
+        "polygon_lower": "67/320",
+        "spectral_bound": "1/16",
+        "renes_at_polygon_lower": "5419/100800",
+        "ell": 6,
+        "dimension_bound": "1/16",
+        "witness": "dimension"
+      },
+      {
+        "k": 6,
+        "r": 3,
+        "H_lower": "1/2",
+        "H_upper": "549755813889/1099511627776",
+        "polygon_lower": "49/160",
+        "spectral_bound": "1863/16384",
+        "renes_at_polygon_lower": "71/700",
+        "ell": 4,
+        "dimension_bound": "1/8",
+        "witness": "dimension"
+      },
+      {
+        "k": 6,
+        "r": 4,
+        "H_lower": "1/2",
+        "H_upper": "549755813889/1099511627776",
+        "polygon_lower": "129/320",
+        "spectral_bound": "695/4096",
+        "renes_at_polygon_lower": "16951/100800",
+        "ell": 3,
+        "dimension_bound": "1/4",
+        "witness": "dimension"
+      },
+      {
+        "k": 6,
+        "r": 5,
+        "H_lower": "1/2",
+        "H_upper": "549755813889/1099511627776",
+        "polygon_lower": "1/2",
+        "spectral_bound": "231/1024",
+        "renes_at_polygon_lower": "16/63",
+        "ell": 2,
+        "dimension_bound": "1/2",
+        "witness": "dimension"
+      },
+      {
+        "k": 6,
+        "r": 6,
+        "H_lower": "1/2",
+        "H_upper": "549755813889/1099511627776",
+        "polygon_lower": "4/7",
+        "spectral_bound": "79/256",
+        "renes_at_polygon_lower": "113/343",
+        "ell": 1,
+        "dimension_bound": "1",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 6,
+        "r": 7,
+        "H_lower": "1/2",
+        "H_upper": "549755813889/1099511627776",
+        "polygon_lower": "9/14",
+        "spectral_bound": "47/128",
+        "renes_at_polygon_lower": "1282/3087",
+        "ell": 1,
+        "dimension_bound": "2",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 6,
+        "r": 8,
+        "H_lower": "1/2",
+        "H_upper": "549755813889/1099511627776",
+        "polygon_lower": "5/7",
+        "spectral_bound": "31/64",
+        "renes_at_polygon_lower": "1579/3087",
+        "ell": 1,
+        "dimension_bound": "4",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 6,
+        "r": 9,
+        "H_lower": "1/2",
+        "H_upper": "549755813889/1099511627776",
+        "polygon_lower": "11/14",
+        "spectral_bound": "9/16",
+        "renes_at_polygon_lower": "212/343",
+        "ell": 0,
+        "dimension_bound": "8",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 6,
+        "r": 10,
+        "H_lower": "1/2",
+        "H_upper": "549755813889/1099511627776",
+        "polygon_lower": "6/7",
+        "spectral_bound": "5/8",
+        "renes_at_polygon_lower": "2269/3087",
+        "ell": 0,
+        "dimension_bound": "16",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 6,
+        "r": 11,
+        "H_lower": "1/2",
+        "H_upper": "549755813889/1099511627776",
+        "polygon_lower": "13/14",
+        "spectral_bound": "3/4",
+        "renes_at_polygon_lower": "2662/3087",
+        "ell": 0,
+        "dimension_bound": "32",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 7,
+        "r": 1,
+        "H_lower": "489776749883/1099511627776",
+        "H_upper": "122444187471/274877906944",
+        "polygon_lower": "227697757319/2748779069440",
+        "spectral_bound": "1/64",
+        "renes_at_polygon_lower": "101096305513396286844721/7496756791555561776742400",
+        "ell": 7,
+        "dimension_bound": "1/64",
+        "witness": "dimension"
+      },
+      {
+        "k": 7,
+        "r": 2,
+        "H_lower": "489776749883/1099511627776",
+        "H_upper": "122444187471/274877906944",
+        "polygon_lower": "216960339079/1374389534720",
+        "spectral_bound": "1/32",
+        "renes_at_polygon_lower": "57169996187875417059121/1874189197888890444185600",
+        "ell": 7,
+        "dimension_bound": "1/32",
+        "witness": "dimension"
+      },
+      {
+        "k": 7,
+        "r": 3,
+        "H_lower": "489776749883/1099511627776",
+        "H_upper": "122444187471/274877906944",
+        "polygon_lower": "640143598997/2748779069440",
+        "spectral_bound": "8117/131072",
+        "renes_at_polygon_lower": "441319450148343970556089/7496756791555561776742400",
+        "ell": 5,
+        "dimension_bound": "1/16",
+        "witness": "dimension"
+      },
+      {
+        "k": 7,
+        "r": 4,
+        "H_lower": "489776749883/1099511627776",
+        "H_upper": "122444187471/274877906944",
+        "polygon_lower": "211591629959/687194767360",
+        "spectral_bound": "3253/32768",
+        "renes_at_polygon_lower": "46188418856495199612721/468547299472222611046400",
+        "ell": 4,
+        "dimension_bound": "1/8",
+        "witness": "dimension"
+      },
+      {
+        "k": 7,
+        "r": 5,
+        "H_lower": "489776749883/1099511627776",
+        "H_upper": "122444187471/274877906944",
+        "polygon_lower": "210517888135/549755813888",
+        "spectral_bound": "1157/8192",
+        "renes_at_polygon_lower": "44870629576729573519153/299870271662222471069696",
+        "ell": 3,
+        "dimension_bound": "1/4",
+        "witness": "dimension"
+      },
+      {
+        "k": 7,
+        "r": 6,
+        "H_lower": "489776749883/1099511627776",
+        "H_upper": "122444187471/274877906944",
+        "polygon_lower": "1538049726385/3367254360064",
+        "spectral_bound": "389/2048",
+        "renes_at_polygon_lower": "2373256278262971421542497/11249820660328064891224064",
+        "ell": 2,
+        "dimension_bound": "1/2",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 7,
+        "r": 7,
+        "H_lower": "489776749883/1099511627776",
+        "H_upper": "122444187471/274877906944",
+        "polygon_lower": "2019086063537/3848290697216",
+        "spectral_bound": "261/1024",
+        "renes_at_polygon_lower": "4070999790249833605482593/14693643311448901082415104",
+        "ell": 2,
+        "dimension_bound": "1",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 7,
+        "r": 8,
+        "H_lower": "489776749883/1099511627776",
+        "H_upper": "122444187471/274877906944",
+        "polygon_lower": "7981403539219/13469017440256",
+        "spectral_bound": "81/256",
+        "renes_at_polygon_lower": "63440389204849742880181097/179997130565249038259585024",
+        "ell": 1,
+        "dimension_bound": "2",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 7,
+        "r": 9,
+        "H_lower": "489776749883/1099511627776",
+        "H_upper": "122444187471/274877906944",
+        "polygon_lower": "17792011712117/26938034880512",
+        "spectral_bound": "49/128",
+        "renes_at_polygon_lower": "314736103100301545534951801/719988522260996153038340096",
+        "ell": 1,
+        "dimension_bound": "4",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 7,
+        "r": 10,
+        "H_lower": "489776749883/1099511627776",
+        "H_upper": "122444187471/274877906944",
+        "polygon_lower": "4905304086449/6734508720128",
+        "spectral_bound": "33/64",
+        "renes_at_polygon_lower": "23900164285309348044458081/44999282641312259564896256",
+        "ell": 1,
+        "dimension_bound": "8",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 7,
+        "r": 11,
+        "H_lower": "489776749883/1099511627776",
+        "H_upper": "122444187471/274877906944",
+        "polygon_lower": "21450420979475/26938034880512",
+        "spectral_bound": "9/16",
+        "renes_at_polygon_lower": "456761133213343041049856873/719988522260996153038340096",
+        "ell": 0,
+        "dimension_bound": "16",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 7,
+        "r": 12,
+        "H_lower": "489776749883/1099511627776",
+        "H_upper": "122444187471/274877906944",
+        "polygon_lower": "11639812806577/13469017440256",
+        "spectral_bound": "5/8",
+        "renes_at_polygon_lower": "134452904261370490637633633/179997130565249038259585024",
+        "ell": 0,
+        "dimension_bound": "32",
+        "witness": "spectral/Renes"
+      },
+      {
+        "k": 7,
+        "r": 13,
+        "H_lower": "489776749883/1099511627776",
+        "H_upper": "122444187471/274877906944",
+        "polygon_lower": "25108830246833/26938034880512",
+        "spectral_bound": "3/4",
+        "renes_at_polygon_lower": "625554080061366333213362273/719988522260996153038340096",
+        "ell": 0,
+        "dimension_bound": "64",
+        "witness": "spectral/Renes"
+      }
+    ]
+  }
 }
