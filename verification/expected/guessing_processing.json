@@ -1,0 +1,2517 @@
+{
+  "status": "passed",
+  "seed": 20261104,
+  "scope": "Finite scalar checks; no physical-model certification or universal proof by computation.",
+  "k_range": [
+    1,
+    40
+  ],
+  "discrete_algebra_cases": 73285,
+  "randomized_unconditional_mixtures": 5950,
+  "sampled_continuous_majorant_cases": 80040,
+  "worst_branch_floor_margin": 0.0,
+  "worst_mixture_floor_margin": 0.0,
+  "endpoint_mixtures": [
+    {
+      "k": 8,
+      "full_rank_weight": 0.01,
+      "expected_rank": 0.16,
+      "score": 0.0138671875
+    },
+    {
+      "k": 8,
+      "full_rank_weight": 0.2,
+      "expected_rank": 3.2,
+      "score": 0.203125
+    },
+    {
+      "k": 8,
+      "full_rank_weight": 0.4,
+      "expected_rank": 6.4,
+      "score": 0.40234375
+    },
+    {
+      "k": 8,
+      "full_rank_weight": 0.9,
+      "expected_rank": 14.4,
+      "score": 0.900390625
+    },
+    {
+      "k": 12,
+      "full_rank_weight": 0.01,
+      "expected_rank": 0.24,
+      "score": 0.01024169921875
+    },
+    {
+      "k": 12,
+      "full_rank_weight": 0.2,
+      "expected_rank": 4.800000000000001,
+      "score": 0.2001953125
+    },
+    {
+      "k": 12,
+      "full_rank_weight": 0.4,
+      "expected_rank": 9.600000000000001,
+      "score": 0.400146484375
+    },
+    {
+      "k": 12,
+      "full_rank_weight": 0.9,
+      "expected_rank": 21.6,
+      "score": 0.9000244140625
+    },
+    {
+      "k": 40,
+      "full_rank_weight": 0.01,
+      "expected_rank": 0.8,
+      "score": 0.0100000000009004
+    },
+    {
+      "k": 40,
+      "full_rank_weight": 0.2,
+      "expected_rank": 16.0,
+      "score": 0.2000000000007276
+    },
+    {
+      "k": 40,
+      "full_rank_weight": 0.4,
+      "expected_rank": 32.0,
+      "score": 0.4000000000005457
+    },
+    {
+      "k": 40,
+      "full_rank_weight": 0.9,
+      "expected_rank": 72.0,
+      "score": 0.900000000000091
+    }
+  ],
+  "independent_injection_LP_cases": 216,
+  "LP_relative_tolerance": 1e-07,
+  "LP_checks_passed": true,
+  "low_score_example": {
+    "k": 12,
+    "p": 0.4,
+    "n": 120,
+    "gamma": 0.01,
+    "D": 2000,
+    "random_guess_baseline": 0.000244140625,
+    "lattice_only_baseline": 0.25,
+    "lattice_only_floor": 4.800000000000001,
+    "combined_rank_floor": 9.596483516483518,
+    "logarithmic_charge_bound": 162.00236007215176,
+    "integer_gate_logarithmic_real_bound": 170.30364935599349,
+    "integer_gate_logarithmic_ceiling": 171,
+    "discrete_injection_real_bound": 162.81928776905082,
+    "discrete_injection_ceiling": 163,
+    "interval_example_D": 700,
+    "interval_discrete_real_bound": 36.80485775462068,
+    "width_feasibility_check_a_le_2nq": true
+  },
+  "recovery_comparison": [
+    {
+      "k": 1,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          0.5
+        ],
+        [
+          1,
+          0.8908987181403393
+        ],
+        [
+          2,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.5
+        ],
+        [
+          1,
+          0.8535533905932737
+        ],
+        [
+          2,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.5
+        ],
+        [
+          1,
+          0.8535533905932737
+        ],
+        [
+          2,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          0.5
+        ],
+        [
+          1,
+          0.8535533905932737
+        ],
+        [
+          2,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 0,
+      "inherited_rank_floor_at_example": 0,
+      "combined_rank_floor_at_example": 0,
+      "inherited_hull_is_endpoint_chord": false,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 2,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          0.25
+        ],
+        [
+          2,
+          0.7937005259840998
+        ],
+        [
+          4,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.25
+        ],
+        [
+          2,
+          0.7803300858899106
+        ],
+        [
+          4,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.25
+        ],
+        [
+          2,
+          0.7803300858899106
+        ],
+        [
+          4,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          0.25
+        ],
+        [
+          2,
+          0.7803300858899106
+        ],
+        [
+          4,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 0.5517743420553052,
+      "inherited_rank_floor_at_example": 0.5656854249492381,
+      "combined_rank_floor_at_example": 0.5656854249492381,
+      "inherited_hull_is_endpoint_chord": false,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 3,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          0.125
+        ],
+        [
+          3,
+          0.7071067811865476
+        ],
+        [
+          6,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.125
+        ],
+        [
+          3,
+          0.7437184335382291
+        ],
+        [
+          6,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.125
+        ],
+        [
+          3,
+          0.7437184335382291
+        ],
+        [
+          6,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          0.125
+        ],
+        [
+          3,
+          0.7071067811865476
+        ],
+        [
+          6,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 1.4172657434403133,
+      "inherited_rank_floor_at_example": 1.3334013588089182,
+      "combined_rank_floor_at_example": 1.4172657434403133,
+      "inherited_hull_is_endpoint_chord": false,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 4,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          0.0625
+        ],
+        [
+          3,
+          0.5
+        ],
+        [
+          4,
+          0.6299605249474366
+        ],
+        [
+          8,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.0625
+        ],
+        [
+          4,
+          0.7254126073623883
+        ],
+        [
+          8,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.0625
+        ],
+        [
+          4,
+          0.7254126073623883
+        ],
+        [
+          8,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          0.0625
+        ],
+        [
+          3,
+          0.5
+        ],
+        [
+          4,
+          0.6299605249474366
+        ],
+        [
+          8,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 2.3142857142857145,
+      "inherited_rank_floor_at_example": 2.0364675298172568,
+      "combined_rank_floor_at_example": 2.3142857142857145,
+      "inherited_hull_is_endpoint_chord": false,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 5,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          0.03125
+        ],
+        [
+          4,
+          0.5
+        ],
+        [
+          10,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.03125
+        ],
+        [
+          5,
+          0.6585893718713979
+        ],
+        [
+          6,
+          0.7272205453537527
+        ],
+        [
+          10,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.03125
+        ],
+        [
+          5,
+          0.6585893718713979
+        ],
+        [
+          6,
+          0.7272205453537527
+        ],
+        [
+          10,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          0.03125
+        ],
+        [
+          4,
+          0.5
+        ],
+        [
+          10,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 3.146666666666667,
+      "inherited_rank_floor_at_example": 2.9389993401816357,
+      "combined_rank_floor_at_example": 3.146666666666667,
+      "inherited_hull_is_endpoint_chord": false,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 6,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          0.015625
+        ],
+        [
+          5,
+          0.5
+        ],
+        [
+          12,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.015625
+        ],
+        [
+          6,
+          0.5973284521558214
+        ],
+        [
+          7,
+          0.6834909460363284
+        ],
+        [
+          12,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.015625
+        ],
+        [
+          6,
+          0.5973284521558214
+        ],
+        [
+          7,
+          0.6834909460363284
+        ],
+        [
+          12,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          0.015625
+        ],
+        [
+          5,
+          0.5
+        ],
+        [
+          12,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 3.967741935483871,
+      "inherited_rank_floor_at_example": 3.9646489830048717,
+      "combined_rank_floor_at_example": 3.967741935483871,
+      "inherited_hull_is_endpoint_chord": false,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 7,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          0.0078125
+        ],
+        [
+          6,
+          0.44544935907016964
+        ],
+        [
+          14,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.0078125
+        ],
+        [
+          6,
+          0.4860051524849843
+        ],
+        [
+          9,
+          0.7066274148066676
+        ],
+        [
+          14,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.0078125
+        ],
+        [
+          6,
+          0.4860051524849843
+        ],
+        [
+          9,
+          0.7066274148066676
+        ],
+        [
+          14,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          0.0078125
+        ],
+        [
+          6,
+          0.44544935907016964
+        ],
+        [
+          14,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 5.376889426086266,
+      "inherited_rank_floor_at_example": 4.920872346682263,
+      "combined_rank_floor_at_example": 5.376889426086266,
+      "inherited_hull_is_endpoint_chord": false,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 8,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          0.00390625
+        ],
+        [
+          16,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.00390625
+        ],
+        [
+          11,
+          0.7178529207204485
+        ],
+        [
+          16,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.00390625
+        ],
+        [
+          11,
+          0.7178529207204485
+        ],
+        [
+          16,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          0.00390625
+        ],
+        [
+          16,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 6.3623529411764705,
+      "inherited_rank_floor_at_example": 6.1027404828476755,
+      "combined_rank_floor_at_example": 6.3623529411764705,
+      "inherited_hull_is_endpoint_chord": false,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 9,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          0.001953125
+        ],
+        [
+          18,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.001953125
+        ],
+        [
+          18,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.001953125
+        ],
+        [
+          18,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          0.001953125
+        ],
+        [
+          18,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 7.178864970645793,
+      "inherited_rank_floor_at_example": 7.178864970645793,
+      "combined_rank_floor_at_example": 7.178864970645793,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 10,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          0.0009765625
+        ],
+        [
+          20,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.0009765625
+        ],
+        [
+          20,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.0009765625
+        ],
+        [
+          20,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          0.0009765625
+        ],
+        [
+          20,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 7.988269794721408,
+      "inherited_rank_floor_at_example": 7.988269794721408,
+      "combined_rank_floor_at_example": 7.988269794721408,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 11,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          0.00048828125
+        ],
+        [
+          22,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.00048828125
+        ],
+        [
+          22,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.00048828125
+        ],
+        [
+          22,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          0.00048828125
+        ],
+        [
+          22,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 8.793551538837324,
+      "inherited_rank_floor_at_example": 8.793551538837324,
+      "combined_rank_floor_at_example": 8.793551538837324,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 12,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          0.000244140625
+        ],
+        [
+          24,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.000244140625
+        ],
+        [
+          24,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.000244140625
+        ],
+        [
+          24,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          0.000244140625
+        ],
+        [
+          24,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 9.596483516483518,
+      "inherited_rank_floor_at_example": 9.596483516483518,
+      "combined_rank_floor_at_example": 9.596483516483518,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 13,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          0.0001220703125
+        ],
+        [
+          26,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.0001220703125
+        ],
+        [
+          26,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          0.0001220703125
+        ],
+        [
+          26,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          0.0001220703125
+        ],
+        [
+          26,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 10.398095470638506,
+      "inherited_rank_floor_at_example": 10.398095470638506,
+      "combined_rank_floor_at_example": 10.398095470638506,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 14,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          6.103515625e-05
+        ],
+        [
+          28,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          6.103515625e-05
+        ],
+        [
+          28,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          6.103515625e-05
+        ],
+        [
+          28,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          6.103515625e-05
+        ],
+        [
+          28,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 11.198974546786303,
+      "inherited_rank_floor_at_example": 11.198974546786303,
+      "combined_rank_floor_at_example": 11.198974546786303,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 15,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          3.0517578125e-05
+        ],
+        [
+          30,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          3.0517578125e-05
+        ],
+        [
+          30,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          3.0517578125e-05
+        ],
+        [
+          30,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          3.0517578125e-05
+        ],
+        [
+          30,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 11.999450666829432,
+      "inherited_rank_floor_at_example": 11.999450666829432,
+      "combined_rank_floor_at_example": 11.999450666829432,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 16,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          1.52587890625e-05
+        ],
+        [
+          32,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          1.52587890625e-05
+        ],
+        [
+          32,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          1.52587890625e-05
+        ],
+        [
+          32,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          1.52587890625e-05
+        ],
+        [
+          32,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 12.799707026779584,
+      "inherited_rank_floor_at_example": 12.799707026779584,
+      "combined_rank_floor_at_example": 12.799707026779584,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 17,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          7.62939453125e-06
+        ],
+        [
+          34,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          7.62939453125e-06
+        ],
+        [
+          34,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          7.62939453125e-06
+        ],
+        [
+          34,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          7.62939453125e-06
+        ],
+        [
+          34,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 13.599844359164118,
+      "inherited_rank_floor_at_example": 13.599844359164118,
+      "combined_rank_floor_at_example": 13.599844359164118,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 18,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          3.814697265625e-06
+        ],
+        [
+          36,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          3.814697265625e-06
+        ],
+        [
+          36,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          3.814697265625e-06
+        ],
+        [
+          36,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          3.814697265625e-06
+        ],
+        [
+          36,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 14.39991760222474,
+      "inherited_rank_floor_at_example": 14.39991760222474,
+      "combined_rank_floor_at_example": 14.39991760222474,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 19,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          1.9073486328125e-06
+        ],
+        [
+          38,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          1.9073486328125e-06
+        ],
+        [
+          38,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          1.9073486328125e-06
+        ],
+        [
+          38,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          1.9073486328125e-06
+        ],
+        [
+          38,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 15.199956512368226,
+      "inherited_rank_floor_at_example": 15.199956512368226,
+      "combined_rank_floor_at_example": 15.199956512368226,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 20,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          9.5367431640625e-07
+        ],
+        [
+          40,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          9.5367431640625e-07
+        ],
+        [
+          40,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          9.5367431640625e-07
+        ],
+        [
+          40,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          9.5367431640625e-07
+        ],
+        [
+          40,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 15.999977111794578,
+      "inherited_rank_floor_at_example": 15.999977111794578,
+      "combined_rank_floor_at_example": 15.999977111794578,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 21,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          4.76837158203125e-07
+        ],
+        [
+          42,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          4.76837158203125e-07
+        ],
+        [
+          42,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          4.76837158203125e-07
+        ],
+        [
+          42,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          4.76837158203125e-07
+        ],
+        [
+          42,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 16.799987983697886,
+      "inherited_rank_floor_at_example": 16.799987983697886,
+      "combined_rank_floor_at_example": 16.799987983697886,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 22,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          2.384185791015625e-07
+        ],
+        [
+          44,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          2.384185791015625e-07
+        ],
+        [
+          44,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          2.384185791015625e-07
+        ],
+        [
+          44,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          2.384185791015625e-07
+        ],
+        [
+          44,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 17.599993705748012,
+      "inherited_rank_floor_at_example": 17.599993705748012,
+      "combined_rank_floor_at_example": 17.599993705748012,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 23,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          1.1920928955078125e-07
+        ],
+        [
+          46,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          1.1920928955078125e-07
+        ],
+        [
+          46,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          1.1920928955078125e-07
+        ],
+        [
+          46,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          1.1920928955078125e-07
+        ],
+        [
+          46,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 18.399996709823217,
+      "inherited_rank_floor_at_example": 18.399996709823217,
+      "combined_rank_floor_at_example": 18.399996709823217,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 24,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          5.960464477539063e-08
+        ],
+        [
+          48,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          5.960464477539063e-08
+        ],
+        [
+          48,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          5.960464477539063e-08
+        ],
+        [
+          48,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          5.960464477539063e-08
+        ],
+        [
+          48,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 19.19999828338613,
+      "inherited_rank_floor_at_example": 19.19999828338613,
+      "combined_rank_floor_at_example": 19.19999828338613,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 25,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          2.9802322387695312e-08
+        ],
+        [
+          50,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          2.9802322387695312e-08
+        ],
+        [
+          50,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          2.9802322387695312e-08
+        ],
+        [
+          50,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          2.9802322387695312e-08
+        ],
+        [
+          50,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 19.9999991059303,
+      "inherited_rank_floor_at_example": 19.9999991059303,
+      "combined_rank_floor_at_example": 19.9999991059303,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 26,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          1.4901161193847656e-08
+        ],
+        [
+          52,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          1.4901161193847656e-08
+        ],
+        [
+          52,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          1.4901161193847656e-08
+        ],
+        [
+          52,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          1.4901161193847656e-08
+        ],
+        [
+          52,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 20.799999535083764,
+      "inherited_rank_floor_at_example": 20.799999535083764,
+      "combined_rank_floor_at_example": 20.799999535083764,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 27,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          7.450580596923828e-09
+        ],
+        [
+          54,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          7.450580596923828e-09
+        ],
+        [
+          54,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          7.450580596923828e-09
+        ],
+        [
+          54,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          7.450580596923828e-09
+        ],
+        [
+          54,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 21.59999975860119,
+      "inherited_rank_floor_at_example": 21.59999975860119,
+      "combined_rank_floor_at_example": 21.59999975860119,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 28,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          3.725290298461914e-09
+        ],
+        [
+          56,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          3.725290298461914e-09
+        ],
+        [
+          56,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          3.725290298461914e-09
+        ],
+        [
+          56,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          3.725290298461914e-09
+        ],
+        [
+          56,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 22.399999874830247,
+      "inherited_rank_floor_at_example": 22.399999874830247,
+      "combined_rank_floor_at_example": 22.399999874830247,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 29,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          1.862645149230957e-09
+        ],
+        [
+          58,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          1.862645149230957e-09
+        ],
+        [
+          58,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          1.862645149230957e-09
+        ],
+        [
+          58,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          1.862645149230957e-09
+        ],
+        [
+          58,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 23.199999935179953,
+      "inherited_rank_floor_at_example": 23.199999935179953,
+      "combined_rank_floor_at_example": 23.199999935179953,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 30,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          9.313225746154785e-10
+        ],
+        [
+          60,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          9.313225746154785e-10
+        ],
+        [
+          60,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          9.313225746154785e-10
+        ],
+        [
+          60,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          9.313225746154785e-10
+        ],
+        [
+          60,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 23.999999966472387,
+      "inherited_rank_floor_at_example": 23.999999966472387,
+      "combined_rank_floor_at_example": 23.999999966472387,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 31,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          4.656612873077393e-10
+        ],
+        [
+          62,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          4.656612873077393e-10
+        ],
+        [
+          62,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          4.656612873077393e-10
+        ],
+        [
+          62,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          4.656612873077393e-10
+        ],
+        [
+          62,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 24.799999982677402,
+      "inherited_rank_floor_at_example": 24.799999982677402,
+      "combined_rank_floor_at_example": 24.799999982677402,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 32,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          2.3283064365386963e-10
+        ],
+        [
+          64,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          2.3283064365386963e-10
+        ],
+        [
+          64,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          2.3283064365386963e-10
+        ],
+        [
+          64,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          2.3283064365386963e-10
+        ],
+        [
+          64,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 25.599999991059306,
+      "inherited_rank_floor_at_example": 25.599999991059306,
+      "combined_rank_floor_at_example": 25.599999991059306,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 33,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          1.1641532182693481e-10
+        ],
+        [
+          66,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          1.1641532182693481e-10
+        ],
+        [
+          66,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          1.1641532182693481e-10
+        ],
+        [
+          66,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          1.1641532182693481e-10
+        ],
+        [
+          66,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 26.399999995389955,
+      "inherited_rank_floor_at_example": 26.399999995389955,
+      "combined_rank_floor_at_example": 26.399999995389955,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 34,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          5.820766091346741e-11
+        ],
+        [
+          68,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          5.820766091346741e-11
+        ],
+        [
+          68,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          5.820766091346741e-11
+        ],
+        [
+          68,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          5.820766091346741e-11
+        ],
+        [
+          68,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 27.19999999762513,
+      "inherited_rank_floor_at_example": 27.19999999762513,
+      "combined_rank_floor_at_example": 27.19999999762513,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 35,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          2.9103830456733704e-11
+        ],
+        [
+          70,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          2.9103830456733704e-11
+        ],
+        [
+          70,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          2.9103830456733704e-11
+        ],
+        [
+          70,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          2.9103830456733704e-11
+        ],
+        [
+          70,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 27.99999999877764,
+      "inherited_rank_floor_at_example": 27.99999999877764,
+      "combined_rank_floor_at_example": 27.99999999877764,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 36,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          1.4551915228366852e-11
+        ],
+        [
+          72,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          1.4551915228366852e-11
+        ],
+        [
+          72,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          1.4551915228366852e-11
+        ],
+        [
+          72,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          1.4551915228366852e-11
+        ],
+        [
+          72,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 28.79999999937136,
+      "inherited_rank_floor_at_example": 28.79999999937136,
+      "combined_rank_floor_at_example": 28.79999999937136,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 37,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          7.275957614183426e-12
+        ],
+        [
+          74,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          7.275957614183426e-12
+        ],
+        [
+          74,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          7.275957614183426e-12
+        ],
+        [
+          74,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          7.275957614183426e-12
+        ],
+        [
+          74,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 29.59999999967695,
+      "inherited_rank_floor_at_example": 29.59999999967695,
+      "combined_rank_floor_at_example": 29.59999999967695,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 38,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          3.637978807091713e-12
+        ],
+        [
+          76,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          3.637978807091713e-12
+        ],
+        [
+          76,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          3.637978807091713e-12
+        ],
+        [
+          76,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          3.637978807091713e-12
+        ],
+        [
+          76,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 30.39999999983411,
+      "inherited_rank_floor_at_example": 30.39999999983411,
+      "combined_rank_floor_at_example": 30.39999999983411,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 39,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          1.8189894035458565e-12
+        ],
+        [
+          78,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          1.8189894035458565e-12
+        ],
+        [
+          78,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          1.8189894035458565e-12
+        ],
+        [
+          78,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          1.8189894035458565e-12
+        ],
+        [
+          78,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 31.199999999914873,
+      "inherited_rank_floor_at_example": 31.199999999914873,
+      "combined_rank_floor_at_example": 31.199999999914873,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    },
+    {
+      "k": 40,
+      "direct_integer_rank_hull": [
+        [
+          0,
+          9.094947017729282e-13
+        ],
+        [
+          80,
+          1.0
+        ]
+      ],
+      "inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          9.094947017729282e-13
+        ],
+        [
+          80,
+          1.0
+        ]
+      ],
+      "algebra_aware_inherited_recovery_integer_rank_hull": [
+        [
+          0,
+          9.094947017729282e-13
+        ],
+        [
+          80,
+          1.0
+        ]
+      ],
+      "combined_integer_rank_hull": [
+        [
+          0,
+          9.094947017729282e-13
+        ],
+        [
+          80,
+          1.0
+        ]
+      ],
+      "example_score": 0.4,
+      "direct_rank_floor_at_example": 31.999999999956344,
+      "inherited_rank_floor_at_example": 31.999999999956344,
+      "combined_rank_floor_at_example": 31.999999999956344,
+      "inherited_hull_is_endpoint_chord": true,
+      "algebra_aware_family_equals_rank_only_family": true,
+      "BCW_R3_addition_leaves_maximized_curve_unchanged": true
+    }
+  ],
+  "recovery_comparison_limit": "Only the supplied primary-source formula family was compared; finite k=1..40 does not prove the all-k simplification or absolute optimality.",
+  "recovery_families_compared": {
+    "rank_only": "f=min(1,2^(r-2k)); dimension score<=min(1,2^(r-k)); refined discrimination inverse applied to min(pair MUB PGM (1+f)/2, BCW R3 (d*f+1/d)/2, DFW binomial family)",
+    "algebra_aware": "f=min(1,2^(r-2k),2^(s-k)); dimension score<=min(1,2^(r-s-k)); same refined discrimination and recovery family including BCW R3; maximize over integer s with c=r-2s>=0",
+    "algebra_aware_equality_proof": "For r<=k choose s=0,c=r. For k<=r<=2k choose s=r-k,c=2k-r. Both choices attain the rank-only family. They fit every width n>=k when r<=2n. Consequently adding the existing coherent-block bottleneck does not alter the rank-only upper curve in this width regime.",
+    "finite_width_limit": "The stored unconstrained-rank comparison allows every s with c>=0 and fits n>=k. If n<k, enforce s+c<=n; this can strengthen either family."
+  },
+  "exact_recovery_chord_certificates": [
+    {
+      "k": 9,
+      "arithmetic": "exact Fraction",
+      "all_positive_integer_ranks_certified": true,
+      "rank_zero_score": "1/512",
+      "witnesses": [
+        {
+          "r": 1,
+          "bound": "dimension_squared",
+          "value": "1/65536",
+          "target": "1/324"
+        },
+        {
+          "r": 2,
+          "bound": "dimension_squared",
+          "value": "1/16384",
+          "target": "1/81"
+        },
+        {
+          "r": 3,
+          "bound": "dimension_squared",
+          "value": "1/4096",
+          "target": "1/36"
+        },
+        {
+          "r": 4,
+          "bound": "dimension_squared",
+          "value": "1/1024",
+          "target": "4/81"
+        },
+        {
+          "r": 5,
+          "bound": "dimension_squared",
+          "value": "1/256",
+          "target": "25/324"
+        },
+        {
+          "r": 6,
+          "bound": "dimension_squared",
+          "value": "1/64",
+          "target": "1/9"
+        },
+        {
+          "r": 7,
+          "bound": "dimension_squared",
+          "value": "1/16",
+          "target": "49/324"
+        },
+        {
+          "r": 8,
+          "bound": "DFW_ell_2",
+          "value": "87/512",
+          "target": "16/81"
+        },
+        {
+          "r": 9,
+          "bound": "DFW_ell_2",
+          "value": "55/256",
+          "target": "1/4"
+        },
+        {
+          "r": 10,
+          "bound": "DFW_ell_1",
+          "value": "37/128",
+          "target": "25/81"
+        },
+        {
+          "r": 11,
+          "bound": "DFW_ell_1",
+          "value": "21/64",
+          "target": "121/324"
+        },
+        {
+          "r": 12,
+          "bound": "DFW_ell_1",
+          "value": "13/32",
+          "target": "4/9"
+        },
+        {
+          "r": 13,
+          "bound": "pair_MUB_PGM",
+          "value": "33/64",
+          "target": "169/324"
+        },
+        {
+          "r": 14,
+          "bound": "pair_MUB_PGM",
+          "value": "17/32",
+          "target": "49/81"
+        },
+        {
+          "r": 15,
+          "bound": "pair_MUB_PGM",
+          "value": "9/16",
+          "target": "25/36"
+        },
+        {
+          "r": 16,
+          "bound": "pair_MUB_PGM",
+          "value": "5/8",
+          "target": "64/81"
+        },
+        {
+          "r": 17,
+          "bound": "pair_MUB_PGM",
+          "value": "3/4",
+          "target": "289/324"
+        },
+        {
+          "r": 18,
+          "bound": "pair_MUB_PGM",
+          "value": "1",
+          "target": "1"
+        }
+      ]
+    },
+    {
+      "k": 10,
+      "arithmetic": "exact Fraction",
+      "all_positive_integer_ranks_certified": true,
+      "rank_zero_score": "1/1024",
+      "witnesses": [
+        {
+          "r": 1,
+          "bound": "dimension_squared",
+          "value": "1/262144",
+          "target": "1/400"
+        },
+        {
+          "r": 2,
+          "bound": "dimension_squared",
+          "value": "1/65536",
+          "target": "1/100"
+        },
+        {
+          "r": 3,
+          "bound": "dimension_squared",
+          "value": "1/16384",
+          "target": "9/400"
+        },
+        {
+          "r": 4,
+          "bound": "dimension_squared",
+          "value": "1/4096",
+          "target": "1/25"
+        },
+        {
+          "r": 5,
+          "bound": "dimension_squared",
+          "value": "1/1024",
+          "target": "1/16"
+        },
+        {
+          "r": 6,
+          "bound": "dimension_squared",
+          "value": "1/256",
+          "target": "9/100"
+        },
+        {
+          "r": 7,
+          "bound": "dimension_squared",
+          "value": "1/64",
+          "target": "49/400"
+        },
+        {
+          "r": 8,
+          "bound": "dimension_squared",
+          "value": "1/16",
+          "target": "4/25"
+        },
+        {
+          "r": 9,
+          "bound": "DFW_ell_3",
+          "value": "19/128",
+          "target": "81/400"
+        },
+        {
+          "r": 10,
+          "bound": "DFW_ell_2",
+          "value": "23/128",
+          "target": "1/4"
+        },
+        {
+          "r": 11,
+          "bound": "DFW_ell_2",
+          "value": "15/64",
+          "target": "121/400"
+        },
+        {
+          "r": 12,
+          "bound": "DFW_ell_1",
+          "value": "75/256",
+          "target": "9/25"
+        },
+        {
+          "r": 13,
+          "bound": "DFW_ell_1",
+          "value": "43/128",
+          "target": "169/400"
+        },
+        {
+          "r": 14,
+          "bound": "DFW_ell_1",
+          "value": "27/64",
+          "target": "49/100"
+        },
+        {
+          "r": 15,
+          "bound": "pair_MUB_PGM",
+          "value": "33/64",
+          "target": "9/16"
+        },
+        {
+          "r": 16,
+          "bound": "pair_MUB_PGM",
+          "value": "17/32",
+          "target": "16/25"
+        },
+        {
+          "r": 17,
+          "bound": "pair_MUB_PGM",
+          "value": "9/16",
+          "target": "289/400"
+        },
+        {
+          "r": 18,
+          "bound": "pair_MUB_PGM",
+          "value": "5/8",
+          "target": "81/100"
+        },
+        {
+          "r": 19,
+          "bound": "pair_MUB_PGM",
+          "value": "3/4",
+          "target": "361/400"
+        },
+        {
+          "r": 20,
+          "bound": "pair_MUB_PGM",
+          "value": "1",
+          "target": "1"
+        }
+      ]
+    }
+  ]
+}

@@ -46,6 +46,8 @@ The exact finite-depth law in [Control cost](control_cost.md) improves the const
 
 The same argument applies to every contiguous interval. A protocol cannot satisfy an arbitrarily long interior interval solely by moving its charged operations before or after that interval.
 
+The [delayed-basis BB84 application](guessing_processing.md) replaces the fidelity premise by an unconditional whole-string guessing score. The input is only the quantum challenge, its secret label is never disclosed, and its basis is disclosed after storage. For $`k\ge8`$, score $`p\gt2^{-k}`$ forces $`a_k(p)=2k(p-2^{-k})/(1-2^{-k})`$ at every cut, so the same gate and interval inequalities apply. A positive score excess can reflect retained classical information and does not alone demonstrate quantum storage. Existing branchwise fidelity/recovery reductions already give the same large-block floor; the useful conclusion is the operational connection with its explicit controller and chronology assumptions.
+
 ## 3. Quantum storage at zero internal T count
 
 The [Clifford-only construction](clifford_lifetime.md) extracts a stabilizer-syndrome history without performing corrections during storage. Each stored syndrome bit has several replicas, each with a growing ternary tree of noisy descendants. At the endpoint, majority reconstruction recovers the history, and successive syndrome differences identify the correctable error increments.
@@ -137,4 +139,5 @@ The [closest predecessor](../references/RELATED_WORK.md) established the qualita
 The constructive coherent recovery shows how to meet that requirement up to a power of a logarithm, with explicit finite circuits and a guarantee stronger than the converse's Bell-fidelity premise. The remaining gap is stated at the level of the full operational model: better coherent decoding could improve the achieved resource law. A restriction of this particular concatenated construction would not by itself prove that such an improvement is impossible.
 
 All conclusions retain independent depolarizing noise, fixed schedules, counted persistent workspace, and ideal processing between noise layers. Correlated noise, gate faults inside the processing intervals, geometric locality, and an external controller require their own model and analysis.
+
 

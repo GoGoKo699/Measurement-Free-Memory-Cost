@@ -202,9 +202,20 @@ Fresh magic states alone do not expand the backward binary envelope. Their avail
 
 Both constructions permit ideal global processing. A local hardware design with faulty gates, measurement latency, or correlated noise must account for those additional features before importing an achievability conclusion.
 
+### Delayed-basis BB84 scores as an operational premise
+
+The [guessing-to-processing transfer](guessing_processing.md) applies the same ledger to a device that receives only $`k`$ BB84 challenge qubits. The secret string $`X`$ is never supplied; only its independent basis string is revealed after charged storage ends. For unconditional exact-string score $`p`$ and $`k\ge8`$, one full-output envelope with terminal rank $`2n`$ satisfies, at every primitive cut,
+
+```math
+R_t\ge a_k(p)=2k\left[\frac{p-2^{-k}}{1-2^{-k}}\right]_+.
+```
+
+Whenever $`a_k(p)\gt0`$, substitute this floor for $`a`$ in the gate and every-contiguous-interval bounds; the transfer also gives a positive all-size floor for $`1\le k\le7`$. The proof factors each sampled CPTP tail through a finite quantum-plus-classical Pauli algebra before any basis-dependent readout. All persistent controller records remain noisy and counted, and mathematical noise flags are not physically supplied. Established branchwise recovery reductions already imply the same large-block floor for $`k\ge9`$. The score does not verify the device-model premises or automatically import a cryptographic preparation wrapper.
+
 ## 5. Reading and verification routes
 
 Read [Binary Pauli envelopes](pauli_envelopes.md) for the forgetting proof, then [Control cost](control_cost.md) for the fidelity bottleneck and gate budgets. The two constructive chapters, [Clifford quantum lifetime](clifford_lifetime.md) and [Coherent recovery](coherent_recovery.md), establish the different ways to pay for storage. [Interpretation](interpretation.md) compares their resources and explains the remaining optimality gap.
 
 [Related work](../references/RELATED_WORK.md) identifies inherited ingredients, the closest published theorem, and the distinctions from measurement-based or externally decoded models. [Verification](../verification/README.md) describes the finite checks and their scope. Finite computations test the explicit algebra and circuits; universal claims rely on the proofs.
+
 

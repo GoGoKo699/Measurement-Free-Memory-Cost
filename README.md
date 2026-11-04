@@ -6,6 +6,14 @@ This project studies a memory whose data and syndrome records all remain noisy, 
 
 The model permits arbitrary ideal global Clifford operations and input-independent replacement resets between independent depolarizing-noise layers. Fresh reset states may include magic states. Initial encoding and final recovery may be arbitrary. Every internal T/T-dagger gate is counted, and every persistent register belongs to the noisy physical width.
 
+## Delayed-basis guessing and processing
+
+[Lattice Memory Certification](https://github.com/GoGoKo699/Lattice-Memory-Certification) bounds exact BB84 whole-string guessing through a quantum-plus-classical bottleneck. Here that bottleneck is supplied by the Pauli algebra of a sampled storage tail. Its unconditional guessing score enforces an expected-rank floor at every cut, which can replace the fidelity premise in the gate and contiguous-interval budgets.
+
+The [complete transfer and recovery comparison](science/guessing_processing.md) live in this repository; Lattice supplies the [finite guessing theorem](https://github.com/GoGoKo699/Lattice-Memory-Certification/blob/main/science/guessing-bound.md) and its [operational application](https://github.com/GoGoKo699/Lattice-Memory-Certification/blob/main/science/noisy-processing.md). The device receives only the quantum challenge; the hidden string stays secret and only the bases arrive after storage. The common terminal envelope is the full physical output, with $`M=2n`$. All persistent controller records are noisy and counted, and their processing must use the charged circuit model. Noise flags remain proof aids.
+
+The transfer can be useful below one-half success. Existing recovery inequalities already yield the same large-block rank floor, so low-score applicability is not claimed as a new asymptotic result. The score does not verify the device's noise or controller assumptions, and no LWE compilation is imported here.
+
 ## Explanatory report
 
 Read the [complete explanatory report (PDF)](learning/report/Measurement_Free_Memory_Cost_Report.pdf) for a self-contained explanation of the memory model, the processing lower bound, the two storage constructions, and the remaining resource gap.
@@ -37,6 +45,7 @@ Here $`[x]_+=\max\{x,0\}`$. At fixed high fidelity and sufficiently long storage
 |---|---|---|
 | Clifford/reset forgetting | Half-diamond distance to a replacement channel is at most $`\min\{1,2n(1-\gamma)^D\}`$ | [Binary Pauli envelopes](science/pauli_envelopes.md) |
 | Continuing processing | Extensive non-Clifford budget with fidelity, width, and timing dependence | [Control cost](science/control_cost.md) |
+| Guessing-score premise | Delayed-basis whole-string success supplies an all-cut rank floor for the same gate and interval ledger | [Guessing and processing](science/guessing_processing.md) |
 | Sharp zero-T quantum lifetime | $`\Theta(\gamma^{-1}\ln n)`$ at fixed logical size and target fidelity $`4^{-k}\lt F_0\lt 1`$, for sufficiently weak noise | [Clifford quantum lifetime](science/clifford_lifetime.md) |
 | Explicit coherent recovery | Width and T count with a polylogarithmic overhead relative to the extensive lower bound | [Coherent recovery](science/coherent_recovery.md) |
 
@@ -62,6 +71,7 @@ Start with the [model, assumptions, and exact claims](science/model.md). Follow 
 |---|---|
 | Why do arbitrary fresh magic states not remove this bound? | [Envelope updates](science/pauli_envelopes.md) → [processing budget](science/control_cost.md) |
 | How is the quantum payload related to binary Pauli rank? | [Channel-rank and algebra bottlenecks](science/control_cost.md) |
+| Can a delayed-basis guessing score replace the fidelity premise? | [CPTP factorization, score floors and recovery comparison](science/guessing_processing.md) |
 | Can a quantum state survive logarithmic time with zero internal T count? | [Noisy syndrome archive](science/clifford_lifetime.md) |
 | What does a fully charged recovery circuit look like? | [Five-qubit correction and concatenation](science/coherent_recovery.md) |
 | Which resources remain necessary even with more gates? | [Width, endpoints, and interpretation](science/interpretation.md) |
@@ -69,7 +79,7 @@ Start with the [model, assumptions, and exact claims](science/model.md). Follow 
 
 ## Learn the project
 
-The single educational anchor is **Daniel Gottesman, *An Introduction to Quantum Error Correction and Fault-Tolerant Quantum Computation*** ([arXiv:0904.2557](https://arxiv.org/abs/0904.2557)). Follow the [source-to-project bridge](learning/GOTTESMAN_BRIDGE.md) and the [30 project-intrinsic milestones](learning/MILESTONES.md): 12 background/preliminaries and 18 narrative/innovation targets. Personal coaching and learner progress are kept outside this scientific repository.
+The single educational anchor shared with Lattice Memory Certification is **John Watrous, *The Theory of Quantum Information* (2018)**. Follow the [learning guide](learning/README.md), [source-to-project bridge](learning/WATROUS_BRIDGE.md), and [30 project-intrinsic milestones](learning/MILESTONES.md): 12 background/preliminaries and 18 narrative/innovation targets. The final milestones connect the constructions and the guessing-score corollary to the resource frontier. Primary stabilizer, uncertainty and recovery sources remain separately attributed research references.
 
 [The LLM reading guide](llms.txt) maps scientific questions to authoritative files.
 
@@ -99,4 +109,5 @@ Both constructions protect arbitrary unknown inputs and their reference correlat
 ## Purpose and contact
 
 The project is currently under collaboration, and the manuscript is being written. For questions, please contact Ruge Lin at [gogoko699@gmail.com](mailto:gogoko699@gmail.com).
+
 

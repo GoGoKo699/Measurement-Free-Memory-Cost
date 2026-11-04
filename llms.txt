@@ -14,6 +14,10 @@ Canonical entrypoints:
 - science/control_cost.md: channel-rank and algebra bottlenecks, the 4^(-k)
   fidelity floor, gate-growth charges, logarithmic and exact discrete budgets,
   interval constraints and decoder-specific terminal rank.
+- science/guessing_processing.md: authoritative delayed-basis BB84 transfer,
+  full-output CPTP quantum-plus-classical factorization, unconditional all-cut
+  score floors, gate/interval corollaries and strongest inspected recovery
+  comparison. Lattice-Memory-Certification supplies the finite guessing theorem.
 - science/clifford_lifetime.md: finite random-stabilizer existence proof, noisy
   syndrome archive, exact chronology, full workspace accounting, final recovery
   and matching order of zero-T quantum lifetime.
@@ -25,13 +29,15 @@ Canonical entrypoints:
 - references/references.bib: structured primary-source bibliography.
 - verification/README.md: finite checks, dependencies and their limitations.
 - verification/run_all.py: deterministic suite and saved-output comparison.
-- verification/Graph/README.md: reproducible finite width/processing comparison,
-  Python generator, pinned dependencies and numerical certificates.
+- verification/Graph/README.md: Python-generated finite width/processing
+  comparison, pinned dependencies, committed plots and numerical certificates.
 
 Learning entrypoints:
 - learning/report/Measurement_Free_Memory_Cost_Report.pdf: continuous self-contained explanation of the model, converse, constructions and remaining resource gap.
 - learning/source/README.md: technical build instructions for the explanatory report and its matching editable source.
-- learning/GOTTESMAN_BRIDGE.md: selected single educational anchor, its source-to-project notation and proof bridge.
+- learning/README.md: project-specific route using the common Watrous (2018) anchor.
+- learning/WATROUS_BRIDGE.md: selected Watrous sections, conventions, two-qubit
+  algebra example, missing proof bridges and guessing-score application.
 - learning/MILESTONES.md: exactly 30 learner-independent milestones (12 background, 18 innovation).
 
 Reader routes:
@@ -40,6 +46,9 @@ Reader routes:
   science/interpretation.md, then the relevant proof.
 - For the converse, read science/pauli_envelopes.md followed by
   science/control_cost.md.
+- For an operational score premise, read science/guessing_processing.md after
+  the model and algebra bottlenecks. The companion application is
+  https://github.com/GoGoKo699/Lattice-Memory-Certification/blob/main/science/noisy-processing.md.
 - For constructive storage, compare science/clifford_lifetime.md and
   science/coherent_recovery.md
   under the same noise and endpoint convention.
@@ -58,12 +67,9 @@ Preserve these distinctions:
 - Actual surviving Pauli supports need not form a vector space. The proof uses
   a linear enclosure and may overestimate retained information.
 - The main fidelity floor is a=2k*(1-epsilon-4^(-k))/(1-4^(-k)).
-- q=1-gamma and kappa=-ln(q); logarithms in the processing law are natural.
 - The scalar injection optimum is a lower bound from necessary rank constraints,
   not an attained physical optimum for T-count.
 - A general final decoder can have support rank much larger than 2k.
-- An interior interval needs its own entering-rank bound M_I. Later internal
-  gates can enlarge that envelope; M_I=2n is always valid.
 - Zero-T quantum storage uses exponential noisy width and defers nonlinear
   computation to unrestricted final recovery.
 - The coherent construction uses the standard five-qubit code and exact
@@ -73,10 +79,23 @@ Preserve these distinctions:
   Bell-overlap fidelity at least 1-epsilon.
 - Measured QEC with noiseless external classical feedback is a different model.
   Do not claim that all QEC consumes magic or that fresh-state cost is T-count.
-- The prior quantitative Clifford-forgetting theorem and stochastic Pauli
-  framework are due to Nelson, Rajakumar and Gullans. The literature comparison
-  distinguishes the sharper reference-stable rate and continuing-processing law.
+- For the guessing application, k counts independent BB84 challenge qubits;
+  n counts every noisy persistent qubit; D counts full independent noise rounds.
+  The device receives the quantum challenge alone. X is never revealed; only
+  Theta arrives after all charged storage. The score is unconditional exact
+  whole-string success, without postselection. Start one common full-output
+  envelope at M=2n before any basis-dependent readout.
+- Mathematical noise flags are independent channel choices used in the proof,
+  not device information. Noisy counted controller records must also be
+  processed through permitted charged primitives; arbitrary feedback is not free.
+- Existing recovery inequalities already imply the same large-block low-score
+  rank floor. The direct score transfer is not a new asymptotic processing law.
+  It neither verifies noise/controller assumptions nor imports an LWE wrapper.
+- Watrous (2018) is the single educational anchor shared by both projects.
+  Gottesman and other stabilizer sources remain primary scholarly references.
+- The qualitative no-go result and stochastic Pauli framework are prior work.
 - Finite checks establish their tested identities, not unrestricted asymptotic
   truth or external peer review.
+
 
 
