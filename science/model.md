@@ -109,7 +109,7 @@ For a storage circuit using only Clifford operations and replacement resets, and
 
 ```math
 \frac12\|\Phi_D-\mathcal R_\tau\|_\diamond
-\le\min\{1,2nq^D\}.
+\le 1-(1-q^D)^{2n}\le\min\{1,2nq^D\}.
 \qquad\text{(M6)}
 ```
 
@@ -167,7 +167,7 @@ m_T\ge\left[
 
 The first term in the maximum retains the payload floor. The second follows from the conditional extinction probability $`\gamma^r`$ of a rank-$`r`$ envelope and the requirement that extinction occur with probability at most $`\delta`$. The proof uses an absorbing envelope update, so a zero envelope stays zero through every permitted primitive. It sums disjoint first-extinction events, applies Jensen's inequality to the surviving cut weights, and converts cumulative rank into T count using the same noise/gate balance. No noise flag is made available to the controller.
 
-At finite width and $`D\ge1`$, exact zero Bell infidelity is impossible under positive depolarization. At $`D=0`$, there is no reliability-dependent interior processing requirement. The existing finite and interval bounds remain complementary; (M14) is not asserted to dominate each of them numerically.
+The [sharpened finite theorem](reliability_processing.md) replaces the rank-only hazard by $`\gamma^{r-s}`$, where $`2s`$ is the envelope's symplectic rank, keeps the exact survival product, and retains the exiting-rank floor. It strengthens (M14) within the same model. At finite width and $`D\ge1`$, exact zero Bell infidelity is impossible under positive depolarization. At $`D=0`$, there is no reliability-dependent interior processing requirement. The existing finite and interval bounds remain complementary; (M14) is not asserted to dominate each of them numerically.
 
 ### Sharp order of the zero-T quantum lifetime
 
@@ -219,7 +219,7 @@ Here $`n`$ includes the code block and all syndrome, controller and temporary re
 
 The code, constant-iteration decoder and repeated-round residual invariant are inherited from Gu et al. Their parallel runtime alone would not prove the charged gate bound. The added compilation counts local minimizations, comparisons, deterministic ties, updates and fixed routing. The correction channel is reference-stable, and correlated X/Z components of depolarizing noise are combined by a union bound.
 
-Fix $`\gamma\in(0,1/20]`$, $`C\gt0`$ and $`0\lt\epsilon_0\lt1/2`$. Put $`L=\ln(D/\epsilon)`$. For every family with $`D\to\infty`$, $`k\ge1`$, $`0\lt\epsilon\le\epsilon_0`$ and $`n\le C(k+L)`$, (M14) implies $`m_T=\Omega_{\gamma,C,\epsilon_0}(D(k+L))`$, uniformly over $`k,\epsilon`$. Indeed $`b`$ is bounded below and $`\ln(Db/\delta)=L+O_{\epsilon_0}(1)`$; the maximum in (M14) controls $`k+L`$, and sufficiently large $`D`$ absorbs the $`2n`$ reserve. Equation (M13) attains this processing order at width $`O(k+L)`$. This closes the reliability-dominated case, including fixed $`k`$, as well as the payload-dominated case. Constants may be enormous and depend on the fixed positive noise strength; no optimal coefficient or uniform weak-noise law is inferred. The extended constructive range is proved by fixed-level inner protection, rather than inferred from an LDPC threshold.
+Fix $`\gamma\in(0,1/20]`$, $`C\gt0`$ and $`0\lt\epsilon_0\lt1/2`$. Put $`L=\ln(D/\epsilon)`$. For every family with $`D\to\infty`$, $`k\ge1`$, $`0\lt\epsilon\le\epsilon_0`$ and $`n\le C(k+L)`$, (M14) implies $`m_T=\Omega_{\gamma,C,\epsilon_0}(D(k+L))`$, uniformly over $`k,\epsilon`$. Indeed $`b`$ is bounded below and $`\ln(Db/\delta)=L+O_{\epsilon_0}(1)`$; the maximum in (M14) controls $`k+L`$, and sufficiently large $`D`$ absorbs the $`2n`$ reserve. Equation (M13) attains this processing order at width $`O(k+L)`$. This closes the reliability-dominated case, including fixed $`k`$, as well as the payload-dominated case. The minimum-width corollary proves $`n_{\min}=\Theta_{\gamma,\epsilon_0}(k+L)`$, so this matching order holds within a sufficiently large fixed factor of minimum width. Constants may be enormous and depend on the fixed positive noise strength; no optimal coefficient or uniform weak-noise law is inferred. The extended constructive range is proved by fixed-level inner protection, rather than inferred from an LDPC threshold.
 
 ## 4. How the results fit together
 

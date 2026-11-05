@@ -96,7 +96,7 @@ Preserve these distinctions:
   MFQEC mechanism are inherited. With a fixed number of inner five-qubit levels, for gamma<=1/20,
   n=O(k+ln(J/epsilon)), m_T=O(nJ), J=O(gamma D+1). It matches processing order
   for every payload at fixed positive gamma, D growing, epsilon bounded above
-  below1/2 and n=O(k+ln(D/epsilon)), by combining payload and reliability
+  below 1/2 and n=O(k+ln(D/epsilon)), by combining payload and reliability
   converses. This is not a sharp uniform weak-noise law. Constants can be enormous. The extended range is proved by constant-level composition,
   not inferred from an LDPC threshold; no coefficient is optimized.
 - All constructions give half-diamond error epsilon. The converse assumes only
@@ -131,3 +131,5 @@ Preserve these distinctions:
 
 
 
+
+Finite refinements: paired physical pivots give extinction hazard gamma^(r-s), with 2s the restricted symplectic rank. Keep the exact survival product and separate Bell/BB84 coherent-block floors, then retain exit rank in the T ledger. Zero-T negative moments give half-diamond forgetting at most 1-(1-q^D)^M. At fixed positive noise in the constructive range and error ceiling below 1/2, n_min=Theta_gamma(k+ln(D/epsilon)); the processing match is within a sufficiently large fixed factor of minimum width. None of these statements proves a uniform weak-noise or unrestricted width/work optimum.

@@ -19,6 +19,16 @@
         "outward_denominator": "1000000000000"
       },
       "integer_gate_count": 2989,
+      "sharpened_joint_lower": {
+        "lower": "3972.233892021316",
+        "upper": "3972.233892021317",
+        "decimal_places": 12,
+        "outward_denominator": "1000000000000"
+      },
+      "sharpened_integer_gate_count": 3973,
+      "rank_floor": "148/75",
+      "symplectic_half_rank_floor": "49/50",
+      "strictly_beats_rank_only_integer_count": true,
       "old_payload_logarithmic_lower": {
         "lower": "1972.784440727507",
         "upper": "1972.784440727508",
@@ -42,8 +52,26 @@
       "old_scalar_coasting_rounds": 528,
       "strictly_beats_both_old_integer_counts": true,
       "proof_of_decimal_enclosures": {
-        "method": "64-term exact Fraction atanh series after binary range reduction",
+        "method": "64-term exact Fraction atanh series after binary range reduction; 24-term alternating series for 1-exp(-x), with 40-place outward rational rounding",
         "tail": "2*t^(2*N+1)/((2*N+1)*(1-t^2))",
+        "one_minus_b_root": {
+          "lower": "0.000000134230194312533529348885",
+          "upper": "0.000000134230194312533529348886",
+          "decimal_places": 30,
+          "outward_denominator": "1000000000000000000000000000000"
+        },
+        "log_inverse_root_complement": {
+          "lower": "15.823709642839",
+          "upper": "15.823709642840",
+          "decimal_places": 12,
+          "outward_denominator": "1000000000000"
+        },
+        "exact_product_rank_floor": {
+          "lower": "3.390260558687",
+          "upper": "3.390260558688",
+          "decimal_places": 12,
+          "outward_denominator": "1000000000000"
+        },
         "log_A_over_delta": {
           "lower": "15.816990558174",
           "upper": "15.816990558175",
@@ -94,6 +122,16 @@
         "outward_denominator": "1000000000000"
       },
       "integer_gate_count": 38422,
+      "sharpened_joint_lower": {
+        "lower": "48237.912124130625",
+        "upper": "48237.912124130626",
+        "decimal_places": 12,
+        "outward_denominator": "1000000000000"
+      },
+      "sharpened_integer_gate_count": 48238,
+      "rank_floor": "148/75",
+      "symplectic_half_rank_floor": "49/50",
+      "strictly_beats_rank_only_integer_count": true,
       "old_payload_logarithmic_lower": {
         "lower": "19822.180916546067",
         "upper": "19822.180916546068",
@@ -117,8 +155,26 @@
       "old_scalar_coasting_rounds": 528,
       "strictly_beats_both_old_integer_counts": true,
       "proof_of_decimal_enclosures": {
-        "method": "64-term exact Fraction atanh series after binary range reduction",
+        "method": "64-term exact Fraction atanh series after binary range reduction; 24-term alternating series for 1-exp(-x), with 40-place outward rational rounding",
         "tail": "2*t^(2*N+1)/((2*N+1)*(1-t^2))",
+        "one_minus_b_root": {
+          "lower": "0.000000013423020242051949795992",
+          "upper": "0.000000013423020242051949795993",
+          "decimal_places": 30,
+          "outward_denominator": "1000000000000000000000000000000"
+        },
+        "log_inverse_root_complement": {
+          "lower": "18.126294675429",
+          "upper": "18.126294675430",
+          "decimal_places": 12,
+          "outward_denominator": "1000000000000"
+        },
+        "exact_product_rank_floor": {
+          "lower": "3.883593879079",
+          "upper": "3.883593879080",
+          "decimal_places": 12,
+          "outward_denominator": "1000000000000"
+        },
         "log_A_over_delta": {
           "lower": "18.119575651168",
           "upper": "18.119575651169",

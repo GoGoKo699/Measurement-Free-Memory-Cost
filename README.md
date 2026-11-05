@@ -52,11 +52,11 @@ m_T\ge\left[
 \right]_+.
 ```
 
-A rank-$`r`$ envelope has conditional extinction probability at least $`\gamma^r`$. Keeping total extinction below $`\delta`$ therefore requires a larger cumulative rank, which must be replenished by charged gates. Unlike a pure width ceiling, this bound charges continuing T/T-dagger processing.
+A rank-$`r`$ envelope with symplectic rank $`2s`$ has conditional extinction probability at least $`\gamma^{r-s}`$. The displayed rank-only consequence is a simple comparison bound. The full finite theorem retains the coherent-block floor, the exact survival product and the exiting-rank requirement, giving stronger necessary counts and interval bounds. Keeping total extinction below $`\delta`$ requires cumulative rank that must be replenished by charged gates.
 
 | Result | Guarantee | Authoritative account |
 |---|---|---|
-| Clifford/reset forgetting | Half-diamond distance to a replacement channel is at most $`\min\{1,2n(1-\gamma)^D\}`$ | [Binary Pauli envelopes](science/pauli_envelopes.md) |
+| Clifford/reset forgetting | Half-diamond distance to a replacement channel is at most $`1-[1-(1-\gamma)^D]^{2n}`$ | [Binary Pauli envelopes](science/pauli_envelopes.md) |
 | Continuing processing | Extensive non-Clifford budget with fidelity, width, and timing dependence | [Control cost](science/control_cost.md) |
 | Reliability-dependent processing | Rank extinction forces an additional reliability logarithm at modest width; fixed-noise order matching includes small payloads | [Reliability processing](science/reliability_processing.md) |
 | Guessing-score premise | Delayed-basis whole-string success supplies an all-cut rank floor | [Guessing and processing](science/guessing_processing.md) |
@@ -93,7 +93,7 @@ The [proof and compilation ledger](science/tanner_memory.md) count syndrome, loc
 m_T=\Omega_{\gamma,C,\epsilon_0}\!\left(D[k+\ln(D/\epsilon)]\right).
 ```
 
-The Tanner construction attains this order at width $`O(k+\ln(D/\epsilon))`$, uniformly over payloads and target errors in that range. In particular, one logical qubit requires order $`D\ln(D/\epsilon)`$ processing at such width. This matching statement fixes the positive noise strength; it does not optimize the uniform weak-noise dependence or numerical coefficient. The inner level and potentially enormous constants depend on the fixed outer family, rather than on payload, duration or target error.
+The Tanner construction attains this order at width $`O(k+\ln(D/\epsilon))`$, uniformly over payloads and target errors in that range. The [minimum-width corollary](science/reliability_processing.md) proves $`n_{\min}=\Theta_\gamma(k+\ln(D/\epsilon))`$: the processing optimum therefore concerns memories within a sufficiently large fixed factor of minimum width. In particular, one logical qubit requires order $`D\ln(D/\epsilon)`$ processing there. This matching statement fixes the positive noise strength; it does not optimize the uniform weak-noise dependence or numerical coefficient. The inner level and potentially enormous constants depend on the fixed outer family, rather than on payload, duration or target error.
 
 Gu, Tang, Caha, Choe, He and Kubica supply the decoder and repeated-round invariant. Existing passive LDPC and measurement-free correction supply the correction mechanism. The addition here is its explicit fixed-circuit resource consequence in the present model. Nelson, Rajakumar, and Gullans proved a quantitative Clifford-memory forgetting bound and introduced the stochastic Pauli framework used here. Bharti, Haug and Tanggara established the complete-erasure/Jensen mechanism for a cumulative spacetime law. The reliability converse adapts that mechanism to backward Pauli rank and converts cumulative rank into specifically charged T/T-dagger processing. The [literature comparison](references/RELATED_WORK.md) explains the sharper reference-stable contraction, the processing and timing laws, and the inherited coding and circuit ingredients.
 

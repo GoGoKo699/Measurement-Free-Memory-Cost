@@ -226,10 +226,20 @@ With no internal T gates, the final backward rank $r_b$ in sample $b$ satisfies
 \begin{equation}
 \E_b r_b\le Mq^D.
 \end{equation}
-Because a positive integer rank is at least one,
+Retaining the rank distribution sharpens the resulting survival bound. For $0\le z\le1$, choose $r$ independent coordinate columns of a generator matrix for the incoming envelope. If $c_i\in\{0,1,2\}$ selected columns lie on physical qubit $i$, the surviving rank is at most $\sum_i c_i B_i$, where the independent $B_i$ have survival probability $q$. Since $z^x$ decreases in $x$,
+\[
+\E[z^{r'}\mid V]\ge\prod_i(1-q+qz^{c_i})
+\ge(1-q+qz)^r.
+\]
+For $c_i=2$, the second inequality follows from the nonnegative difference $q(1-q)(1-z)^2$; the other cases are equalities. Free processing cannot increase rank. Conditional independence therefore permits iteration, giving
+\[
+\E z^{r_b}\ge(1-q^D+q^Dz)^M.
+\]
+Set $z=0$, with $0^0=1$, and define $\eta_M(D)=1-(1-q^D)^M$. Then
 \begin{equation}
-p:=\Pr(r_b>0)\le\min\{1,Mq^D\}.
+p:=\Pr(r_b>0)\le\eta_M(D)\le\min\{1,Mq^D\}.
 \end{equation}
+This generating-function bound is attained by $M$ independent one-site $Z$ directions when $M\le n$ and there is no processing. That establishes sharpness of this rank comparison, not optimality of the channel distance below.
 Every branch with $r_b=0$ is exactly a replacement channel. Grouping branches yields
 \begin{equation}
 \Phi_D=(1-p)\R_{\tau_G}+p\Psi,
@@ -244,15 +254,16 @@ Fix any input state $\omega_0$ and set $\tau=\Phi_D(\omega_0)$. Then
 The diamond distance between any two channels is at most two. Consequently,
 \begin{equation}
 \boxed{\frac12\norm{\Phi_D-\R_\tau}_\diamond
-\le\min\{1,Mq^D\}.}
+\le\eta_M(D)=1-(1-q^D)^M.}
 \label{eq:forget}
 \end{equation}
 This bound has no reference-dimension prefactor. Arbitrary encoding before storage and decoding afterwards cannot increase diamond distance.
 
-If $M=0$, the decoded channel is already a replacement channel. For $M>0$, a sufficient depth to make the right side at most $\delta\in(0,1)$ is
+If $M=0$, set $\eta_0(D)=0$: the decoded channel is already a replacement channel. For $M>0$, the least integer depth making this certificate at most $\delta\in(0,1)$ is
 \begin{equation}
-D\ge\frac{\ln(M/\delta)}{\kappa}.
+D_{\rm cert}=\left\lceil\frac{\ln\!\left(1/[1-(1-\delta)^{1/M}]\right)}{\kappa}\right\rceil.
 \end{equation}
+The simpler condition $D\ge\ln(M/\delta)/\kappa$ remains sufficient.
 Taking $M=2n$ gives a lifetime upper bound of order $\gamma^{-1}\ln n$ at weak noise, since $\kappa=\gamma+O(\gamma^2)$ as $\gamma\to0$.
 
 For a recovered logical channel near a replacement, Bell fidelity is at most $4^{-k}+\delta$. A replacement has Bell fidelity exactly $K^{-2}=4^{-k}$, whatever output state it prepares. Hence any fixed fidelity target $F_0>4^{-k}$ is incompatible with arbitrarily long zero-T storage at fixed width.
@@ -458,11 +469,18 @@ c_\gamma=\ln(1/\gamma)>0.
 \end{equation}
 
 \begin{theorem}[Reliability-dependent processing]
+Put
+\begin{equation}
+a_r=2kb,\qquad
+a_s=k\positive{\frac{1-\eps-2^{-k}}{1-2^{-k}}},\qquad
+L_\gamma(D,b)=\frac{b}{c_\gamma}
+\ln\frac1{1-b^{1/D}}.
+\end{equation}
 Every permitted memory with Bell fidelity at least $1-\eps$ satisfies
 \begin{equation}
-\boxed{m_T\ge\positive{
-\gamma Db\max\left\{2k,
-\frac{[\ln(Db/\delta)]_+}{c_\gamma}\right\}-2n}.}
+\boxed{m_T\ge\left\lceil\positive{
+\gamma D\max\{a_r,a_s+L_\gamma(D,b)\}+a_r-2n}
+\right\rceil.}
 \label{eq:reliability}
 \end{equation}
 The bound is necessary; the finite-depth and individual-gate bounds remain complementary.
@@ -496,11 +514,49 @@ At noise layer $j$, expected rank drops by at least $\gamma\E r_j$. Every free o
  m_T\ge\gamma B-2n.
 \label{eq:reliability-telescope}
 \end{equation}
-The earlier fidelity floor also gives $\E r_j\ge2kb$ at every incoming cut, so $B\ge2kbD$. Combining this with \eqref{eq:cumulative-rank} proves \eqref{eq:reliability}.
+The earlier fidelity floor also gives $\E r_j\ge2kb$ at every incoming cut, so $B\ge2kbD$. These observations already prove the useful rank-only consequence
+\begin{equation}
+m_T\ge\positive{\gamma Db\max\left\{2k,
+\frac{[\ln(Db/\delta)]_+}{c_\gamma}\right\}-2n}.
+\label{eq:reliability-coarse}
+\end{equation}
+
+\textbf{Pair symplectic pivots to strengthen the hazard.}
+Let the symplectic form on $V_j$ have rank $2s_j$. There is an injective pivot set supported on at most $r_j-s_j$ physical qubits. To see this, choose a $2s_j$-dimensional nondegenerate subspace and a generator matrix $H$. Its Gram matrix $H\Omega H^T$ is invertible over $\mathbb F_2$. In its Cauchy--Binet determinant expansion, pair a coordinate subset with the subset obtained by interchanging each physical $X,Z$ coordinate. The noninvariant terms cancel in characteristic two. Thus some nonzero minor uses exactly $s_j$ complete coordinate pairs. Extend these independent columns to $r_j$ pivots with at most $r_j-2s_j$ further sites. Replacing the resulting sites kills $V_j$, so the stronger conditional hazard is $\gamma^{r_j-s_j}$.
+
+\textbf{Retain the survival product.}
+Put $u_j=r_j-s_j$, $\alpha_j=\Pr(r_j>0)$, and $t_j=\E[u_j\mid r_j>0]$. Conditional Jensen and absorption imply
+\begin{equation}
+\alpha_{j+1}\le\alpha_j(1-\gamma^{t_j}),\qquad
+b\le\prod_{j=1}^D(1-\gamma^{t_j}).
+\end{equation}
+Here the final survival probability is included after the last layer; any operations between layers can only reduce survival. The function
+$f(t)=-\ln(1-e^{-c_\gamma t})$ is decreasing and convex on $t>0$. Taking logarithms and applying Jensen gives
+\begin{equation}
+\frac1D\sum_jt_j\ge
+\frac1{c_\gamma}\ln\frac1{1-b^{1/D}}.
+\end{equation}
+Because $\alpha_j\ge b$, this yields
+$\sum_j\E(r_j-s_j)\ge D L_\gamma(D,b)$.
+
+\textbf{Add the quantum floor and retain the exit rank.}
+At every cut the branch Bell fidelity is at most $\min\{1,2^{s_j-k}\}$. The secant line on $s_j\in\{0,\ldots,k\}$ gives
+\begin{equation}
+\min\{1,2^{s_j-k}\}\le
+2^{-k}+(1-2^{-k})s_j/k,
+\end{equation}
+also valid for $s_j>k$. Averaging proves $\E s_j\ge a_s$. Hence
+$\sum_j\E r_j\ge D\max\{a_r,a_s+L_\gamma(D,b)\}$.
+The rank floor $a_r$ also holds at the exiting storage cut. Retaining it in the telescoping balance improves \eqref{eq:reliability-telescope} to
+$m_T\ge\gamma\sum_j\E r_j+a_r-2n$. Integer rounding proves \eqref{eq:reliability}.
+
+This sharpening dominates the rank-only reliability term: with $x=b^{1/D}$,
+$\delta=(1-x)\sum_{i=0}^{D-1}x^i\ge Db(1-x)$.
+For example, at $k=1$, $n=200$, and $\gamma=\eps=0.01$, the sharpened certified integer lower bounds are $3973$ gates at $D=10^5$ and $48238$ at $D=10^6$, compared with $2989$ and $38422$ from \eqref{eq:reliability-coarse}.
 
 This reliability mechanism adapts established complete-erasure/Jensen reasoning for cumulative spacetime. Its role here is different: the hazard depends on backward Pauli rank, and the final balance charges T/T-dagger slots while permitting free Clifford operations and input-independent resets.
 
-For any contiguous interval, the same proof uses its number $D_I$ of noise layers and the same global extinction allowance $\delta$. Retain the actual globally propagated suffix envelope at the interval's later cut, with expected rank at most $M_I\le2n$; its suffix noise is independent of the noise inside the interval. Do not restart an unrelated envelope. Replace $D,2n,m_T$ in the reliability part by $D_I,M_I,m_{T,I}$. This requires no claim that hazards at different times are independent.
+For any contiguous interval with $D_I\ge1$, retain the actual globally propagated suffix envelope at its later cut, with expected rank at most $M_I\le2n$. Its suffix noise is independent of the noise inside the interval. Replace $D,2n,m_T$ in \eqref{eq:reliability} by $D_I,M_I,m_{T,I}$, retaining the same global $b,a_r,a_s$ and the exit-rank term. This requires no independence of hazards at different times.
 
 \subsection{Matching order for every payload at fixed noise}
 Fix $\gamma\in(0,1/20]$, a width constant $C>0$ and $0<\eps_0<1/2$. Let $D\to\infty$, allow any $k\ge1$ and $0<\eps\le\eps_0$, and put $L=\ln(D/\eps)$. At width
@@ -512,7 +568,7 @@ the processing bound is
  m_T=\Omega_{\gamma,C,\eps_0}\bigl(D(k+L)\bigr).
 \label{eq:all-payload}
 \end{equation}
-Indeed $\eps\le\delta\le4\eps/3$ and $b\ge1-4\eps_0/3>1/3$. Thus $\ln(Db/\delta)=L+O_{\eps_0}(1)$ uniformly over $k,\eps$. For sufficiently large $D$, the maximum in \eqref{eq:reliability} bounds a positive constant times $k+L$. Its positive $D(k+L)$ term then absorbs the initial reserve $2n\le2C(k+L)$. The required duration threshold depends only on the fixed constants, rather than on $k$ or $\eps$.
+Indeed $\eps\le\delta\le4\eps/3$ and $b\ge1-4\eps_0/3>1/3$. Thus $\ln(Db/\delta)=L+O_{\eps_0}(1)$ uniformly over $k,\eps$. For sufficiently large $D$, the maximum in \eqref{eq:reliability-coarse} bounds a positive constant times $k+L$. Its positive $D(k+L)$ term then absorbs the initial reserve $2n\le2C(k+L)$. The required duration threshold depends only on the fixed constants, rather than on $k$ or $\eps$.
 
 The Tanner construction below attains $n=O(k+L)$ and $m_T=O_\gamma(D(k+L))$, so its processing order matches \eqref{eq:all-payload}. For fixed $k$, this is order $D\ln(D/\eps)$; when $k$ dominates the logarithm, it reduces to the payload order. The comparison fixes positive $\gamma$. The factor $1/\ln(1/\gamma)$ in the finite converse prevents interpreting it as an optimized uniform weak-noise coefficient.
 
@@ -866,17 +922,29 @@ The probability that this never happens in $D$ independent layers is $(1-\gamma^
 \boxed{\Fe\le4^{-k}+(1-4^{-k})(1-\gamma^n)^D.}
 \label{eq:ceiling}
 \end{equation}
-For $D\ge1$ and $0<\eps<1-4^{-k}$, put $\eta=\eps/(1-4^{-k})$. High fidelity requires
+For $D\ge1$ and $0<\eps<1-4^{-k}$, put $\delta=\eps/(1-4^{-k})$ and $b=1-\delta$. Exact inversion gives the necessary integer-width bound
 \begin{equation}
-(1-\gamma^n)^D\ge1-\eta.
+n\ge\left\lceil\frac{\ln[1/(1-b^{1/D})]}{\ln(1/\gamma)}\right\rceil.
+\label{eq:exact-width}
 \end{equation}
-Since $1-x\le e^{-x}$, a useful necessary consequence is
+The simpler inequality $n\ge\ln[D/(-\ln b)]/\ln(1/\gamma)$ remains valid when its numerator is positive.
+
+\begin{theorem}[Minimum width at fixed noise]
+Fix $0<\gamma\le1/20$ and $0<\eps_0<1/2$. Uniformly over integers $k,D\ge1$ and $0<\eps\le\eps_0$, the minimum permitted physical width, with unrestricted prescribed T count, is
 \begin{equation}
-\gamma^n\le\frac{-\ln(1-\eta)}D,
-\quad
-n\ge\frac{\ln[D/(-\ln(1-\eta))]}{\ln(1/\gamma)}
+n_{\min}=\Theta_{\gamma,\eps_0}\bigl(k+\ln(D/\eps)\bigr).
 \end{equation}
-whenever the numerator is positive. For fixed $\gamma$ and small error this is logarithmic width in $D/\eps$. It is an elementary necessary ceiling, not an attainable resource formula.
+This holds both for Bell infidelity at most $\eps$ and for half-diamond distance at most $\eps$.
+\end{theorem}
+
+The payload lower bound is $n\ge k$: a channel factoring through $n$ qubits has Bell fidelity at most $\min\{1,2^{n-k}\}$, which is at most $1/2$ if $n<k$. For the reliability term let $b_*=1-4\eps_0/3>0$. Since $\delta\le4\eps/3$ and $b\ge b_*$,
+\[
+1-b^{1/D}\le\frac{\delta}{Db}
+\le\frac{4\eps}{3b_*D}.
+\]
+Together with \eqref{eq:exact-width}, the payload bound yields the uniform lower order. Half-diamond error bounds Bell infidelity, so this necessity applies to that target too. For sufficiency, the reference-stable Tanner construction has $J\le40\gamma D+1\le3D$ and width $O(k+\ln(J/\eps))$, proving the matching upper order.
+
+Consequently the processing optimum is $\Theta(D[k+\ln(D/\eps)])$, at fixed noise and large $D$, within a sufficiently large fixed factor of minimum width. The width factor must accommodate the construction's constants; this statement does not apply to every prescribed factor. At $D=0$, the exact minimum width for either error target in this range is $k$, achieved by identity transmission.
 
 At any fixed finite width, the right side of \eqref{eq:ceiling} tends to $4^{-k}$ as $D\to\infty$. Consequently, the long-time slope of the processing lower bound must be interpreted along families with adequate growing width, not as a promise of indefinitely reliable storage in one finite device.
 
@@ -892,7 +960,7 @@ Resource choice & Established result & Boundary of the claim\\
 Clifford and resets only & Sharp lifetime order $\Theta(\gamma^{-1}\ln n)$ at fixed $k,F_0$ & Weak noise; exponential archive width; unrestricted endpoint decoding\\[4pt]
 Five-qubit coherent correction & Explicit polylogarithmic reliability overhead for $\gamma\le1/20$ & Modest local circuit; overhead remains in this construction\\[4pt]
 Tanner coherent correction & $n=O(k+\ln(J_+/\eps))$, $m_T=O(nJ)$, $J=O(\gamma D+1)$ & Range $\gamma\le1/20$ after fixed-level inner protection; fixed-noise order matching at width $O(k+\ln(D/\eps))$; enormous constants\\[4pt]
-Arbitrary internal gates & Full-register depolarization ceiling \eqref{eq:ceiling} & A necessary width condition, not a matching code construction\\
+Minimum width & $\Theta(k+\ln(D/\eps))$ at fixed $\gamma\le1/20$ & Bell and half-diamond targets; lower bound from \eqref{eq:ceiling} and payload, upper bound from Tanner correction\\
 \bottomrule
 \end{tabularx}
 \caption{The lower bounds, constructions, and ultimate width ceiling answer different parts of the same storage problem.}
@@ -980,7 +1048,25 @@ The first-extinction and cumulative-rank argument in Section~\ref{sec:reliabilit
  [\ln(Db_p/\delta_p)]_+-2n}.
 \label{eq:score-reliability}
 \end{equation}
-Here only the reliability part is substituted; no large-$k$ mean-rank chord is assumed for a small challenge. For fixed $k$, fixed above-chance $p$ and fixed positive noise, this forces order $D\ln D$ work at width $O(\ln D)$. The same inference can concern retained classical input dependence, so it does not alone certify coherent quantum storage. Neither the score nor this bound verifies the noise and controller premises.
+A sharper form uses the same paired-pivot and survival-product proof, with score-derived floors. Let $a_k(p)=a_p$ from \eqref{eq:guess-floor} for $k\ge8$. For $1\le k\le7$, set $H=2^{-k/6}$ and $t_0=5k/6$, and use the inverse of the concave polygon through $(0,2^{-k}),(t_0,H),(2k,1)$:
+\[
+a_k(p)=\begin{cases}
+t_0(p-2^{-k})/(H-2^{-k}),&2^{-k}<p\le H,\\
+t_0+(2k-t_0)(p-H)/(1-H),&H\le p<1.
+\end{cases}
+\]
+The branch bound $p_{b,t}\le\min\{1,2^{(s-k)/6}\}$ has its own secant floor
+\[
+a_s^{\rm BB84}(p)=k\positive{\frac{p-2^{-k/6}}{1-2^{-k/6}}}.
+\]
+It follows, without substituting a Bell-fidelity premise, that
+\begin{equation}
+m_T\ge\left\lceil\positive{
+\gamma D\max\{a_k(p),a_s^{\rm BB84}(p)+L_\gamma(D,b_p)\}
++a_k(p)-2n}\right\rceil.
+\label{eq:score-reliability-sharp}
+\end{equation}
+For a contiguous interval use $D_I,m_{T,I},M_I$ in place of $D,m_T,2n$, with the same global floors. The quantum-factor floor vanishes at $p\le2^{-k/6}$, while the survival term is positive at every strictly above-chance score. For fixed $k$, fixed above-chance $p$ and fixed positive noise, this forces order $D\ln D$ work at width $O(\ln D)$. The same inference can concern retained classical input dependence, so it does not alone certify coherent quantum storage. Neither the score nor this bound verifies the noise and controller premises.
 
 \subsection{Retaining the noise distribution through rank moments}
 The mean-rank chord discards information about which rank mixtures the product noise can generate. Retaining an exponential moment gives a stronger family of necessary processing budgets in the same model. For a fixed real $1<z\le2$, define
@@ -1072,6 +1158,23 @@ m_T&\ge\left\lceil
 For T/T-dagger circuits, the second bound in \eqref{eq:moment-budget} can also be rounded upward. Retain the largest applicable lower bound over $z$ and the earlier mean-rank bounds. The necessary one-layer feasibility condition is $a_z\le2n\alpha_z$.
 
 Every contiguous interval inherits the same global floor. Its entering reserve must bound $X_z=\log_z\E z^r$, rather than $\E r$; the universal value $2n$ is safe. A bound on the old mean-rank reserve $M_I$ alone cannot be substituted, because $\log_z\E z^r$ can exceed $\E r$. A smaller proved moment reserve may be used with that interval's own charged gates and noise rounds.
+
+\subsection{A four-input collision refinement survives averaging}
+The companion guessing analysis proves the exact averaged PGM optimum $27/64$ for four inputs and a one-qubit retained quantum register, even with arbitrary classical records. The finite-outcome discrimination inequality therefore gives the branch cap
+$C_4=(2+\sqrt{345})/32$. Combining this cap with the output-dimension, classical dimension-lifting, normalized recovery and hypercontractive collision bounds gives, at $k=4$ and $z=27/25$, a concave upper polygon with knots
+\[
+(1,1/16),\qquad(z^3,1/2),\qquad(z^6,789/1000),\qquad(z^8,1),
+\]
+constant at one afterward. Exact rational checks certify the slope ordering and all 25 integer pairs $(s,c)$ with $0\le2s+c\le8$. Thus $p\le P(\E z^r)$ at every cut. In particular,
+\[
+P(z^5)=\frac{6951}{10145}<\frac7{10}.
+\]
+Consequently score $p=7/10$ requires
+\[
+X_z\ge\log_z\!\left[z^3+\frac{200}{289}(z^6-z^3)\right]
+=5.1476692298\ldots>5.
+\]
+The specified prior caps permit score $7/10$ at rank five with $(s,c)=(1,3)$: their smallest collision cap is $1/2$, whereas $g_{16}(7/10)=62/125<1/2$. The new improvement therefore survives maximization over branches and concavification. This compares outer bounds; it does not assert attainability of the previous profile or optimality of this polygon. The improved floor enters the same moment and interval ledgers.
 
 \subsection{A stronger consequence at a fixed positive score}
 For fixed $p>0$, both $b_0$ and $H_k$ decay exponentially. Choose $\ln z=1/\sqrt{k}$ for sufficiently large $k$, which respects $z\le2^{1/7}$. The direct polygon then gives
@@ -1210,7 +1313,7 @@ The five-qubit calculation evaluates every one of the $4^5=1024$ Pauli errors, c
 \end{equation}
 In particular, all weight-zero and weight-one errors are corrected. Integer batching and concatenation parameters are checked in 240 finite cases. A separate score-transfer suite checks finite quantum-plus-classical rank cases, unconditional branch mixtures, exact rational recovery-comparison certificates, and independently solved scalar injection programs. Independent moment checks cover all binary subspaces at widths one through three, 34,764 rational moment inequalities, 22,878 pivot and reset checks, and 1,020 T-axis growth checks; exact logarithm enclosures certify the displayed finite gate comparison. These calculations test the stated finite implications; the written factorization and averaging arguments establish the all-cut conclusion.
 
-Additional checks exhaust all two-input/two-output local lookup maps, compare a nonlinear coherent correction channel's full Choi state with its projected-channel formula, and verify invariant, batching, length-ratio and workspace inequalities. They also check 864 exact scalar inversions, all 169 integer algebra pairs in the displayed decay comparison, and rational-interval finite and asymptotic optimization certificates. The extensions also check fixed-level inner-code composition, profile semigroup and fixed-slot convolution identities, convergent-series tails and the stronger exponent optimization. The small scalar Tanner fixture is not a concrete admissible code instance or a practical threshold certificate.
+The refined zero-T bound is checked by exact rational generating-function inequalities and equality examples. Reliability checks test paired physical pivots, conditional survival products and certified finite gate counts, supplementing the analytical proof. Additional checks exhaust all two-input/two-output local lookup maps, compare a nonlinear coherent correction channel's full Choi state with its projected-channel formula, and verify invariant, batching, length-ratio and workspace inequalities. They also check 864 exact scalar inversions, all 169 integer algebra pairs in the displayed decay comparison, and rational-interval finite and asymptotic optimization certificates. The extensions also check fixed-level inner-code composition, profile semigroup and fixed-slot convolution identities, convergent-series tails and the stronger exponent optimization. The small scalar Tanner fixture is not a concrete admissible code instance or a practical threshold certificate.
 
 These checks support the finite algebra and circuits. They do not prove an asymptotic statement by extrapolation. General forgetting follows from the envelope induction; the processing converse follows from channel-rank and scalar inequalities; archives, concatenation and the Tanner construction follow from their stated inherited theorems and induction arguments. No finite test establishes optimality of 42 gates, an optimal hardware threshold, or attainment of the scalar relaxation by a memory circuit.
 
