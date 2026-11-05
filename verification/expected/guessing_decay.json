@@ -1,0 +1,192 @@
+{
+  "status": "pass",
+  "exact_inversion_checks": 864,
+  "critical_rho": "2/99",
+  "certified_asymptotic_optima": [
+    {
+      "rho": "0",
+      "case": "right_endpoint",
+      "E_interval": [
+        "49510512897/250000000000",
+        "198042051589/1000000000000"
+      ]
+    },
+    {
+      "rho": "1/200",
+      "case": "right_endpoint",
+      "E_interval": [
+        "144011388677/1000000000000",
+        "72005694339/500000000000"
+      ],
+      "endpoint_derivative": [
+        "140207236797/100000000000",
+        "1402072367971/1000000000000"
+      ]
+    },
+    {
+      "rho": "1/100",
+      "case": "right_endpoint",
+      "E_interval": [
+        "44990362883/500000000000",
+        "89980725767/1000000000000"
+      ],
+      "endpoint_derivative": [
+        "804144735941/1000000000000",
+        "402072367971/500000000000"
+      ]
+    },
+    {
+      "rho": "3/200",
+      "case": "right_endpoint",
+      "E_interval": [
+        "17975031427/500000000000",
+        "7190012571/200000000000"
+      ],
+      "endpoint_derivative": [
+        "25777137989/125000000000",
+        "206217103913/1000000000000"
+      ]
+    },
+    {
+      "rho": "1/50",
+      "case": "unique_interior_maximum",
+      "z_interval": [
+        "1005050399521/1000000000000",
+        "502525199761/500000000000"
+      ],
+      "E_interval": [
+        "50419501/1000000000000",
+        "25209751/500000000000"
+      ]
+    },
+    {
+      "rho": "2/99",
+      "case": "zero",
+      "E_interval": [
+        "0",
+        "0"
+      ]
+    }
+  ],
+  "finite_examples": {
+    "parameters": {
+      "k": 12,
+      "n": 120,
+      "D": 2000,
+      "q": "99/100",
+      "z": "27/25"
+    },
+    "integer_profile_certificate": {
+      "pairs_checked": 169,
+      "pair_caps_sha256": "21edb5190ad2df29531d08dffae822650a7c82f70bf863a402da30a59ef430e1",
+      "hull_vertex_ranks": {
+        "integer_direct": [
+          0,
+          11,
+          24
+        ],
+        "specified_recovery": [
+          0,
+          13,
+          16,
+          19,
+          24
+        ],
+        "combined": [
+          0,
+          11,
+          24
+        ]
+      },
+      "scope": "Outer caps for the specified published-recovery reductions and direct dimension theorem, with existing dimension and dimension-lifting caps. No exhaustive prior theorem or optimal operational score claim."
+    },
+    "rows": [
+      {
+        "m_T": 0,
+        "coasting_index": 2000,
+        "U_interval": [
+          "966959/500000000000",
+          "1933919/1000000000000"
+        ],
+        "simple_negative_log_score_lower": [
+          "184706483843/100000000000",
+          "1847064838431/1000000000000"
+        ],
+        "simple_score_upper": "78849680389/500000000000",
+        "certified_polygon_score_upper": "244168541/1000000000000",
+        "integer_direct_score_upper": "244168541/1000000000000",
+        "specified_recovery_score_upper": "122086829/500000000000",
+        "combined_score_upper": "244168541/1000000000000"
+      },
+      {
+        "m_T": 171,
+        "coasting_index": 332,
+        "U_interval": [
+          "10946347698917/1000000000000",
+          "5473173849459/500000000000"
+        ],
+        "simple_negative_log_score_lower": [
+          "25115566793/25000000000",
+          "1004622671721/1000000000000"
+        ],
+        "simple_score_upper": "183091389929/500000000000",
+        "certified_polygon_score_upper": "248198005521/1000000000000",
+        "integer_direct_score_upper": "248198005521/1000000000000",
+        "specified_recovery_score_upper": "293651830277/1000000000000",
+        "combined_score_upper": "248198005521/1000000000000"
+      },
+      {
+        "m_T": 200,
+        "coasting_index": 316,
+        "U_interval": [
+          "792666007969/62500000000",
+          "2536531225501/200000000000"
+        ],
+        "simple_negative_log_score_lower": [
+          "435497283661/500000000000",
+          "870994567323/1000000000000"
+        ],
+        "simple_score_upper": "83707016173/200000000000",
+        "certified_polygon_score_upper": "155150041121/500000000000",
+        "integer_direct_score_upper": "155150041121/500000000000",
+        "specified_recovery_score_upper": "183664734323/500000000000",
+        "combined_score_upper": "155150041121/500000000000"
+      },
+      {
+        "m_T": 243,
+        "coasting_index": 296,
+        "U_interval": [
+          "3807927379313/250000000000",
+          "15231709517253/1000000000000"
+        ],
+        "simple_negative_log_score_lower": [
+          "84352095567/125000000000",
+          "674816764537/1000000000000"
+        ],
+        "simple_score_upper": "509249724669/1000000000000",
+        "certified_polygon_score_upper": "208950262177/500000000000",
+        "integer_direct_score_upper": "208950262177/500000000000",
+        "specified_recovery_score_upper": "485618841419/1000000000000",
+        "combined_score_upper": "208950262177/500000000000"
+      },
+      {
+        "m_T": 300,
+        "coasting_index": 275,
+        "U_interval": [
+          "18572627760607/1000000000000",
+          "580394617519/31250000000"
+        ],
+        "simple_negative_log_score_lower": [
+          "6526503409/15625000000",
+          "417696218177/1000000000000"
+        ],
+        "simple_score_upper": "164640564321/250000000000",
+        "certified_polygon_score_upper": "23800255161/40000000000",
+        "integer_direct_score_upper": "23800255161/40000000000",
+        "specified_recovery_score_upper": "327426996641/500000000000",
+        "combined_score_upper": "23800255161/40000000000"
+      }
+    ]
+  },
+  "scope": "Exact scalar identities and rational-interval objective/finite certificates. All-parameter statements use the written proof. No achievable capacity or physical optimality is certified."
+}

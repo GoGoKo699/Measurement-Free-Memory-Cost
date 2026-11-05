@@ -59,7 +59,7 @@ With Clifford operations and resets alone, the best possible lifetime grows only
 
 \keypoint{Fresh states can remove entropy. They do not, by themselves, supply the coherent processing needed to decide and apply corrections inside this memory.}
 
-The lower bound is complemented by two storage constructions. The first defers nonlinear decoding to the final endpoint and uses exponential noisy width. The second corrects errors during storage, using at most 42 T or T-dagger gates per recovery node. Its width and gate count have an overhead polynomial in the logarithm of the storage and accuracy parameters. The optimum between the lower and upper gate budgets remains open.
+The lower bound is complemented by three storage constructions. A noisy archive defers nonlinear decoding to the final endpoint and uses exponential width. A concatenated five-qubit construction corrects during storage with at most 42 T or T-dagger gates per node and a polylogarithmic reliability overhead. A coherently compiled, constant-iteration Tanner-code decoder removes that overhead in a proved, smaller noise range: its total noisy width is $O(k+\ln(J_+/\eps))$ and its prescribed T count is $O(nJ)$ for $J=O(\gamma D+1)$ and $J_+=\max(1,J)$. This matches the converse's order when the payload dominates the reliability logarithm and storage is sufficiently long. Numerical optimality and practical constants remain open.
 
 Both the converse and the constructions permit ideal global operations between noisy intervals. Storage duration counts noise rounds, separately from elementary gate depth.
 \vfill
@@ -71,7 +71,7 @@ Central mechanism & Noise contracts a binary envelope of backward Pauli observab
 \newpage
 \tableofcontents
 \vspace{4mm}
-\textbf{Reading route.} Sections 1--3 define the task and the forgetting mechanism. Sections 4--6 turn that mechanism into a quantitative processing budget. Sections 7--8 explain the two storage constructions. Sections 9--10 compare their resources and state the remaining questions. Section~\ref{sec:guessing} derives a delayed-basis guessing premise and strengthens its processing implication by retaining exponential rank moments. The appendix records the finite checks and a compact notation guide.
+\textbf{Reading route.} Sections 1--3 define the task and the forgetting mechanism. Sections 4--6 turn that mechanism into a quantitative processing budget. Section 7 explains the noisy archive; Section 8 gives both the five-qubit and Tanner-code coherent constructions. Sections 9--10 compare their resources and state the remaining questions. Section~\ref{sec:guessing} derives a delayed-basis guessing premise, retains exponential rank moments, and obtains a finite and asymptotic decay guarantee. The appendix records the finite checks and a compact notation guide.
 
 \textbf{Conventions.} All systems are finite-dimensional. A quantum channel is a completely positive, trace-preserving linear map, abbreviated CPTP. Logarithms written as $\ln$ are natural; $\log_2$ has base two. Probabilities, gate counts, qubit counts, and numbers of rounds are dimensionless. No physical clock time is assigned to a round.
 
@@ -572,10 +572,10 @@ All data, roots, leaves, parents, and reuse slots are included. Syndrome extract
 
 The constants in the coding and tree estimates can be chosen uniformly over $0<\gamma\le1/16$. Since $J\le32\gamma D+1$,
 \begin{align}
-n_0&=O(k+\ln(J/\eps)),\\
-b_{\mathrm{rep}}&=O\!\left(\ln\frac{2J(k+\ln(J/\eps))}\eps\right),\\
-N&=O\!\left((k+\ln(J/\eps))
-\ln\frac{2J(k+\ln(J/\eps))}\eps\;3^J\right).
+n_0&=O(k+\ln(J_+/\eps)),\\
+b_{\mathrm{rep}}&=O\!\left(\ln\frac{2J(k+\ln(J_+/\eps))}\eps\right),\\
+N&=O\!\left((k+\ln(J_+/\eps))
+\ln\frac{2J(k+\ln(J_+/\eps))}\eps\;3^J\right).
 \end{align}
 For fixed payload and error, $\ln N=O(1+\gamma D)$. Inverting the construction at sufficiently large available width and combining it with \eqref{eq:forget} proves
 \begin{equation}
@@ -664,9 +664,103 @@ Let $\alpha=\log_2 5$ and $\ell=1+\ln[k(\gamma D+1)/\eps]$. Since $5^L\le5A^\alp
 m_T=O\bigl(k(\gamma D+1)\ell^\alpha\bigr).}
 \label{eq:upper}
 \end{equation}
-The constants are uniform over the stated weak-noise range. The achieved bound has a polylogarithmic overhead relative to the extensive lower bound; removing that factor remains open.
+The constants are uniform over this construction's stated weak-noise range. Its polylogarithmic overhead remains part of the five-qubit guarantee. The Tanner-code construction below removes that overhead in asymptotic order within a separately proved, smaller noise range.
 
 For $k=1$, $\gamma=0.01$, $D=1000$, and $\eps=0.01$, the integer prescription gives $n=125$ and $m_T\le260{,}400$. It chooses $\tau=5$, $J=200$, $A\approx7.75$, and $L=3$, with conservative error certificate $20(3/8)^8\approx0.00782$. This example shows the cost of the explicit construction with its loose constants. It gives neither a practical optimum nor an estimate of hardware gate time.
+
+\subsection{A constant-iteration Tanner decoder}
+\label{sec:tanner}
+The next construction uses an inherited family of good quantum Tanner codes and its parallel decoder. Their code parameters and residual-error theorem are inputs; the new step is a fixed Boolean and coherent compilation with complete workspace and prescribed-gate accounting. It uses the same ideal processing model, with no retained syndrome history.
+
+Write $N$ for the Tanner \emph{data-block length}, distinct from total noisy width $n$. Fix local length $\Delta$, local relative distance $d_r$, product-expansion constant $\kappa_c$, and complementary local rates $\rho_c,1-\rho_c$ with $\rho_c\ne1/2$. The inherited family has at least $R_0N$ logical qubits and distance at least $d_0N$, where
+\[
+R_0=(1-2\rho_c)^2>0,\qquad
+d_0=\frac{d_r^2\kappa_c^2}{256\Delta}>0.
+\]
+The subscript on $\kappa_c$ distinguishes code expansion from the noise parameter $\kappa=-\ln q$.
+
+Choose $0<\delta_c<1/18$. With
+\[
+A_c=\frac{48}{\kappa_c\Delta},\quad
+C_c=\frac{d_r^2\delta_c^3\kappa_c}{4096\Delta^2},\quad
+g_c=\frac{1-18\delta_c}{16},
+\]
+the inherited decoder, run for $t$ parallel iterations, contracts each CSS error component modulo its stabilizer subgroup by
+\[
+|e+f_t|_R\le a_t|e|_R,\qquad
+a_t=\frac{24}{5\kappa_c}(1-g_c)^t,
+\quad A_c|e|_R\le\min(C_cN,d/\Delta).
+\]
+Here the syndrome is perfect because it is freshly extracted during ideal processing; no syndrome survives from an earlier epoch. Fix $t$ once so that $a:=a_t\le1/2$. This iteration count is independent of $N,k,D,\eps$.
+
+\subsection{Every decoder decision belongs to a fixed circuit}
+A local view contains $b=\Delta^2$ bits. Fix lexicographic orders on local words and decompositions. Initial minimum-weight local corrections are Boolean functions of at most $b$ current syndrome bits. During a parallel type substep, a candidate $x$ is eligible exactly when
+\[
+|Z|-|Z+x|\ge|x|/2
+\quad\Longleftrightarrow\quad
+4|Z\cap x|\ge3|x|.
+\]
+Selecting a maximum-weight eligible word, resolving ties, and minimizing its row/column decomposition defines one finite map from $b$ bits to at most $2b$ bits. Enumerating its minterms implements all comparisons and minimizations. Each table uses at most $(b-1)2^b$ binary AND gates and at most $4b2^b+4b$ total Boolean gates.
+
+For both CSS components there are $(4+8t)N/b$ such tables and $O((1+t)N)$ further XOR/copy operations. Four vertex types are processed in fixed order; views within each type are disjoint. Incidence connections are fixed wires. They require no data-dependent addressing, free lookup machine, or protected counter. This is a linear circuit-size argument at fixed $b,t$, rather than an appeal to classical RAM runtime.
+
+Reset scratch to $\ket0$, extract the commuting stabilizer syndrome by Clifford gates, and evaluate the Boolean circuit reversibly into fresh work bits. Each AND is a Toffoli and each XOR/NOT is Clifford. Apply the computed correction masks with controlled Paulis, reverse the Boolean computation, and reset the original syndrome on a fixed schedule. A seven-T implementation of each Toffoli gives the prescribed bound
+\[
+T_{\rm epoch}\le14(4+8t)\frac{(b-1)2^b}{b}N\le C_TN,
+\quad C_T=112(1+t)b2^b.
+\]
+The factor two counts computation and uncomputation. It is charged even for an error-free syndrome. At most $4N$ syndrome bits and the linear Boolean workspace coexist with the data; a safe total is
+\[
+n\le C_WN,\qquad C_W=64(1+t)b2^b.
+\]
+Every slot remains noisy between epochs. Its noise is discarded by the next input-independent reset, not by protected storage. These constants can be enormous.
+
+\subsection{Why resetting the syndrome is logically safe}
+Let $\Pi_s$ project onto syndrome $s$, and let $P_{f(s)}$ be the deterministic compiled correction. The coherent circuit followed by syndrome reset implements exactly
+\[
+\mathcal R(\omega)=\sum_sP_{f(s)}\Pi_s\omega\Pi_sP_{f(s)}^\dagger.
+\]
+This identity holds for arbitrary operators and after tensoring with an arbitrary reference. It is the intended measured syndrome-correction channel. On an encoded input subject to a fixed Pauli trajectory, the syndrome is definite and contains no unknown logical amplitude. The retained original syndrome remains available while the Boolean circuit is uncomputed, even though correction changes the data's syndrome.
+
+Put $\theta_c=\min(C_c,d_0/\Delta)$ and fix
+\[
+u=\min\left\{\frac{\theta_c}{4A_c},\frac{d_0}{8},\frac18\right\}>0,
+\qquad v=\frac{au}{1-a}\le u.
+\]
+If every fresh batch error has each CSS component of weight at most $uN$, and the previous residual components have reduced weight at most $vN$, then the incoming reduced weight is at most $(u+v)N\le2uN$. The inherited theorem applies and leaves reduced weight at most $a(u+v)N=vN$. Induction starts at zero. Representatives of both components together have Pauli support at most $2vN\le d_0N/4<d/2$, so one fixed endpoint decoder corrects every good trajectory. Minimum representatives are proof devices and are never computed by the controller.
+
+\subsection{Batching, available lengths, and the achieved order}
+The proved range is $0<\gamma\le\gamma_*:=u/2$. Take
+\[
+h=\lfloor u/\gamma\rfloor\ge\frac{u}{2\gamma},\qquad
+J=\lceil D/h\rceil\le2\gamma D/u+1.
+\]
+A batch has retention $q^h$. Each X or Z component separately has probability $p_h=(1-q^h)/2\le u/2$ at each data position. The components are correlated on the same qubit, so only separate binomial tail bounds are used. With $c=D_{\rm bin}(u\Vert u/2)>0$, a union bound over both components and all batches gives
+\[
+P_{\rm bad}\le2Je^{-cN}.
+\]
+No independence between the two residual components is assumed.
+
+Suitable lengths have bounded gaps. For one fixed odd prime power $Q$ and $\Delta=Q+1$, the underlying group construction provides every integer $i>2$, with
+\[
+N_i=\frac{\Delta^2}{2}Q^i(Q^{2i}-1),\qquad
+N_{i+1}/N_i<2Q^3.
+\]
+Thus one may round up to an available length satisfying
+\[
+N\ge\max\{N_0,k/R_0,c^{-1}\ln(2J_+/\eps)\},
+\quad J_+=\max(1,J),
+\]
+at a fixed multiplicative cost. The free encoder pads unused logical axes with fixed states. Every good input-independent Pauli trajectory is exactly corrected by the same endpoint decoder. Consequently $\Lambda=(1-P_{\rm bad})\id+P_{\rm bad}\Xi$ for a CPTP map $\Xi$, and
+\[
+\boxed{n=O(k+\ln(J_+/\eps)),\quad
+m_T=O(nJ),\quad
+\dd(\Lambda)\le\eps,\quad J=O(\gamma D+1).}
+\label{eq:tanner-upper}
+\]
+For $D=0$ no recovery is required. Constants depend only on the fixed code, decoder slack and iteration count, and length-gap factor, uniformly for $0<\gamma\le\gamma_*$. The noise range is generally far smaller than $1/20$ and is not inherited from the five-qubit construction.
+
+When $k=\Omega(\ln(J_+/\eps))$ and $\gamma D\to\infty$, the construction has $n=O(k)$ and $m_T=O(k\gamma D)$, matching the converse's order after its initial-width allowance is exhausted. This closes the former polylogarithmic reliability gap in that regime. Existing Tanner codes, parallel decoding, repeated-round correction, coherent syndrome correction and passive LDPC memory mechanisms remain inherited ingredients. The addition is their model-compatible compilation and resource consequence, with no claim of an optimal numerical coefficient or practical threshold.
 
 \section{Why more gates still require growing width}
 There is a limitation independent of the Clifford restriction. In the identity/depolarization decomposition, one noise layer completely depolarizes all $n$ qubits with probability $\gamma^n$. Once that happens, all correlation with the original unknown input is gone. Input-independent subsequent operations and replacement states cannot restore it.
@@ -691,7 +785,7 @@ whenever the numerator is positive. For fixed $\gamma$ and small error this is l
 At any fixed finite width, the right side of \eqref{eq:ceiling} tends to $4^{-k}$ as $D\to\infty$. Consequently, the long-time slope of the processing lower bound must be interpreted along families with adequate growing width, not as a promise of indefinitely reliable storage in one finite device.
 
 \section{Comparing the storage resource guarantees}
-The two constructions make different resource choices. The archive retains noisy syndrome history for nonlinear recovery at the endpoint; the coherent construction evaluates corrections during storage. Their guarantees and the necessary resource bounds are compared below.
+The constructions make different resource choices. The archive retains noisy syndrome history for nonlinear recovery at the endpoint; the five-qubit and Tanner constructions evaluate corrections during storage. Their guarantees and the necessary resource bounds are compared below.
 
 \begin{table}[ht]
 \centering\small
@@ -700,7 +794,8 @@ The two constructions make different resource choices. The archive retains noisy
 Resource choice & Established result & Boundary of the claim\\
 \midrule
 Clifford and resets only & Sharp lifetime order $\Theta(\gamma^{-1}\ln n)$ at fixed $k,F_0$ & Weak noise; exponential archive width; unrestricted endpoint decoding\\[4pt]
-Internal coherent correction & Necessary $\Omega(k\gamma D)$ long-time work; explicit polylogarithmic-overhead upper bound & Optimal T count and width remain open\\[4pt]
+Five-qubit coherent correction & Explicit polylogarithmic reliability overhead for $\gamma\le1/20$ & Modest local circuit; overhead remains in this construction\\[4pt]
+Tanner coherent correction & $n=O(k+\ln(J_+/\eps))$, $m_T=O(nJ)$, $J=O(\gamma D+1)$ & Smaller proved noise range; enormous fixed constants; order matching only in the stated payload/time regime\\[4pt]
 Arbitrary internal gates & Full-register depolarization ceiling \eqref{eq:ceiling} & A necessary width condition, not a matching code construction\\
 \bottomrule
 \end{tabularx}
@@ -711,9 +806,9 @@ The common mechanism is the loss of independent binary directions in the output'
 
 The established ingredients include the qualitative memory obstruction, stabilizer and symplectic methods, the algebra and entanglement tools, random-code existence, tree broadcasting, five-qubit coding, concatenation, and exact Toffoli synthesis. The quantitative account developed here lies in the simultaneous envelope contraction, fidelity-dependent and finite-depth budgets, and the fully charged storage constructions. The self-contained derivations are not a claim that every ingredient is new.
 
-Several questions remain. Can coherent coding and decoding remove the power-of-logarithm factor in \eqref{eq:upper}, uniformly as $\gamma\to0$? What is the optimum simultaneous dependence on width, fidelity, payload, and gate placement? Can stronger algebraic information than total envelope rank improve the converse? A lower bound for one particular concatenated decoder would not answer these unrestricted questions.
+Several questions remain. What is the optimum simultaneous dependence on width, fidelity, payload, and gate placement outside the Tanner matching regime? Can useful constants or a broader noise range be proved for an explicitly compiled decoder? Can stronger algebraic information than total envelope rank improve the converse? A lower bound for one particular decoder would not answer these unrestricted questions.
 
-The present guarantees do not include noisy elementary gates, restricted connectivity, finite processing time, correlated noise, or preparation faults. Both constructions use the stated ideal processing model. A measured protected controller also changes the available resources and requires a separate analysis. These boundaries prevent a direct reinterpretation of $D$ as hardware depth.
+The present guarantees do not include noisy elementary gates, restricted connectivity, finite processing time, correlated noise, or preparation faults. All constructions use the stated ideal processing model. A measured protected controller also changes the available resources and requires a separate analysis. These boundaries prevent a direct reinterpretation of $D$ as hardware depth.
 
 \section{A delayed-basis score as an alternative premise}
 \label{sec:guessing}
@@ -880,7 +975,36 @@ The first estimate follows from $L_z(p)\ge(p-o(1))z^{2k}$; the second follows by
 m_T\ge(2-o(1))\,k\,\frac{1-q}{q}\,D.
 \label{eq:moment-asymptotic}
 \end{equation}
-The earlier chord floor gives the corresponding leading coefficient $2p$. The order remains $k\gamma D$ at weak noise, but the new necessary rate approaches the full $2k$ payload coefficient at every fixed positive score. No decay exponent for vanishing scores or matching physical construction is asserted.
+The earlier chord floor gives the corresponding leading coefficient $2p$. The order remains $k\gamma D$ at weak noise, but the necessary rate approaches the full $2k$ payload coefficient at every fixed positive score. The next subsection quantifies vanishing scores; the separate Tanner construction matches resource order in its stated regime, without identifying a numerical optimum.
+
+\subsection{An explicit decay guarantee below a necessary rate}
+For $1<z\le2^{1/7}$ the direct branch profile obeys $p\le z^{-2k}\E z^r$, giving the all-cut floor $a_z=[2k+\log_zp]_+$. Set $M=2n$ and $\alpha=\alpha_z$. For $D\ge1$, inversion of the discrete injection inequalities gives
+\begin{equation}
+\begin{aligned}
+U_z&=\min\left\{M\alpha,\;
+\min_{1\le l\le D}\frac{\alpha(m_T+M\alpha^{l-1})}{1+(D-l)(1-\alpha)}\right\},\\
+p&\le\min\{1,z^{U_z-2k}\}.
+\end{aligned}
+\label{eq:decay-finite}
+\end{equation}
+Indeed the ledger requires $m_T\ge a_z/\alpha+(D-l)(1-\alpha)a_z/\alpha-M\alpha^{l-1}$ for every $l$. Rearrangement yields the inner minimum. The width cap after any noise layer gives $a_z\le M\alpha$. If the floor is nonpositive the score inequality already holds. For $D=0$ use $U_z=M$, giving the trivial bound one. This finite formula retains the full initial width allowance.
+
+Fix $q\in(0,1)$ and finite $\rho\ge0$. Along any family with $k,D\to\infty$, $n\ge k$, $\ln(n/k)=o(D)$ and $\limsup m_T/(kD)\le\rho$, one obtains
+\begin{equation}
+\liminf\frac{-\ln p}{k}\ge E_q(\rho),\qquad
+E_q(\rho)=\sup_{1<z\le2^{1/7}}(\ln z)
+\left[2-\rho\frac{\alpha_z}{1-\alpha_z}\right]_+.
+\label{eq:decay-asymptotic}
+\end{equation}
+For fixed $z$, choose $l=1+\lceil\ln(2n/k)/(-\ln\alpha_z)\rceil=o(D)$, so the surviving initial allowance is at most $k$. Dividing \eqref{eq:decay-finite} by $k$ proves the fixed-$z$ bound; the same liminf exceeds every such bound, hence their supremum. Use $-\ln0=+\infty$.
+
+Because $\alpha_z>q$ and $\alpha_z\to q$ as $z\downarrow1$, the exponent is positive exactly when $0\le\rho<2(1-q)/q$. The left endpoint has continuous value zero; the right endpoint is admitted. Rational-interval optimization is globally certified by strict concavity: with $t=2\ln z$, $f(t)=\ln(1-q+qe^t)$ and $g=t-f>0$, the untruncated objective is $(1+\rho/2)t-(\rho/2)t^2/g$, and
+\[
+\left(t^2/g\right)''=2(g-tg')^2/g^3-t^2g''/g^2>0.
+\]
+For $q=0.99$, certified exponent intervals include $E_q(0.01)\in[0.089980725766,0.089980725767]$ and $E_q(0.02)\in[0.000050419501,0.000050419502]$.
+
+Any established nondecreasing concave branch majorant $P_z$ also gives $p\le P_z(z^{U_z})$. The full polygon retains information lost by the simple floor. At $k=12,n=120,q=0.99,z=27/25,D=2000,m_T=200$, it proves $p\le0.310300082242$, whereas the simple floor gives $p\le0.418535080865$. This quantitative converse is not an achievable processing capacity; integer refinements or other recovery bounds can remain stronger in particular regimes.
 
 Finite integer algebra parameters can sharpen the convenient analytic polygon. For $k=12$, combine the direct quantum-dimension and output-dimension bounds with the established purely classical bound $\beta^{12}$, where $\beta=(1+1/\sqrt2)/2$. A rational certificate checks every one of the 169 allowed integer pairs $(s,c)$ with $0\le2s+c\le24$. At $z=27/25$, the concave polygon through
 \[
@@ -937,7 +1061,9 @@ The five-qubit calculation evaluates every one of the $4^5=1024$ Pauli errors, c
 \end{equation}
 In particular, all weight-zero and weight-one errors are corrected. Integer batching and concatenation parameters are checked in 240 finite cases. A separate score-transfer suite checks finite quantum-plus-classical rank cases, unconditional branch mixtures, exact rational recovery-comparison certificates, and independently solved scalar injection programs. Independent moment checks cover all binary subspaces at widths one through three, 34,764 rational moment inequalities, 22,878 pivot and reset checks, and 1,020 T-axis growth checks; exact logarithm enclosures certify the displayed finite gate comparison. These calculations test the stated finite implications; the written factorization and averaging arguments establish the all-cut conclusion.
 
-These checks support the finite algebra and circuits. They do not prove an asymptotic statement by extrapolation. General forgetting follows from the envelope induction; the processing converse follows from channel-rank and scalar inequalities; arbitrary-depth archives and concatenation follow from their conditioning and induction arguments. No finite test establishes optimality of 42 gates, an optimal hardware threshold, or attainment of the scalar relaxation by a memory circuit.
+Additional checks exhaust all two-input/two-output local lookup maps, compare a nonlinear coherent correction channel's full Choi state with its projected-channel formula, and verify invariant, batching, length-ratio and workspace inequalities. They also check 864 exact scalar inversions, all 169 integer algebra pairs in the displayed decay comparison, and rational-interval finite and asymptotic optimization certificates. The small scalar Tanner fixture is not a concrete admissible code instance or a practical threshold certificate.
+
+These checks support the finite algebra and circuits. They do not prove an asymptotic statement by extrapolation. General forgetting follows from the envelope induction; the processing converse follows from channel-rank and scalar inequalities; archives, concatenation and the Tanner construction follow from their stated inherited theorems and induction arguments. No finite test establishes optimality of 42 gates, an optimal hardware threshold, or attainment of the scalar relaxation by a memory circuit.
 
 \subsection{Boundary cases}
 If $D=0$, an identity memory on $k$ qubits suffices. If $\gamma=0$, it suffices for any finite duration; the positive-noise batching formulas need not be used. If $k=0$, the task is vacuous. The constructions state nonzero error tolerance: exact zero error is not asserted under nonzero depolarization. The archive case $J=1$ uses no archived record, and the concatenated construction $L=0$ uses no recovery node.
@@ -960,7 +1086,7 @@ $R_t$, $a$, $a_p$ & Expected envelope rank and its fidelity- or guessing-score-d
 $X_z$, $a_z$ & Logarithmic exponential rank moment and an all-cut lower bound.\\
 $\alpha_z$ & Noise contraction parameter for the moment potential.\\
 $B$, $b_{\mathrm{rep}}$ & Total structural rank-growth charge and number of archive root replicas, respectively.\\
-$\tau$, $J$ & Batch length and number of batches; constants differ between the two constructions.\\
+$\tau$, $h$, $J$ & Batch length and number of batches; constants differ among constructions.\\
 $n_0$, $s$ & Archive data-block width and number of its stabilizer generators.\\
 $H_{\mathrm{arc}}$ & Number $s(J-1)$ of intermediate syndrome bits to archive.\\
 $L$ & Concatenation level of the five-qubit code.\\

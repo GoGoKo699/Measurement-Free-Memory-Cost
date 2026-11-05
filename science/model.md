@@ -88,7 +88,7 @@ F_{\mathrm e}(\Lambda)
 \qquad\text{(M4)}
 ```
 
-This is the squared-overlap convention. A replacement logical channel has fidelity exactly $`K^{-2}=4^{-k}`$. The converse assumes only $`F_{\mathrm e}\ge1-\epsilon`$. The two constructions prove the stronger worst-case, reference-stable guarantee
+This is the squared-overlap convention. A replacement logical channel has fidelity exactly $`K^{-2}=4^{-k}`$. The converse assumes only $`F_{\mathrm e}\ge1-\epsilon`$. The constructions prove the stronger worst-case, reference-stable guarantee
 
 ```math
 \delta_\diamond(\Lambda)
@@ -166,7 +166,7 @@ for sufficiently large width and $`0\lt \gamma\le1/16`$, with constants dependin
 
 The constructive direction in [Clifford quantum lifetime](clifford_lifetime.md) stores unknown quantum states, rather than only a classical bit. A stabilizer code produces a history of syndrome bits; many noisy copies of each bit are propagated through ternary trees. All majority voting and nonlinear decoding occur at the final endpoint. Every tree node remains a counted noisy qubit. Its exponential width and ideal global fanout are essential resources.
 
-### Explicit coherent recovery within logarithmic factors
+### Explicit five-qubit coherent recovery
 
 For $`0\lt \gamma\le1/20`$ and $`0\lt \epsilon\lt 1/2`$, put
 
@@ -186,7 +186,24 @@ m_T=O\bigl(k(\gamma D+1)\ell^\alpha\bigr).
 
 It concatenates the five-qubit code, batches weak noise, and applies an explicit syndrome correction using at most 42 T/T-dagger gates per decoding node. No additional work qubits are needed beyond the code block. The constants and finite integer parameter choices are given in the construction.
 
-This upper bound establishes a concrete comparison with (M9). The optimal T count and physical width remain open; the construction retains a polylogarithmic reliability overhead.
+This five-qubit upper bound retains a polylogarithmic reliability overhead and its explicit range $`\gamma\le1/20`$.
+
+### Constant-iteration Tanner recovery and matching order
+
+Fix a good quantum Tanner-code family satisfying the hypotheses stated in [Tanner memory](tanner_memory.md). There is a family-dependent constant $`\gamma_*>0`$ such that, for $`0\lt\gamma\le\gamma_*`$, $`k,D\ge1`$ and $`0\lt\epsilon\lt1/2`$, a fixed Clifford+T/reset memory achieves (M5) with
+
+```math
+n=O\!\left(k+\ln\frac{J}{\epsilon}\right),
+\qquad m_T=O(nJ),
+\qquad J=O(\gamma D+1).
+\qquad\text{(M13)}
+```
+
+Here $`n`$ includes the code block and all syndrome, controller and temporary registers. The local decoder is a fixed Boolean circuit compiled coherently; every prescribed T/T-dagger slot is counted. Scratch is reset on a fixed schedule before use, so current syndrome extraction is ideal under the existing interior-processing assumption. No syndrome record is protected between noisy rounds.
+
+The code, constant-iteration decoder and repeated-round residual invariant are inherited from Gu et al. Their parallel runtime alone would not prove the charged gate bound. The added compilation counts local minimizations, comparisons, deterministic ties, updates and fixed routing. The correction channel is reference-stable, and correlated X/Z components of depolarizing noise are combined by a union bound.
+
+When $`k=\Omega(\ln(J/\epsilon))`$, $`n=O(k)`$. If also $`\gamma D`$ is sufficiently large to exceed the converse's width allowance, (M9) and (M13) give matching $`\Theta(k\gamma D)`$ processing order at fixed high fidelity. Constants depend on the fixed code family and can be enormous. This is not an optimal coefficient or a hardware gate-time theorem, and the Tanner noise range is not asserted to contain the five-qubit range.
 
 ## 4. How the results fit together
 
@@ -195,12 +212,13 @@ The conclusions distinguish two ways to support storage:
 | Choice of internal processing | Established resource behavior | Main physical cost |
 |---|---|---|
 | Clifford operations and resets only | Optimal lifetime order is logarithmic in width at fixed logical size and fidelity | An exponential number of noisy syndrome records |
-| Charged coherent nonlinear recovery | Explicit width and gate count with a polylogarithmic reliability overhead | Continuing T/T-dagger processing |
+| Five-qubit coherent nonlinear recovery | Explicit width and gate count with a polylogarithmic reliability overhead | Continuing T/T-dagger processing |
+| Constant-iteration Tanner recovery | Width $`O(k+\ln(J/\epsilon))`$ and work $`O(nJ)`$ for a sufficiently small code-dependent noise range | Continuing charged decoding with counted resettable scratch |
 | Any high-fidelity protocol in the model | Must satisfy the gate-budget and interval lower bounds | Information cannot cross every temporal cut without sufficient internal processing |
 
 Fresh magic states alone do not expand the backward binary envelope. Their availability therefore does not eliminate the processing lower bound. This is a statement about operations inside the specified memory, rather than a magic-state consumption theorem for all forms of error correction.
 
-Both constructions permit ideal global processing. A local hardware design with faulty gates, measurement latency, or correlated noise must account for those additional features before importing an achievability conclusion.
+All constructions permit ideal global processing. A local hardware design with faulty gates, measurement latency, or correlated noise must account for those additional features before importing an achievability conclusion.
 
 ### Delayed-basis BB84 scores as an operational premise
 
@@ -230,9 +248,11 @@ m_T\ge(2-o(1))\,kD\,\frac{1-q}{q}.
 
 This improves the fixed-score coefficient obtained from the convenient mean-rank floor; the weak-noise order remains $`k\gamma D`$. Finite examples and exact certificates are in the moment chapter. The conclusion is necessary and conditional on the same noise, controller and gate assumptions, with no physical-achievability claim.
 
+The [quantitative decay corollary](guessing_decay.md) inverts this necessary ledger while retaining the finite initial-width reserve. Under the same growing-family conditions, a budget rate $`\limsup m_T/(kD)\le\rho`$ forces $`\liminf(-\ln p)/k\ge E_q(\rho)`$. Its explicit optimized exponent is positive exactly when $`\rho\lt2(1-q)/q`$. This is a guarantee of exponential score decay below a necessary rate; it is not an achievable processing capacity.
+
 ## 5. Reading and verification routes
 
-Read [Binary Pauli envelopes](pauli_envelopes.md) for the forgetting proof, then [Control cost](control_cost.md) for the fidelity bottleneck and gate budgets. The two constructive chapters, [Clifford quantum lifetime](clifford_lifetime.md) and [Coherent recovery](coherent_recovery.md), establish the different ways to pay for storage. [Interpretation](interpretation.md) compares their resources and explains the remaining optimality gap.
+Read [Binary Pauli envelopes](pauli_envelopes.md) for the forgetting proof, then [Control cost](control_cost.md) for the fidelity bottleneck and gate budgets. The constructive chapters [Clifford quantum lifetime](clifford_lifetime.md), [five-qubit coherent recovery](coherent_recovery.md), and [Tanner memory](tanner_memory.md) establish the different ways to pay for storage. [Interpretation](interpretation.md) states the matching-order regime and the remaining questions about coefficients, finite constants and physical implementation.
 
 [Related work](../references/RELATED_WORK.md) identifies inherited ingredients, the closest published theorem, and the distinctions from measurement-based or externally decoded models. [Verification](../verification/README.md) describes the finite checks and their scope. Finite computations test the explicit algebra and circuits; universal claims rely on the proofs.
 

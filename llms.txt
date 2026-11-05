@@ -21,13 +21,20 @@ Canonical entrypoints:
 - science/moment_processing.md: exponential-moment noise contraction, fixed
   averaged-channel recovery, direct score and recovery potential floors, finite
   gate/interval ledgers and fixed-score asymptotic converse.
+- science/guessing_decay.md: finite inverse ledger retaining initial width,
+  explicit asymptotic score-decay exponent, positive-rate threshold and
+  certified optimization; a converse corollary, not achievable capacity.
 - science/clifford_lifetime.md: finite random-stabilizer existence proof, noisy
   syndrome archive, exact chronology, full workspace accounting, final recovery
   and matching order of zero-T quantum lifetime.
 - science/coherent_recovery.md: five-qubit syndrome polynomials, 42-T recovery
   node, concatenation, batching, finite parameters and upper resources.
+- science/tanner_memory.md: inherited good Tanner-code decoder, fixed Boolean
+  circuit and exact coherent compilation, prescribed T count, complete noisy
+  workspace, current-syndrome residual invariant, correlated X/Z tails, code
+  length availability, batching and matching-order small-noise construction.
 - science/interpretation.md: width and continuing work, catastrophic-reset
-  baseline, endpoint/controller distinctions and remaining logarithmic gap.
+  baseline, endpoint/controller distinctions, matching regime and limitations.
 - references/RELATED_WORK.md: primary attribution and operational comparisons.
 - references/references.bib: structured primary-source bibliography.
 - verification/README.md: finite checks, dependencies and their limitations.
@@ -36,7 +43,7 @@ Canonical entrypoints:
   comparison, pinned dependencies, committed plots and numerical certificates.
 
 Learning entrypoints:
-- learning/report/Measurement_Free_Memory_Cost_Report.pdf: continuous self-contained explanation of the model, converse, constructions and remaining resource gap.
+- learning/report/Measurement_Free_Memory_Cost_Report.pdf: continuous self-contained explanation of the model, converse, constructions, matching-order regime and remaining physical questions.
 - learning/source/README.md: technical build instructions for the explanatory report and its matching editable source.
 - learning/README.md: project-specific route using the common Watrous (2018) anchor.
 - learning/WATROUS_BRIDGE.md: selected Watrous sections, conventions, two-qubit
@@ -53,7 +60,7 @@ Reader routes:
   the model and algebra bottlenecks. The companion application is
   https://github.com/GoGoKo699/Lattice-Memory-Certification/blob/main/science/noisy-processing.md.
 - For constructive storage, compare science/clifford_lifetime.md and
-  science/coherent_recovery.md
+  science/coherent_recovery.md and science/tanner_memory.md
   under the same noise and endpoint convention.
 - For a theorem, use its full proof and assumptions, not an introductory summary.
 - For reproduction, follow verification/README.md and inspect the actual output.
@@ -75,10 +82,17 @@ Preserve these distinctions:
 - A general final decoder can have support rank much larger than 2k.
 - Zero-T quantum storage uses exponential noisy width and defers nonlinear
   computation to unrestricted final recovery.
-- The coherent construction uses the standard five-qubit code and exact
+- The five-qubit coherent construction uses the standard code and exact
   seven-T Toffoli synthesis. Its six Toffoli-equivalent gates need no extra
   work qubits; their 42-T bound is not claimed optimal.
-- Both constructions give half-diamond error epsilon. The converse assumes only
+- The Tanner construction uses a fixed bounded-size local circuit with all
+  minimizations, comparisons, ties and routing charged; scratch is reset on a
+  fixed schedule and counted in n. The Gu et al. decoder/invariant and existing
+  MFQEC mechanism are inherited. For sufficiently small family-dependent gamma,
+  n=O(k+ln(J/epsilon)), m_T=O(nJ), J=O(gamma D+1). It matches processing order
+  when k=Omega(ln(J/epsilon)) and duration exceeds the width allowance. Constants
+  can be enormous; no claim imports gamma<=1/20 or optimizes a coefficient.
+- All constructions give half-diamond error epsilon. The converse assumes only
   Bell-overlap fidelity at least 1-epsilon.
 - Measured QEC with noiseless external classical feedback is a different model.
   Do not claim that all QEC consumes magic or that fresh-state cost is T-count.

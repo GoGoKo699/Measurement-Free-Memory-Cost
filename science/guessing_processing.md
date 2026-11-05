@@ -365,3 +365,9 @@ For each of the 49 cases, exact fraction arithmetic verifies at least one of
 The first is the measure-and-prepare bound. The second, together with (G16)–(G18b), gives $`g_d(p_*)\le g_d(L)`$. Since $`p_*\ge1/d`$ and $`g_d`$ increases on $`[1/d,1]`$, it implies $`p_*\le L`$. Averaging the resulting polygon bound and applying Jensen's inequality reproduces (G12).
 
 The [canonical verifier](../verification/verify_guessing_processing.py) implements the integer bisection and all 49 checks in `exact_small_block_recovery_certificates`; the [reference output](../verification/expected/guessing_processing.json) records every rational endpoint and witness. No floating-point tolerance enters these certificates. They establish this finite comparison of the displayed bounds, not an optimal operational score curve.
+
+## Finite guessing and quantified decay refinements
+
+For three challenges and one retained quantum qubit, the [Lattice finite refinement](https://github.com/GoGoKo699/Lattice-Memory-Certification/blob/main/science/finite-guessing.md) gives $`p\le(2+7\sqrt2)/16`$, including unrestricted classical records and arbitrary encoders. It uses a rank-sensitive two-copy purity constraint, followed by the inherited finite-alphabet discrimination inequality. The stated normalized recovery-only specialization gives the weaker $`(1+2\sqrt7)/8`$. This finite improvement supplies a sharper branch cap at $`k=3,s=1`$; form the concave majorant in $`z^r`$ before averaging. It does not tensorize against arbitrary joint encoders.
+
+The [decay corollary](guessing_decay.md) proves a finite inverse of the existing injection ledger and an explicit asymptotic exponential score guarantee. Its critical processing rate is a necessary-converse threshold; no achievable capacity or optimal numerical coefficient is inferred.

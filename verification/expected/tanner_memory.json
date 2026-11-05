@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "exhaustive_two_input_two_output_lookup_cases": 1024,
+  "reference_channel": {
+    "input_dimension": 4,
+    "reference_dimension": 4,
+    "nonlinear_table": [
+      0,
+      2,
+      2,
+      1
+    ],
+    "compute_uncompute_toffolis": 8,
+    "prescribed_T_slots": 56,
+    "work_leak_probability": 0.0,
+    "choi_max_entry_error": 8.326672684688674e-17
+  },
+  "scalar_checks": {
+    "resource_and_invariant_cases": 164,
+    "exact_length_ratio_cases": 32
+  },
+  "sufficient_size_example": {
+    "interpretation": "Conditional scalar fixture only; no Tanner block simulated.",
+    "u": "1/32",
+    "gamma": "1/1024",
+    "D": 1000000,
+    "epoch_length": 32,
+    "epochs": 31250,
+    "logical_qubits": 128,
+    "rate_lower_bound": "1/4",
+    "target_error": "1/1048576",
+    "sufficient_data_length": 73728,
+    "failure_bound_exact": "15625/17179869184",
+    "certificate": "Hoeffding c>=u^2/2; 2J exp(-u^2 N/2)<=2J*2^-L<=epsilon."
+  },
+  "scope": "Finite compilation/Choi identities and exact scalar checks; inherited Tanner family and decoder theorems are not numerically re-proved."
+}

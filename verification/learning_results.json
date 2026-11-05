@@ -3,14 +3,14 @@
   "anchor": "Watrous, The Theory of Quantum Information (2018)",
   "milestone_map": {
     "milestones": 30,
-    "dependency_edges": 63,
+    "dependency_edges": 65,
     "background": 12,
     "narrative": 18
   },
   "navigation": {
-    "markdown_files": 15,
-    "local_links": 202,
-    "heading_fragments": 9
+    "markdown_files": 18,
+    "local_links": 254,
+    "heading_fragments": 15
   },
   "hosted_rendering": "not_tested_by_this_script"
 }

@@ -120,3 +120,9 @@ No sampled hardware threshold or noisy-gate implementation is inferred from this
 ## Exponential-moment processing checks
 
 Run `python verification/verify_moment_processing.py`, or use `python verification/run_all.py` to compare all five scientific suites with their committed expected outputs. The moment suite checks the pivot/noise inequality on all subspaces at widths one through three, reset and T updates, the 169 exact integer-algebra witnesses for the combined finite polygon, rational logarithm enclosures for the 244/58 counts, and the specified recovery-family comparison. All bound and rounding decisions use exact integer or rational arithmetic. These checks supplement the general proof in [Moment processing](../science/moment_processing.md); they do not establish physical feasibility or optimal T cost.
+
+## Tanner compilation and explicit guessing decay
+
+`verify_tanner_memory.py` checks all 1,024 clean-input cases of every two-input/two-output Boolean lookup, an entire nonlinear correction Choi channel with a reference and reset scratch, exact resource/invariant margins, bounded code-length ratios, and a sufficient-size scalar fixture. The fixture does not instantiate an admissible Tanner block. The construction theorem depends on the inherited good-code/parallel-decoder results and the written fixed-circuit proof in [Tanner memory](../science/tanner_memory.md).
+
+`verify_guessing_decay.py` checks exact scalar ledger inversion, rational interval certificates for the global one-variable exponent optimization and finite score bounds. It also forms certified full integer-algebra and specified recovery-family moment profiles before branch averaging. The universal quantifiers and limiting statement are proved in [Guessing decay](../science/guessing_decay.md); no finite computation establishes a processing capacity. Both scripts are included in `run_all.py`, with committed deterministic expected JSON.
