@@ -839,7 +839,7 @@ The factor two counts computation and uncomputation. It is charged even for an e
 \[
 n\le C_WN,\qquad C_W=64(1+t)b2^b.
 \]
-Every slot remains noisy between epochs. Its noise is discarded by the next input-independent reset, not by protected storage. These constants can be enormous.
+Every slot remains noisy between epochs. Syndrome and work registers are reset before their next use. These constants can be enormous.
 
 \subsection{Why resetting the syndrome is logically safe}
 Let $\Pi_s$ project onto syndrome $s$, and let $P_{f(s)}$ be the deterministic compiled correction. The coherent circuit followed by syndrome reset implements exactly
@@ -912,7 +912,7 @@ Thus the same outer invariant and $2Je^{-cN}$ tail certificate apply. A safe com
 n\le(W+C_W)N,\qquad
 m_T\le\left[42\frac{W-1}{4}+C_T\right]NJ.
 \]
-Inner correction contributes all $42(W-1)/4$ T slots per block per epoch; outer decoding contributes $C_TN$. Inner encoding and wire routing are Clifford. Outer scratch is reset before use and need not retain an encoded record between epochs. The available-length and padding argument is unchanged. Therefore \eqref{eq:tanner-upper} holds throughout $0<\gamma\le1/20$. This extends the proved range without restoring a reliability logarithm, at potentially enormous fixed cost.
+Inner correction contributes all $42(W-1)/4$ T slots per block per epoch; outer decoding contributes $C_TN$. Inner encoding and wire routing are Clifford. Outer scratch is reset before use and need not retain an encoded record between epochs. The available-length and padding argument is unchanged. Therefore \eqref{eq:tanner-upper} holds throughout $0<\gamma\le1/20$. The extension preserves the established width and processing orders at a potentially enormous fixed cost.
 
 \section{Why more gates still require growing width}
 There is a limitation independent of the Clifford restriction. In the identity/depolarization decomposition, one noise layer completely depolarizes all $n$ qubits with probability $\gamma^n$. Once that happens, all correlation with the original unknown input is gone. Input-independent subsequent operations and replacement states cannot restore it.
