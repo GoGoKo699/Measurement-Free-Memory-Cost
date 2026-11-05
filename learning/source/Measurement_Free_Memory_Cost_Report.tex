@@ -59,7 +59,7 @@ With Clifford operations and resets alone, the best possible lifetime grows only
 
 \keypoint{Fresh states can remove entropy. They do not, by themselves, supply the coherent processing needed to decide and apply corrections inside this memory.}
 
-The lower bound is complemented by three storage constructions. A noisy archive defers nonlinear decoding to the final endpoint and uses exponential width. A concatenated five-qubit construction corrects during storage with at most 42 T or T-dagger gates per node and a polylogarithmic reliability overhead. A coherently compiled, constant-iteration Tanner-code decoder removes that overhead in a proved, smaller noise range: its total noisy width is $O(k+\ln(J_+/\eps))$ and its prescribed T count is $O(nJ)$ for $J=O(\gamma D+1)$ and $J_+=\max(1,J)$. This matches the converse's order when the payload dominates the reliability logarithm and storage is sufficiently long. Numerical optimality and practical constants remain open.
+The lower bound is complemented by three storage constructions. A noisy archive defers nonlinear decoding to the final endpoint and uses exponential width. A concatenated five-qubit construction corrects during storage with at most 42 T or T-dagger gates per node and a polylogarithmic reliability overhead. A coherently compiled, constant-iteration Tanner-code decoder removes that overhead for $0<\gamma\le1/20$ after a fixed number of inner five-qubit levels: its total noisy width is $O(k+\ln(J_+/\eps))$ and its prescribed T count is $O(nJ)$ for $J=O(\gamma D+1)$ and $J_+=\max(1,J)$. This matches the converse's order when the payload dominates the reliability logarithm and storage is sufficiently long. Numerical optimality and practical constants remain open.
 
 Both the converse and the constructions permit ideal global operations between noisy intervals. Storage duration counts noise rounds, separately from elementary gate depth.
 \vfill
@@ -664,7 +664,7 @@ Let $\alpha=\log_2 5$ and $\ell=1+\ln[k(\gamma D+1)/\eps]$. Since $5^L\le5A^\alp
 m_T=O\bigl(k(\gamma D+1)\ell^\alpha\bigr).}
 \label{eq:upper}
 \end{equation}
-The constants are uniform over this construction's stated weak-noise range. Its polylogarithmic overhead remains part of the five-qubit guarantee. The Tanner-code construction below removes that overhead in asymptotic order within a separately proved, smaller noise range.
+The constants are uniform over this construction's stated weak-noise range. Its polylogarithmic overhead remains part of the five-qubit guarantee. The Tanner-code construction below removes that overhead in asymptotic order first within a separately proved, smaller direct noise range. A fixed number of inner five-qubit levels then extends the same resource order to $\gamma\le1/20$.
 
 For $k=1$, $\gamma=0.01$, $D=1000$, and $\eps=0.01$, the integer prescription gives $n=125$ and $m_T\le260{,}400$. It chooses $\tau=5$, $J=200$, $A\approx7.75$, and $L=3$, with conservative error certificate $20(3/8)^8\approx0.00782$. This example shows the cost of the explicit construction with its loose constants. It gives neither a practical optimum nor an estimate of hardware gate time.
 
@@ -752,15 +752,41 @@ N\ge\max\{N_0,k/R_0,c^{-1}\ln(2J_+/\eps)\},
 \quad J_+=\max(1,J),
 \]
 at a fixed multiplicative cost. The free encoder pads unused logical axes with fixed states. Every good input-independent Pauli trajectory is exactly corrected by the same endpoint decoder. Consequently $\Lambda=(1-P_{\rm bad})\id+P_{\rm bad}\Xi$ for a CPTP map $\Xi$, and
-\[
+\begin{equation}
 \boxed{n=O(k+\ln(J_+/\eps)),\quad
 m_T=O(nJ),\quad
 \dd(\Lambda)\le\eps,\quad J=O(\gamma D+1).}
 \label{eq:tanner-upper}
-\]
-For $D=0$ no recovery is required. Constants depend only on the fixed code, decoder slack and iteration count, and length-gap factor, uniformly for $0<\gamma\le\gamma_*$. The noise range is generally far smaller than $1/20$ and is not inherited from the five-qubit construction.
+\end{equation}
+For $D=0$ no recovery is required. Constants depend only on the fixed code, decoder slack and iteration count, and length-gap factor, uniformly for $0<\gamma\le\gamma_*$. This bare Tanner noise range can be far smaller than $1/20$. The following composition proves the extension; it is not inferred from an LDPC threshold.
 
 When $k=\Omega(\ln(J_+/\eps))$ and $\gamma D\to\infty$, the construction has $n=O(k)$ and $m_T=O(k\gamma D)$, matching the converse's order after its initial-width allowance is exhausted. This closes the former polylogarithmic reliability gap in that regime. Existing Tanner codes, parallel decoding, repeated-round correction, coherent syndrome correction and passive LDPC memory mechanisms remain inherited ingredients. The addition is their model-compatible compilation and resource consequence, with no claim of an optimal numerical coefficient or practical threshold.
+
+\subsection{Fixed-level inner protection extends the noise range}
+The outer decoder only needs a fixed tolerance, rather than an error shrinking with storage duration. Consequently a \emph{fixed} number of inner five-qubit levels suffices to reach that tolerance throughout $0<\gamma\le1/20$.
+
+For a batch of length
+\[
+h=\left\lfloor\frac1{20\gamma}\right\rfloor,
+\qquad J=\lceil D/h\rceil\le40\gamma D+1,
+\]
+the physical nonidentity Pauli probability is at most $3/80$. The elementary inner recursion $p_{\ell+1}\le10p_\ell^2$ therefore gives
+\[
+\eta_\ell=\frac{(3/8)^{2^\ell}}{10},\qquad
+L_* =\min\{\ell\ge0:\eta_\ell\le u/2\},\qquad W=5^{L_*}.
+\]
+The constants $L_*,W$ depend only on the fixed outer family. They do not grow with $k,D,\eps$ or depend on $\gamma$ in the stated range.
+
+Encode each outer data qubit in $W$ inner physical qubits. At every epoch, coherently decode and correct each inner block, apply the compiled outer recovery, and reencode by a Clifford circuit. Reset unused syndrome and workspace on the prescribed schedule. All of this processing lies in an ideal interval between noisy layers. Every persistent physical slot remains noisy and counted.
+
+Disjoint inner blocks transform fresh independent physical Pauli noise into independent fresh Pauli errors across outer positions, each with total nonidentity probability at most $\eta_{L_*}\le u/2$. A pre-existing Pauli residual on the outer data acts as a logical Pauli of each inner block. It commutes with the inner stabilizers, leaves their syndrome unchanged, and passes through correction composed with the fresh residual label. The effective channel need not be isotropic, and its X/Z components need not be independent. Each component's error probability is at most $u/2$, which is exactly what the preceding marginal tail argument requires.
+
+Thus the same outer invariant and $2Je^{-cN}$ tail certificate apply. A safe complete resource count is
+\[
+n\le(W+C_W)N,\qquad
+m_T\le\left[42\frac{W-1}{4}+C_T\right]NJ.
+\]
+Inner correction contributes all $42(W-1)/4$ T slots per block per epoch; outer decoding contributes $C_TN$. Inner encoding and wire routing are Clifford. Outer scratch is reset before use and need not retain an encoded record between epochs. The available-length and padding argument is unchanged. Therefore \eqref{eq:tanner-upper} holds throughout $0<\gamma\le1/20$. This extends the proved range without restoring a reliability logarithm, at potentially enormous fixed cost.
 
 \section{Why more gates still require growing width}
 There is a limitation independent of the Clifford restriction. In the identity/depolarization decomposition, one noise layer completely depolarizes all $n$ qubits with probability $\gamma^n$. Once that happens, all correlation with the original unknown input is gone. Input-independent subsequent operations and replacement states cannot restore it.
@@ -795,7 +821,7 @@ Resource choice & Established result & Boundary of the claim\\
 \midrule
 Clifford and resets only & Sharp lifetime order $\Theta(\gamma^{-1}\ln n)$ at fixed $k,F_0$ & Weak noise; exponential archive width; unrestricted endpoint decoding\\[4pt]
 Five-qubit coherent correction & Explicit polylogarithmic reliability overhead for $\gamma\le1/20$ & Modest local circuit; overhead remains in this construction\\[4pt]
-Tanner coherent correction & $n=O(k+\ln(J_+/\eps))$, $m_T=O(nJ)$, $J=O(\gamma D+1)$ & Smaller proved noise range; enormous fixed constants; order matching only in the stated payload/time regime\\[4pt]
+Tanner coherent correction & $n=O(k+\ln(J_+/\eps))$, $m_T=O(nJ)$, $J=O(\gamma D+1)$ & Range $\gamma\le1/20$ after fixed-level inner protection; enormous constants; order matching only in the stated payload/time regime\\[4pt]
 Arbitrary internal gates & Full-register depolarization ceiling \eqref{eq:ceiling} & A necessary width condition, not a matching code construction\\
 \bottomrule
 \end{tabularx}
@@ -806,7 +832,7 @@ The common mechanism is the loss of independent binary directions in the output'
 
 The established ingredients include the qualitative memory obstruction, stabilizer and symplectic methods, the algebra and entanglement tools, random-code existence, tree broadcasting, five-qubit coding, concatenation, and exact Toffoli synthesis. The quantitative account developed here lies in the simultaneous envelope contraction, fidelity-dependent and finite-depth budgets, and the fully charged storage constructions. The self-contained derivations are not a claim that every ingredient is new.
 
-Several questions remain. What is the optimum simultaneous dependence on width, fidelity, payload, and gate placement outside the Tanner matching regime? Can useful constants or a broader noise range be proved for an explicitly compiled decoder? Can stronger algebraic information than total envelope rank improve the converse? A lower bound for one particular decoder would not answer these unrestricted questions.
+Several questions remain. What is the optimum simultaneous dependence on width, fidelity, payload, and gate placement outside the Tanner matching regime? Can useful constants be proved for an explicitly instantiated decoder, or can the physical noise range be extended further? Can stronger algebraic information than total envelope rank improve the converse? A lower bound for one particular decoder would not answer these unrestricted questions.
 
 The present guarantees do not include noisy elementary gates, restricted connectivity, finite processing time, correlated noise, or preparation faults. All constructions use the stated ideal processing model. A measured protected controller also changes the available resources and requires a separate analysis. These boundaries prevent a direct reinterpretation of $D$ as hardware depth.
 
@@ -1006,6 +1032,46 @@ For $q=0.99$, certified exponent intervals include $E_q(0.01)\in[0.089980725766,
 
 Any established nondecreasing concave branch majorant $P_z$ also gives $p\le P_z(z^{U_z})$. The full polygon retains information lost by the simple floor. At $k=12,n=120,q=0.99,z=27/25,D=2000,m_T=200$, it proves $p\le0.310300082242$, whereas the simple floor gives $p\le0.418535080865$. This quantitative converse is not an achievable processing capacity; integer refinements or other recovery bounds can remain stronger in particular regimes.
 
+\subsection{Propagating the full generating-function profile}
+The fixed-moment result above replaces every noise step by contraction at one fixed argument. Retaining the argument's exact evolution gives a stronger decay law from the same envelope and guessing bounds.
+
+Let $F(\lambda)=\ln\E e^{\lambda r}$ and define
+\[
+\phi_j(\lambda)=\frac12\ln\left[1+q^j(e^{2\lambda}-1)\right],
+\qquad S_q(\lambda)=\sum_{j=1}^{\infty}\phi_j(\lambda).
+\]
+The pivot inequality says a noise layer replaces the profile argument by $\phi_1(\lambda)$, and $\phi_i\circ\phi_j=\phi_{i+j}$. A prescribed T slot adds at most $\lambda$ to $F(\lambda)$. After subsequent noise layers, its contribution at a cut is bounded by the corresponding $\phi_j(\lambda)$. This retains more information than repeated scalar Jensen contraction. Since $\phi_j(\lambda)=O(q^j)$ on the compact interval used below, the series converges.
+
+The direct branchwise polygon obeys, for $0\le\lambda\le\ln2$,
+\[
+p\le e^{-kA(\lambda)}\E e^{\lambda r},\qquad
+A(\lambda)=\min\left\{2\lambda,\frac{\ln2+5\lambda}{6},\ln2\right\}.
+\]
+The three affine pieces follow from the same output-dimension and quantum-memory bounds; no new uniform guessing exponent is presumed. For $1\le L\le D$, put $T_L=D-L+1$. Sum over those noise cuts and charge each prescribed T slot by all of its possible remaining-noise contributions. The finite consequence is
+\[
+\frac{-\ln p}{k}\ge
+\left[A(\lambda)-
+\frac{2n\sum_{d=L}^{D}\phi_d(\lambda)
++m_T\sum_{j=1}^{T_L}\phi_j(\lambda)}{kT_L}\right]_+.
+\]
+The first term retains the initial full-output width. The second counts fixed circuit slots, rather than an expected executed cost.
+
+Under the same fixed-$q$ growing-family hypotheses as \eqref{eq:decay-asymptotic}, the result becomes
+\begin{equation}
+\boxed{\liminf\frac{-\ln p}{k}\ge\mathcal E_q(\rho),\qquad
+\mathcal E_q(\rho)=
+\max_{0\le\lambda\le\ln2}
+[A(\lambda)-\rho S_q(\lambda)]_+.}
+\label{eq:full-profile-exponent}
+\end{equation}
+For each fixed argument, take $L=o(D)$ large enough to exhaust the width reserve; $\ln(n/k)=o(D)$ permits this. The truncated series approaches $S_q$, and $D/T_L\to1$. Taking the maximum after the fixed-argument limit proves the stated quantifiers.
+
+This exponent is positive exactly for $\rho<2(1-q)/q$, and $\mathcal E_q(0)=\ln2$. It strictly improves $E_q$ throughout its positive region. On the old interval $0<\lambda\le\ln2/7$, the score exponent is still $A=2\lambda$, while
+\[
+S_q(\lambda)<\lambda\frac{\alpha_{e^\lambda}}{1-\alpha_{e^\lambda}}.
+\]
+The larger interval also improves the zero-rate endpoint from $2\ln2/7$ to $\ln2$. For positive $\rho$, strict convexity of $S_q$ gives a unique optimum of the untruncated piecewise strictly concave objective, possibly at the kink $\lambda=\ln2/7$ or endpoint $\ln2$. Series-tail enclosures and interval optimization provide reproducible global certificates. This strengthens a converse exponent without establishing an achievable processing capacity or changing Lattice's uniform $1/6$ exponent.
+
 Finite integer algebra parameters can sharpen the convenient analytic polygon. For $k=12$, combine the direct quantum-dimension and output-dimension bounds with the established purely classical bound $\beta^{12}$, where $\beta=(1+1/\sqrt2)/2$. A rational certificate checks every one of the 169 allowed integer pairs $(s,c)$ with $0\le2s+c\le24$. At $z=27/25$, the concave polygon through
 \[
 (1,1/4096),\qquad(z^{11},1/4),\qquad(z^{24},1),
@@ -1061,7 +1127,7 @@ The five-qubit calculation evaluates every one of the $4^5=1024$ Pauli errors, c
 \end{equation}
 In particular, all weight-zero and weight-one errors are corrected. Integer batching and concatenation parameters are checked in 240 finite cases. A separate score-transfer suite checks finite quantum-plus-classical rank cases, unconditional branch mixtures, exact rational recovery-comparison certificates, and independently solved scalar injection programs. Independent moment checks cover all binary subspaces at widths one through three, 34,764 rational moment inequalities, 22,878 pivot and reset checks, and 1,020 T-axis growth checks; exact logarithm enclosures certify the displayed finite gate comparison. These calculations test the stated finite implications; the written factorization and averaging arguments establish the all-cut conclusion.
 
-Additional checks exhaust all two-input/two-output local lookup maps, compare a nonlinear coherent correction channel's full Choi state with its projected-channel formula, and verify invariant, batching, length-ratio and workspace inequalities. They also check 864 exact scalar inversions, all 169 integer algebra pairs in the displayed decay comparison, and rational-interval finite and asymptotic optimization certificates. The small scalar Tanner fixture is not a concrete admissible code instance or a practical threshold certificate.
+Additional checks exhaust all two-input/two-output local lookup maps, compare a nonlinear coherent correction channel's full Choi state with its projected-channel formula, and verify invariant, batching, length-ratio and workspace inequalities. They also check 864 exact scalar inversions, all 169 integer algebra pairs in the displayed decay comparison, and rational-interval finite and asymptotic optimization certificates. The extensions also check fixed-level inner-code composition, profile semigroup and fixed-slot convolution identities, convergent-series tails and the stronger exponent optimization. The small scalar Tanner fixture is not a concrete admissible code instance or a practical threshold certificate.
 
 These checks support the finite algebra and circuits. They do not prove an asymptotic statement by extrapolation. General forgetting follows from the envelope induction; the processing converse follows from channel-rank and scalar inequalities; archives, concatenation and the Tanner construction follow from their stated inherited theorems and induction arguments. No finite test establishes optimality of 42 gates, an optimal hardware threshold, or attainment of the scalar relaxation by a memory circuit.
 

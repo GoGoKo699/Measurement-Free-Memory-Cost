@@ -14,6 +14,8 @@ The [complete transfer and recovery comparison](science/guessing_processing.md) 
 
 The transfer is useful below one-half success. Existing recovery inequalities reproduce the convenient mean-rank score floors for all challenge sizes. The [exponential-moment bound](science/moment_processing.md) then strengthens the dynamical ledger by retaining the actual product-noise probabilities. At fixed positive guessing score and fixed noise strength, its long-storage coefficient approaches that of a full logical payload as the challenge grows. The score does not verify the device's noise or controller assumptions, and no LWE compilation is imported here.
 
+The [full generating-function ledger](science/guessing_decay.md) strengthens the explicit decay exponent by propagating its argument through every noise layer, rather than contracting one fixed moment. Its optimized exponent reaches $`\ln2`$ at zero T rate and is positive exactly below the same necessary rate $`2(1-q)/q`$. This remains a converse, rather than an achievable processing capacity.
+
 ## Explanatory report
 
 Read the [complete explanatory report (PDF)](learning/report/Measurement_Free_Memory_Cost_Report.pdf) for a self-contained explanation of the memory model, the processing lower bound, the storage constructions, and the regimes where their resource orders match.
@@ -47,10 +49,10 @@ Here $`[x]_+=\max\{x,0\}`$. At fixed high fidelity and sufficiently long storage
 | Continuing processing | Extensive non-Clifford budget with fidelity, width, and timing dependence | [Control cost](science/control_cost.md) |
 | Guessing-score premise | Delayed-basis whole-string success supplies an all-cut rank floor | [Guessing and processing](science/guessing_processing.md) |
 | Exponential-moment strengthening | Actual product-noise probabilities give a stronger family of gate and interval bounds | [Moment processing](science/moment_processing.md) |
-| Quantitative guessing decay | Finite-width inversion and an explicit exponential score bound below the necessary processing rate | [Guessing decay](science/guessing_decay.md) |
+| Quantitative guessing decay | Full generating-function propagation and an explicit stronger exponential score bound, with finite width retained | [Guessing decay](science/guessing_decay.md) |
 | Sharp zero-T quantum lifetime | $`\Theta(\gamma^{-1}\ln n)`$ at fixed logical size and target fidelity $`4^{-k}\lt F_0\lt 1`$, for sufficiently weak noise | [Clifford quantum lifetime](science/clifford_lifetime.md) |
 | Five-qubit coherent recovery | Explicit 42-T node and concatenated reliability overhead, for $`\gamma\le1/20`$ | [Coherent recovery](science/coherent_recovery.md) |
-| Constant-iteration Tanner recovery | Counted width $`O(k+\ln(J/\epsilon))`$ and prescribed T count $`O(nJ)`$, for a sufficiently small family-dependent noise range | [Tanner memory](science/tanner_memory.md) |
+| Constant-iteration Tanner recovery | Counted width $`O(k+\ln(J/\epsilon))`$ and prescribed T count $`O(nJ)`$ for $`\gamma\le1/20`$, using fixed-level inner protection | [Tanner memory](science/tanner_memory.md) |
 
 For the constructive recovery bound with $`k,D\ge1`$, let $`\alpha=\log_2 5`$ and $`\ell=1+\ln[k(\gamma D+1)/\epsilon]`$. For $`0\lt \gamma\le1/20`$ and $`0\lt \epsilon\lt 1/2`$, an explicit concatenated five-qubit construction achieves
 
@@ -64,7 +66,7 @@ m_T=O\bigl(k(\gamma D+1)\ell^\alpha\bigr),
 
 Each decoding node uses at most **42 T/T-dagger gates and no additional work qubits**. The logarithmic overhead belongs to this five-qubit construction. It retains the stated noise range.
 
-For a fixed good quantum Tanner-code family, there is a constant $`\gamma_*>0`$ such that $`0\lt\gamma\le\gamma_*`$ permits a second coherent construction with
+For a fixed good quantum Tanner-code family, a fixed number of inner five-qubit concatenation levels permits a second coherent construction throughout $`0\lt\gamma\le1/20`$, with
 
 ```math
 n=O\!\left(k+\ln\frac{J}{\epsilon}\right),
@@ -73,7 +75,7 @@ n=O\!\left(k+\ln\frac{J}{\epsilon}\right),
 \qquad\frac12\|\Lambda-\mathrm{id}_{2^k}\|_\diamond\le\epsilon.
 ```
 
-The [proof and compilation ledger](science/tanner_memory.md) count syndrome, local tables, tie-breaking, updates, routing and resettable workspace. Constant iterations keep a residual error inside a correctable region; the free endpoint decoder completes recovery. When $`k=\Omega(\ln(J/\epsilon))`$ and storage exceeds the converse's width allowance, the achieved processing order is $`k\gamma D`$. The constants can be extremely large; this neither optimizes the coefficient nor supplies a hardware threshold.
+The [proof and compilation ledger](science/tanner_memory.md) count syndrome, local tables, tie-breaking, updates, routing and resettable workspace. Constant iterations keep a residual error inside a correctable region; the free endpoint decoder completes recovery. When $`k=\Omega(\ln(J/\epsilon))`$ and storage exceeds the converse's width allowance, the achieved processing order is $`k\gamma D`$. The inner level is fixed by the outer decoder's residual tolerance, independently of payload, duration and target error. It enlarges constants without restoring a reliability logarithm. The constants can be extremely large; this neither optimizes the coefficient nor supplies a hardware threshold.
 
 Gu, Tang, Caha, Choe, He and Kubica supply the decoder and repeated-round invariant. Existing passive LDPC and measurement-free correction supply the correction mechanism. The addition here is its explicit fixed-circuit resource consequence in the present model. Nelson, Rajakumar, and Gullans proved a quantitative Clifford-memory forgetting bound and introduced the stochastic Pauli framework used here. The [literature comparison](references/RELATED_WORK.md) explains the sharper reference-stable contraction, the processing and timing laws, and the inherited coding and circuit ingredients.
 
@@ -109,7 +111,7 @@ python3 verification/run_all.py
 python3 verification/check_learning.py
 ```
 
-The seven scientific checks cover Pauli-algebra and channel-rank identities, the exact finite-depth scalar optimization, the syndrome archive and workspace schedule, the explicit five-qubit recovery, the guessing-score transfer with its prior-recovery comparison, and the exponential-moment bounds with exact finite certificates. The learning check verifies the 30-milestone route and local links. [Verification](verification/README.md) records the environment, expected outputs, and scope.
+The scientific checks cover Pauli-algebra and channel-rank identities, the exact finite-depth scalar optimization, the syndrome archive and workspace schedule, the explicit five-qubit recovery, the guessing-score transfer with its prior-recovery comparison, and the exponential-moment bounds with exact finite certificates. The learning check verifies the 30-milestone route and local links. [Verification](verification/README.md) records the environment, expected outputs, and scope.
 
 The [finite resource comparison](verification/Graph/README.md) provides the
 Python-generated width and processing curves, pinned dependencies, and a check
@@ -121,7 +123,7 @@ Finite computations validate the stated finite identities. General converses, co
 
 All persistent qubits undergo independent depolarizing noise. Processing between noise layers is ideal and may be global. The constructions do not include extra noisy rounds proportional to elementary gate depth, geometric locality, or a protected external controller. Final recovery lies outside the charged storage interval.
 
-All constructions protect arbitrary unknown inputs and their reference correlations. The zero-T construction pays exponential noisy width and uses unrestricted final nonlinear decoding. Five-qubit concatenation retains a polylogarithmic reliability overhead. Constant-iteration Tanner recovery removes that overhead at sufficiently small noise when the payload dominates the reliability logarithm. Optimal numerical T count, practical constants and hardware costs remain open.
+All constructions protect arbitrary unknown inputs and their reference correlations. The zero-T construction pays exponential noisy width and uses unrestricted final nonlinear decoding. Five-qubit concatenation retains a polylogarithmic reliability overhead. Fixed-level inner protection extends the Tanner recovery bound to $`\gamma\le1/20`$; it removes that overhead when the payload dominates the reliability logarithm. Optimal numerical T count, practical constants and hardware costs remain open.
 
 ## Purpose and contact
 

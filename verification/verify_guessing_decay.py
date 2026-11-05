@@ -318,6 +318,250 @@ def finite_examples():
     return {'parameters':{'k':k,'n':n,'D':D,'q':str(q),'z':str(z)},'integer_profile_certificate':profile_receipt,'rows':rows}
 
 
+def power_interval(x, exponent):
+    assert exponent >= 0
+    result, base = point(1), point(x)
+    while exponent:
+        if exponent & 1:
+            result = mul(result,base)
+        base = mul(base,base)
+        exponent //= 2
+    return result
+
+
+@lru_cache(None)
+def adaptive_log_interval(x):
+    """Atanh-series enclosure with an explicit adaptive rational tail."""
+    assert x >= 1
+    original = x
+    count = 0
+    while x >= 2:
+        x /= 2
+        count += 1
+    t = (x-1)/(x+1)
+    power, total, terms = t, ZERO, 0
+    while True:
+        total += 2*power/Q(2*terms+1)
+        terms += 1
+        power *= t*t
+        tail = 2*power/(Q(2*terms+1)*(1-t*t))
+        if tail <= Q(1,1 << 105):
+            break
+    result = total, total+tail
+    if count:
+        ln2 = log_interval(Q(2))
+        result = result[0]+count*ln2[0], result[1]+count*ln2[1]
+    assert original >= 1
+    return outward(result)
+
+
+def adaptive_log_range(x):
+    return adaptive_log_interval(x[0])[0], adaptive_log_interval(x[1])[1]
+
+
+def pgf_series(q,z,start=1,derivative=False):
+    """Enclose sum_{j=start}^infty phi_j or its lambda derivative.
+
+    Direct head terms end once b=(z^2-1)*q^J <=1/4. The remaining
+    logarithmic/geometric series alternates with strictly decreasing terms.
+    Even truncation is a lower sum and the next odd truncation an upper sum.
+    Every operation, including q^J, is enclosed outward with Fractions.
+    """
+    assert 0 < q < 1 and z[0] >= 1 and start >= 1
+    z2 = mul(z,z)
+    a = sub(z2,point(1))
+    qpower = power_interval(q,start)
+    result = point(0)
+    head = 0
+    while a[1]*qpower[1] > Q(1,4):
+        product = mul(a,qpower)
+        if derivative:
+            term = div(mul(z2,qpower),add(point(1),product))
+        else:
+            term = mul(point(Q(1,2)),adaptive_log_range(add(point(1),product)))
+        result = add(result,term)
+        qpower = mul(qpower,point(q))
+        head += 1
+    b = mul(a,qpower)
+    assert b[1] <= Q(1,4)
+    tail = point(0)
+    qsmall = ONE
+    bpower = point(1)
+    prefactor = mul(z2,qpower)
+    for index in range(1,62):
+        qsmall *= q
+        if derivative:
+            term = div(mul(prefactor,bpower),point(1-qsmall))
+        else:
+            bpower = mul(bpower,b)
+            term = div(bpower,point(2*index*(1-qsmall)))
+        if index == 61:
+            # After 60 terms the exact remainder is nonnegative and no larger
+            # than the next positive term.
+            tail = tail[0],tail[1]+term[1]
+            break
+        tail = add(tail,term if index & 1 else neg(term))
+        if derivative:
+            bpower = mul(bpower,b)
+    result = add(result,tail)
+    return (max(ZERO,result[0]),result[1]), {'head_terms':head,'alternating_tail_terms':60}
+
+
+def full_intercept(z):
+    lnz = log_range(z)
+    ln2 = log_interval(Q(2))
+    candidates = [mul(point(2),lnz),
+                  mul(point(Q(1,6)),add(ln2,mul(point(5),lnz))),ln2]
+    return min(item[0] for item in candidates),min(item[1] for item in candidates)
+
+
+def full_objective(q,rho,z):
+    series,receipt = pgf_series(q,z)
+    return sub(full_intercept(z),mul(point(rho),series)),receipt
+
+
+def certified_full_optimum(q,rho):
+    critical = 2*(1-q)/q
+    if rho >= critical:
+        return {'rho':str(rho),'case':'zero','E_interval':['0','0']}
+    if not rho:
+        return {'rho':'0','case':'right_endpoint_z2','E_interval':small(log_interval(Q(2)))}
+    kink = seventh_root_two()
+    derivative_kink,_ = pgf_series(q,kink,derivative=True)
+    derivative_end,_ = pgf_series(q,point(2),derivative=True)
+    kink_left = sub(point(2),mul(point(rho),derivative_kink))
+    kink_right = sub(point(Q(5,6)),mul(point(rho),derivative_kink))
+    endpoint_left = sub(point(Q(5,6)),mul(point(rho),derivative_end))
+    if endpoint_left[0] >= 0:
+        z,case = point(2),'right_endpoint_z2'
+    elif kink_left[0] >= 0 and kink_right[1] <= 0:
+        z,case = kink,'profile_kink_z_2power1over7'
+    else:
+        if kink_left[1] < 0:
+            lo,hi,slope = ONE,kink[1],Q(2)
+            case = 'unique_root_below_profile_kink'
+        else:
+            assert kink_right[0] > 0 and endpoint_left[1] < 0
+            lo,hi,slope = kink[0],Q(2),Q(5,6)
+            case = 'unique_root_above_profile_kink'
+        for _ in range(50):
+            middle = (lo+hi)/2
+            derivative,_ = pgf_series(q,point(middle),derivative=True)
+            sign = sub(point(slope),mul(point(rho),derivative))
+            if sign[0] > 0:
+                lo = middle
+            elif sign[1] < 0:
+                hi = middle
+            else:
+                break
+        left,_ = pgf_series(q,point(lo),derivative=True)
+        right,_ = pgf_series(q,point(hi),derivative=True)
+        assert sub(point(slope),mul(point(rho),left))[0] > 0
+        assert sub(point(slope),mul(point(rho),right))[1] < 0
+        z = lo,hi
+    value,receipt = full_objective(q,rho,z)
+    assert value[0] > 0
+    return {'rho':str(rho),'case':case,'z_interval':small(z),
+            'E_interval':small(value),'series_certificate':receipt}
+
+
+def pgf_schedule_checks():
+    cases = 0
+    # A gate in backward gap h has age d-h at cut d, when d>h. Verify every
+    # column and every selected terminal window, not one particular schedule.
+    for D in range(1,25):
+        weights = [Q(3,4)**j for j in range(D+1)]
+        for L in range(1,D+1):
+            T = D-L+1
+            bound = sum(weights[1:T+1],ZERO)
+            for h in range(D+1):
+                column = sum((weights[d-h] for d in range(L,D+1) if d>h),ZERO)
+                assert column <= bound
+                cases += 1
+    identities = 0
+    for q in (Q(1,3),Q(2,3),Q(99,100)):
+        for z in (Q(27,25),Q(3,2),Q(2)):
+            value = z*z
+            for j in range(1,25):
+                value = 1-q+q*value
+                assert value == 1+q**j*(z*z-1)
+                identities += 1
+    profiles = 0
+    for k in range(1,25):
+        for r in range(2*k+3):
+            # Raising to42 removes the sixth/seventh roots in the inherited
+            # profile and each affine support line.
+            if 6*r <= 5*k:
+                cap42 = Q(2)**(42*(r-k))
+            elif r <= 2*k:
+                cap42 = Q(2)**(6*(r-2*k))
+            else:
+                cap42 = ONE
+            for z in (ONE,Q(27,25),Q(3,2),Q(2),Q(3)):
+                support42 = max(z**(42*(r-2*k)),
+                                Q(2)**(-7*k)*z**(42*r-35*k),
+                                Q(2)**(-42*k)*z**(42*r))
+                assert cap42 <= support42
+                profiles += 1
+    return {'all_gate_column_windows_checked':cases,
+            'semigroup_squared_identities':identities,'full_profile_support_checks':profiles}
+
+
+def full_finite_examples():
+    k,n,D,q = 12,120,2000,Q(99,100)
+    rows = []
+    for z in (Q(27,25),Q(2)):
+        prefix = [point(0)]
+        qpower = point(1)
+        a = z*z-1
+        for _ in range(D):
+            qpower = mul(qpower,point(q))
+            term = mul(point(Q(1,2)),adaptive_log_range(add(point(1),mul(point(a),qpower))))
+            prefix.append(add(prefix[-1],term))
+        intercept = full_intercept(point(z))
+        polygon = [(ONE,Q(1,4096)),(z**11,Q(1,4)),(z**24,ONE)] if z==Q(27,25) else None
+        for budget in (0,171,200,243,300):
+            best = None
+            lower = None
+            selected = None
+            for L in range(1,D+1):
+                T = D-L+1
+                width = sub(prefix[D],prefix[L-1])
+                moment_bound = mul(point(Q(1,T)),add(mul(point(2*n),width),mul(point(budget),prefix[T])))
+                lower = moment_bound[0] if lower is None else min(lower,moment_bound[0])
+                if best is None or moment_bound[1] < best:
+                    best,selected = moment_bound[1],L
+            decay = max(ZERO,k*intercept[0]-best)
+            score_upper = ONE if not decay else 1/sum((decay**j/Q(factorial(j)) for j in range(101)),ZERO)
+            item = {'z':str(z),'m_T':budget,'selected_L':selected,
+                    'log_moment_bound_interval':small((lower,best)),
+                    'negative_log_score_lower':small((decay,decay)),
+                    'score_upper':small((score_upper,score_upper))[1]}
+            if polygon is not None:
+                polygon_upper = polygon_value(polygon,exp_upper(best))
+                item['existing_polygon_score_upper'] = small((polygon_upper,polygon_upper))[1]
+            rows.append(item)
+    return {'parameters':{'k':k,'n':n,'D':D,'q':str(q)},'rows':rows}
+
+
+def full_generating_function_certificate():
+    q = Q(99,100)
+    rates = (ZERO,Q(1,1000),Q(1,200),Q(1,100),Q(3,200),Q(1,50),2*(1-q)/q)
+    optima = [certified_full_optimum(q,rho) for rho in rates]
+    comparisons = []
+    for item,rho in zip(optima,rates):
+        old = certified_optimum(q,rho)
+        new_lower = Q(item['E_interval'][0])
+        old_upper = Q(old['E_interval'][1])
+        if rho < 2*(1-q)/q:
+            assert new_lower > old_upper
+        comparisons.append({'rho':str(rho),'old_E_interval':old['E_interval'],
+                            'full_E_interval':item['E_interval']})
+    return {'status':'pass','schedule_and_profile_checks':pgf_schedule_checks(),
+            'certified_optima':optima,'strict_improvement_over_previous_bound':comparisons,
+            'finite_examples':full_finite_examples(),
+            'series_scope':'Rational outward head terms plus 60-term alternating tail after (z^2-1)q^J<=1/4; derivative tails certified likewise. No floating-point certificate decisions.'}
+
 def main():
     checks = exact_inversion_checks()
     q = Q(99,100)
@@ -327,6 +571,7 @@ def main():
     print(json.dumps({'status':'pass','exact_inversion_checks':checks,
         'critical_rho':str(critical),'certified_asymptotic_optima':optima,
         'finite_examples':finite_examples(),
+        'full_generating_function':full_generating_function_certificate(),
         'scope':'Exact scalar identities and rational-interval objective/finite certificates. All-parameter statements use the written proof. No achievable capacity or physical optimality is certified.'},indent=2))
 
 

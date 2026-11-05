@@ -2,9 +2,9 @@
 
 ## 1. Result and scope
 
-Existing good quantum Tanner codes and their constant-iteration parallel decoder give a stronger sufficient resource bound in the [same memory model](model.md). This chapter proves the fixed-circuit compilation, accounts for its total width and prescribed T count, and combines it with the published residual-error invariant. The addition is a resource consequence of inherited codes, decoders and measurement-free correction mechanisms.
+Existing good quantum Tanner codes and their constant-iteration parallel decoder give a stronger sufficient resource bound in the [same memory model](model.md). This chapter proves the fixed-circuit compilation, accounts for its total width and prescribed T count, and combines it with the published residual-error invariant. A fixed number of inner five-qubit concatenation levels extends the physical noise range. These are resource consequences of inherited codes, decoders and measurement-free correction mechanisms.
 
-Fix an admissible Tanner family as specified below. There is a family-dependent constant $`\gamma_*\gt0`$ such that, for $`0\lt\gamma\le\gamma_*`$, $`k\ge1`$, $`D\ge0`$ and $`0\lt\epsilon\lt1/2`$, a memory exists with
+Fix an admissible Tanner family as specified below. For $`0\lt\gamma\le1/20`$, $`k\ge1`$, $`D\ge0`$ and $`0\lt\epsilon\lt1/2`$, a memory exists with
 
 ```math
 n=O\!\left(k+\ln\frac{J_+}{\epsilon}\right),
@@ -20,7 +20,7 @@ and
 \qquad\text{(T1)}
 ```
 
-Here $`n`$ includes data, syndrome, controller and all temporary work qubits. The constants are independent of $`k,D,\epsilon,\gamma`$ in the stated range. They can be very large, and $`\gamma_*`$ can be very small. This noise range is not the full range of the [five-qubit construction](coherent_recovery.md).
+Here $`n`$ includes data, syndrome, controller and all temporary work qubits. The constants depend on the fixed Tanner family and are independent of $`k,D,\epsilon,\gamma`$ in the stated range. They can be very large. Sections 2–7 retain the original direct Tanner construction, which requires a possibly tiny family-dependent $`\gamma_*\gt0`$. Section 8 proves the extended range by explicit composition with the [five-qubit construction](coherent_recovery.md); it does not assume that the Tanner decoder itself has that physical noise threshold.
 
 When $`k=\Omega(\ln(J_+/\epsilon))`$ and $`\gamma D`$ is sufficiently long for the converse's initial-width allowance, (T1) gives $`n=O(k)`$ and $`m_T=O(k\gamma D)`$. It closes the earlier polylogarithmic overhead in asymptotic order in that regime. It does not determine the optimal coefficient, practical constants, locality or a threshold with faulty processing gates.
 
@@ -180,7 +180,7 @@ p_h=\frac{1-q^h}{2}.
 
 They are independent across positions. They are correlated with each other at a position. Only the two marginal binomial tails and a union bound will be used.
 
-For the proved noise range, choose
+For the direct Tanner construction, choose
 
 ```math
 0\lt\gamma\le\gamma_*:=u/2,
@@ -245,10 +245,89 @@ J\le\frac{2\gamma D}{u}+1,
 \qquad n\le C_WN,
 ```
 
-proving (T1). For $`D=0`$, take $`J=0`$ and $`J_+=1`$; no interior recovery is needed.
+proving (T1) in the original range $`0\lt\gamma\le\gamma_*`$. For $`D=0`$, take $`J=0`$ and $`J_+=1`$; no interior recovery is needed.
 
-## 8. Attribution, interpretation and finite checks
+## 8. Constant inner concatenation extends the physical noise range
+
+The [five-qubit recovery](coherent_recovery.md) gives an exact coherent circuit which decodes one concatenated block, corrects it and resets its syndrome wires. For independent physical Pauli errors with nonidentity probability at most $`p_0`$, its fresh residual logical Pauli has probability at most
+
+```math
+p_L\le\frac{(10p_0)^{2^L}}{10}.
+```
+
+This circuit uses $`W=5^L`$ physical wires and $`42(W-1)/4`$ prescribed T/T-dagger slots, with no additional work qubits. The syndrome wires are reset and reused by the Clifford reencoder. These are the existing five-qubit circuit and concatenation bounds, rather than new decoding statements.
+
+Choose once, using the outer decoder's constant $`u`$ from (T7),
+
+```math
+L_* =\min\left\{\ell\in\mathbb Z_{\ge0}:
+\eta_\ell:=\frac1{10}\left(\frac38\right)^{2^\ell}
+\le\frac u2\right\},
+\qquad W=5^{L_*}.
+\qquad\text{(T11)}
+```
+
+The minimum exists and depends only on the fixed outer family. In particular, the inner concatenation depth does not grow with payload, duration or target error. For $`0\lt\gamma\le1/20`$, replace (T8) by
+
+```math
+h=\left\lfloor\frac1{20\gamma}\right\rfloor,
+\qquad J=\left\lceil\frac D h\right\rceil,
+\qquad J\le40\gamma D+1.
+\qquad\text{(T12)}
+```
+
+Encode each of the $`N`$ outer Tanner positions into a separate $`W`$-qubit inner block. Following every full batch, and the shorter final batch, execute the following fixed schedule within one ideal processing interval:
+
+1. Decode and correct all inner blocks through their fixed $`L_*`$ levels; reset the released inner syndrome wires.
+2. Reset the outer scratch pool, extract the current outer syndrome, execute the fixed Tanner circuit from Sections 3–4, and reset its syndrome records.
+3. Reencode every outer data wire into its inner block by Clifford operations using the released zero wires.
+
+During the intervening noisy layers, all $`WN`$ inner data wires and the entire outer scratch pool remain noisy and counted. No record survives in protected storage. The temporarily decoded outer data are exposed only during ideal processing, as permitted by the existing model. Each reset has a prescribed, input-independent output and timing.
+
+### Fresh inner errors and pre-existing outer residuals
+
+A batch of at most $`h`$ physical noise layers has nonidentity Pauli probability
+
+```math
+p_0=\frac34(1-q^h)\le\frac{3h\gamma}{4}\le\frac3{80}
+```
+
+per physical position. For a fixed inner block, let $`E`$ be its complete fresh physical Pauli pattern. The inner correction circuit sends an arbitrary encoded logical operator to a definite logical Pauli conjugation $`\omega\mapsto P_{\ell(E)}\omega P_{\ell(E)}^\dagger`$. This holds on all logical inputs, including those entangled with other blocks or a reference; syndrome resets implement the associated correction channel exactly.
+
+A pre-existing outer residual Pauli acts as a logical Pauli $`P`$ of the inner block. Its encoded representative commutes with the inner stabilizers, so it changes no extracted inner syndrome. Commuting it through $`E`$ changes only an irrelevant Pauli phase. Consequently the corrected logical operator is
+
+```math
+P_{\ell(E)}P\,\omega\,P^\dagger P_{\ell(E)}^\dagger.
+\qquad\text{(T13)}
+```
+
+Thus the old outer residual is followed by a fresh error whose label depends only on the new physical noise. It does not change the distribution of that fresh label or the validity of the inner error estimate. The same conclusion follows level by level in the concatenation tree.
+
+Different inner blocks use disjoint fresh physical-error samples. Conditional on any prior noise history, their fresh logical Pauli labels are therefore independent, with nonidentity probability at most $`\eta_{L_*}\le u/2`$. The resulting logical Pauli channel need not be depolarizing. Its X and Z components at the same outer position can be correlated. Each component separately is an independent collection across positions with marginal probabilities at most $`u/2`$. Its weight is stochastically bounded by $`\mathrm{Bin}(N,u/2)`$, even if the marginal probabilities differ between positions or epochs.
+
+Apply the two marginal Chernoff bounds and a union bound, using the same $`c=\mathrm{KL}(u\|u/2)`$ as before. With probability at least $`1-2Je^{-cN}`$, every fresh outer error has each CSS component of weight at most $`uN`$. Section 5's residual invariant then applies without change. In particular, inner decoding failures are corrected by the outer code when they lie in this region; no unnecessary union bound requiring every inner block to succeed is imposed.
+
+The exact inner correction channel, the outer channel (T6), and the Clifford reencoder compose as CPTP maps on the entire system and reference. Every trajectory in the good event has the same correctable final outer residual. The free endpoint first decodes the inner encoding and then applies the fixed outer endpoint decoder. It is the identity logical channel on every good trajectory. The input-independent trajectory mixture proves the same half-diamond bound as Section 7.
+
+### Width, prescribed processing and reliability
+
+Use (T10) with the epoch count from (T12). The outer code length still obeys $`N=O(k+\ln(J_+/\epsilon))`$. A conservative simultaneous allocation reserves separate inner blocks and the complete outer circuit pool; it gives
+
+```math
+n\le(W+C_W)N,
+\qquad
+m_T\le\left[\frac{42(W-1)}4+C_T\right]NJ.
+\qquad\text{(T14)}
+```
+
+The width bound deliberately permits overlap to be counted twice rather than assuming unproved scratch reuse. All circuits and every T/T-dagger slot are fixed in advance, including epochs whose syndromes are zero. The inner encoder, all syndrome extraction, routing and reencoding are Clifford operations already permitted by the model. The count includes the final recovery, although some final operations could instead be absorbed into the free endpoint.
+
+Equations (T10)–(T14) prove (T1) uniformly for $`0\lt\gamma\le1/20`$. At $`D=0`$, set $`J=0`$; the endpoint encoding and decoding require no interior recovery. The extension can increase the already large constants. It supplies neither a practical numerical threshold for good Tanner codes nor tolerance of noise inside the processing circuit. In the smaller range $`\gamma\le\gamma_*`$, the earlier direct construction remains available and can have lower overhead.
+
+## 9. Attribution, interpretation and finite checks
 
 Good Tanner codes, the parallel decoder, its contraction and its repeated-round use are inherited. Coherent syndrome extraction followed by measurement-free nonlinear correction is also established prior work, including [Hong, Guo and Lucas](https://doi.org/10.1038/s41467-024-55570-7), who study measurement-free error correction and passive LDPC memory constructions. This result adds the explicit fixed-circuit translation and total noisy-width/prescribed-T consequence in this model. It is not a claim of the first coherent LDPC memory or of new code/decoder performance.
 
-The [related-work account](../references/RELATED_WORK.md) separates these ingredients. The [finite verifier](../verification/verify_tanner_memory.py) checks all two-input/two-output lookup tables on clean inputs, a nonlinear correction channel's full Choi state with a reference, exact scalar invariant and batching margins, length ratios, resource inequalities and a sufficient-size scalar certificate. The scalar fixture does not instantiate an admissible Tanner code or prove a practical threshold. The universal theorem relies on the argument above and the inherited code/decoder results; it is not certified by a small numerical simulation.
+The fixed inner concatenation in Section 8 combines that theorem with the existing five-qubit circuit. Its addition is the proved physical-noise range and explicit combined resource accounting, not a new concatenated code or threshold mechanism.
+
+The [related-work account](../references/RELATED_WORK.md) separates these ingredients. The [finite verifier](../verification/verify_tanner_memory.py) checks all two-input/two-output lookup tables on clean inputs, a nonlinear correction channel's full Choi state with a reference, exact scalar invariant and batching margins, length ratios, resource inequalities and sufficient-size scalar certificates. It also exhaustively checks that every five-qubit fresh Pauli pattern preserves the inner syndrome and acquires precisely the expected residual when any previous logical Pauli is present, checks biased Pauli-error distributions with exact rational arithmetic, and checks the combined schedule and constant-depth choice. The scalar fixtures do not instantiate an admissible Tanner code or prove a practical threshold. The universal theorem relies on the argument above and the inherited code/decoder results; it is not certified by a small numerical simulation.
