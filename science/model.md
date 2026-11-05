@@ -190,7 +190,7 @@ This five-qubit upper bound retains a polylogarithmic reliability overhead and i
 
 ### Constant-iteration Tanner recovery and matching order
 
-Fix a good quantum Tanner-code family satisfying the hypotheses stated in [Tanner memory](tanner_memory.md). There is a family-dependent constant $`\gamma_*>0`$ such that, for $`0\lt\gamma\le\gamma_*`$, $`k,D\ge1`$ and $`0\lt\epsilon\lt1/2`$, a fixed Clifford+T/reset memory achieves (M5) with
+Fix a good quantum Tanner-code family satisfying the hypotheses stated in [Tanner memory](tanner_memory.md). For $`0\lt\gamma\le1/20`$, $`k,D\ge1`$ and $`0\lt\epsilon\lt1/2`$, a fixed Clifford+T/reset memory achieves (M5) with
 
 ```math
 n=O\!\left(k+\ln\frac{J}{\epsilon}\right),
@@ -199,11 +199,11 @@ n=O\!\left(k+\ln\frac{J}{\epsilon}\right),
 \qquad\text{(M13)}
 ```
 
-Here $`n`$ includes the code block and all syndrome, controller and temporary registers. The local decoder is a fixed Boolean circuit compiled coherently; every prescribed T/T-dagger slot is counted. Scratch is reset on a fixed schedule before use, so current syndrome extraction is ideal under the existing interior-processing assumption. No syndrome record is protected between noisy rounds.
+Here $`n`$ includes the code block and all syndrome, controller and temporary registers. The local decoder is a fixed Boolean circuit compiled coherently; every prescribed T/T-dagger slot is counted. Scratch is reset on a fixed schedule before use, so current syndrome extraction is ideal under the existing interior-processing assumption. No syndrome record is protected between noisy rounds. A fixed number of inner five-qubit concatenation levels reduces each outer position's fresh error to the outer decoder's tolerance; this level depends only on the fixed family, not on $`k,D,\epsilon`$. The bare Tanner option remains valid at its smaller direct noise range.
 
 The code, constant-iteration decoder and repeated-round residual invariant are inherited from Gu et al. Their parallel runtime alone would not prove the charged gate bound. The added compilation counts local minimizations, comparisons, deterministic ties, updates and fixed routing. The correction channel is reference-stable, and correlated X/Z components of depolarizing noise are combined by a union bound.
 
-When $`k=\Omega(\ln(J/\epsilon))`$, $`n=O(k)`$. If also $`\gamma D`$ is sufficiently large to exceed the converse's width allowance, (M9) and (M13) give matching $`\Theta(k\gamma D)`$ processing order at fixed high fidelity. Constants depend on the fixed code family and can be enormous. This is not an optimal coefficient or a hardware gate-time theorem, and the Tanner noise range is not asserted to contain the five-qubit range.
+When $`k=\Omega(\ln(J/\epsilon))`$, $`n=O(k)`$. If also $`\gamma D`$ is sufficiently large to exceed the converse's width allowance, (M9) and (M13) give matching $`\Theta(k\gamma D)`$ processing order at fixed high fidelity. Constants depend on the fixed code family and can be enormous. This is not an optimal coefficient or a hardware gate-time theorem. The extended range $`\gamma\le1/20`$ is proved by the fixed-level inner construction, rather than inferred from an LDPC threshold.
 
 ## 4. How the results fit together
 
@@ -213,7 +213,7 @@ The conclusions distinguish two ways to support storage:
 |---|---|---|
 | Clifford operations and resets only | Optimal lifetime order is logarithmic in width at fixed logical size and fidelity | An exponential number of noisy syndrome records |
 | Five-qubit coherent nonlinear recovery | Explicit width and gate count with a polylogarithmic reliability overhead | Continuing T/T-dagger processing |
-| Constant-iteration Tanner recovery | Width $`O(k+\ln(J/\epsilon))`$ and work $`O(nJ)`$ for a sufficiently small code-dependent noise range | Continuing charged decoding with counted resettable scratch |
+| Constant-iteration Tanner recovery | Width $`O(k+\ln(J/\epsilon))`$ and work $`O(nJ)`$ for $`\gamma\le1/20`$ with fixed-level inner protection | Continuing charged decoding with counted resettable scratch |
 | Any high-fidelity protocol in the model | Must satisfy the gate-budget and interval lower bounds | Information cannot cross every temporal cut without sufficient internal processing |
 
 Fresh magic states alone do not expand the backward binary envelope. Their availability therefore does not eliminate the processing lower bound. This is a statement about operations inside the specified memory, rather than a magic-state consumption theorem for all forms of error correction.
@@ -248,7 +248,25 @@ m_T\ge(2-o(1))\,kD\,\frac{1-q}{q}.
 
 This improves the fixed-score coefficient obtained from the convenient mean-rank floor; the weak-noise order remains $`k\gamma D`$. Finite examples and exact certificates are in the moment chapter. The conclusion is necessary and conditional on the same noise, controller and gate assumptions, with no physical-achievability claim.
 
-The [quantitative decay corollary](guessing_decay.md) inverts this necessary ledger while retaining the finite initial-width reserve. Under the same growing-family conditions, a budget rate $`\limsup m_T/(kD)\le\rho`$ forces $`\liminf(-\ln p)/k\ge E_q(\rho)`$. Its explicit optimized exponent is positive exactly when $`\rho\lt2(1-q)/q`$. This is a guarantee of exponential score decay below a necessary rate; it is not an achievable processing capacity.
+The [quantitative decay corollary](guessing_decay.md) inverts this necessary ledger while retaining the finite initial-width reserve. Under the same growing-family conditions, a budget rate $`\limsup m_T/(kD)\le\rho`$ forces $`\liminf(-\ln p)/k\ge E_q(\rho)`$. The full generating-function version strengthens $`E_q`$ to $`\mathcal E_q`$ by propagating all moment arguments. It has $`\mathcal E_q(0)=\ln2`$ and is positive exactly when $`\rho\lt2(1-q)/q`$. This is a guarantee of exponential score decay below a necessary rate; it is not an achievable processing capacity.
+
+For the stronger exponent, write
+
+```math
+\phi_j(\lambda)=\frac12\ln[1+q^j(e^{2\lambda}-1)],
+\quad S_q(\lambda)=\sum_{j=1}^{\infty}\phi_j(\lambda),
+\quad A(\lambda)=\min\left\{2\lambda,\frac{\ln2+5\lambda}{6},\ln2\right\}.
+```
+
+Then the same limiting hypotheses give
+
+```math
+\liminf\frac{-\ln p}{k}\ge\mathcal E_q(\rho),
+\qquad\mathcal E_q(\rho)=
+\max_{0\le\lambda\le\ln2}[A(\lambda)-\rho S_q(\lambda)]_+.
+```
+
+The [full proof and finite-width version](guessing_decay.md) retain the initial width and count every prescribed gate slot. The improvement comes from the noise-profile composition, without improving the branchwise guessing theorem.
 
 ## 5. Reading and verification routes
 

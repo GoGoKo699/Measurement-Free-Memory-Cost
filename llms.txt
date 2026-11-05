@@ -22,7 +22,7 @@ Canonical entrypoints:
   averaged-channel recovery, direct score and recovery potential floors, finite
   gate/interval ledgers and fixed-score asymptotic converse.
 - science/guessing_decay.md: finite inverse ledger retaining initial width,
-  explicit asymptotic score-decay exponent, positive-rate threshold and
+  fixed-moment and stronger full-profile score-decay exponents, positive-rate threshold and
   certified optimization; a converse corollary, not achievable capacity.
 - science/clifford_lifetime.md: finite random-stabilizer existence proof, noisy
   syndrome archive, exact chronology, full workspace accounting, final recovery
@@ -32,7 +32,7 @@ Canonical entrypoints:
 - science/tanner_memory.md: inherited good Tanner-code decoder, fixed Boolean
   circuit and exact coherent compilation, prescribed T count, complete noisy
   workspace, current-syndrome residual invariant, correlated X/Z tails, code
-  length availability, batching and matching-order small-noise construction.
+  length availability, batching, fixed-level five-qubit extension to gamma<=1/20 and matching-order construction.
 - science/interpretation.md: width and continuing work, catastrophic-reset
   baseline, endpoint/controller distinctions, matching regime and limitations.
 - references/RELATED_WORK.md: primary attribution and operational comparisons.
@@ -88,10 +88,11 @@ Preserve these distinctions:
 - The Tanner construction uses a fixed bounded-size local circuit with all
   minimizations, comparisons, ties and routing charged; scratch is reset on a
   fixed schedule and counted in n. The Gu et al. decoder/invariant and existing
-  MFQEC mechanism are inherited. For sufficiently small family-dependent gamma,
+  MFQEC mechanism are inherited. With a fixed number of inner five-qubit levels, for gamma<=1/20,
   n=O(k+ln(J/epsilon)), m_T=O(nJ), J=O(gamma D+1). It matches processing order
   when k=Omega(ln(J/epsilon)) and duration exceeds the width allowance. Constants
-  can be enormous; no claim imports gamma<=1/20 or optimizes a coefficient.
+  can be enormous. The extended range is proved by constant-level composition,
+  not inferred from an LDPC threshold; no coefficient is optimized.
 - All constructions give half-diamond error epsilon. The converse assumes only
   Bell-overlap fidelity at least 1-epsilon.
 - Measured QEC with noiseless external classical feedback is a different model.

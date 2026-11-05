@@ -33,5 +33,92 @@
     "failure_bound_exact": "15625/17179869184",
     "certificate": "Hoeffding c>=u^2/2; 2J exp(-u^2 N/2)<=2J*2^-L<=epsilon."
   },
+  "hybrid_inner": {
+    "prior_logical_pauli_covariance_cases": 4096,
+    "exact_biased_distribution_cases": 4,
+    "distribution_results": [
+      {
+        "fixture": "depolarizing",
+        "logical_nonidentity_probability": "330891/25600000",
+        "pair_union_bound": "9/640",
+        "X_Z_joint_minus_product": "693735371791/163840000000000"
+      },
+      {
+        "fixture": "pure_x",
+        "logical_nonidentity_probability": "10680057/819200000",
+        "pair_union_bound": "9/640",
+        "X_Z_joint_minus_product": "21571506710523/3355443200000000"
+      },
+      {
+        "fixture": "biased",
+        "logical_nonidentity_probability": "3822896653/838860800000",
+        "pair_union_bound": "49/10240",
+        "X_Z_joint_minus_product": "601290528292872228191/351843720888320000000000"
+      },
+      {
+        "fixture": "different_positions",
+        "logical_nonidentity_probability": "1623051/327680000",
+        "pair_union_bound": "529/102400",
+        "X_Z_joint_minus_product": "4900294011981/2684354560000000"
+      }
+    ]
+  },
+  "hybrid_schedule": {
+    "exact_schedule_and_resource_cases": 100,
+    "constant_depth_choices": [
+      {
+        "outer_u": "1/8",
+        "constant_inner_levels": 0,
+        "inner_width_per_outer_position": 1,
+        "inner_T_slots_per_outer_position": 0,
+        "effective_nonidentity_bound": "3/80"
+      },
+      {
+        "outer_u": "1/32",
+        "constant_inner_levels": 1,
+        "inner_width_per_outer_position": 5,
+        "inner_T_slots_per_outer_position": 42,
+        "effective_nonidentity_bound": "9/640"
+      },
+      {
+        "outer_u": "1/1000",
+        "constant_inner_levels": 3,
+        "inner_width_per_outer_position": 125,
+        "inner_T_slots_per_outer_position": 1302,
+        "effective_nonidentity_bound": "6561/167772160"
+      },
+      {
+        "outer_u": "1/1048576",
+        "constant_inner_levels": 4,
+        "inner_width_per_outer_position": 625,
+        "inner_T_slots_per_outer_position": 6552,
+        "effective_nonidentity_bound": "43046721/2814749767106560"
+      },
+      {
+        "outer_u": "1/1000000000000",
+        "constant_inner_levels": 5,
+        "inner_width_per_outer_position": 3125,
+        "inner_T_slots_per_outer_position": 32802,
+        "effective_nonidentity_bound": "1853020188851841/792281625142643375935439503360"
+      }
+    ]
+  },
+  "hybrid_sufficient_size_example": {
+    "interpretation": "Conditional hybrid scalar fixture only; no Tanner block simulated.",
+    "u": "1/32",
+    "gamma": "1/20",
+    "D": 1000000,
+    "epoch_length": 1,
+    "epochs": 1000000,
+    "logical_qubits": 128,
+    "rate_lower_bound": "1/4",
+    "constant_inner_levels": 1,
+    "inner_width_per_outer_position": 5,
+    "effective_nonidentity_bound": "9/640",
+    "target_error": "1/1048576",
+    "sufficient_outer_data_length": 83968,
+    "failure_bound_exact": "15625/17179869184",
+    "certificate": "Inner residual <=u/2; 2J exp(-u^2 N/2)<=2J*2^-exponent<=epsilon."
+  },
   "scope": "Finite compilation/Choi identities and exact scalar checks; inherited Tanner family and decoder theorems are not numerically re-proved."
 }

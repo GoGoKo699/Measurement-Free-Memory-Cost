@@ -188,5 +188,346 @@
       }
     ]
   },
+  "full_generating_function": {
+    "status": "pass",
+    "schedule_and_profile_checks": {
+      "all_gate_column_windows_checked": 5200,
+      "semigroup_squared_identities": 216,
+      "full_profile_support_checks": 3360
+    },
+    "certified_optima": [
+      {
+        "rho": "0",
+        "case": "right_endpoint_z2",
+        "E_interval": [
+          "693147180559/1000000000000",
+          "8664339757/12500000000"
+        ]
+      },
+      {
+        "rho": "1/1000",
+        "case": "right_endpoint_z2",
+        "z_interval": [
+          "2",
+          "2"
+        ],
+        "E_interval": [
+          "597010325033/1000000000000",
+          "298505162517/500000000000"
+        ],
+        "series_certificate": {
+          "head_terms": 247,
+          "alternating_tail_terms": 60
+        }
+      },
+      {
+        "rho": "1/200",
+        "case": "unique_root_above_profile_kink",
+        "z_interval": [
+          "1773525929433/1000000000000",
+          "886762964717/500000000000"
+        ],
+        "E_interval": [
+          "108726746813/500000000000",
+          "217453493627/1000000000000"
+        ],
+        "series_certificate": {
+          "head_terms": 213,
+          "alternating_tail_terms": 60
+        }
+      },
+      {
+        "rho": "1/100",
+        "case": "profile_kink_z_2power1over7",
+        "z_interval": [
+          "1104089513673/1000000000000",
+          "552044756837/500000000000"
+        ],
+        "E_interval": [
+          "95025987871/1000000000000",
+          "2969562121/31250000000"
+        ],
+        "series_certificate": {
+          "head_terms": 0,
+          "alternating_tail_terms": 60
+        }
+      },
+      {
+        "rho": "3/200",
+        "case": "profile_kink_z_2power1over7",
+        "z_interval": [
+          "1104089513673/1000000000000",
+          "552044756837/500000000000"
+        ],
+        "E_interval": [
+          "10879489003/250000000000",
+          "43517956013/1000000000000"
+        ],
+        "series_certificate": {
+          "head_terms": 0,
+          "alternating_tail_terms": 60
+        }
+      },
+      {
+        "rho": "1/50",
+        "case": "unique_root_below_profile_kink",
+        "z_interval": [
+          "505033697271/500000000000",
+          "1010067394543/1000000000000"
+        ],
+        "E_interval": [
+          "25070421/250000000000",
+          "20056337/200000000000"
+        ],
+        "series_certificate": {
+          "head_terms": 0,
+          "alternating_tail_terms": 60
+        }
+      },
+      {
+        "rho": "2/99",
+        "case": "zero",
+        "E_interval": [
+          "0",
+          "0"
+        ]
+      }
+    ],
+    "strict_improvement_over_previous_bound": [
+      {
+        "rho": "0",
+        "old_E_interval": [
+          "49510512897/250000000000",
+          "198042051589/1000000000000"
+        ],
+        "full_E_interval": [
+          "693147180559/1000000000000",
+          "8664339757/12500000000"
+        ]
+      },
+      {
+        "rho": "1/1000",
+        "old_E_interval": [
+          "93617959503/500000000000",
+          "187235919007/1000000000000"
+        ],
+        "full_E_interval": [
+          "597010325033/1000000000000",
+          "298505162517/500000000000"
+        ]
+      },
+      {
+        "rho": "1/200",
+        "old_E_interval": [
+          "144011388677/1000000000000",
+          "72005694339/500000000000"
+        ],
+        "full_E_interval": [
+          "108726746813/500000000000",
+          "217453493627/1000000000000"
+        ]
+      },
+      {
+        "rho": "1/100",
+        "old_E_interval": [
+          "44990362883/500000000000",
+          "89980725767/1000000000000"
+        ],
+        "full_E_interval": [
+          "95025987871/1000000000000",
+          "2969562121/31250000000"
+        ]
+      },
+      {
+        "rho": "3/200",
+        "old_E_interval": [
+          "17975031427/500000000000",
+          "7190012571/200000000000"
+        ],
+        "full_E_interval": [
+          "10879489003/250000000000",
+          "43517956013/1000000000000"
+        ]
+      },
+      {
+        "rho": "1/50",
+        "old_E_interval": [
+          "50419501/1000000000000",
+          "25209751/500000000000"
+        ],
+        "full_E_interval": [
+          "25070421/250000000000",
+          "20056337/200000000000"
+        ]
+      },
+      {
+        "rho": "2/99",
+        "old_E_interval": [
+          "0",
+          "0"
+        ],
+        "full_E_interval": [
+          "0",
+          "0"
+        ]
+      }
+    ],
+    "finite_examples": {
+      "parameters": {
+        "k": 12,
+        "n": 120,
+        "D": 2000,
+        "q": "99/100"
+      },
+      "rows": [
+        {
+          "z": "27/25",
+          "m_T": 0,
+          "selected_L": 2000,
+          "log_moment_bound_interval": [
+            "7443/200000000000",
+            "1163/31250000000"
+          ],
+          "negative_log_score_lower": [
+            "1847064950051/1000000000000",
+            "461766237513/250000000000"
+          ],
+          "score_upper": "6307973727/40000000000",
+          "existing_polygon_score_upper": "48829521/200000000000"
+        },
+        {
+          "z": "27/25",
+          "m_T": 171,
+          "selected_L": 314,
+          "log_moment_bound_interval": [
+            "213254732863/250000000000",
+            "853018931453/1000000000000"
+          ],
+          "negative_log_score_lower": [
+            "497023027907/500000000000",
+            "198809211163/200000000000"
+          ],
+          "score_upper": "185038154177/500000000000",
+          "existing_polygon_score_upper": "63205275149/250000000000"
+        },
+        {
+          "z": "27/25",
+          "m_T": 200,
+          "selected_L": 299,
+          "log_moment_bound_interval": [
+            "988530279729/1000000000000",
+            "98853027973/100000000000"
+          ],
+          "negative_log_score_lower": [
+            "429267353769/500000000000",
+            "858534707539/1000000000000"
+          ],
+          "score_upper": "423782593031/1000000000000",
+          "existing_polygon_score_upper": "316524376419/1000000000000"
+        },
+        {
+          "z": "27/25",
+          "m_T": 243,
+          "selected_L": 281,
+          "log_moment_bound_interval": [
+            "1187508689687/1000000000000",
+            "148438586211/125000000000"
+          ],
+          "negative_log_score_lower": [
+            "659556297579/1000000000000",
+            "32977814879/50000000000"
+          ],
+          "score_upper": "103416142713/200000000000",
+          "existing_polygon_score_upper": "427189188587/1000000000000"
+        },
+        {
+          "z": "27/25",
+          "m_T": 300,
+          "selected_L": 261,
+          "log_moment_bound_interval": [
+            "1448352285079/1000000000000",
+            "36208807127/25000000000"
+          ],
+          "negative_log_score_lower": [
+            "398712702187/1000000000000",
+            "99678175547/250000000000"
+          ],
+          "score_upper": "671183503209/1000000000000",
+          "existing_polygon_score_upper": "304988483973/500000000000"
+        },
+        {
+          "z": "2",
+          "m_T": 0,
+          "selected_L": 2000,
+          "log_moment_bound_interval": [
+            "83869/125000000000",
+            "670953/1000000000000"
+          ],
+          "negative_log_score_lower": [
+            "4158882747883/500000000000",
+            "8317765495767/1000000000000"
+          ],
+          "score_upper": "244140789/1000000000000"
+        },
+        {
+          "z": "2",
+          "m_T": 171,
+          "selected_L": 347,
+          "log_moment_bound_interval": [
+            "10589983994111/1000000000000",
+            "41367124977/3906250000"
+          ],
+          "negative_log_score_lower": [
+            "0",
+            "0"
+          ],
+          "score_upper": "1"
+        },
+        {
+          "z": "2",
+          "m_T": 200,
+          "selected_L": 332,
+          "log_moment_bound_interval": [
+            "6133775563447/500000000000",
+            "2453510225379/200000000000"
+          ],
+          "negative_log_score_lower": [
+            "0",
+            "0"
+          ],
+          "score_upper": "1"
+        },
+        {
+          "z": "2",
+          "m_T": 243,
+          "selected_L": 312,
+          "log_moment_bound_interval": [
+            "14729219078697/1000000000000",
+            "7364609539349/500000000000"
+          ],
+          "negative_log_score_lower": [
+            "0",
+            "0"
+          ],
+          "score_upper": "1"
+        },
+        {
+          "z": "2",
+          "m_T": 300,
+          "selected_L": 291,
+          "log_moment_bound_interval": [
+            "8976790290721/500000000000",
+            "17953580581443/1000000000000"
+          ],
+          "negative_log_score_lower": [
+            "0",
+            "0"
+          ],
+          "score_upper": "1"
+        }
+      ]
+    },
+    "series_scope": "Rational outward head terms plus 60-term alternating tail after (z^2-1)q^J<=1/4; derivative tails certified likewise. No floating-point certificate decisions."
+  },
   "scope": "Exact scalar identities and rational-interval objective/finite certificates. All-parameter statements use the written proof. No achievable capacity or physical optimality is certified."
 }

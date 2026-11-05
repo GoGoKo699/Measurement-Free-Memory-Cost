@@ -14,6 +14,8 @@ import json
 import math
 import numpy as np
 
+from verify_five_qubit import correction, syndrome, sp, LOGICAL_X, LOGICAL_Z
+
 
 def gates_for_table(table):
     """Two syndrome inputs4,5; minterm work6..9; output10,11."""
@@ -182,9 +184,144 @@ def sufficient_size_example():
             'certificate': 'Hoeffding c>=u^2/2; 2J exp(-u^2 N/2)<=2J*2^-L<=epsilon.'}
 
 
+def hybrid_inner_checks():
+    """Exact Pauli covariance and biased-noise checks for the inner recovery.
+
+    The independently checked dense recovery identity lives in verify_five_qubit.
+    Here the extra issue is that a nonzero outer residual already exists when
+    fresh physical noise arrives. No independence of its X/Z bits is assumed.
+    """
+    labels = list(itertools.product('IXYZ', repeat=5))
+    bit = {'I': 0, 'X': 1, 'Z': 2, 'Y': 3}
+    char = {value: key for key, value in bit.items()}
+
+    def residual(label):
+        fx, fz = correction(syndrome(label))
+        return (fx ^ sp(label, LOGICAL_Z)) | ((fz ^ sp(label, LOGICAL_X)) << 1)
+
+    covariance_cases = 0
+    for label in labels:
+        original_syndrome = syndrome(label)
+        original_residual = residual(label)
+        for prior in 'IXYZ':
+            # XXXXX and ZZZZZ represent logical X and Z; YYYYY differs from
+            # their logical-Y product only by a physically irrelevant phase.
+            shifted = tuple(char[bit[p] ^ bit[prior]] for p in label)
+            assert syndrome(shifted) == original_syndrome
+            assert residual(shifted) == original_residual ^ bit[prior]
+            covariance_cases += 1
+
+    depolarizing = (F(77,80), F(1,80), F(1,80), F(1,80))
+    pure_x = (F(77,80), F(3,80), F(0), F(0))
+    biased = (F(313,320), F(1,80), F(1,160), F(1,320))
+    no_error = (F(1), F(0), F(0), F(0))
+    fixtures = [
+        ('depolarizing', [depolarizing]*5),
+        ('pure_x', [pure_x]*5),
+        ('biased', [biased]*5),
+        ('different_positions', [depolarizing, pure_x, biased, no_error, biased]),
+    ]
+    results = []
+    for name, distributions in fixtures:
+        assert all(sum(p) == 1 and min(p) >= 0 for p in distributions)
+        output = [F(0)]*4  # I,X,Z,Y order follows the binary residual label.
+        for label in labels:
+            probability = math.prod(distributions[j]['IXYZ'.index(p)]
+                                    for j, p in enumerate(label))
+            output[residual(label)] += probability
+        assert sum(output) == 1
+        physical_failure = [1-p[0] for p in distributions]
+        pair_bound = sum(physical_failure[i]*physical_failure[j]
+                         for i in range(5) for j in range(i+1,5))
+        nonidentity = 1-output[0]
+        assert nonidentity <= pair_bound <= 10*max(physical_failure)**2
+        x_marginal, z_marginal = output[1]+output[3], output[2]+output[3]
+        assert x_marginal <= nonidentity and z_marginal <= nonidentity
+        correlation = output[3]-x_marginal*z_marginal
+        if name == 'depolarizing':
+            assert correlation != 0  # A concrete check that X/Z independence is false.
+        results.append({'fixture': name, 'logical_nonidentity_probability': str(nonidentity),
+                        'pair_union_bound': str(pair_bound),
+                        'X_Z_joint_minus_product': str(correlation)})
+    return {'prior_logical_pauli_covariance_cases': covariance_cases,
+            'exact_biased_distribution_cases': len(fixtures),
+            'distribution_results': results}
+
+
+def hybrid_schedule_checks():
+    parameter_cases = 0
+    choices = []
+    for u in [F(1,8), F(1,32), F(1,1000), F(1,2**20), F(1,10**12)]:
+        level = 0
+        while F(3,8)**(2**level)/10 > u/2:
+            level += 1
+        eta = F(3,8)**(2**level)/10
+        W = 5**level
+        assert eta <= u/2
+        if level:
+            assert F(3,8)**(2**(level-1))/10 > u/2
+        node_count = (W-1)//4
+        assert node_count == sum(5**j for j in range(level))
+        choices.append({'outer_u': str(u), 'constant_inner_levels': level,
+                        'inner_width_per_outer_position': W,
+                        'inner_T_slots_per_outer_position': 42*node_count,
+                        'effective_nonidentity_bound': str(eta)})
+        for gamma in [F(1,20), F(1,21), F(1,100), F(1,1000)]:
+            h = 1 // (20*gamma)
+            assert h >= 1/(40*gamma) and 0 < h*gamma <= F(1,20)
+            for batch_length in {1, h}:
+                p0 = F(3,4)*(1-(1-gamma)**batch_length)
+                assert p0 <= F(3,80)
+                assert (10*p0)**(2**level)/10 <= eta <= u/2
+            for D in [0, 1, h, h+1, 1_000_000]:
+                J = (D+h-1)//h
+                assert J <= 40*gamma*D+1
+                assert (J == 0) == (D == 0)
+                if J:
+                    assert 1 <= D-(J-1)*h <= h
+                # The combined count includes both inner and outer allocations.
+                # These illustrative outer constants test accounting, not code existence.
+                N, CW, CT = 120, 1024, 2048
+                width = (W+CW)*N
+                slots = (42*node_count+CT)*N*J
+                assert width >= W*N and width >= CW*N
+                assert slots >= 42*node_count*N*J and slots >= CT*N*J
+                parameter_cases += 1
+    return {'exact_schedule_and_resource_cases': parameter_cases,
+            'constant_depth_choices': choices}
+
+
+def hybrid_sufficient_size_example():
+    # Conditional algebraic fixture only: these are not certified Tanner local codes.
+    u, gamma = F(1,32), F(1,20)
+    D, epsilon, k, rate = 1_000_000, F(1,2**20), 128, F(1,4)
+    level = 0
+    while F(3,8)**(2**level)/10 > u/2:
+        level += 1
+    h = 1 // (20*gamma)
+    J = (D+h-1)//h
+    exponent = 0
+    while F(2*J, 2**exponent) > epsilon:
+        exponent += 1
+    N = max(math.ceil(k/rate), math.ceil(F(2*exponent)/(u*u)))
+    failure = F(2*J, 2**exponent)
+    assert u*u*N/2 >= exponent and failure <= epsilon
+    assert gamma > u/2  # This fixture lies outside the direct Tanner noise range.
+    return {'interpretation': 'Conditional hybrid scalar fixture only; no Tanner block simulated.',
+            'u': str(u), 'gamma': str(gamma), 'D': D, 'epoch_length': h,
+            'epochs': J, 'logical_qubits': k, 'rate_lower_bound': str(rate),
+            'constant_inner_levels': level, 'inner_width_per_outer_position': 5**level,
+            'effective_nonidentity_bound': str(F(3,8)**(2**level)/10),
+            'target_error': str(epsilon), 'sufficient_outer_data_length': N,
+            'failure_bound_exact': str(failure),
+            'certificate': 'Inner residual <=u/2; 2J exp(-u^2 N/2)<=2J*2^-exponent<=epsilon.'}
+
+
 def run():
     return {'status': 'PASS', 'exhaustive_two_input_two_output_lookup_cases': exhaustive_lookup(),
             'reference_channel': choi_channel(), 'scalar_checks': scalar_and_resource_checks(), 'sufficient_size_example': sufficient_size_example(),
+            'hybrid_inner': hybrid_inner_checks(), 'hybrid_schedule': hybrid_schedule_checks(),
+            'hybrid_sufficient_size_example': hybrid_sufficient_size_example(),
             'scope': 'Finite compilation/Choi identities and exact scalar checks; inherited Tanner family and decoder theorems are not numerically re-proved.'}
 
 
