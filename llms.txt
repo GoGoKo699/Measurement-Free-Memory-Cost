@@ -45,7 +45,8 @@ Canonical entrypoints:
 - verification/README.md: finite checks, dependencies and their limitations.
 - verification/run_all.py: deterministic suite and saved-output comparison.
 - verification/Graph/README.md: Python-generated finite width/processing
-  comparison, pinned dependencies, committed plots and numerical certificates.
+  comparison and refined/rank-only/payload processing lower bounds, pinned
+  dependencies, committed plots and numerical certificates.
 
 Learning entrypoints:
 - learning/report/Measurement_Free_Memory_Cost_Report.pdf: continuous self-contained explanation of the model, converse, constructions, matching-order regime and remaining physical questions.
