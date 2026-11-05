@@ -119,16 +119,46 @@ The kernel of the restricted coordinate map has dimension $`r-\mathrm{rank}G_E`$
 
 At a backward noise layer the current envelope is a function only of noise later in forward time. It is independent of the erasures sampled in the current layer. Consequently (E7) may be conditioned on the current envelope and iterated. Free operations from Lemma E1 can only decrease the rank between layers.
 
+### Lemma E2a — Generating-function contraction
+
+For the same noise layer, put $`r'=\dim(V\cap\ker\pi_E)`$. For every $`s\in[0,1]`$, with $`0^0=1`$,
+
+```math
+\mathbb E_E[s^{r'}]\ge(1-q+qs)^r.
+\qquad\text{(E8a)}
+```
+
+**Proof.** Choose the independent columns used in Lemma E2. Let $`c_i\in\{0,1,2\}`$ be the number chosen on qubit $`i`$, so $`\sum_i c_i=r`$. Write $`B_i=1`$ when qubit $`i`$ is not replaced. The projection-rank bound in that lemma gives $`r'\le\sum_i c_iB_i`$. Since $`s^x`$ is nonincreasing in $`x`$,
+
+```math
+\mathbb E_E[s^{r'}]
+\ge\prod_i(1-q+qs^{c_i})
+\ge(1-q+qs)^r.
+\qquad\text{(E8b)}
+```
+
+The product uses independence across qubits. The final factor comparison is equality for $`c_i=0,1`$; for $`c_i=2`$, its difference is $`q(1-q)(1-s)^2\ge0`$. The same argument holds at $`s=0`$ under the stated convention. $`\square`$
+
+Consequently, a zero-T interval starting from a deterministic envelope of rank $`M`$ and containing $`D`$ noise layers obeys
+
+```math
+\mathbb E[s^{r_{\rm end}}]\ge(1-q^D+q^Ds)^M
+\qquad(0\le s\le1).
+\qquad\text{(E8c)}
+```
+
+Indeed, conditional application of (E8a) sends a generating function $`G(s)`$ to at least $`G(1-q+qs)`$. A free primitive can only decrease rank, so it cannot decrease $`G(s)`$ on this interval. Iterating from $`G(s)=s^M`$ proves (E8c), including $`D=0`$ and $`M=0`$. Equality is attained for $`V=\mathrm{span}\{Z_1,\ldots,Z_M\}`$, $`M\le n`$, with no intervening processing: its final rank is binomial with parameters $`M,q^D`$. This is sharpness of the envelope generating-function inequality, not a claim that the channel-distance bound below is optimal.
+
 ## 3. Exact replacement components
 
 ### Theorem E3 — Logarithmic forgetting, stable under an arbitrary reference
 
-Let $`\Phi`$ be the storage channel, optionally composed with a fixed final decoder. Suppose the storage interval contains only the free primitives of Lemma E1 and $`D`$ noise layers. Initialize the envelope with dimension $`M`$, as in (E5), or take $`M=2n`$. For every fixed input density operator $`\omega_0`$, let $`\tau=\Phi(\omega_0)`$. Then
+Let $`\Phi`$ be the storage channel, optionally composed with a fixed final decoder. Suppose the storage interval contains only the free primitives of Lemma E1 and $`D`$ noise layers. Initialize the envelope with dimension $`M`$, as in (E5), or take $`M=2n`$. Put $`\eta_M(D)=1-(1-q^D)^M`$, using $`0^0=1`$ so that $`\eta_0(D)=0`$ even at $`D=0`$. For every fixed input density operator $`\omega_0`$, let $`\tau=\Phi(\omega_0)`$. Then
 
 
 ```math
 \frac12\|\Phi-\mathcal R_\tau\|_\diamond
-\le \min\{1,Mq^D\},
+\le \eta_M(D)\le \min\{1,Mq^D\},
 \qquad \mathcal R_\tau(X)=\mathrm{Tr}(X)\tau.
 \qquad\text{(E9)}
 ```
@@ -142,7 +172,7 @@ Equivalently, for every finite reference system $`R`$ and joint input state $`\o
 (\Phi\otimes\mathrm{id}_R)(\omega_{MR})
 -\tau\otimes\omega_R
 \right\|_1
-\le \min\{1,Mq^D\}.
+\le \eta_M(D).
 \qquad\text{(E10)}
 ```
 
@@ -152,23 +182,23 @@ In particular, any two input states obey
 
 ```math
 \|\Phi(\rho)-\Phi(\sigma)\|_1
-\le 2\min\{1,Mq^D\}.
+\le 2\eta_M(D).
 \qquad\text{(E11)}
 ```
 
 
-**Proof.** After propagating through the entire sampled storage circuit, write $`r_b=\dim V_b`$. Lemmas E1 and E2 imply
+**Proof.** After propagating through the entire sampled storage circuit, write $`r_b=\dim V_b`$. Setting $`s=0`$ in (E8c) gives
 
 
 ```math
-\mathbb E_b r_b\le Mq^D,
+\Pr(r_b=0)\ge(1-q^D)^M,
 \qquad
-p:=\Pr(r_b>0)\le\min\{1,Mq^D\}.
+p:=\Pr(r_b>0)\le\eta_M(D)\le\min\{1,Mq^D\}.
 \qquad\text{(E12)}
 ```
 
 
-The second inequality uses that a positive integer rank is at least one. If $`r_b=0`$, the adjoint image of every output observable is a scalar multiple of the identity. Therefore $`\Phi_b`$ is exactly a replacement channel: all input states have the same output, and trace preservation extends the formula to $`\Phi_b(X)=\mathrm{Tr}(X)\tau_b`$.
+The last inequality is Bernoulli's inequality. If $`r_b=0`$, the adjoint image of every output observable is a scalar multiple of the identity. Therefore $`\Phi_b`$ is exactly a replacement channel: all input states have the same output, and trace preservation extends the formula to $`\Phi_b(X)=\mathrm{Tr}(X)\tau_b`$.
 
 Separating the sampled circuits according to this event yields
 
@@ -191,7 +221,14 @@ where $`\Psi`$ is a CPTP channel and the first term is the average of the replac
 
 The diamond distance between two channels is at most two, proving (E9) and hence (E10). Equation (E13) also gives $`\Phi(\rho)-\Phi(\sigma)=p[\Psi(\rho)-\Psi(\sigma)]`$, whose trace norm is at most $`2p`$. This proves (E11) without an extra factor of two. $`\square`$
 
-For $`M>0`$, a sufficient depth for the right side of (E9) to be at most $`\delta\in(0,1)`$ is
+For $`M>0`$ and $`\delta\in(0,1)`$, the sharper bound $`\eta_M(D)`$ is at most $`\delta`$ exactly when
+
+```math
+D\ge\frac{\ln\!\left(1/[1-(1-\delta)^{1/M}]\right)}{-\ln q}.
+\qquad\text{(E15a)}
+```
+
+For an integer depth, take the ceiling. A simpler sufficient condition remains
 
 
 ```math
@@ -214,11 +251,11 @@ The conservative choice $`n=\max_t n_t`$ yields every bound in this chapter. A m
 
 Nelson, Rajakumar, and Gullans prove forgetting at depth $`O(\gamma^{-1}\log n\log(n/\delta))`$ for noisy Clifford circuits with resets. Their stochastic decomposition of depolarizing noise, backward action on Paulis, and replacement-branch reduction are the starting point for the present argument. Their published Theorem 1 and Observation 2 appear in [*Non-Clifford Gates Are Required for Long-Term Memory*, CCC 2026](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.CCC.2026.38), with the [full article](https://drops.dagstuhl.de/storage/00lipics/lipics-vol383-ccc2026/LIPIcs.CCC.2026.38/LIPIcs.CCC.2026.38.pdf) and [arXiv version](https://arxiv.org/abs/2510.08451) available online.
 
-The additional ingredient here is the simultaneous binary linear envelope and its one-layer expected-rank contraction (E7). It replaces counting individual surviving Paulis. The replacement decomposition then yields the reference-stable statement (E9). The theorem permits arbitrary joint replacement states because their adjoint label action remains a coordinate projection.
+The additional ingredient here is the simultaneous binary linear envelope and its one-layer expected-rank contraction (E7). It replaces counting individual surviving Paulis. The same independent-column argument also proves the generating-function refinement (E8a), which improves the finite replacement probability while retaining logarithmic forgetting depth. The replacement decomposition then yields the reference-stable statement (E9). The theorem permits arbitrary joint replacement states because their adjoint label action remains a coordinate projection.
 
 The result concerns internal operations in the stated storage model. Fixed replacement states, including magic states, are free; protected external classical decoding uses a different controller resource. The quantum-memory construction in [clifford_lifetime.md](clifford_lifetime.md) and the charged recovery construction in [coherent_recovery.md](coherent_recovery.md) address different ways to approach the resulting resource frontier.
 
 ## 6. Finite verification
 
-The deterministic verification program in [verification/verify_pauli_algebra.py](../verification/verify_pauli_algebra.py) constructs dense two-qubit Pauli matrices independently of the circuit rank simulator. It checks every binary subspace of $`\mathbb F_2^4`$, the conditional expectations used in the companion chapter, the local rotation envelopes, and mixed backward circuits with nonstabilizer resets. Its numerical checks detect finite operator and sign errors; the dimension-independent assertions are established by the proofs above. The accompanying exact-rational verification checks the finite-depth scalar optimization used in [control_cost.md](control_cost.md).
+The deterministic verification program in [verification/verify_pauli_algebra.py](../verification/verify_pauli_algebra.py) constructs dense two-qubit Pauli matrices independently of the circuit rank simulator. It checks every binary subspace of $`\mathbb F_2^4`$, the conditional expectations used in the companion chapter, the local rotation envelopes, and mixed backward circuits with nonstabilizer resets. Exact replacement-mask enumeration checks (E8a) and multi-layer free schedules against (E8c), including $`s=0,1`$, zero rank, zero depth and the independent-axis equality cases. Its numerical checks detect finite operator and sign errors; the dimension-independent assertions are established by the proofs above. The accompanying exact-rational verification also checks the finite-depth scalar optimization used in [control_cost.md](control_cost.md).
 

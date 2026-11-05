@@ -50,7 +50,7 @@ The [delayed-basis BB84 application](guessing_processing.md) replaces the fideli
 
 ### Reliability also constrains the time spent at each rank
 
-The [reliability converse](reliability_processing.md) uses an absorbing choice of the same envelope. At an incoming rank $`r\gt0`$, at most $`r`$ physical pivot qubits identify every label. Replacing all of them annihilates the envelope, with conditional probability at least $`\gamma^r`$. Current replacement choices are independent of the later suffix defining the incoming envelope. A zero envelope stays zero under every adjoint primitive; in particular, a T update adds its axis only when some existing label anticommutes with it.
+The [reliability converse](reliability_processing.md) uses an absorbing choice of the same envelope. At binary rank $`r\gt0`$ and symplectic rank $`2s`$, at most $`r-s`$ physical pivot qubits identify every label. Replacing all of them annihilates the envelope, with conditional probability at least $`\gamma^{r-s}`$. Current replacement choices are independent of the later suffix defining the incoming envelope. A zero envelope stays zero under every adjoint primitive; in particular, a T update adds its axis only when some existing label anticommutes with it. Discarding the symplectic information gives the simpler rank-only consequence below.
 
 Let $`\delta=\epsilon/(1-4^{-k})\in(0,1)`$ and $`b=1-\delta`$. Bell fidelity at least $`1-\epsilon`$ permits eventual extinction with probability at most $`\delta`$. First-extinction events at distinct noise layers are disjoint, so their total hazard is bounded by that same probability. Jensen's inequality, weighted by the surviving cuts, forces cumulative incoming rank at least
 
@@ -67,7 +67,7 @@ m_T\ge\left[
 \right]_+.
 ```
 
-This converts a reliability requirement into charged continuing processing, rather than only a width ceiling. The complete-erasure/Jensen reliability mechanism has an established cumulative-spacetime precedent; its adaptation here uses backward Pauli rank and the T-growth ledger. For delayed-basis guessing, the same reliability part applies with $`\delta=(1-p)/(1-2^{-k})`$ for every $`2^{-k}\lt p\lt1`$. It can witness work retaining classical as well as quantum input dependence, without verifying the device assumptions.
+The stronger finite theorem keeps the exact product of conditional survival probabilities, adds the existing all-cut lower bound on the coherent block size, and retains the exiting-rank floor in the gate ledger. These improvements change finite necessary counts without changing the fixed-noise asymptotic order. The complete-erasure/Jensen reliability mechanism has an established cumulative-spacetime precedent; its adaptation here uses backward Pauli rank and the T-growth ledger. For delayed-basis guessing, the reliability part applies with $`\delta=(1-p)/(1-2^{-k})`$ for every $`2^{-k}\lt p\lt1`$. Its coherent-block contribution must use the separate BB84 dimension bound, not the Bell-fidelity floor. The resulting bound can witness work retaining classical as well as quantum input dependence, without verifying the device assumptions.
 
 ## 3. Quantum storage at zero internal T count
 
@@ -162,7 +162,7 @@ n\ge\frac{\ln D-\ln[-\ln(1-\eta)]}{|\ln\gamma|}.
 
 When its right side is useful, this makes the width requirement explicit. At fixed $`\gamma`$ and small error, it grows logarithmically in $`D/\epsilon`$. The continuing-processing slope concerns feasible families with adequate width; fixed finite width still has the lifetime ceiling (I1).
 
-The five-qubit construction uses a power of a logarithm in the storage horizon. With fixed-level inner protection throughout $`\gamma\le1/20`$, the Tanner construction's width instead has the additive form $`O(k+\ln(J/\epsilon))`$. At fixed noise and for long durations, this has the same logarithmic reliability order as (I2). The numerical width/work frontier remains open.
+The five-qubit construction uses a power of a logarithm in the storage horizon. With fixed-level inner protection throughout $`\gamma\le1/20`$, the Tanner construction's width instead has the additive form $`O(k+\ln(J_+/\epsilon))`$, with $`J_+=\max\{1,J\}`$. At fixed noise, the channel-dimension bound also forces $`n\ge k`$ when $`\epsilon\lt1/2`$. Together with (I2) and the Tanner upper bound, this proves $`n_{\min}=\Theta_\gamma(k+\ln(D/\epsilon))`$, uniformly over the stated payload and error range as $`D\to\infty`$. Thus the matching processing order holds within a sufficiently large fixed factor of the minimum possible width. The [full corollary](reliability_processing.md) makes the quantifiers explicit; the numerical and unrestricted width/work frontier remains open.
 
 ## 6. Endpoints, controllers, and magic states
 

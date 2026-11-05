@@ -6,7 +6,8 @@ They verify all two-qubit subspace algebras, non-Clifford envelope updates,
 mixed sampled channels, a joint nonstabilizer replacement reset, and a decoder
 whose terminal support rank exceeds twice its output width. A separate exact
 rational calculation verifies the finite-depth injection LP by matching primal
-and dual certificates. These checks supplement, rather than replace, the proofs.
+and dual certificates, and enumerates replacement masks for the zero-T
+generating-function bound. These checks supplement, rather than replace, the proofs.
 
 Run from any directory:
     python3 verify_pauli_algebra.py --output pauli_algebra_results.json
@@ -426,6 +427,111 @@ def verify_mixed_circuits() -> dict[str, int | float]:
             "maximum_replacement_criterion_residual": max_replacement_error}
 
 
+def verify_forgetting_generating_function(spaces: list[Subspace]) -> dict[str, int | str]:
+    """Enumerate exact noise branches, independently of the pivot proof."""
+    q_values = (Fraction(1, 5), Fraction(1, 2), Fraction(4, 5))
+    s_values = (Fraction(0), Fraction(1, 7), Fraction(1, 3),
+                Fraction(2, 3), Fraction(1))
+    max_depth = 4
+    schedules = (
+        ("identity",),
+        ("hadamard0", "cnot"),
+        ("reset0", "hadamard0", "cnot"),
+        ("measure_x1", "cnot", "hadamard0"),
+        ("cnot", "reset0", "hadamard0", "measure_x1"),
+    )
+    coordinate_masks = [sum((1 << j) | (1 << (N_QUBITS + j))
+                            for j in range(N_QUBITS) if mask & (1 << j))
+                        for mask in range(1 << N_QUBITS)]
+    kernels = {space: tuple(frozenset(v for v in space if not v & mask)
+                            for mask in coordinate_masks)
+               for space in spaces}
+
+    def free_update(space: Subspace, operation: str) -> Subspace:
+        if operation == "identity":
+            return space
+        if operation == "hadamard0":
+            return frozenset((v & ~5) | ((v & 1) << 2) | ((v & 4) >> 2)
+                             for v in space)
+        if operation == "cnot":
+            return frozenset(v ^ ((v & 1) << 1) ^ ((v & 8) >> 1) for v in space)
+        if operation == "reset0":
+            return frozenset(v & ~5 for v in space)
+        if operation == "measure_x1":
+            return frozenset(v for v in space if symplectic(v, 2) == 0)
+        raise VerificationError(f"Unknown free fixture: {operation}")
+
+    operations = {operation for schedule in schedules for operation in schedule}
+    free_images = {(space, operation): free_update(space, operation)
+                   for space in spaces for operation in operations}
+    for (space, operation), updated in free_images.items():
+        require(updated in kernels, f"Free fixture {operation} is not a subspace")
+        require(dimension(updated) <= dimension(space), "Free fixture increased rank")
+
+    def generating_function(distribution: dict[Subspace, Fraction], s: Fraction) -> Fraction:
+        # Fraction(0)**0 is 1, including the extinct-rank contribution at s=0.
+        return sum((probability * s**dimension(space)
+                    for space, probability in distribution.items()), Fraction(0))
+
+    one_layer_cases = schedule_cases = equality_cases = strict_cases = 0
+    equality_spaces = {span(1 << (N_QUBITS + j) for j in range(m))
+                       for m in range(N_QUBITS + 1)}
+    for q in q_values:
+        mask_probabilities = tuple((1-q)**mask.bit_count()
+                                   * q**(N_QUBITS-mask.bit_count())
+                                   for mask in range(1 << N_QUBITS))
+        require(sum(mask_probabilities) == 1, "Noise mask law is not normalized")
+
+        def noise(distribution: dict[Subspace, Fraction]) -> dict[Subspace, Fraction]:
+            updated: dict[Subspace, Fraction] = {}
+            for space, probability in distribution.items():
+                for target, mask_probability in zip(kernels[space], mask_probabilities):
+                    updated[target] = updated.get(target, Fraction(0)) + probability * mask_probability
+            require(sum(updated.values()) == 1, "Branch law lost normalization")
+            return updated
+
+        for initial in spaces:
+            initial_rank = dimension(initial)
+            one_layer = noise({initial: Fraction(1)})
+            for s in s_values:
+                actual = generating_function(one_layer, s)
+                bound = (1-q+q*s)**initial_rank
+                require(actual >= bound, "One-layer generating-function inequality failed")
+                strict_cases += int(actual > bound)
+                one_layer_cases += 1
+            for schedule in schedules:
+                distribution = {initial: Fraction(1)}
+                for depth in range(max_depth + 1):
+                    for s in s_values:
+                        actual = generating_function(distribution, s)
+                        bound = (1-q**depth+q**depth*s)**initial_rank
+                        require(actual >= bound, "Iterated generating-function inequality failed")
+                        schedule_cases += 1
+                        if schedule == ("identity",) and initial in equality_spaces:
+                            require(actual == bound, "Independent-axis equality fixture failed")
+                            equality_cases += 1
+                    alive = 1-distribution.get(frozenset({0}), Fraction(0))
+                    eta = 1-(1-q**depth)**initial_rank
+                    require(alive <= eta <= min(1, initial_rank*q**depth),
+                            "Finite forgetting improvement failed")
+                    if depth < max_depth:
+                        operation = schedule[depth % len(schedule)]
+                        before_noise: dict[Subspace, Fraction] = {}
+                        for space, probability in distribution.items():
+                            target = free_images[space, operation]
+                            before_noise[target] = before_noise.get(target, Fraction(0)) + probability
+                        distribution = noise(before_noise)
+    require(strict_cases > 0, "Fixtures did not exercise strict contraction")
+    return {"arithmetic": "exact rational (fractions.Fraction)",
+            "subspaces_checked": len(spaces),
+            "one_layer_generating_function_cases": one_layer_cases,
+            "strict_one_layer_cases": strict_cases,
+            "free_schedule_families": len(schedules),
+            "maximum_noise_depth": max_depth,
+            "iterated_generating_function_cases": schedule_cases,
+            "independent_axis_equality_cases": equality_cases}
+
+
 def verify_injection_case(depth: int, initial: Fraction, floor: Fraction,
                           q: Fraction, cap: Fraction) -> bool:
     """Check exact primal/dual certificates; return whether cap is feasible."""
@@ -539,7 +645,7 @@ def main() -> int:
     require(len(spaces) == 67, "Enumeration did not produce all two-qubit subspaces")
     report = {
         "status": "PASS",
-        "scope": "finite operator identities and exact scalar LP certificates",
+        "scope": "finite operator identities, exact forgetting laws and scalar LP certificates",
         "python_version": platform.python_version(),
         "numpy_version": np.__version__,
         "numerical_tolerance": TOLERANCE,
@@ -549,6 +655,7 @@ def main() -> int:
         "terminal_decoder": verify_decoder_support(),
         "logical_channel_rank": verify_logical_channel_rank(spaces),
         "mixed_circuits": verify_mixed_circuits(),
+        "forgetting_generating_function": verify_forgetting_generating_function(spaces),
         "injection_optimization": verify_injection_optimization(),
     }
     serialized = json.dumps(report, indent=2, sort_keys=True) + "\n"
