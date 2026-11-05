@@ -110,7 +110,7 @@ Consequently the average $`H_d`$ is at most the fraction in (D6). Its average is
 
 The term containing $`2n`$ is the explicit initial-width allowance. The cut averaging makes the theorem independent of the gate schedule. There is no random selection of storage circuits, expected executed charge, free nonlinear controller, or supplied noise flag.
 
-A stronger finite branch majorant can be composed with this ledger. If $`P_z`$ is any established nondecreasing concave majorant of the branch score in $`Y=z^r`$, set $`B_L`$ equal to the fraction in (D6). At least one selected cut has $`H_d\le B_L`$, so
+For $`\lambda\gt0`$, a stronger finite branch majorant can be composed with this ledger. If $`P_z`$ is any established nondecreasing concave majorant of the branch score in $`Y=z^r`$, set $`B_L`$ equal to the fraction in (D6). At least one selected cut has $`H_d\le B_L`$, so
 
 ```math
 p\le P_z(e^{B_L}),\qquad z=e^\lambda.
