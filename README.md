@@ -136,6 +136,10 @@ The [finite resource comparison](verification/Graph/README.md) provides the
 Python-generated width and processing curves, pinned dependencies, and a check
 against the committed plot and numerical certificates.
 
+The [finite processing lower-bound figure](verification/Graph/README.md#finite-processing-lower-bounds)
+compares the refined reliability, rank-only reliability and payload bounds at
+the same physical width, with independent checks of its labelled values.
+
 Finite computations validate the stated finite identities. General converses, concatenation guarantees, and asymptotic resource laws rely on the written proofs.
 
 ## Scope

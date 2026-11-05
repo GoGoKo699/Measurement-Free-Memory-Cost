@@ -140,7 +140,7 @@ a\left[D\kappa-\ln\!\left(\frac{2n}{a}\right)\right]_+,
 \qquad\text{(M9)}
 ```
 
-The count includes both $`T`$ and $`T^\dagger`$. At fixed error bounded away from the trivial threshold and weak noise, this is an extensive cost of order $`k\gamma D`$ once $`D\kappa`$ exceeds the width allowance $`\ln(2n/a)`$ by a fixed factor greater than one. This is a necessary gate budget; the constructions below give sufficient resources in the same model.
+The count includes all prescribed internal $`T`$ and $`T^\dagger`$ slots, including slots whose action is trivial on a particular sampled branch. At fixed error bounded away from the trivial threshold and weak noise, this is an extensive cost of order $`k\gamma D`$ once $`D\kappa`$ exceeds the width allowance $`\ln(2n/a)`$ by a fixed factor greater than one. This is a necessary gate budget; the constructions below give sufficient resources in the same model.
 
 [Control cost](control_cost.md) gives sharper integer-gate and finite-depth inequalities, an exact optimization of the corresponding scalar rank constraints, and a bound for every contiguous storage interval. It also replaces $`2n`$ by a smaller decoder-specific terminal rank when justified. A fixed Pauli-axis rotation has rank-growth charge at most one, while a general operation on $`s`$ qubits has a safe charge at most $`2s`$; those structural charges are not automatically physical T counts.
 

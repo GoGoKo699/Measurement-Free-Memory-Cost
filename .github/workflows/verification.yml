@@ -50,6 +50,7 @@ jobs:
         run: |
           python -m pip install -r verification/Graph/requirements.txt
           python verification/Graph/generate_plots.py --check
+          python verification/Graph/generate_figures.py --check
 
   report-texlive-2025:
     runs-on: ubuntu-24.04
