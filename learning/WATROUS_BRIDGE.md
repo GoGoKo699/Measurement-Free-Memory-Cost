@@ -89,7 +89,7 @@ Retaining spectral normalization in existing recovery inequalities reproduces th
 
 ## Retaining the noise distribution
 
-The [moment-processing proof](../science/moment_processing.md) uses the same counted device model. Choose independent coordinate pivots for a rank-$`r`$ Pauli envelope. At a noise layer, a surviving subspace can use only pivots on retained physical qubits. This gives, for $`1<z\le2`$,
+The [moment-processing proof](../science/moment_processing.md) uses the same counted device model. Choose independent coordinate pivots for a rank-$`r`$ Pauli envelope. At a noise layer, a surviving subspace can use only pivots on retained physical qubits. This gives, for $`1\lt z\le2`$,
 
 ```math
 \mathbb E[z^{r'}\mid V]\le(1-q+qz^2)^{r/2}.

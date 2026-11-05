@@ -17,7 +17,7 @@ Initialize a common backward envelope at the **complete physical output before b
 ```math
 r_{b,t}=\dim V_{b,t},\qquad
 M_{z,t}=\mathbb E_b z^{r_{b,t}},\qquad
-x_{z,t}=\log_z M_{z,t},\quad z>1.
+x_{z,t}=\log_z M_{z,t},\quad z\gt 1.
 \qquad\text{(M1)}
 ```
 
@@ -53,7 +53,7 @@ Define
 
 ```math
 \alpha_z=\frac{\ln(1-q+qz^2)}{2\ln z},
-\qquad q<\alpha_z<1.
+\qquad q\lt \alpha_z\lt 1.
 \qquad\text{(M3)}
 ```
 
@@ -87,7 +87,7 @@ h_k(r)=
 
 Here $`p_{b,t}`$ is the actual common decoder's score; $`p=\mathbb E_b p_{b,t}`$ at every primitive cut. The upper profile need not be attainable.
 
-Fix $`1<z\leq2^{1/7}`$ and set
+Fix $`1\lt z\leq2^{1/7}`$ and set
 
 ```math
 b_0=2^{-k},\quad H=2^{-k/6},\quad
@@ -115,7 +115,7 @@ p\leq\mathbb E_bP_z(z^{r_{b,t}})
 \qquad\text{(M7)}
 ```
 
-For $`p>b_0`$, invert this polygon and put $`a_{z,\mathrm{dir}}=\log_z L_z(p)`$, where
+For $`p\gt b_0`$, invert this polygon and put $`a_{z,\mathrm{dir}}=\log_z L_z(p)`$, where
 
 ```math
 L_z(p)=1+(p-b_0)\frac{Y_2-1}{1-b_0}
@@ -126,7 +126,7 @@ if the middle vertex is dropped. If it is retained, use
 ```math
 L_z(p)=
 \begin{cases}
-1+(p-b_0)\dfrac{Y_1-1}{H-b_0},&b_0<p\leq H,\\
+1+(p-b_0)\dfrac{Y_1-1}{H-b_0},&b_0\lt p\leq H,\\
 Y_1+(p-H)\dfrac{Y_2-Y_1}{1-H},&H\leq p\leq1.
 \end{cases}
 \qquad\text{(M8)}
@@ -141,7 +141,7 @@ h_k(r)\leq\min\{1,2^{(r-2k)/7}\}.
 \qquad\text{(M9)}
 ```
 
-In the first region this is equivalent to $`r\leq5k/6`$; in the second it is equality. If $`1<z\leq2^{1/7}`$, then $`p\leq z^{-2k}M_z`$, giving the simpler floor $`x_z\geq2k+\log_zp`$ when positive. At $`z=2^{1/7}`$ and $`p\geq H`$, the full polygon gives exactly $`2k+7\log_2p`$.
+In the first region this is equivalent to $`r\leq5k/6`$; in the second it is equality. If $`1\lt z\leq2^{1/7}`$, then $`p\leq z^{-2k}M_z`$, giving the simpler floor $`x_z\geq2k+\log_zp`$ when positive. At $`z=2^{1/7}`$ and $`p\geq H`$, the full polygon gives exactly $`2k+7\log_2p`$.
 
 Integer algebra sizes, the width constraint and other proved branch caps can improve (M6). Any concave majorant of those branch caps in $`Y=z^r`$ may replace $`P_z`$; Section 6 gives an exact finite certificate.
 
@@ -164,7 +164,7 @@ Choose one optimal CPTP recovery of the averaged channel. At every cut append th
 F_0\leq\mathbb E_b\min\{1,2^{r_{b,t}-2k}\}.
 ```
 
-For $`1<z\leq2`$, the exponential is convex in $`Y=z^r`$. Its endpoint secant yields the all-cut floor
+For $`1\lt z\leq2`$, the exponential is convex in $`Y=z^r`$. Its endpoint secant yields the all-cut floor
 
 ```math
 a_{z,\mathrm{rec}}=
@@ -173,13 +173,13 @@ a_{z,\mathrm{rec}}=
 \qquad\text{(M11)}
 ```
 
-This is positive for every above-chance score because measure-and-prepare already gives $`F_0\geq p/d>4^{-k}`$. It may be optimized over a larger parameter range than the direct polygon. One can also apply the recovery bounds branch by branch before constructing the moment polygon; averaging the recovery premise first can lose strength. No claim of universal dominance between these alternatives is needed.
+This is positive for every above-chance score because measure-and-prepare already gives $`F_0\geq p/d\gt 4^{-k}`$. It may be optimized over a larger parameter range than the direct polygon. One can also apply the recovery bounds branch by branch before constructing the moment polygon; averaging the recovery premise first can lose strength. No claim of universal dominance between these alternatives is needed.
 
 ## 5. Processing and contiguous intervals
 
 ### Theorem M2 — Moment processing ledger
 
-Fix $`z>1`$ and any positive proved all-cut floor $`a_z`$, from Sections 3–4 or a certified branch majorant. Put $`M=2n`$ and $`\kappa_z=-\ln\alpha_z`$. The [existing scalar processing proofs](control_cost.md#4-logarithmic-and-additive-resource-laws) apply to $`x_z`$ with retention $`\alpha_z`$, giving
+Fix $`z\gt 1`$ and any positive proved all-cut floor $`a_z`$, from Sections 3–4 or a certified branch majorant. Put $`M=2n`$ and $`\kappa_z=-\ln\alpha_z`$. The [existing scalar processing proofs](control_cost.md#4-logarithmic-and-additive-resource-laws) apply to $`x_z`$ with retention $`\alpha_z`$, giving
 
 ```math
 B\geq a_z[D\kappa_z-\ln(M/a_z)]_+,
@@ -219,8 +219,8 @@ For $`k=12,p=2/5,n=120,q=99/100`$, take $`z=27/25`$. A finite majorant uses the 
 The classical input to this certificate is $`p\leq\beta^k`$ for a fully classical memory, where $`\beta=(1+1/\sqrt2)/2`$. Here is a direct proof under the present input promise. For a deterministic decoder $`f`$, let $`S_f=\sum_\theta\rho_{f(\theta),\theta}`$. The Gram matrix of the selected BB84 vectors has absolute row sums at most $`(1+1/\sqrt2)^k`$: basis strings at Hamming distance $`h`$ contribute overlap at most $`2^{-h/2}`$. Thus $`\|S_f\|_\infty\leq(1+1/\sqrt2)^k`$. A classical encoder is a POVM $`\{E_c\}`$ with deterministic postprocessing $`f_c`$, and therefore
 
 ```math
-p=4^{-k}\sum_c\operatorname{Tr}(E_cS_{f_c})
-\leq4^{-k}(1+1/\sqrt2)^k\operatorname{Tr}I
+p=4^{-k}\sum_c\mathrm{Tr}(E_cS_{f_c})
+\leq4^{-k}(1+1/\sqrt2)^k\mathrm{Tr}I
 =\beta^k.
 ```
 
@@ -243,13 +243,13 @@ Certified logarithm enclosures then give:
 
 The new unrounded individual-gate expressions lie in $`(243.117317956157,243.117317956158)`$ and $`(57.347537146205,57.347537146206)`$, respectively. These are valid certified lower counts, not globally optimized parameters or achievable physical costs.
 
-The earlier recovery comparison remains correct for the convenient **mean-rank** floors. The present theorem uses actual product-noise moments instead. The specified normalized recovery family can also be fed into that stronger ledger **branchwise before averaging**. The verifier includes the squared-recovery caps, all normalized spectral thresholds, the Renes conversion, measure-and-prepare and output-dimension caps, and the established classical bound. The additional dimension-lifting cap $`p\leq2^s\beta^k`$ is inactive at the certificate's rank-16 witness and does not remove it. This cap follows by tracing out the quantum register to obtain a classical encoder and bounding quantum guessing in each classical block by its dimension times the largest posterior. A rational mixture witness, 67 exact parameter intervals and an analytic tail certify that, for these same parameters and all $`z>1`$, its individual-gate and injection formulas yield rounded necessary counts at most 223 and 52. The direct finite polygon yields 244 and 58. The numbers 223 and 52 are ceilings on the strength of those converse formulas, not physical upper gate counts. This comparison specifies its bound family and does not assert dominance over every possible recovery theorem. At scores at or below one half, preserving this order of operations is particularly important.
+The earlier recovery comparison remains correct for the convenient **mean-rank** floors. The present theorem uses actual product-noise moments instead. The specified normalized recovery family can also be fed into that stronger ledger **branchwise before averaging**. The verifier includes the squared-recovery caps, all normalized spectral thresholds, the Renes conversion, measure-and-prepare and output-dimension caps, and the established classical bound. The additional dimension-lifting cap $`p\leq2^s\beta^k`$ is inactive at the certificate's rank-16 witness and does not remove it. This cap follows by tracing out the quantum register to obtain a classical encoder and bounding quantum guessing in each classical block by its dimension times the largest posterior. A rational mixture witness, 67 exact parameter intervals and an analytic tail certify that, for these same parameters and all $`z\gt 1`$, its individual-gate and injection formulas yield rounded necessary counts at most 223 and 52. The direct finite polygon yields 244 and 58. The numbers 223 and 52 are ceilings on the strength of those converse formulas, not physical upper gate counts. This comparison specifies its bound family and does not assert dominance over every possible recovery theorem. At scores at or below one half, preserving this order of operations is particularly important.
 
 ## 7. Long storage at a fixed positive score
 
 ### Corollary M3 — Leading charge without a fixed-score prefactor
 
-Let $`k\to\infty`$, $`n\geq k`$, $`q\in(0,1)`$ be fixed, and suppose $`D\to\infty`$ with $`\ln(n/k)=o(D)`$. If $`p\geq p_0>0`$, every feasible family obeys
+Let $`k\to\infty`$, $`n\geq k`$, $`q\in(0,1)`$ be fixed, and suppose $`D\to\infty`$ with $`\ln(n/k)=o(D)`$. If $`p\geq p_0\gt 0`$, every feasible family obeys
 
 ```math
 B\geq(2-o(1))k\frac{1-q}{q}D,
@@ -282,7 +282,7 @@ which proves (M15). $`\square`$
 
 The earlier displayed mean-rank score floor has leading coefficient $`2p_0k(1-q)/q`$. Equation (M15) removes that fixed-success prefactor. The weak-noise order remains $`\Theta(k\gamma D)`$. The result concerns feasible width/time families and does not guarantee indefinite storage at fixed width.
 
-Equivalently, under these conditions, if $`\limsup m_T/(kD)<2(1-q)/q`$, the unconditional whole-string score must tend to zero. This is a vanishing-score consequence; the argument proves neither an exponential decay rate nor a matching capacity or circuit construction.
+Equivalently, under these conditions, if $`\limsup m_T/(kD)\lt 2(1-q)/q`$, the unconditional whole-string score must tend to zero. This is a vanishing-score consequence; the argument proves neither an exponential decay rate nor a matching capacity or circuit construction.
 
 ## 8. Proof dependencies and limits
 

@@ -17,7 +17,7 @@ m_T\ge a\left[D(-\ln q)-\ln\frac{2n}{a}\right]_+,
 a = \frac{2k(1-\epsilon-4^{-k})}{1-4^{-k}}.
 ```
 
-The nontrivial regime is $`\epsilon<1-4^{-k}`$. At fixed acceptable infidelity and beyond the width allowance, this gives $`m_T=\Omega(k\gamma D)`$. The companion zero-$`T`$ statement gives replacement-channel convergence on the scale $`\gamma^{-1}\log(n/\epsilon)`$, including a diamond-norm formulation. These statements are proved in the project's Pauli-envelope and control-cost chapters.
+The nontrivial regime is $`\epsilon\lt 1-4^{-k}`$. At fixed acceptable infidelity and beyond the width allowance, this gives $`m_T=\Omega(k\gamma D)`$. The companion zero-$`T`$ statement gives replacement-channel convergence on the scale $`\gamma^{-1}\log(n/\epsilon)`$, including a diamond-norm formulation. These statements are proved in the project's Pauli-envelope and control-cost chapters.
 
 The new step is contraction of the simultaneous binary Pauli-envelope rank and its conversion into reference-stable forgetting, fidelity-dependent gate counts, and temporal interval laws. Nelson, Rajakumar, and Gullans already proved a quantitative forgetting theorem for noisy Clifford processing with resets. The present result sharpens its width dependence and relates the rank bottleneck to continuing internal work. Pauli symplectic coordinates, operator-algebra decomposition, Schmidt-number bounds, concatenated codes, and seven-$`T`$ Toffoli circuits are standard ingredients.
 
@@ -74,7 +74,7 @@ In the last paper, Sec. IV.1 explicitly gives the usual recursively increasing c
 
 **Guo, Hong, Kaufman, and Lucas**, “Toward Self-Correcting Quantum Codes for Neutral Atom Arrays,” PRX Quantum **7**, 010301 (2026), [final paper](https://journals.aps.org/prxquantum/pdf/10.1103/mfmt-fwkg), `guo2026toward`, is particularly useful. Appendix D implements local greedy decisions using fixed-size reversible majority gadgets and a bounded-color schedule. **Our inference:** after compiling those fixed gadgets, a sweep uses $`O(n)`$ non-Clifford gates. This is a concrete possible route to low work overhead.
 
-It is not a matching theorem here. The sustained-decoder results are numerical and phenomenological, and the paper leaves full noisy coherent-decoder analysis for future work. It does not prove a suitable finite-rate code family with arbitrary-duration storage in the precise model above. Even a proved $`O(kD)`$ cost at a fixed $`\gamma>0`$ would not establish a bound uniform in weak noise of the form $`O(k\gamma D)`$; the dependence of constants on $`\gamma`$ matters.
+It is not a matching theorem here. The sustained-decoder results are numerical and phenomenological, and the paper leaves full noisy coherent-decoder analysis for future work. It does not prove a suitable finite-rate code family with arbitrary-duration storage in the precise model above. Even a proved $`O(kD)`$ cost at a fixed $`\gamma\gt 0`$ would not establish a bound uniform in weak noise of the form $`O(k\gamma D)`$; the dependence of constants on $`\gamma`$ matters.
 
 ## 5. Same-model constructive comparison supplied by this project
 
@@ -82,7 +82,7 @@ The project includes an explicit upper construction rather than relying on an in
 
 The explicitly derived syndrome correction polynomials use three Toffoli and three CCZ gates per internal decoding node. Their 42-$`T`$ total uses exact seven-$`T`$ decompositions. **Selinger**, PRA **87**, 042302 (2013), Eq. (1), p. 1 of the [author manuscript](https://www.mathstat.dal.ca/~selinger/papers/toffoli.pdf), explicitly displays the three-wire seven-$`T`$ Toffoli; Eq. (3) credits Amy et al.'s depth improvement. Selinger's separate $`T`$-depth-one construction uses four extra ancillas and is not the construction invoked here. See `selinger2013tdepth` and `amy2013meet`.
 
-For $`0<\gamma\le1/20`$, take
+For $`0\lt \gamma\le1/20`$, take
 
 ```math
 \tau=\left\lfloor\frac{1}{20\gamma}\right\rfloor,
@@ -159,4 +159,4 @@ The [exponential-moment extension](../science/moment_processing.md) combines the
 All these consequences retain the device-model assumptions. Neither a score nor the proof certifies independent noise, controller restrictions, or the absence of protected records. The LWE-based remote-preparation compilation in the sister project is not imported into this physical processing statement.
 
 
-The finite moment comparison keeps the recovery inequalities branchwise before concavification in $`z^r`$. Its exact certificate bounds the strength of the explicitly specified recovery-only moment family over all $`z>1`$: at the twelve-qubit example its two ledgers give rounded counts at most 223 and 52. The direct quantum-dimension/output-dimension/classical certificate yields 244 and 58. These are comparisons of converse formulas, not physical gate upper bounds or universal recovery optimality statements. The known classical cap used in the finite witness has a self-contained Gram-row-sum proof in the moment chapter.
+The finite moment comparison keeps the recovery inequalities branchwise before concavification in $`z^r`$. Its exact certificate bounds the strength of the explicitly specified recovery-only moment family over all $`z\gt 1`$: at the twelve-qubit example its two ledgers give rounded counts at most 223 and 52. The direct quantum-dimension/output-dimension/classical certificate yields 244 and 58. These are comparisons of converse formulas, not physical gate upper bounds or universal recovery optimality statements. The known classical cap used in the finite witness has a self-contained Gram-row-sum proof in the moment chapter.

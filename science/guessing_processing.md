@@ -255,7 +255,7 @@ The comparison must be performed before averaging future noise: using only a rec
 
 ### Distribution-aware strengthening
 
-The comparison above concerns the convenient mean-rank floors (G1) and (G12). It does not exhaust the information in the noisy circuit. The [exponential-moment theorem](moment_processing.md) keeps $`\mathbb E[z^r]`$ for $`1<z\le2`$ rather than replacing the sampled ranks by an arbitrary mixture with the same mean. A pivot-coordinate argument contracts $`X_z=\log_z\mathbb E[z^r]`$ by $`\alpha_z=\ln(1-q+qz^2)/(2\ln z)`$ at each noise layer; a T/T-dagger gate adds at most one.
+The comparison above concerns the convenient mean-rank floors (G1) and (G12). It does not exhaust the information in the noisy circuit. The [exponential-moment theorem](moment_processing.md) keeps $`\mathbb E[z^r]`$ for $`1\lt z\le2`$ rather than replacing the sampled ranks by an arbitrary mixture with the same mean. A pivot-coordinate argument contracts $`X_z=\log_z\mathbb E[z^r]`$ by $`\alpha_z=\ln(1-q+qz^2)/(2\ln z)`$ at each noise layer; a T/T-dagger gate adds at most one.
 
 That theorem fixes one recovery of the averaged full channel, then uses its branchwise Bell fidelities and their linear average at every cut. This differs from applying an averaged-score recovery estimate only to the mean-rank ledger. The recovery lower bound is inherited; the stronger consequence comes from the dynamical moment estimate. Applying the direct quantum-plus-classical branch curve in the moment variable gives a complementary floor and keeps every above-chance score useful. The full-output initial potential is $`2n`$, and an interval reserve must bound $`\log_z\mathbb E[z^r]`$, rather than merely $`\mathbb E[r]`$.
 

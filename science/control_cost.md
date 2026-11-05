@@ -160,7 +160,7 @@ At each primitive circuit cut $`t`$, construct the sampled backward envelope $`V
 ```math
 R_t=\mathbb E_b\dim V_{b,t},
 \qquad
-a=\frac{2k(1-\epsilon-4^{-k})}{1-4^{-k}}>0.
+a=\frac{2k(1-\epsilon-4^{-k})}{1-4^{-k}}\gt 0.
 \qquad\text{(C8)}
 ```
 
@@ -309,7 +309,7 @@ The dimension reserve $`M`$ contributes only the finite term $`\ln(M/a)`$. For $
 
 ## 5. Exact finite-depth bound from discrete injections
 
-Define, for an integer $`D\ge1`$, $`M\ge a>0`$, and $`q\in(0,1)`$,
+Define, for an integer $`D\ge1`$, $`M\ge a\gt 0`$, and $`q\in(0,1)`$,
 
 
 ```math
@@ -406,13 +406,13 @@ b_j=\left[\frac aq-x_{j-1}\right]_+,
 ```
 
 
-Let $`t_0=\lfloor\ln(M/a)/\kappa\rfloor`$. If $`D\le t_0`$, the zero-injection trajectory $`x_j=Mq^j`$ remains at least $`a`$, so the optimum is zero. If $`D>t_0`$, the trajectory coasts through layer $`t_0`$, then uses
+Let $`t_0=\lfloor\ln(M/a)/\kappa\rfloor`$. If $`D\le t_0`$, the zero-injection trajectory $`x_j=Mq^j`$ remains at least $`a`$, so the optimum is zero. If $`D\gt t_0`$, the trajectory coasts through layer $`t_0`$, then uses
 
 
 ```math
 b_{t_0+1}=\frac aq-Mq^{t_0},
 \qquad
-b_j=\frac{(1-q)a}{q}\quad(j>t_0+1).
+b_j=\frac{(1-q)a}{q}\quad(j\gt t_0+1).
 \qquad\text{(C27)}
 ```
 
@@ -424,7 +424,7 @@ Its cost equals the dual value (C25) at $`\ell=t_0+1`$, namely
 \mathcal L(D,M,a,q)
 =\frac aq-Mq^{t_0}
 +(D-t_0-1)\frac{(1-q)a}{q}
-\quad(D>t_0).
+\quad(D\gt t_0).
 \qquad\text{(C28)}
 ```
 
@@ -442,7 +442,7 @@ a\le qC=2nq.
 ```
 
 
-If $`a>qC`$, the fidelity requirement is impossible within this model, regardless of the gate budget. When $`a\le M\le C`$ and $`a\le qC`$, the optimal scalar schedule (C26) respects the cap even immediately before each noise layer: during coasting its rank is at most $`M\le C`$, and during replenishment its pre-noise rank is $`a/q\le C`$. Consequently adding the cap to the scalar relaxation does not change (C19) in its feasible parameter regime.
+If $`a\gt qC`$, the fidelity requirement is impossible within this model, regardless of the gate budget. When $`a\le M\le C`$ and $`a\le qC`$, the optimal scalar schedule (C26) respects the cap even immediately before each noise layer: during coasting its rank is at most $`M\le C`$, and during replenishment its pre-noise rank is $`a/q\le C`$. Consequently adding the cap to the scalar relaxation does not change (C19) in its feasible parameter regime.
 
 This observation does not make the scalar schedule a physical construction. Actual envelope ranks are random integers, each injection arises from a realizable gate, and preservation of a large envelope is only a necessary condition for transmission. The theorem proves the cost required by these necessary conditions.
 
@@ -485,7 +485,7 @@ If only an upper bound $`M_I`$ is used, the dominating recurrence starts at that
 
 For a fixed decoder $`\mathcal D`$, its Pauli-support envelope $`V_{\mathrm{dec}}`$ is defined by (E5). Starting at $`M=\dim V_{\mathrm{dec}}`$ is valid because every pulled-back terminal observable already lies in $`\mathcal A_{V_{\mathrm{dec}}}`$. The decoder is not subsequently charged as an internal operation. Its complete action is included in the initial support condition.
 
-If $`M=0`$, the decoded storage channel is a replacement channel, so its composition with any encoder has Bell fidelity $`4^{-k}`$. The strict fidelity regime defining $`a>0`$ is then infeasible. The logarithmic and scalar budget formulas use $`M\ge a>0`$.
+If $`M=0`$, the decoded storage channel is a replacement channel, so its composition with any encoder has Bell fidelity $`4^{-k}`$. The strict fidelity regime defining $`a\gt 0`$ is then infeasible. The logarithmic and scalar budget formulas use $`M\ge a\gt 0`$.
 
 If $`\mathcal D`$ is a Clifford unitary followed by discarding all but $`k`$ physical output qubits, then the $`2k`$ independent output Pauli generators pull back to $`2k`$ independent Pauli labels. Hence $`M=2k`$. A decoder built solely from the free primitives after selecting $`k`$ output qubits has $`M\le2k`$, by the same backward rank argument. In that case the logarithmic reserve is $`\ln(2k/a)`$, independent of the physical storage width.
 
