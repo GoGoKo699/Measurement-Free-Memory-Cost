@@ -26,7 +26,7 @@ paths, overrides, reference protection, and the finite example.
 
 The curves use the [processing law](../../science/control_cost.md),
 [archive construction](../../science/clifford_lifetime.md), and
-[coherent recovery](../../science/coherent_recovery.md). These plotted constructions retain their explicit finite constants. The [Tanner construction](../../science/tanner_memory.md) closes the asymptotic order gap in its proved smaller-noise, large-payload regime; its potentially enormous family constants are not plotted as practical estimates.
+[coherent recovery](../../science/coherent_recovery.md). These plotted constructions retain their explicit finite constants. The [Tanner construction](../../science/tanner_memory.md), combined with the [reliability converse](../../science/reliability_processing.md), has matching processing order across payload sizes at fixed positive noise in its proved range and width proportional to payload plus reliability logarithm. Its potentially enormous family constants are not plotted as practical estimates.
 
 
-The resource curve uses the mean-rank ledger stated in `science/control_cost.md`. The additional exponential-moment family in [moment processing](../../science/moment_processing.md) can strengthen a conditional lower bound; the plotted curve is not asserted to optimize every converse in that family.
+The resource curve uses the mean-rank ledger stated in `science/control_cost.md`. The additional exponential-moment family in [moment processing](../../science/moment_processing.md) can strengthen a conditional lower bound; the rank-extinction reliability bound is another complementary converse. The plotted curve is not asserted to optimize these bounds.

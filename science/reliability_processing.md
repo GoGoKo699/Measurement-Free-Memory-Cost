@@ -200,7 +200,7 @@ p_0\le\delta_p:=\frac{1-p}{1-2^{-k}}.
 \qquad\text{(R14)}
 ```
 
-Replace $`\delta`$ by $`\delta_p`$ in (R3) and (R10). This uses a separate score argument and does not identify guessing probability with Bell fidelity. For fixed $`k,\gamma,p\gt 2^{-k}`$ and $`n=O(\ln D)`$, it gives $`m_T=\Omega_\gamma(D\ln D)`$ as $`D\to\infty`$. The conclusion may hold below the classical-storage score: noisy classical records also need continuing processing in the stated device model. It is not a certificate of quantum storage or a verification of the noise/controller premises. Perfect score $`p=1`$ is impossible at finite width with $`D\ge1`$ for the same complete-replacement reason.
+Replace $`\delta`$ by $`\delta_p`$ in (R3) and (R10). This uses a separate score argument and does not identify guessing probability with Bell fidelity. For fixed $`k`$, $`\gamma\gt0`$ and $`p\gt2^{-k}`$, with $`n=O(\ln D)`$, it gives $`m_T=\Omega_{\gamma,k,p}(D\ln D)`$ as $`D\to\infty`$. The conclusion may hold below the classical-storage score: noisy classical records also need continuing processing in the stated device model. It is not a certificate of quantum storage or a verification of the noise/controller premises. Perfect score $`p=1`$ is impossible at finite width with $`D\ge1`$ for the same complete-replacement reason.
 
 The ideal finite-dimension BB84 guessing theorem is unchanged. Its new consequence is this reliability-sensitive conditional processing witness; no LWE preparation/processing compiler is imported.
 
