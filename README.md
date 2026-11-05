@@ -64,7 +64,7 @@ A rank-$`r`$ envelope has conditional extinction probability at least $`\gamma^r
 | Quantitative guessing decay | Full generating-function propagation and an explicit stronger exponential score bound, with finite width retained | [Guessing decay](science/guessing_decay.md) |
 | Sharp zero-T quantum lifetime | $`\Theta(\gamma^{-1}\ln n)`$ at fixed logical size and target fidelity $`4^{-k}\lt F_0\lt 1`$, for sufficiently weak noise | [Clifford quantum lifetime](science/clifford_lifetime.md) |
 | Five-qubit coherent recovery | Explicit 42-T node and concatenated reliability overhead, for $`\gamma\le1/20`$ | [Coherent recovery](science/coherent_recovery.md) |
-| Constant-iteration Tanner recovery | Counted width $`O(k+\ln(J/\epsilon))`$ and prescribed T count $`O(nJ)`$ for $`\gamma\le1/20`$, using fixed-level inner protection | [Tanner memory](science/tanner_memory.md) |
+| Constant-iteration Tanner recovery | Counted width $`O(k+\ln(J_+/\epsilon))`$ and prescribed T count $`O(nJ)`$ for $`\gamma\le1/20`$, using fixed-level inner protection | [Tanner memory](science/tanner_memory.md) |
 
 For the constructive recovery bound with $`k,D\ge1`$, let $`\alpha=\log_2 5`$ and $`\ell=1+\ln[k(\gamma D+1)/\epsilon]`$. For $`0\lt \gamma\le1/20`$ and $`0\lt \epsilon\lt 1/2`$, an explicit concatenated five-qubit construction achieves
 
@@ -78,10 +78,10 @@ m_T=O\bigl(k(\gamma D+1)\ell^\alpha\bigr),
 
 Each decoding node uses at most **42 T/T-dagger gates and no additional work qubits**. The logarithmic overhead belongs to this five-qubit construction. It retains the stated noise range.
 
-For a fixed good quantum Tanner-code family, a fixed number of inner five-qubit concatenation levels permits a second coherent construction throughout $`0\lt\gamma\le1/20`$, with
+For a fixed good quantum Tanner-code family, a fixed number of inner five-qubit concatenation levels permits a second coherent construction throughout $`0\lt\gamma\le1/20`$. Write $`J_+=\max\{1,J\}`$, including $`D=J=0`$. Its guarantee is
 
 ```math
-n=O\!\left(k+\ln\frac{J}{\epsilon}\right),
+n=O\!\left(k+\ln\frac{J_+}{\epsilon}\right),
 \qquad m_T=O(nJ),
 \qquad J=O(\gamma D+1),
 \qquad\frac12\|\Lambda-\mathrm{id}_{2^k}\|_\diamond\le\epsilon.

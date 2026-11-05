@@ -127,16 +127,16 @@ Ideal processing between noisy intervals is essential to this upper comparison: 
 
 The [Tanner construction](../science/tanner_memory.md) now supplies the previously missing resource translation in this repository. It hardwires local syndrome minimization, eligible-codeword selection, deterministic ties and row/column decompositions as bounded-size Boolean circuits. Graph incidence fixes routing; constant iterations give a linear circuit and counted resettable workspace. Exact coherent compilation charges every prescribed T/T-dagger slot, with no protected controller. Resetting scratch immediately before ideal extraction supplies the current syndrome within the existing model.
 
-Combining this compilation with the inherited residual invariant, correlated X/Z tail accounting, weak-noise batching and bounded-ratio code lengths gives, after a fixed number of inner five-qubit levels, throughout $`0\lt\gamma\le1/20`$,
+Combining this compilation with the inherited residual invariant, correlated X/Z tail accounting, weak-noise batching and bounded-ratio code lengths gives the following resource guarantee throughout $`0\lt\gamma\le1/20`$ after a fixed number of inner five-qubit levels. Write $`J_+=\max\{1,J\}`$ so the bound also covers $`D=J=0`$:
 
 ```math
-n=O\!\left(k+\ln\frac{J}{\epsilon}\right),
+n=O\!\left(k+\ln\frac{J_+}{\epsilon}\right),
 \qquad m_T=O(nJ),
 \qquad J=O(\gamma D+1),
 \qquad\frac12\|\Lambda-\mathrm{id}_{2^k}\|_\diamond\le\epsilon.
 ```
 
-The mechanism is largely suggested by combining established good-code decoding and standard coherent simulation. The proved addition is the fixed-circuit compilation/accounting and its matching-order consequence for this processing converse. It closes the multiplicative logarithmic gap when $`k=\Omega(\ln(J/\epsilon))`$ and duration exceeds the width allowance. It does not determine the numerical coefficient, practical resource size or hardware threshold. For smaller payloads the construction has an additive reliability logarithm. The [rank-extinction converse](../science/reliability_processing.md) establishes that this term is necessary in continuing T processing at fixed noise and width O(k+ln(D/epsilon)), yielding matching order for every payload scaling. The extension to $`\gamma\le1/20`$ is a separate composition proof: fixed-level inner correction bounds each fresh outer Pauli error without assuming isotropy, then ideal outer correction restores the residual invariant. Ordinary constant concatenation and standard coherent correction remain inherited tools; the addition is the exact same-model resource composition.
+The mechanism is largely suggested by combining established good-code decoding and standard coherent simulation. The proved addition is the fixed-circuit compilation/accounting and its matching-order consequence for this processing converse. It closes the multiplicative logarithmic gap when $`k=\Omega(\ln(J_+/\epsilon))`$ and duration exceeds the width allowance. It does not determine the numerical coefficient, practical resource size or hardware threshold. For smaller payloads the construction has an additive reliability logarithm. The [rank-extinction converse](../science/reliability_processing.md) establishes that this term is necessary in continuing T processing at fixed noise and width O(k+ln(D/epsilon)), yielding matching order for every payload scaling. The extension to $`\gamma\le1/20`$ is a separate composition proof: fixed-level inner correction bounds each fresh outer Pauli error without assuming isotropy, then ideal outer correction restores the residual invariant. Ordinary constant concatenation and standard coherent correction remain inherited tools; the addition is the exact same-model resource composition.
 
 ### Quantum storage with zero interior non-Clifford gates
 
