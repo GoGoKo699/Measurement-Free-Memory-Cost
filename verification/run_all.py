@@ -17,6 +17,8 @@ CHECKS = (
     ("moment_processing", "verify_moment_processing.py"),
     ("guessing_decay", "verify_guessing_decay.py"),
     ("tanner_memory", "verify_tanner_memory.py"),
+    ("reliability", "verify_reliability.py"),
+    ("reliability_examples", "certify_reliability_examples.py"),
 )
 METADATA = {"python_version", "numpy_version"}
 

@@ -1,5 +1,7 @@
 # Build the explanatory report
 
+The source includes the absorbing rank-extinction converse, its all-payload fixed-noise resource comparison and the delayed-basis specialization. Keep the stored PDF paired with a fresh build of this exact source when verifying those statements.
+
 The report is a single self-contained LaTeX source. Its TikZ schematic is inline;
 no external figure or bibliography file is required.
 
