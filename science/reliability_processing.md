@@ -8,7 +8,7 @@ The complete-erasure survival mechanism and its use with Jensen's inequality are
 
 ## 1. Model, absorbing propagation and the finite statement
 
-Use exactly the [existing memory model](model.md): $`n`$ noisy physical slots, $`D`$ independent product-depolarizing rounds with $`0<\gamma<1`$, a fixed Clifford+T/T-dagger/reset circuit, arbitrary free CPTP endpoints, and no protected controller or cross-time side channel. Every persistent data, syndrome, resource and work register is noisy and counted. The count $`m_T`$ includes every prescribed interior T/T-dagger slot. The identity/replacement flags below are a mathematical decomposition, not information supplied to the device.
+Use exactly the [existing memory model](model.md): $`n`$ noisy physical slots, $`D`$ independent product-depolarizing rounds with $`0\lt \gamma\lt 1`$, a fixed Clifford+T/T-dagger/reset circuit, arbitrary free CPTP endpoints, and no protected controller or cross-time side channel. Every persistent data, syndrome, resource and work register is noisy and counted. The count $`m_T`$ includes every prescribed interior T/T-dagger slot. The identity/replacement flags below are a mathematical decomposition, not information supplied to the device.
 
 Propagate one simultaneous Pauli envelope backward from the full physical output, initially $`W_n=\mathbb F_2^{2n}`$. For a T rotation about Pauli label $`w`$, choose
 
@@ -22,7 +22,7 @@ V+\langle w\rangle,&\text{otherwise}.
 
 The [rotation support formula](control_cost.md#3-rank-growth-charges-for-gates) proves this update valid and its rank growth at most one. In particular, $`V=0`$ stays zero. Clifford symplectic images, reset coordinate projections, sampled depolarizing intersections and unrecorded Pauli measurements also preserve zero and have the existing rank bounds. Blindly adjoining $`w`$ when $`V=0`$ would create an artificial nonzero envelope and must not be used here.
 
-Write $`[x]_+=\max\{x,0\}`$ and, for $`0<\delta<1`$ and integer $`s\ge1`$, define
+Write $`[x]_+=\max\{x,0\}`$ and, for $`0\lt \delta\lt 1`$ and integer $`s\ge1`$, define
 
 ```math
 \mathcal R_\gamma(s,\delta)=
@@ -33,7 +33,7 @@ Write $`[x]_+=\max\{x,0\}`$ and, for $`0<\delta<1`$ and integer $`s\ge1`$, defin
 
 ### Theorem R1 — Finite reliability budget
 
-Suppose $`D\ge1`$, $`k\ge1`$, recovered Bell entanglement fidelity satisfies $`F_{\mathrm e}\ge1-\epsilon`$, and $`0<\epsilon<1-4^{-k}`$. Put
+Suppose $`D\ge1`$, $`k\ge1`$, recovered Bell entanglement fidelity satisfies $`F_{\mathrm e}\ge1-\epsilon`$, and $`0\lt \epsilon\lt 1-4^{-k}`$. Put
 
 ```math
 \delta=\frac{\epsilon}{1-4^{-k}},\qquad b=1-\delta.
@@ -78,7 +78,7 @@ This is a rank-dependent bound, rather than the event that all $`n`$ physical qu
 
 ## 3. Survival bounds the cumulative rank
 
-Fix a complete identity/replacement realization for the storage circuit, and traverse it backward using the absorbing updates. Immediately before backward noise layer $`j`$, let $`r_j`$ be the envelope rank and $`S_j=\mathbf 1_{\{r_j>0\}}`$. The current envelope is determined by suffix flags; the layer being crossed has not yet been sampled. Put
+Fix a complete identity/replacement realization for the storage circuit, and traverse it backward using the absorbing updates. Immediately before backward noise layer $`j`$, let $`r_j`$ be the envelope rank and $`S_j=\mathbf 1_{\{r_j\gt 0\}}`$. The current envelope is determined by suffix flags; the layer being crossed has not yet been sampled. Put
 
 ```math
 A=\sum_{j=1}^D\Pr[S_j=1],\qquad
@@ -103,7 +103,7 @@ Absorption implies $`\Pr[S_j=1]\ge1-p_0\ge b`$, and therefore $`A\ge Db`$. First
 \qquad\text{(R7)}
 ```
 
-Normalize the joint measure on layer indices and surviving suffix histories by $`A>0`$. Its mean rank is $`B/A`$, since rank is zero on the omitted histories. Jensen's inequality for the convex function $`x\mapsto e^{-x\ln(1/\gamma)}`$ yields
+Normalize the joint measure on layer indices and surviving suffix histories by $`A\gt 0`$. Its mean rank is $`B/A`$, since rank is zero on the omitted histories. Jensen's inequality for the convex function $`x\mapsto e^{-x\ln(1/\gamma)}`$ yields
 
 ```math
 \delta\ge A\exp\left[-\ln(1/\gamma)\frac BA\right].
@@ -118,7 +118,7 @@ B\ge\frac{A}{\ln(1/\gamma)}
 \qquad\text{(R8)}
 ```
 
-The second step is valid for all $`0<\delta<1`$: $`x[\ln(x/\delta)]_+`$ is zero on $`[0,\delta]`$ and has positive derivative on $`(\delta,\infty)`$. No independence between successive ranks or survival conditioning on future flags has been assumed. Current-layer independence is used only in Lemma R2 before that layer is exposed.
+The second step is valid for all $`0\lt \delta\lt 1`$: $`x[\ln(x/\delta)]_+`$ is zero on $`[0,\delta]`$ and has positive derivative on $`(\delta,\infty)`$. No independence between successive ranks or survival conditioning on future flags has been assumed. Current-layer independence is used only in Lemma R2 before that layer is exposed.
 
 ## 4. Convert cumulative rank into charged processing
 
@@ -151,21 +151,21 @@ Always $`M_I=2n`$ is valid. Use the actual propagated global suffix envelope, wh
 
 ### Corollary R4 — Fixed-noise matching under a width constraint
 
-Fix $`0<\gamma\le1/20`$, $`0<\epsilon_0<1/2`$ and a constant $`C>0`$. Let $`D\to\infty`$, allow arbitrary $`k\ge1`$ and $`0<\epsilon\le\epsilon_0`$ to vary with $`D`$, and impose
+Fix $`0\lt \gamma\le1/20`$, $`0\lt \epsilon_0\lt 1/2`$ and a constant $`C\gt 0`$. Let $`D\to\infty`$, allow arbitrary $`k\ge1`$ and $`0\lt \epsilon\le\epsilon_0`$ to vary with $`D`$, and impose
 
 ```math
 L=\ln(D/\epsilon),\qquad n\le C(k+L).
 \qquad\text{(R11)}
 ```
 
-There are constants $`c>0`$ and $`D_0`$, depending only on $`\gamma,C,\epsilon_0`$, such that every allowed memory with recovered Bell fidelity at least $`1-\epsilon`$ satisfies
+There are constants $`c\gt 0`$ and $`D_0`$, depending only on $`\gamma,C,\epsilon_0`$, such that every allowed memory with recovered Bell fidelity at least $`1-\epsilon`$ satisfies
 
 ```math
 m_T\ge cD[k+\ln(D/\epsilon)]\qquad(D\ge D_0).
 \qquad\text{(R12)}
 ```
 
-**Proof.** For every $`k\ge1`$, $`\epsilon\le\delta\le4\epsilon/3`$ and $`b\ge b_0:=1-4\epsilon_0/3>0`$. Thus
+**Proof.** For every $`k\ge1`$, $`\epsilon\le\delta\le4\epsilon/3`$ and $`b\ge b_0:=1-4\epsilon_0/3\gt 0`$. Thus
 
 ```math
 \ln(Db/\delta)\ge L+\ln(3b_0/4).
@@ -179,7 +179,7 @@ For sufficiently large $`D`$, uniformly over $`k,\epsilon`$ in the stated domain
 \ge c_1(k+L)
 ```
 
-for a fixed $`c_1>0`$. The expression before the outer positive part in (R4) is at least $`[\gamma b_0c_1D-2C]\,(k+L)`$. Choose $`D_0`$ so the bracket is at least $`\gamma b_0c_1D/2`$. This proves (R12).
+for a fixed $`c_1\gt 0`$. The expression before the outer positive part in (R4) is at least $`[\gamma b_0c_1D-2C]\,(k+L)`$. Choose $`D_0`$ so the bracket is at least $`\gamma b_0c_1D/2`$. This proves (R12).
 
 The [Tanner construction](tanner_memory.md) achieves half-diamond error at most $`\epsilon`$, width $`O(k+L)`$ and $`m_T=O_\gamma(D[k+L])`$ in this same fixed-noise range. Its width constant depends on the chosen admissible family. Thus for a sufficiently large constant width factor permitting that construction, the necessary and sufficient processing order is
 
@@ -192,7 +192,7 @@ Constants also depend on the fixed width allowance and code family. This describ
 
 ## 6. Delayed-basis BB84 scores
 
-Use one full-output envelope before any basis-dependent final readout. If the unconditional whole-string guessing score is at least $`p`$, with $`2^{-k}<p<1`$, then every zero-envelope branch has input-independent physical output. Its success after basis disclosure is at most $`2^{-k}`$; aborts can only lower it. Branch probabilities are independent of the hidden input and basis. Therefore
+Use one full-output envelope before any basis-dependent final readout. If the unconditional whole-string guessing score is at least $`p`$, with $`2^{-k}\lt p\lt 1`$, then every zero-envelope branch has input-independent physical output. Its success after basis disclosure is at most $`2^{-k}`$; aborts can only lower it. Branch probabilities are independent of the hidden input and basis. Therefore
 
 ```math
 p\le1-(1-2^{-k})p_0,\qquad
@@ -200,7 +200,7 @@ p_0\le\delta_p:=\frac{1-p}{1-2^{-k}}.
 \qquad\text{(R14)}
 ```
 
-Replace $`\delta`$ by $`\delta_p`$ in (R3) and (R10). This uses a separate score argument and does not identify guessing probability with Bell fidelity. For fixed $`k,\gamma,p>2^{-k}`$ and $`n=O(\ln D)`$, it gives $`m_T=\Omega_\gamma(D\ln D)`$ as $`D\to\infty`$. The conclusion may hold below the classical-storage score: noisy classical records also need continuing processing in the stated device model. It is not a certificate of quantum storage or a verification of the noise/controller premises. Perfect score $`p=1`$ is impossible at finite width with $`D\ge1`$ for the same complete-replacement reason.
+Replace $`\delta`$ by $`\delta_p`$ in (R3) and (R10). This uses a separate score argument and does not identify guessing probability with Bell fidelity. For fixed $`k,\gamma,p\gt 2^{-k}`$ and $`n=O(\ln D)`$, it gives $`m_T=\Omega_\gamma(D\ln D)`$ as $`D\to\infty`$. The conclusion may hold below the classical-storage score: noisy classical records also need continuing processing in the stated device model. It is not a certificate of quantum storage or a verification of the noise/controller premises. Perfect score $`p=1`$ is impossible at finite width with $`D\ge1`$ for the same complete-replacement reason.
 
 The ideal finite-dimension BB84 guessing theorem is unchanged. Its new consequence is this reliability-sensitive conditional processing witness; no LWE preparation/processing compiler is imported.
 
