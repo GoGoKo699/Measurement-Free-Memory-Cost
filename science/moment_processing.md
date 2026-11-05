@@ -4,7 +4,7 @@
 
 The actual product-noise distribution supplies a stronger processing bound than reducing every cut to its mean envelope rank. The quantity used here is a logarithmic exponential moment. It contracts under the same noise, grows by at most one across a T gate, and admits an all-cut floor from either delayed-basis BB84 guessing or Bell recovery fidelity. The resulting gate and interval laws retain the original device model.
 
-For a fixed positive whole-string score and fixed noise strength, the leading long-duration necessary charge approaches $`2k(1-q)D/q`$. The convenient mean-rank score floor instead gives the coefficient $`2pk(1-q)D/q`$. Both have order $`k\gamma D`$ at weak noise. This result improves the dependence on a nonvanishing score; it does not determine optimal physical gate cost.
+In the growing-block, long-duration regime of Corollary M3, a fixed positive whole-string score and fixed noise strength give a leading necessary charge approaching $`2k(1-q)D/q`$. The convenient mean-rank score floor instead gives the coefficient $`2pk(1-q)D/q`$. Both have order $`k\gamma D`$ at weak noise. This result improves the dependence on a nonvanishing score; it does not determine optimal physical gate cost.
 
 ## 1. Model, chronology and one full-output envelope
 
