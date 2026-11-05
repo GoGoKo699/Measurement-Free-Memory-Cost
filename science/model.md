@@ -153,6 +153,22 @@ F_{\mathrm e}\le\min\{1,2^{r-2k}\}.
 
 Indeed, the superoperator trace equals $`K^2 F_{\mathrm e}`$, all eigenvalues of a CPTP map have modulus at most one, and the number of its nonzero eigenvalues, counted with algebraic multiplicity, is at most its rank. Applying the convex secant bound to each branch before averaging forces expected envelope rank at least $`a`$ at every cut. Every T gate can add at most one binary generator.
 
+### Reliability-dependent continuing processing
+
+For $`D\ge1`$ and $`0\lt\epsilon\lt1-4^{-k}`$, set $`\delta=\epsilon/(1-4^{-k})`$ and $`b=1-\delta`$. The [rank-extinction theorem](reliability_processing.md) strengthens the necessary processing budget to
+
+```math
+m_T\ge\left[
+\gamma Db\max\left\{2k,
+\frac{[\ln(Db/\delta)]_+}{\ln(1/\gamma)}\right\}-2n
+\right]_+.
+\qquad\text{(M14)}
+```
+
+The first term in the maximum retains the payload floor. The second follows from the conditional extinction probability $`\gamma^r`$ of a rank-$`r`$ envelope and the requirement that extinction occur with probability at most $`\delta`$. The proof uses an absorbing envelope update, so a zero envelope stays zero through every permitted primitive. It sums disjoint first-extinction events, applies Jensen's inequality to the surviving cut weights, and converts cumulative rank into T count using the same noise/gate balance. No noise flag is made available to the controller.
+
+At finite width and $`D\ge1`$, exact zero Bell infidelity is impossible under positive depolarization. At $`D=0`$, there is no reliability-dependent interior processing requirement. The existing finite and interval bounds remain complementary; (M14) is not asserted to dominate each of them numerically.
+
 ### Sharp order of the zero-T quantum lifetime
 
 For fixed $`k`$ and target fidelity $`4^{-k}\lt F_0\lt 1`$, the largest lifetime achievable with Clifford operations and resets alone satisfies
@@ -203,7 +219,7 @@ Here $`n`$ includes the code block and all syndrome, controller and temporary re
 
 The code, constant-iteration decoder and repeated-round residual invariant are inherited from Gu et al. Their parallel runtime alone would not prove the charged gate bound. The added compilation counts local minimizations, comparisons, deterministic ties, updates and fixed routing. The correction channel is reference-stable, and correlated X/Z components of depolarizing noise are combined by a union bound.
 
-When $`k=\Omega(\ln(J/\epsilon))`$, $`n=O(k)`$. If also $`\gamma D`$ is sufficiently large to exceed the converse's width allowance, (M9) and (M13) give matching $`\Theta(k\gamma D)`$ processing order at fixed high fidelity. Constants depend on the fixed code family and can be enormous. This is not an optimal coefficient or a hardware gate-time theorem. The extended range $`\gamma\le1/20`$ is proved by the fixed-level inner construction, rather than inferred from an LDPC threshold.
+Fix $`\gamma\in(0,1/20]`$, $`C\gt0`$ and $`0\lt\epsilon_0\lt1/2`$. Put $`L=\ln(D/\epsilon)`$. For every family with $`D\to\infty`$, $`k\ge1`$, $`0\lt\epsilon\le\epsilon_0`$ and $`n\le C(k+L)`$, (M14) implies $`m_T=\Omega_{\gamma,C,\epsilon_0}(D(k+L))`$, uniformly over $`k,\epsilon`$. Indeed $`b`$ is bounded below and $`\ln(Db/\delta)=L+O_{\epsilon_0}(1)`$; the maximum in (M14) controls $`k+L`$, and sufficiently large $`D`$ absorbs the $`2n`$ reserve. Equation (M13) attains this processing order at width $`O(k+L)`$. This closes the reliability-dominated case, including fixed $`k`$, as well as the payload-dominated case. Constants may be enormous and depend on the fixed positive noise strength; no optimal coefficient or uniform weak-noise law is inferred. The extended constructive range is proved by fixed-level inner protection, rather than inferred from an LDPC threshold.
 
 ## 4. How the results fit together
 
@@ -270,7 +286,7 @@ The [full proof and finite-width version](guessing_decay.md) retain the initial 
 
 ## 5. Reading and verification routes
 
-Read [Binary Pauli envelopes](pauli_envelopes.md) for the forgetting proof, then [Control cost](control_cost.md) for the fidelity bottleneck and gate budgets. The constructive chapters [Clifford quantum lifetime](clifford_lifetime.md), [five-qubit coherent recovery](coherent_recovery.md), and [Tanner memory](tanner_memory.md) establish the different ways to pay for storage. [Interpretation](interpretation.md) states the matching-order regime and the remaining questions about coefficients, finite constants and physical implementation.
+Read [Binary Pauli envelopes](pauli_envelopes.md) for the forgetting proof, then [Control cost](control_cost.md) for the fidelity bottleneck and gate budgets and [Reliability processing](reliability_processing.md) for the absorbing-extinction argument and all-payload fixed-noise matching law. The constructive chapters [Clifford quantum lifetime](clifford_lifetime.md), [five-qubit coherent recovery](coherent_recovery.md), and [Tanner memory](tanner_memory.md) establish the different ways to pay for storage. [Interpretation](interpretation.md) states the matching-order regime and the remaining questions about coefficients, finite constants and physical implementation.
 
 [Related work](../references/RELATED_WORK.md) identifies inherited ingredients, the closest published theorem, and the distinctions from measurement-based or externally decoded models. [Verification](../verification/README.md) describes the finite checks and their scope. Finite computations test the explicit algebra and circuits; universal claims rely on the proofs.
 

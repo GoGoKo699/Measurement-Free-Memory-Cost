@@ -1,6 +1,6 @@
 # Binary Pauli envelopes and reference-stable forgetting
 
-This chapter proves the envelope invariant and logarithmic forgetting theorem. The resource consequences for a memory that continues to transmit quantum information are proved in [control_cost.md](control_cost.md). Operational assumptions and the boundary of the charged storage interval are specified in [model.md](model.md).
+This chapter proves the envelope invariant and logarithmic forgetting theorem. The resource consequences for a memory that continues to transmit quantum information are proved in [control_cost.md](control_cost.md). The [reliability law](reliability_processing.md) additionally controls first extinction of an absorbing envelope and converts cumulative rank into charged processing. Operational assumptions and the boundary of the charged storage interval are specified in [model.md](model.md).
 
 ## 1. Setting and conventions
 

@@ -70,6 +70,22 @@ The [control-cost chapter](../science/control_cost.md) turns preservation into a
 
 Each T or T-dagger gate adds at most one binary generator to a backward envelope. Summing logarithmic changes gives a continuing gate requirement after the finite width reserve. The exact discrete injection optimization gives a complementary bound, and the same ledger applies to every contiguous storage interval. Arbitrary endpoint decoding requires the conservative full-output reserve $`M=2n`$ unless a smaller decoder-specific envelope has actually been proved.
 
+## Why reliability changes the cost even for one logical qubit
+
+The [reliability-processing proof](../science/reliability_processing.md) retains more than a mean-rank floor. Choose the envelope update so that zero is absorbing: when every label commutes with a T axis, keep the current envelope; otherwise add that axis. In particular, a T gate cannot create input dependence after it has been lost.
+
+At rank $`r\gt0`$, independent coordinate pivots identify every envelope label on at most $`r`$ physical qubits. Replacing those qubits kills the envelope with conditional probability at least $`\gamma^r`$. A complete branch with zero envelope is a replacement channel and has Bell fidelity $`4^{-k}`$. Thus fidelity at least $`1-\epsilon`$ forces total extinction probability below $`\delta=\epsilon/(1-4^{-k})`$. First-extinction events are disjoint. Applying Jensen's inequality to their hazards, weighted by cuts whose envelopes are still alive, gives
+
+```math
+\sum_{j=1}^D\mathbb E r_j
+\ge\frac{D(1-\delta)}{\ln(1/\gamma)}
+\left[\ln\frac{D(1-\delta)}{\delta}\right]_+.
+```
+
+The old noise/gate balance converts cumulative rank into T count after subtracting the $`2n`$ initial reserve. At fixed positive noise, even a one-qubit payload consequently costs order $`D\ln(D/\epsilon)`$ when width is $`O(\ln(D/\epsilon))`$. Combining this with the payload floor matches the Tanner construction for all payloads at width $`O(k+\ln(D/\epsilon))`$, with $`D\to\infty`$ and target error bounded above by a fixed constant below one half. The constants need not remain sharp as noise tends to zero.
+
+Watrous supplies the probability, CPTP and reference language. The complete-erasure/Jensen reliability mechanism is an established spacetime-bound ingredient; the project-specific bridge is its application to backward Pauli rank and the charged T-growth ledger. It requires no physical access to noise flags.
+
 ## From a delayed-basis score to the same ledger
 
 The [guessing-to-processing account](../science/guessing_processing.md) supplies the full transfer and strongest inspected recovery comparison. The device receives only $`|X\rangle_\Theta`$, with $`X,\Theta\in\{0,1\}^k`$ uniform and independent. It receives $`\Theta`$ only after all charged storage ends. It never receives $`X`$. The score is the unconditional average probability of returning the entire string correctly.
@@ -109,6 +125,6 @@ The [coherent construction](../science/coherent_recovery.md) corrects internally
 
 The [Tanner construction](../science/tanner_memory.md) replaces concatenation by an inherited good code and a constant-iteration parallel decoder. A finite local truth table must be synthesized as gates; a constant-time classical RAM statement is insufficient. Track all current-syndrome and temporary registers, compile nonlinear decisions into counted T/T-dagger slots, apply the controlled Pauli correction, and reset scratch on a fixed schedule. On each Pauli-noise branch the syndrome is independent of logical amplitudes, so discarding scratch preserves an entangled logical input. A deterministic residual invariant, Chernoff tails and a union bound over correlated X/Z components give half-diamond error at most epsilon. Bounded-ratio code lengths then yield width O(k+ln(J/epsilon)) and work O(nJ), with J=O(gamma D+1), for a sufficiently small direct noise range. A fixed number of inner five-qubit levels reduces the fresh error per outer position to that tolerance, extending the same asymptotic bounds to $`\gamma\le1/20`$. The inner level is independent of payload, duration and target error; its scratch and T slots are included. No isotropic effective-noise assumption is required.
 
-Watrous supplies CPTP maps, partial traces and reference-stable channel comparison. Gu et al. supply the code and repeated-round decoder mechanism; passive LDPC and measurement-free correction are also prior ingredients. The fixed-circuit compilation and resource composition must be proved separately. Matching order when the payload dominates the reliability logarithm leaves numerical coefficients and hardware performance open.
+Watrous supplies CPTP maps, partial traces and reference-stable channel comparison. Gu et al. supply the code and repeated-round decoder mechanism; passive LDPC and measurement-free correction are also prior ingredients. The fixed-circuit compilation and resource composition must be proved separately. The rank-extinction converse extends fixed-noise matching order to reliability-dominated payloads. Numerical coefficients, uniform weak-noise sharpness and hardware performance remain open.
 
 The final [resource interpretation](../science/interpretation.md) also keeps the catastrophic whole-register replacement ceiling explicit. Gates cannot reconstruct a challenge after every persistent copy has been erased. The [milestone map](MILESTONES.md) ends by connecting that feasibility ceiling, the archive, both coherent constructions and the score-based corollary under one operational model.

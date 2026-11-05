@@ -1,0 +1,157 @@
+{
+  "status": "pass",
+  "arithmetic": "Exact Fraction throughout; decimal output rounded outward",
+  "examples": [
+    {
+      "parameters": {
+        "k": 1,
+        "n": 200,
+        "D": 100000,
+        "gamma": "1/100",
+        "epsilon": "1/100",
+        "delta": "1/75",
+        "A": "296000/3"
+      },
+      "reliability_lower": {
+        "lower": "2988.820981733948",
+        "upper": "2988.820981733949",
+        "decimal_places": 12,
+        "outward_denominator": "1000000000000"
+      },
+      "integer_gate_count": 2989,
+      "old_payload_logarithmic_lower": {
+        "lower": "1972.784440727507",
+        "upper": "1972.784440727508",
+        "decimal_places": 12,
+        "outward_denominator": "1000000000000"
+      },
+      "old_individual_gate_relaxation": {
+        "lower": "2438.586861828446",
+        "upper": "2438.586861828447",
+        "decimal_places": 12,
+        "outward_denominator": "1000000000000"
+      },
+      "old_individual_integer_gate_count": 2439,
+      "old_scalar_ledger_lower": {
+        "lower": "1982.731334043540",
+        "upper": "1982.731334043541",
+        "decimal_places": 12,
+        "outward_denominator": "1000000000000"
+      },
+      "old_scalar_integer_gate_count": 1983,
+      "old_scalar_coasting_rounds": 528,
+      "strictly_beats_both_old_integer_counts": true,
+      "proof_of_decimal_enclosures": {
+        "method": "64-term exact Fraction atanh series after binary range reduction",
+        "tail": "2*t^(2*N+1)/((2*N+1)*(1-t^2))",
+        "log_A_over_delta": {
+          "lower": "15.816990558174",
+          "upper": "15.816990558175",
+          "decimal_places": 12,
+          "outward_denominator": "1000000000000"
+        },
+        "log_inverse_gamma": {
+          "lower": "4.605170185988",
+          "upper": "4.605170185989",
+          "decimal_places": 12,
+          "outward_denominator": "1000000000000"
+        },
+        "log_inverse_q": {
+          "lower": "0.010050335853",
+          "upper": "0.010050335854",
+          "decimal_places": 12,
+          "outward_denominator": "1000000000000"
+        },
+        "log_width_reserve": {
+          "lower": "5.311740386880",
+          "upper": "5.311740386881",
+          "decimal_places": 12,
+          "outward_denominator": "1000000000000"
+        },
+        "log_one_plus_inverse_a": {
+          "lower": "0.409959497696",
+          "upper": "0.409959497697",
+          "decimal_places": 12,
+          "outward_denominator": "1000000000000"
+        }
+      },
+      "scope": "Necessary-bound comparison only. No claim of feasible storage parameters, optimal T coefficient, or theorem proof."
+    },
+    {
+      "parameters": {
+        "k": 1,
+        "n": 200,
+        "D": 1000000,
+        "gamma": "1/100",
+        "epsilon": "1/100",
+        "delta": "1/75",
+        "A": "2960000/3"
+      },
+      "reliability_lower": {
+        "lower": "38421.543150672815",
+        "upper": "38421.543150672816",
+        "decimal_places": 12,
+        "outward_denominator": "1000000000000"
+      },
+      "integer_gate_count": 38422,
+      "old_payload_logarithmic_lower": {
+        "lower": "19822.180916546067",
+        "upper": "19822.180916546068",
+        "decimal_places": 12,
+        "outward_denominator": "1000000000000"
+      },
+      "old_individual_gate_relaxation": {
+        "lower": "24502.479317025664",
+        "upper": "24502.479317025665",
+        "decimal_places": 12,
+        "outward_denominator": "1000000000000"
+      },
+      "old_individual_integer_gate_count": 24503,
+      "old_scalar_ledger_lower": {
+        "lower": "19922.125273437479",
+        "upper": "19922.125273437480",
+        "decimal_places": 12,
+        "outward_denominator": "1000000000000"
+      },
+      "old_scalar_integer_gate_count": 19923,
+      "old_scalar_coasting_rounds": 528,
+      "strictly_beats_both_old_integer_counts": true,
+      "proof_of_decimal_enclosures": {
+        "method": "64-term exact Fraction atanh series after binary range reduction",
+        "tail": "2*t^(2*N+1)/((2*N+1)*(1-t^2))",
+        "log_A_over_delta": {
+          "lower": "18.119575651168",
+          "upper": "18.119575651169",
+          "decimal_places": 12,
+          "outward_denominator": "1000000000000"
+        },
+        "log_inverse_gamma": {
+          "lower": "4.605170185988",
+          "upper": "4.605170185989",
+          "decimal_places": 12,
+          "outward_denominator": "1000000000000"
+        },
+        "log_inverse_q": {
+          "lower": "0.010050335853",
+          "upper": "0.010050335854",
+          "decimal_places": 12,
+          "outward_denominator": "1000000000000"
+        },
+        "log_width_reserve": {
+          "lower": "5.311740386880",
+          "upper": "5.311740386881",
+          "decimal_places": 12,
+          "outward_denominator": "1000000000000"
+        },
+        "log_one_plus_inverse_a": {
+          "lower": "0.409959497696",
+          "upper": "0.409959497697",
+          "decimal_places": 12,
+          "outward_denominator": "1000000000000"
+        }
+      },
+      "scope": "Necessary-bound comparison only. No claim of feasible storage parameters, optimal T coefficient, or theorem proof."
+    }
+  ],
+  "limits": "Finite arithmetic certificates supplement, rather than replace, the written extinction theorem and physical resource accounting."
+}

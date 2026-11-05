@@ -48,6 +48,27 @@ The same argument applies to every contiguous interval. A protocol cannot satisf
 
 The [delayed-basis BB84 application](guessing_processing.md) replaces the fidelity premise by an unconditional whole-string guessing score. The input is only the quantum challenge, its secret label is never disclosed, and its basis is disclosed after storage. For $`k\ge8`$, score $`p\gt2^{-k}`$ forces $`a_k(p)=2k(p-2^{-k})/(1-2^{-k})`$ at every cut, so the same gate and interval inequalities apply. A positive score excess can reflect retained classical information and does not alone demonstrate quantum storage. Existing branchwise fidelity/recovery reductions, with spectral normalization retained, reproduce the convenient mean-rank score floors, including the small-block polygon. The direct floor explains the operational connection with its explicit controller and chronology assumptions. The [moment theorem](moment_processing.md) gives a further consequence in the same model: actual product-noise probabilities contract the logarithm of an exponential rank moment, while each charged gate has the same additive growth bound. Combining this dynamics with a fixed recovery of the averaged channel strengthens the gate and interval ledger. For fixed positive guessing score and fixed $`q`$, along growing challenges and storage durations with $`\ln(n/k)=o(D)`$, its necessary rate approaches $`2k(1-q)/q`$ per round. This improves the fixed-score coefficient of the convenient mean-rank law while preserving the order $`k\gamma D`$ at weak noise. The entering interval reserve must bound the logarithmic moment; a mean-rank reserve cannot automatically be reused. The [inverse ledger](guessing_decay.md) additionally bounds the score itself at finite width and duration. In the growing-family limit it gives an explicit exponent $`E_q(\rho)`$, positive exactly for prescribed T rate $`\rho\lt2(1-q)/q`$. Propagating the full generating-function argument through successive noise layers strengthens that exponent to $`\mathcal E_q`$, with $`\mathcal E_q(0)=\ln2`$ and the same positivity threshold. This states how quickly success must vanish; it does not identify an achievable memory capacity.
 
+### Reliability also constrains the time spent at each rank
+
+The [reliability converse](reliability_processing.md) uses an absorbing choice of the same envelope. At an incoming rank $`r\gt0`$, at most $`r`$ physical pivot qubits identify every label. Replacing all of them annihilates the envelope, with conditional probability at least $`\gamma^r`$. Current replacement choices are independent of the later suffix defining the incoming envelope. A zero envelope stays zero under every adjoint primitive; in particular, a T update adds its axis only when some existing label anticommutes with it.
+
+Let $`\delta=\epsilon/(1-4^{-k})\in(0,1)`$ and $`b=1-\delta`$. Bell fidelity at least $`1-\epsilon`$ permits eventual extinction with probability at most $`\delta`$. First-extinction events at distinct noise layers are disjoint, so their total hazard is bounded by that same probability. Jensen's inequality, weighted by the surviving cuts, forces cumulative incoming rank at least
+
+```math
+\sum_{j=1}^D\mathbb E r_j
+\ge\frac{Db}{\ln(1/\gamma)}[\ln(Db/\delta)]_+.
+```
+
+Noise loses at least $`\gamma\mathbb E r_j`$ expected rank at layer $`j`$, whereas a T/T-dagger gate adds at most one. The initial reserve is at most $`2n`$. Consequently
+
+```math
+m_T\ge\left[
+\frac{\gamma Db}{\ln(1/\gamma)}[\ln(Db/\delta)]_+-2n
+\right]_+.
+```
+
+This converts a reliability requirement into charged continuing processing, rather than only a width ceiling. The complete-erasure/Jensen reliability mechanism has an established cumulative-spacetime precedent; its adaptation here uses backward Pauli rank and the T-growth ledger. For delayed-basis guessing, the same reliability part applies with $`\delta=(1-p)/(1-2^{-k})`$ for every $`2^{-k}\lt p\lt1`$. It can witness work retaining classical as well as quantum input dependence, without verifying the device assumptions.
+
 ## 3. Quantum storage at zero internal T count
 
 The [Clifford-only construction](clifford_lifetime.md) extracts a stabilizer-syndrome history without performing corrections during storage. Each stored syndrome bit has several replicas, each with a growing ternary tree of noisy descendants. At the endpoint, majority reconstruction recovers the history, and successive syndrome differences identify the correctable error increments.
@@ -101,7 +122,13 @@ n=O\!\left(k+\ln\frac{J}{\epsilon}\right),
 
 Independent depolarizing noise makes each error component spatially independent within a batch. The X and Z components on a qubit remain correlated; the proof uses a union bound. A bounded-ratio family of code lengths permits arbitrary payloads by fixing unused logical qubits, without puncturing the code.
 
-If $`k=\Omega(\ln(J/\epsilon))`$ and $`\gamma D`$ exceeds the width allowance, the construction and converse have the same $`k\gamma D`$ order at fixed high fidelity. For smaller payloads the additive reliability logarithm remains. The constants depend on local-code tables, degree, expansion and the fixed iteration count, and can be extremely large. A fixed number of inner five-qubit levels now extends this bound to $`\gamma\le1/20`$. The extension is proved by a coherent decode/correct, outer-recovery and reencode schedule; it does not assume isotropic effective noise. The inner level enlarges constants but is independent of reliability parameters.
+The construction is available throughout $`0\lt\gamma\le1/20`$ after a fixed number of inner five-qubit levels. Combining it with the reliability and payload converses now gives matching processing order for every payload at fixed positive noise. More precisely, fix $`\gamma\in(0,1/20]`$, $`C\gt0`$ and $`0\lt\epsilon_0\lt1/2`$. Along $`D\to\infty`$, with $`0\lt\epsilon\le\epsilon_0`$ and width $`n\le C[k+\ln(D/\epsilon)]`$, every permitted memory requires
+
+```math
+m_T=\Omega_{\gamma,C,\epsilon_0}\!\left(D[k+\ln(D/\epsilon)]\right).
+```
+
+The Tanner construction attains the same order at width $`O(k+\ln(D/\epsilon))`$. A fixed one-qubit payload therefore still requires order $`D\ln(D/\epsilon)`$ processing at such width. For payloads dominating the logarithm this reduces to the earlier order $`k\gamma D`$, with positive $`\gamma`$ fixed. The constants depend on the chosen noise strength, width cap and error ceiling as well as the fixed code family. They can be extremely large. The extension is proved by a coherent decode/correct, outer-recovery and reencode schedule, without an isotropic effective-noise assumption; its inner level is independent of payload, duration and target error. This does not settle the uniform weak-noise dependence or numerical optimum.
 
 ## 5. More gates do not eliminate the need for width
 
@@ -151,7 +178,7 @@ Likewise, the theorem is not a magic-state consumption bound. Fresh nonstabilize
 
 The [closest predecessor](../references/RELATED_WORK.md) established the qualitative Clifford-memory obstruction and a logarithmic-squared forgetting bound. The rank contraction supplies a single-logarithm bound stable under an arbitrary reference; the constructive archive establishes its quantum lifetime order. The channel-rank floor then turns a qualitative need for non-Clifford gates into a continuing, extensive requirement on their number and placement.
 
-The five-qubit construction remains a simple finite-circuit witness over its explicit noise range. The Tanner compilation with fixed-level inner protection removes its multiplicative reliability logarithm for $`\gamma\le1/20`$ in the payload-dominant, long-duration regime stated above. This materially tightens the resource comparison within the same model. Gu et al. supply the good code and residual-error mechanism, and prior passive LDPC work already supplies measurement-free correction with resettable ancillas; the added result is the fixed-circuit resource accounting and its matching-order consequence. No optimal numerical processing coefficient, practical threshold or full width/work frontier is established.
+The five-qubit construction remains a simple finite-circuit witness over its explicit noise range. The Tanner compilation and rank-extinction converse give matching processing order for all payloads at fixed positive noise and width proportional to payload plus reliability logarithm. Gu et al. supply the good code and residual-error mechanism, and prior passive LDPC work supplies measurement-free correction with resettable ancillas. Bharti, Haug and Tanggara supply the complete-erasure/Jensen reliability mechanism for cumulative spacetime. The additions here are fixed-circuit accounting and a rank-based adaptation that charges continuing T/T-dagger work even though Clifford operations and resets are free. Optimal numerical coefficients, uniform weak-noise sharpness, useful finite constants and the full width/work frontier remain open.
 
 All conclusions retain independent depolarizing noise, fixed schedules, counted persistent workspace, and ideal processing between noise layers. Correlated noise, gate faults inside the processing intervals, geometric locality, and an external controller require their own model and analysis.
 

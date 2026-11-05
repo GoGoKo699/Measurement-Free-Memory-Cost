@@ -14,6 +14,11 @@ Canonical entrypoints:
 - science/control_cost.md: channel-rank and algebra bottlenecks, the 4^(-k)
   fidelity floor, gate-growth charges, logarithmic and exact discrete budgets,
   interval constraints and decoder-specific terminal rank.
+- science/reliability_processing.md: absorbing Pauli-envelope updates, rank-dependent
+  extinction hazard, first-extinction/Jensen cumulative-rank bound, specifically
+  charged T-count consequence, score specialization and all-payload fixed-noise
+  matching at width O(k+ln(D/epsilon)); primary attribution distinguishes the
+  inherited complete-erasure/Jensen spacetime mechanism.
 - science/guessing_processing.md: authoritative delayed-basis BB84 transfer,
   full-output CPTP quantum-plus-classical factorization, unconditional all-cut
   score floors, gate/interval corollaries and strongest inspected recovery
@@ -55,7 +60,7 @@ Reader routes:
 - For the connected scientific account, read science/model.md and
   science/interpretation.md, then the relevant proof.
 - For the converse, read science/pauli_envelopes.md followed by
-  science/control_cost.md.
+  science/control_cost.md and science/reliability_processing.md.
 - For an operational score premise, read science/guessing_processing.md after
   the model and algebra bottlenecks. The companion application is
   https://github.com/GoGoKo699/Lattice-Memory-Certification/blob/main/science/noisy-processing.md.
@@ -90,8 +95,9 @@ Preserve these distinctions:
   fixed schedule and counted in n. The Gu et al. decoder/invariant and existing
   MFQEC mechanism are inherited. With a fixed number of inner five-qubit levels, for gamma<=1/20,
   n=O(k+ln(J/epsilon)), m_T=O(nJ), J=O(gamma D+1). It matches processing order
-  when k=Omega(ln(J/epsilon)) and duration exceeds the width allowance. Constants
-  can be enormous. The extended range is proved by constant-level composition,
+  for every payload at fixed positive gamma, D growing, epsilon bounded above
+  below1/2 and n=O(k+ln(D/epsilon)), by combining payload and reliability
+  converses. This is not a sharp uniform weak-noise law. Constants can be enormous. The extended range is proved by constant-level composition,
   not inferred from an LDPC threshold; no coefficient is optimized.
 - All constructions give half-diamond error epsilon. The converse assumes only
   Bell-overlap fidelity at least 1-epsilon.
@@ -116,6 +122,10 @@ Preserve these distinctions:
 - Watrous (2018) is the single educational anchor shared by both projects.
   Gottesman and other stabilizer sources remain primary scholarly references.
 - The qualitative no-go result and stochastic Pauli framework are prior work.
+  Complete-erasure/Jensen cumulative-spacetime reasoning is also prior work.
+  The reliability extension adapts it to backward Pauli rank and specifically
+  charged T/T-dagger processing with free Clifford/reset primitives. Zero must
+  remain absorbing in every chosen envelope update.
 - Finite checks establish their tested identities, not unrestricted asymptotic
   truth or external peer review.
 

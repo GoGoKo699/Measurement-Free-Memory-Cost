@@ -231,7 +231,7 @@ V'\subseteq V+\langle w\rangle,
 ```
 
 
-For $`T`$ and $`T^\dagger`$, $`w`$ is the single-qubit $`Z`$ label, up to an irrelevant global phase. A rotation about a large Pauli has the same envelope charge, but is not thereby assigned the physical implementation cost of one T gate.
+For $`T`$ and $`T^\dagger`$, $`w`$ is the single-qubit $`Z`$ label, up to an irrelevant global phase. For reliability-sensitive arguments choose $`V'=V`$ when every $`v\in V`$ commutes with $`w`$, and otherwise use $`V+\langle w\rangle`$. This valid choice leaves the zero envelope absorbing; always adjoining $`w`$ would unnecessarily enlarge it. The [reliability budget](reliability_processing.md) uses this convention. A rotation about a large Pauli has the same envelope charge, but is not thereby assigned the physical implementation cost of one T gate.
 
 For a unitary on a set $`J`$ of $`s_g`$ qubits, conjugation changes only the Pauli factor on $`J`$. The outside label is $`\pi_{J^c}v`$, and an arbitrary label can appear inside $`J`$. An envelope is therefore
 

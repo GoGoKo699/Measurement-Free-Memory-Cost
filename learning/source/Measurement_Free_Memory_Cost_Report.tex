@@ -55,11 +55,11 @@
 \vspace{6mm}
 \textbf{The question.} Suppose every qubit that stores data or a controller record is noisy. Clean replacement states are available, and ideal Clifford operations may be performed between noise rounds. How much additional processing is needed to preserve an unknown quantum state?
 
-With Clifford operations and resets alone, the best possible lifetime grows only logarithmically with physical width. A sufficiently large archive of noisy syndrome records attains this order. At more economical width, preserving high fidelity for long times requires continuing non-Clifford processing. The necessary gate count grows extensively with the logical payload and accumulated noise duration.
+With Clifford operations and resets alone, the best possible lifetime grows only logarithmically with physical width. A sufficiently large archive of noisy syndrome records attains this order. At more economical width, preserving high fidelity for long times requires continuing non-Clifford processing. The necessary gate count grows with both the logical payload and the reliability demanded over the storage horizon. At fixed positive noise, even a one-qubit payload requires order $D\ln(D/\eps)$ continuing processing when width is $O(\ln(D/\eps))$.
 
 \keypoint{Fresh states can remove entropy. They do not, by themselves, supply the coherent processing needed to decide and apply corrections inside this memory.}
 
-The lower bound is complemented by three storage constructions. A noisy archive defers nonlinear decoding to the final endpoint and uses exponential width. A concatenated five-qubit construction corrects during storage with at most 42 T or T-dagger gates per node and a polylogarithmic reliability overhead. A coherently compiled, constant-iteration Tanner-code decoder removes that overhead for $0<\gamma\le1/20$ after a fixed number of inner five-qubit levels: its total noisy width is $O(k+\ln(J_+/\eps))$ and its prescribed T count is $O(nJ)$ for $J=O(\gamma D+1)$ and $J_+=\max(1,J)$. This matches the converse's order when the payload dominates the reliability logarithm and storage is sufficiently long. Numerical optimality and practical constants remain open.
+The lower bound is complemented by three storage constructions. A noisy archive defers nonlinear decoding to the final endpoint and uses exponential width. A concatenated five-qubit construction corrects during storage with at most 42 T or T-dagger gates per node and a polylogarithmic reliability overhead. A coherently compiled, constant-iteration Tanner-code decoder removes that overhead for $0<\gamma\le1/20$ after a fixed number of inner five-qubit levels: its total noisy width is $O(k+\ln(J_+/\eps))$ and its prescribed T count is $O(nJ)$ for $J=O(\gamma D+1)$ and $J_+=\max(1,J)$. A rank-extinction converse makes this processing order necessary for every payload at fixed positive noise and width proportional to $k+\ln(D/\eps)$, once storage is sufficiently long. Numerical optimality, uniform weak-noise sharpness and practical constants remain open.
 
 Both the converse and the constructions permit ideal global operations between noisy intervals. Storage duration counts noise rounds, separately from elementary gate depth.
 \vfill
@@ -71,7 +71,7 @@ Central mechanism & Noise contracts a binary envelope of backward Pauli observab
 \newpage
 \tableofcontents
 \vspace{4mm}
-\textbf{Reading route.} Sections 1--3 define the task and the forgetting mechanism. Sections 4--6 turn that mechanism into a quantitative processing budget. Section 7 explains the noisy archive; Section 8 gives both the five-qubit and Tanner-code coherent constructions. Sections 9--10 compare their resources and state the remaining questions. Section~\ref{sec:guessing} derives a delayed-basis guessing premise, retains exponential rank moments, and obtains a finite and asymptotic decay guarantee. The appendix records the finite checks and a compact notation guide.
+\textbf{Reading route.} Sections 1--3 define the task and the forgetting mechanism. Sections 4--6 turn that mechanism into quantitative payload and reliability budgets. Section 7 explains the noisy archive; Section 8 gives both the five-qubit and Tanner-code coherent constructions. Sections 9--10 compare their resources and state the remaining questions. Section~\ref{sec:guessing} derives a delayed-basis guessing premise, retains exponential rank moments, and obtains a finite and asymptotic decay guarantee. The appendix records the finite checks and a compact notation guide.
 
 \textbf{Conventions.} All systems are finite-dimensional. A quantum channel is a completely positive, trace-preserving linear map, abbreviated CPTP. Logarithms written as $\ln$ are natural; $\log_2$ has base two. Probabilities, gate counts, qubit counts, and numbers of rounds are dimensionless. No physical clock time is assigned to a round.
 
@@ -448,6 +448,76 @@ Its support spans three independent labels, though it outputs one qubit. The num
 
 For a Clifford decoder followed by discarding unused wires, the $2k$ output generators do pull back to $2k$ independent labels, so $M=2k$ is valid. For arbitrary final decoding, $M=2n$ is the safe choice. Moving nonlinear recovery to the free endpoint is permitted, but its support must be included in that endpoint envelope. Moving it inside the storage interval instead makes its gates part of the charge.
 
+\subsection{Reliability forces cumulative rank}
+\label{sec:reliability}
+A mean-rank floor captures the payload but does not by itself retain the probability that every nonconstant input direction is lost. That probability also constrains continuing work. Suppose $D\ge1$ and $0<\eps<1-4^{-k}$. In this subsection put
+\begin{equation}
+\delta=\frac{\eps}{1-4^{-k}},\qquad b=1-\delta,\qquad
+c_\gamma=\ln(1/\gamma)>0.
+\label{eq:reliability-parameters}
+\end{equation}
+
+\begin{theorem}[Reliability-dependent processing]
+Every permitted memory with Bell fidelity at least $1-\eps$ satisfies
+\begin{equation}
+\boxed{m_T\ge\positive{
+\gamma Db\max\left\{2k,
+\frac{[\ln(Db/\delta)]_+}{c_\gamma}\right\}-2n}.}
+\label{eq:reliability}
+\end{equation}
+The bound is necessary; the finite-depth and individual-gate bounds remain complementary.
+\end{theorem}
+
+\textbf{Keep extinction absorbing.}
+Sample all independent replacement flags and propagate the envelope backward through the entire circuit. Use an update that preserves $V=\{0\}$. In particular, a rotation about Pauli axis $w$ leaves $V$ unchanged when every label in $V$ commutes with $w$; otherwise its support is enclosed by $V+\langle w\rangle$. This still increases rank by at most one for a T or T-dagger gate, but never adds an axis to a zero envelope. Clifford operations, replacement resets and sampled noise also preserve zero. Since every adjoint CPTP primitive maps identity to identity, this choice faithfully encloses the actual pulled-back observables.
+
+Let $r_j$ be the incoming rank immediately before the $j$th noise layer in backward order. It depends on the later suffix and is independent of the current layer's flags. For $r_j>0$, choose $r_j$ independent coordinate functionals whose restriction to $V_j$ is injective, and collect the physical qubits containing these pivots. There are at most $r_j$ such qubits. Replacing all of them removes every nonzero label of $V_j$: the survivor space is $V_j\cap W_{E^c}=\{0\}$. Hence the conditional probability of extinction at this layer is at least $\gamma^{r_j}$. This is a statement about the sampled channel decomposition, not a physical flag supplied to the memory.
+
+\textbf{Sum first extinction, rather than independent hazards.}
+A fully sampled branch that reaches zero is input-independent and has Bell fidelity exactly $4^{-k}$, including after arbitrary CPTP encoding and final decoding. Other branches have fidelity at most one. Linearity of fidelity therefore bounds the probability of eventual extinction by $\delta$.
+
+Write $S_j=\mathbf1_{\{r_j>0\}}$. Events in which the envelope first becomes zero at different noise layers are disjoint, because zero is absorbing. Free resets may also cause extinction; omitting those events only weakens the probability bound. Consequently
+\begin{equation}
+\sum_{j=1}^{D}\E[S_j\gamma^{r_j}]\le\delta.
+\label{eq:extinction-hazards}
+\end{equation}
+Let $A=\sum_j\Pr(r_j>0)$ and $B=\sum_j\E r_j$. A branch surviving the whole backward circuit is alive before every noise layer, so $A\ge Db$. Normalize the measure over the alive cut--branch pairs by $A$. Jensen's inequality for the convex function $e^{-c_\gamma r}$ then gives
+\begin{equation}
+\delta\ge A\exp(-c_\gamma B/A),\qquad
+B\ge\frac{A}{c_\gamma}[\ln(A/\delta)]_+
+\ge\frac{Db}{c_\gamma}[\ln(Db/\delta)]_+.
+\label{eq:cumulative-rank}
+\end{equation}
+The positive part uses $B\ge0$. The last step is valid because $x[\ln(x/\delta)]_+$ is nondecreasing for $x\ge0$.
+
+\textbf{Convert cumulative rank into charged gates.}
+At noise layer $j$, expected rank drops by at least $\gamma\E r_j$. Every free operation has nonpositive rank increment, and each prescribed T/T-dagger slot adds at most one. Starting from rank at most $2n$ and ending at nonnegative rank yields
+\begin{equation}
+ m_T\ge\gamma B-2n.
+\label{eq:reliability-telescope}
+\end{equation}
+The earlier fidelity floor also gives $\E r_j\ge2kb$ at every incoming cut, so $B\ge2kbD$. Combining this with \eqref{eq:cumulative-rank} proves \eqref{eq:reliability}.
+
+This reliability mechanism adapts established complete-erasure/Jensen reasoning for cumulative spacetime. Its role here is different: the hazard depends on backward Pauli rank, and the final balance charges T/T-dagger slots while permitting free Clifford operations and input-independent resets.
+
+For any contiguous interval, the same proof uses its number $D_I$ of noise layers and the same global extinction allowance $\delta$. Retain the actual globally propagated suffix envelope at the interval's later cut, with expected rank at most $M_I\le2n$; its suffix noise is independent of the noise inside the interval. Do not restart an unrelated envelope. Replace $D,2n,m_T$ in the reliability part by $D_I,M_I,m_{T,I}$. This requires no claim that hazards at different times are independent.
+
+\subsection{Matching order for every payload at fixed noise}
+Fix $\gamma\in(0,1/20]$, a width constant $C>0$ and $0<\eps_0<1/2$. Let $D\to\infty$, allow any $k\ge1$ and $0<\eps\le\eps_0$, and put $L=\ln(D/\eps)$. At width
+\begin{equation}
+ n\le C(k+L),
+\end{equation}
+the processing bound is
+\begin{equation}
+ m_T=\Omega_{\gamma,C,\eps_0}\bigl(D(k+L)\bigr).
+\label{eq:all-payload}
+\end{equation}
+Indeed $\eps\le\delta\le4\eps/3$ and $b\ge1-4\eps_0/3>1/3$. Thus $\ln(Db/\delta)=L+O_{\eps_0}(1)$ uniformly over $k,\eps$. For sufficiently large $D$, the maximum in \eqref{eq:reliability} bounds a positive constant times $k+L$. Its positive $D(k+L)$ term then absorbs the initial reserve $2n\le2C(k+L)$. The required duration threshold depends only on the fixed constants, rather than on $k$ or $\eps$.
+
+The Tanner construction below attains $n=O(k+L)$ and $m_T=O_\gamma(D(k+L))$, so its processing order matches \eqref{eq:all-payload}. For fixed $k$, this is order $D\ln(D/\eps)$; when $k$ dominates the logarithm, it reduces to the payload order. The comparison fixes positive $\gamma$. The factor $1/\ln(1/\gamma)$ in the finite converse prevents interpreting it as an optimized uniform weak-noise coefficient.
+
+Exact zero infidelity is impossible for finite width, $D\ge1$ and positive noise: the first noise layer has a positive-probability complete-register replacement branch. At $D=0$, the identity endpoint transmission needs no interior processing. These boundary cases are separate from the positive-error formula.
+
 \section{Zero-T storage by retaining a noisy syndrome history}
 \subsection{What can be postponed}
 Errors in the noise model can also be sampled as independent Pauli labels. In each such history, a stabilizer code occupies a definite syndrome sector. Syndrome extraction can copy that sector label without copying the unknown logical state. If every error increment is correctable and the entire syndrome history can be recovered at the endpoint, physical feedback need not occur during storage.
@@ -760,7 +830,7 @@ m_T=O(nJ),\quad
 \end{equation}
 For $D=0$ no recovery is required. Constants depend only on the fixed code, decoder slack and iteration count, and length-gap factor, uniformly for $0<\gamma\le\gamma_*$. This bare Tanner noise range can be far smaller than $1/20$. The following composition proves the extension; it is not inferred from an LDPC threshold.
 
-When $k=\Omega(\ln(J_+/\eps))$ and $\gamma D\to\infty$, the construction has $n=O(k)$ and $m_T=O(k\gamma D)$, matching the converse's order after its initial-width allowance is exhausted. This closes the former polylogarithmic reliability gap in that regime. Existing Tanner codes, parallel decoding, repeated-round correction, coherent syndrome correction and passive LDPC memory mechanisms remain inherited ingredients. The addition is their model-compatible compilation and resource consequence, with no claim of an optimal numerical coefficient or practical threshold.
+When $k=\Omega(\ln(J_+/\eps))$ and $\gamma D\to\infty$, the construction has $n=O(k)$ and $m_T=O(k\gamma D)$. More generally, at fixed positive $\gamma$, its width and processing match the all-payload law \eqref{eq:all-payload}, including the reliability-dominated case. Existing Tanner codes, parallel decoding, repeated-round correction, coherent syndrome correction and passive LDPC memory mechanisms remain inherited ingredients. The addition is their model-compatible compilation and resource consequence, with no claim of an optimal numerical coefficient or practical threshold.
 
 \subsection{Fixed-level inner protection extends the noise range}
 The outer decoder only needs a fixed tolerance, rather than an error shrinking with storage duration. Consequently a \emph{fixed} number of inner five-qubit levels suffices to reach that tolerance throughout $0<\gamma\le1/20$.
@@ -821,7 +891,7 @@ Resource choice & Established result & Boundary of the claim\\
 \midrule
 Clifford and resets only & Sharp lifetime order $\Theta(\gamma^{-1}\ln n)$ at fixed $k,F_0$ & Weak noise; exponential archive width; unrestricted endpoint decoding\\[4pt]
 Five-qubit coherent correction & Explicit polylogarithmic reliability overhead for $\gamma\le1/20$ & Modest local circuit; overhead remains in this construction\\[4pt]
-Tanner coherent correction & $n=O(k+\ln(J_+/\eps))$, $m_T=O(nJ)$, $J=O(\gamma D+1)$ & Range $\gamma\le1/20$ after fixed-level inner protection; enormous constants; order matching only in the stated payload/time regime\\[4pt]
+Tanner coherent correction & $n=O(k+\ln(J_+/\eps))$, $m_T=O(nJ)$, $J=O(\gamma D+1)$ & Range $\gamma\le1/20$ after fixed-level inner protection; fixed-noise order matching at width $O(k+\ln(D/\eps))$; enormous constants\\[4pt]
 Arbitrary internal gates & Full-register depolarization ceiling \eqref{eq:ceiling} & A necessary width condition, not a matching code construction\\
 \bottomrule
 \end{tabularx}
@@ -832,7 +902,7 @@ The common mechanism is the loss of independent binary directions in the output'
 
 The established ingredients include the qualitative memory obstruction, stabilizer and symplectic methods, the algebra and entanglement tools, random-code existence, tree broadcasting, five-qubit coding, concatenation, and exact Toffoli synthesis. The quantitative account developed here lies in the simultaneous envelope contraction, fidelity-dependent and finite-depth budgets, and the fully charged storage constructions. The self-contained derivations are not a claim that every ingredient is new.
 
-Several questions remain. What is the optimum simultaneous dependence on width, fidelity, payload, and gate placement outside the Tanner matching regime? Can useful constants be proved for an explicitly instantiated decoder, or can the physical noise range be extended further? Can stronger algebraic information than total envelope rank improve the converse? A lower bound for one particular decoder would not answer these unrestricted questions.
+Several questions remain. What is the optimum numerical dependence on width, fidelity, payload, and gate placement beyond the fixed-noise, width-restricted matching order? Can useful constants be proved for an explicitly instantiated decoder, or can the physical noise range be extended further? Can stronger algebraic information improve the numerical converse or close its remaining uniform weak-noise gap? A lower bound for one particular decoder would not answer these unrestricted questions.
 
 The present guarantees do not include noisy elementary gates, restricted connectivity, finite processing time, correlated noise, or preparation faults. All constructions use the stated ideal processing model. A measured protected controller also changes the available resources and requires a separate analysis. These boundaries prevent a direct reinterpretation of $D$ as hardware depth.
 
@@ -898,6 +968,19 @@ u&\le\tau_\ell+A_\ell F_{\rm pg},\qquad 0\le\ell\le k.
 The underlying spectral reduction writes $u=\sum_v\lambda_vw_v$, where $w_v\ge0$, $\sum_vw_v=1$, and $w_v\le F_{\rm pg}$. Its nonzero eigenvalues are $2^{-j}$ with multiplicities $2^j\binom kj$. Bounding all terms at or below $\tau_\ell$ by that threshold, then applying the cap to the excess, gives $u\le\tau_\ell+F_{\rm pg}\sum_{\lambda_v>\tau_\ell}(\lambda_v-\tau_\ell)$, which is the displayed estimate. At $\ell=0$ it gives $u\le(1+F_{\rm pg})/2$. At $p_*=1/2$, taking $\ell=2$ gives a positive recovery-fidelity lower bound of order $k^{-2}$.
 
 Each branch also has $F_{\rm rec}\le\min\{1,2^{r-2k}\}$. Combining these inequalities branchwise and then averaging reproduces \eqref{eq:guess-floor} for every $k\ge8$. Exact finite-rank checks also imply the weaker floor stated above for $1\le k\le7$. These mean-rank floors and their gate or interval consequences therefore already follow from the recovery route. The direct factorization provides a short operational proof; the comparison establishes neither an optimal attainable score nor dominance over every possible stronger direct bound.
+
+\subsection{A score also bounds extinction}
+For the full-output envelope, an extinct branch is input-independent before basis readout. Since the hidden string remains uniform and secret, such a branch has guessing success at most $2^{-k}$ (aborts can only lower it). For $2^{-k}<p<1$, eventual extinction therefore has probability at most
+\begin{equation}
+ \delta_p=\frac{1-p}{1-2^{-k}},\qquad b_p=1-\delta_p.
+\end{equation}
+The first-extinction and cumulative-rank argument in Section~\ref{sec:reliability} then gives, for every challenge length $k\ge1$,
+\begin{equation}
+ m_T\ge\positive{\frac{\gamma Db_p}{\ln(1/\gamma)}
+ [\ln(Db_p/\delta_p)]_+-2n}.
+\label{eq:score-reliability}
+\end{equation}
+Here only the reliability part is substituted; no large-$k$ mean-rank chord is assumed for a small challenge. For fixed $k$, fixed above-chance $p$ and fixed positive noise, this forces order $D\ln D$ work at width $O(\ln D)$. The same inference can concern retained classical input dependence, so it does not alone certify coherent quantum storage. Neither the score nor this bound verifies the noise and controller premises.
 
 \subsection{Retaining the noise distribution through rank moments}
 The mean-rank chord discards information about which rank mixtures the product noise can generate. Retaining an exponential moment gives a stronger family of necessary processing budgets in the same model. For a fixed real $1<z\le2$, define
@@ -1132,7 +1215,7 @@ Additional checks exhaust all two-input/two-output local lookup maps, compare a 
 These checks support the finite algebra and circuits. They do not prove an asymptotic statement by extrapolation. General forgetting follows from the envelope induction; the processing converse follows from channel-rank and scalar inequalities; archives, concatenation and the Tanner construction follow from their stated inherited theorems and induction arguments. No finite test establishes optimality of 42 gates, an optimal hardware threshold, or attainment of the scalar relaxation by a memory circuit.
 
 \subsection{Boundary cases}
-If $D=0$, an identity memory on $k$ qubits suffices. If $\gamma=0$, it suffices for any finite duration; the positive-noise batching formulas need not be used. If $k=0$, the task is vacuous. The constructions state nonzero error tolerance: exact zero error is not asserted under nonzero depolarization. The archive case $J=1$ uses no archived record, and the concatenated construction $L=0$ uses no recovery node.
+If $D=0$, an identity memory on $k$ qubits suffices. If $\gamma=0$, it suffices for any finite duration; the positive-noise batching formulas need not be used. If $k=0$, the task is vacuous. For finite width, positive noise and at least one noise layer, exact zero infidelity is impossible because complete-register replacement has positive probability. The constructive formulas therefore state nonzero error tolerance. The archive case $J=1$ uses no archived record, and the concatenated construction $L=0$ uses no recovery node.
 
 \subsection{Notation guide}
 \begin{tabularx}{\linewidth}{@{}p{25mm}X@{}}
@@ -1149,6 +1232,7 @@ $\A_V$ & Complex Pauli algebra, of dimension $2^r$.\\
 $M$ & Terminal envelope dimension, at most $2n$.\\
 $M_I$ & Upper bound on expected decoded-tail envelope rank at an interval's later cut.\\
 $R_t$, $a$, $a_p$ & Expected envelope rank and its fidelity- or guessing-score-derived floor.\\
+$\delta$, $b$ & Extinction-probability allowance $\eps/(1-4^{-k})$ and survival lower bound $1-\delta$.\\
 $X_z$, $a_z$ & Logarithmic exponential rank moment and an all-cut lower bound.\\
 $\alpha_z$ & Noise contraction parameter for the moment potential.\\
 $B$, $b_{\mathrm{rep}}$ & Total structural rank-growth charge and number of archive root replicas, respectively.\\
