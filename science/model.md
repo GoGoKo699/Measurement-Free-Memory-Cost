@@ -127,7 +127,7 @@ The proof in [Binary Pauli envelopes](pauli_envelopes.md) tracks the dimension o
 Suppose $`F_{\mathrm e}\ge1-\epsilon`$ and $`0\le\epsilon\lt 1-4^{-k}`$. Define
 
 ```math
-a=2k\,\frac{1-\epsilon-4^{-k}}{1-4^{-k}}>0.
+a=2k\,\frac{1-\epsilon-4^{-k}}{1-4^{-k}}\gt 0.
 \qquad\text{(M8)}
 ```
 
@@ -211,6 +211,24 @@ R_t\ge a_k(p)=2k\left[\frac{p-2^{-k}}{1-2^{-k}}\right]_+.
 ```
 
 Whenever $`a_k(p)\gt0`$, substitute this floor for $`a`$ in the gate and every-contiguous-interval bounds; the transfer also gives a positive all-size floor for $`1\le k\le7`$. The proof factors each sampled CPTP tail through a finite quantum-plus-classical Pauli algebra before any basis-dependent readout. All persistent controller records remain noisy and counted, and mathematical noise flags are not physically supplied. Established branchwise recovery reductions, with spectral normalization retained, reproduce both displayed floor formulas for every challenge size. The score does not verify the device-model premises or automatically import a cryptographic preparation wrapper.
+
+### Exponential moments retain the noise law
+
+The [moment-processing theorem](moment_processing.md) strengthens this ledger without changing the device model. For $`z\gt 1`$, define $`X_z=\log_z\mathbb E[z^r]`$. A product-noise layer gives $`X_z'\le\alpha_zX_z`$, with
+
+```math
+\alpha_z=\frac{\ln(1-q+qz^2)}{2\ln z}.
+```
+
+Each T/T-dagger gate adds at most one, and free Clifford operations and input-independent resets do not increase this potential. Direct quantum-plus-classical score bounds supply a floor for $`1\lt z\le2^{1/7}`$; a fixed recovery of the averaged full channel supplies a complementary floor (using $`F_0=1-\epsilon`$ for the Bell-fidelity premise) for $`1\lt z\le2`$. Once a positive floor $`a_z`$ is proved at every cut, replace the scalar ledger's $`a,q`$ by $`a_z,\alpha_z`$. The initial full-output potential is $`2n`$. An interval entry bound must control $`X_z`$ itself, rather than only mean rank.
+
+For fixed positive guessing score and fixed $`q`$, along $`n\ge k`$, $`k,D\to\infty`$ and $`\ln(n/k)=o(D)`$, the discrete ledger implies
+
+```math
+m_T\ge(2-o(1))\,kD\,\frac{1-q}{q}.
+```
+
+This improves the fixed-score coefficient obtained from the convenient mean-rank floor; the weak-noise order remains $`k\gamma D`$. Finite examples and exact certificates are in the moment chapter. The conclusion is necessary and conditional on the same noise, controller and gate assumptions, with no physical-achievability claim.
 
 ## 5. Reading and verification routes
 

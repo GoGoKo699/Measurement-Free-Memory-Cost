@@ -9,7 +9,7 @@ R_t\ge a_k(p):=2k\left[\frac{p-2^{-k}}{1-2^{-k}}\right]_+.
 \qquad\text{(G1)}
 ```
 
-The full-output envelope and dynamical ledger belong to this project. The finite quantum-memory guessing theorem used below belongs to [Lattice Memory Certification](https://github.com/GoGoKo699/Lattice-Memory-Certification/blob/dcff3be0246b27b07fb325c31293199e6fddbcf7/science/guessing-bound.md); its original input-length and dimension notation is translated here to $`k`$ challenge qubits and $`2^s`$ retained quantum dimension. The channel factorization and score-based composition are shared results. Established recovery reductions already yield both (G1) and the small-block floor below. The transfer supplies a direct operational proof of these consequences; it adds no processing budget beyond that recovery route. Section 5 and Appendices A–B give the comparison, including scores at or below one half.
+The full-output envelope and dynamical ledger belong to this project. The finite quantum-memory guessing theorem used below belongs to [Lattice Memory Certification](https://github.com/GoGoKo699/Lattice-Memory-Certification/blob/dcff3be0246b27b07fb325c31293199e6fddbcf7/science/guessing-bound.md); its original input-length and dimension notation is translated here to $`k`$ challenge qubits and $`2^s`$ retained quantum dimension. The channel factorization and score-based composition are shared results. Established recovery reductions already yield both (G1) and the small-block mean-rank floor below. The transfer supplies a direct operational proof of their consequences. The [moment-processing chapter](moment_processing.md) retains the actual noise distribution and gives a stronger dynamical ledger from the direct profile and complementary recovery bounds. Section 5 and Appendices A–B give the comparison, including scores at or below one half.
 
 ## 1. Challenge, chronology, and counted device
 
@@ -252,6 +252,12 @@ p_*\le2^{-k}+(1-2^{-k})\min\left\{\frac r{2k},1\right\}.
 Appendix A proves the statement analytically for $`k\ge11`$ and supplies exact rational certificates for $`k=8,9,10`$. Averaging it gives precisely (G1). Appendix B gives 49 exact rational certificates that the same prior-recovery family lies below the concave polygon used for (G12), at every interior integer rank for $`1\le k\le7`$. Thus prior recovery already implies **both displayed all-cut floors**, and therefore all gate and interval consequences obtained from them.
 
 The comparison must be performed before averaging future noise: using only a recovery bound for the already averaged score can lose strength. The direct quantum-plus-classical proof supplies a short operational route. This conclusion concerns the convenient floors (G1) and (G12), not optimal guessing or every stronger bound obtainable by optimizing integer quantum/classical block sizes.
+
+### Distribution-aware strengthening
+
+The comparison above concerns the convenient mean-rank floors (G1) and (G12). It does not exhaust the information in the noisy circuit. The [exponential-moment theorem](moment_processing.md) keeps $`\mathbb E[z^r]`$ for $`1\lt z\le2`$ rather than replacing the sampled ranks by an arbitrary mixture with the same mean. A pivot-coordinate argument contracts $`X_z=\log_z\mathbb E[z^r]`$ by $`\alpha_z=\ln(1-q+qz^2)/(2\ln z)`$ at each noise layer; a T/T-dagger gate adds at most one.
+
+That theorem fixes one recovery of the averaged full channel, then uses its branchwise Bell fidelities and their linear average at every cut. This differs from applying an averaged-score recovery estimate only to the mean-rank ledger. The recovery lower bound is inherited; the stronger consequence comes from the dynamical moment estimate. Applying the direct quantum-plus-classical branch curve in the moment variable gives a complementary floor and keeps every above-chance score useful. The full-output initial potential is $`2n`$, and an interval reserve must bound $`\log_z\mathbb E[z^r]`$, rather than merely $`\mathbb E[r]`$.
 
 ## 6. Exact boundaries and interpretation
 

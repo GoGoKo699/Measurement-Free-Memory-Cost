@@ -18,6 +18,9 @@ Canonical entrypoints:
   full-output CPTP quantum-plus-classical factorization, unconditional all-cut
   score floors, gate/interval corollaries and strongest inspected recovery
   comparison. Lattice-Memory-Certification supplies the finite guessing theorem.
+- science/moment_processing.md: exponential-moment noise contraction, fixed
+  averaged-channel recovery, direct score and recovery potential floors, finite
+  gate/interval ledgers and fixed-score asymptotic converse.
 - science/clifford_lifetime.md: finite random-stabilizer existence proof, noisy
   syndrome archive, exact chronology, full workspace accounting, final recovery
   and matching order of zero-T quantum lifetime.
@@ -88,10 +91,13 @@ Preserve these distinctions:
 - Mathematical noise flags are independent channel choices used in the proof,
   not device information. Noisy counted controller records must also be
   processed through permitted charged primitives; arbitrary feedback is not free.
-- Existing recovery inequalities, with spectral normalization retained, already
-  imply every displayed score floor for all k and their gate/interval budgets.
-  The direct score transfer provides an operational proof of those consequences.
-  It neither verifies noise/controller assumptions nor imports an LWE wrapper.
+- Existing recovery inequalities reproduce the convenient mean-rank floors in
+  science/guessing_processing.md. The moment chapter uses those recovery tools
+  with the actual product-noise probabilities to strengthen the dynamical
+  ledger. It does not claim a stronger pointwise guessing theorem or optimal
+  physical cost. Its interval entry reserve bounds log_z E[z^r], not E[r];
+  the full-output bound 2n is always safe. Neither route verifies device
+  assumptions or imports an LWE processing wrapper.
 - Watrous (2018) is the single educational anchor shared by both projects.
   Gottesman and other stabilizer sources remain primary scholarly references.
 - The qualitative no-go result and stochastic Pauli framework are prior work.

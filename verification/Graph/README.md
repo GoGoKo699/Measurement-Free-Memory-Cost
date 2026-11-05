@@ -28,3 +28,6 @@ The curves use the [processing law](../../science/control_cost.md),
 [archive construction](../../science/clifford_lifetime.md), and
 [coherent recovery](../../science/coherent_recovery.md). Their gap remains an
 open resource question; the plotted constructions are sufficient strategies.
+
+
+The resource curve uses the mean-rank ledger stated in `science/control_cost.md`. The additional exponential-moment family in [moment processing](../../science/moment_processing.md) can strengthen a conditional lower bound; the plotted curve is not asserted to optimize every converse in that family.
