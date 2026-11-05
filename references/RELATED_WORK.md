@@ -3,7 +3,8 @@
 **Project:** Measurement-Free-Memory-Cost  
 **Supporting-literature audit:** 25 October 2026  
 **Manuscript citation check:** 3 November 2026; repository alignment 4 November 2026  
-**Scope:** the later check covers the manuscript's cited primary references and its comparison with the closest prior work. It is not a new exhaustive novelty search. Bibliography keys refer to `references.bib`.
+**Reopened construction audit:** 5 November 2026, covering good Tanner-code decoding, code-length availability and passive measurement-free LDPC memories.
+**Scope:** the construction audit supplements the earlier manuscript-citation check. It is a targeted primary-source comparison, not an exhaustive novelty search. Bibliography keys refer to `references.bib`.
 
 ## 1. Contribution in relation to prior work
 
@@ -70,6 +71,12 @@ Several recent papers supply concrete architectures:
 
 In the last paper, Sec. IV.1 explicitly gives the usual recursively increasing correctable-error order under concatenation; its circuit-level threshold study is a separate physical result. These constructions support a polylogarithmic reliability overhead at sufficiently low fixed noise. Their numerical threshold values should not be substituted for the present ideal-processing model's $`\gamma`$.
 
+### Good-code decoding and existing passive measurement-free memories
+
+**Leverrier and Zémor** introduced the good quantum Tanner codes and sequential/parallel mismatch decoders (`leverrier2022tanner`, `leverrier2023decoding`). **Gu, Tang, Caha, Choe, He and Kubica**, CMP **405**, 85 (2024), [published paper](https://doi.org/10.1007/s00220-024-04951-6), [arXiv:2306.12470v2](https://arxiv.org/abs/2306.12470v2), `gu2024singleshot`, prove the single-shot and repeated-round residual mechanism. The inspected v2 and Springer versions both state it as Theorems 3.5 and 4.20, using Algorithms 3–4. A fixed number of parallel iterations preserves a correctable residual region using only the current syndrome. Their good-code theorem is inherited from the code/decoder sources. **Dinur, Evra, Livne, Lubotzky and Mozes**, [arXiv:2111.04808v2, Claim 6.7](https://arxiv.org/abs/2111.04808v2), `dinur2022locallytestable`, supply the Ramanujan family used to verify bounded-ratio code-length availability. These are coding and decoding contributions, not results originating in this repository.
+
+**Hong, Guo and Lucas**, Nature Communications **16**, 316 (2025), [DOI](https://doi.org/10.1038/s41467-024-55570-7), `hong2025memory`, already give passive LDPC memories and coherent correction with resettable ancillas. The inspected [arXiv v3](https://arxiv.org/abs/2403.10599v3), Appendix E, explicitly stores stabilizer information coherently, applies feedback, and resets the ancillas. Its concrete HGP theorem (B.8) gives a lifetime exponential in the square root of data width, and the local implementation uses a constant number of ancillas per data qubit. Thus coherent syndrome feedback, fixed local processing and measurement-free LDPC memory are prior mechanisms. The present Tanner compilation is not claimed as their first realization. This project's ideal interior operations and charged T slots require a separate resource translation; the prior mechanism is credited even where its physical noise and lifetime statement differ.
+
 ### A promising but nonmatching low-overhead comparison
 
 **Guo, Hong, Kaufman, and Lucas**, “Toward Self-Correcting Quantum Codes for Neutral Atom Arrays,” PRX Quantum **7**, 010301 (2026), [final paper](https://journals.aps.org/prxquantum/pdf/10.1103/mfmt-fwkg), `guo2026toward`, is particularly useful. Appendix D implements local greedy decisions using fixed-size reversible majority gadgets and a bounded-color schedule. **Our inference:** after compiling those fixed gadgets, a sweep uses $`O(n)`$ non-Clifford gates. This is a concrete possible route to low work overhead.
@@ -116,9 +123,20 @@ This calculation is an inference from the project's explicit circuit and element
 
 Ideal processing between noisy intervals is essential to this upper comparison: a full recursive decode/correct/re-encode operation is not exposed to extra noise proportional to its elementary gate depth. This is the same processing model as the lower bound, so the comparison is valid internally; it does not by itself establish a hardware circuit-level threshold or a physical gate-time cost.
 
-### What is still open
+### Fixed-circuit Tanner resource consequence
 
-No inspected primary source supplied a proof of $`O(k\gamma D)`$ total $`T`$-count, uniformly in small $`\gamma`$, at long horizons with every persistent data and syndrome register included in the noisy width. This is a bounded literature finding, not a proof that no such construction exists. Eliminating the explicit polylogarithmic factor while preserving the exact resource accounting remains an operational tightness question. Constant-rate codes and efficient coherent decoding are plausible routes, but neither classical RAM decoding time nor ideal classical side processing may be treated as free coherent circuitry.
+The [Tanner construction](../science/tanner_memory.md) now supplies the previously missing resource translation in this repository. It hardwires local syndrome minimization, eligible-codeword selection, deterministic ties and row/column decompositions as bounded-size Boolean circuits. Graph incidence fixes routing; constant iterations give a linear circuit and counted resettable workspace. Exact coherent compilation charges every prescribed T/T-dagger slot, with no protected controller. Resetting scratch immediately before ideal extraction supplies the current syndrome within the existing model.
+
+Combining this compilation with the inherited residual invariant, correlated X/Z tail accounting, weak-noise batching and bounded-ratio code lengths gives, for a sufficiently small family-dependent $`\gamma_*`$,
+
+```math
+n=O\!\left(k+\ln\frac{J}{\epsilon}\right),
+\qquad m_T=O(nJ),
+\qquad J=O(\gamma D+1),
+\qquad\frac12\|\Lambda-\mathrm{id}_{2^k}\|_\diamond\le\epsilon.
+```
+
+The mechanism is largely suggested by combining established good-code decoding and standard coherent simulation. The proved addition is the fixed-circuit compilation/accounting and its matching-order consequence for this processing converse. It closes the multiplicative logarithmic gap when $`k=\Omega(\ln(J/\epsilon))`$ and duration exceeds the width allowance. It does not determine the numerical coefficient, practical resource size or hardware threshold. For smaller payloads an additive reliability logarithm remains; the tiny proved Tanner noise range is not extended to the five-qubit range.
 
 ### Quantum storage with zero interior non-Clifford gates
 
@@ -160,3 +178,6 @@ All these consequences retain the device-model assumptions. Neither a score nor 
 
 
 The finite moment comparison keeps the recovery inequalities branchwise before concavification in $`z^r`$. Its exact certificate bounds the strength of the explicitly specified recovery-only moment family over all $`z\gt 1`$: at the twelve-qubit example its two ledgers give rounded counts at most 223 and 52. The direct quantum-dimension/output-dimension/classical certificate yields 244 and 58. These are comparisons of converse formulas, not physical gate upper bounds or universal recovery optimality statements. The known classical cap used in the finite witness has a self-contained Gram-row-sum proof in the moment chapter.
+
+
+The [quantitative guessing-decay corollary](../science/guessing_decay.md) is an inversion and controlled asymptotic consequence of this existing moment ledger. It retains the finite width reserve, gives an explicit exponent positive below $`2(1-q)/q`$, and compares the simple floor with the full polygon, integer-algebra profiles and the specified recovery reductions. It is not a new pointwise uncertainty theorem or a processing-capacity achievability claim.

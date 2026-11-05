@@ -15,6 +15,8 @@ CHECKS = (
     ("five_qubit", "verify_five_qubit.py"),
     ("guessing_processing", "verify_guessing_processing.py"),
     ("moment_processing", "verify_moment_processing.py"),
+    ("guessing_decay", "verify_guessing_decay.py"),
+    ("tanner_memory", "verify_tanner_memory.py"),
 )
 METADATA = {"python_version", "numpy_version"}
 

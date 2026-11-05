@@ -291,3 +291,9 @@ The Pauli envelope, fixed primitive charges, CPTP factorization and scalar ledge
 The earlier optimality of the rank-only chord does not obstruct this theorem: it applied after replacing the noise distribution by arbitrary mixtures constrained only by $`\mathbb E r`$. Here the actual product-noise transition controls $`\mathbb E z^r`$ before its logarithm is taken.
 
 All persistent-controller, noise independence and endpoint assumptions remain premises. A score verifies none of them. Mathematical flags stay unavailable to the device, and no LWE preparation or resource-preserving compilation is imported. The [verification guide](../verification/README.md) distinguishes exact certificates, finite checks and written all-parameter proofs.
+
+## Quantitative decay and a finite guessing refinement
+
+[Explicit guessing decay](guessing_decay.md) inverts the same discrete ledger at finite width and time. It retains the initial reserve and proves an exponential-in-challenge upper bound below the necessary-rate threshold. This is a corollary of the present dynamics, without a processing-capacity claim.
+
+The sister project's [three-input bound](https://github.com/GoGoKo699/Lattice-Memory-Certification/blob/900b54da514d462c7969da80abff0bf0b7c84e49/science/finite-guessing.md) proves that one retained quantum qubit, with unrestricted classical records, has success at most $`(2+7\sqrt2)/16`$. Its rank-sensitive purity certificate can replace that finite quantum-dimension cap before moment concavification. A rational polygon demonstrates survival through branch averaging at three inputs. It changes neither the general exponent $`1/6`$ nor the existing twelve-input certificate. The same study proves a limitation of collision-only routes to improving the uniform exponent.

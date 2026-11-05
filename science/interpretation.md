@@ -2,7 +2,7 @@
 
 The [model](model.md) separates three resources: noisy physical width, fresh-state preparation, and non-Clifford operations performed while the unknown state is stored. The main conclusion is that an unlimited supply of replacement states does not remove the need for continuing non-Clifford processing at modest width.
 
-The [forgetting theorem](pauli_envelopes.md), [processing budget](control_cost.md), and [two](clifford_lifetime.md) [constructions](coherent_recovery.md) quantify this statement in one operational model.
+The [forgetting theorem](pauli_envelopes.md), [processing budget](control_cost.md), and the [syndrome archive](clifford_lifetime.md), [five-qubit recovery](coherent_recovery.md) and [Tanner recovery](tanner_memory.md) quantify this statement in one operational model.
 
 ## 1. Why the binary rank is the useful quantity
 
@@ -46,7 +46,7 @@ The exact finite-depth law in [Control cost](control_cost.md) improves the const
 
 The same argument applies to every contiguous interval. A protocol cannot satisfy an arbitrarily long interior interval solely by moving its charged operations before or after that interval.
 
-The [delayed-basis BB84 application](guessing_processing.md) replaces the fidelity premise by an unconditional whole-string guessing score. The input is only the quantum challenge, its secret label is never disclosed, and its basis is disclosed after storage. For $`k\ge8`$, score $`p\gt2^{-k}`$ forces $`a_k(p)=2k(p-2^{-k})/(1-2^{-k})`$ at every cut, so the same gate and interval inequalities apply. A positive score excess can reflect retained classical information and does not alone demonstrate quantum storage. Existing branchwise fidelity/recovery reductions, with spectral normalization retained, reproduce the convenient mean-rank score floors, including the small-block polygon. The direct floor explains the operational connection with its explicit controller and chronology assumptions. The [moment theorem](moment_processing.md) gives a further consequence in the same model: actual product-noise probabilities contract the logarithm of an exponential rank moment, while each charged gate has the same additive growth bound. Combining this dynamics with a fixed recovery of the averaged channel strengthens the gate and interval ledger. For fixed positive guessing score and fixed $`q`$, along growing challenges and storage durations with $`\ln(n/k)=o(D)`$, its necessary rate approaches $`2k(1-q)/q`$ per round. This improves the fixed-score coefficient of the convenient mean-rank law while preserving the order $`k\gamma D`$ at weak noise. The entering interval reserve must bound the logarithmic moment; a mean-rank reserve cannot automatically be reused.
+The [delayed-basis BB84 application](guessing_processing.md) replaces the fidelity premise by an unconditional whole-string guessing score. The input is only the quantum challenge, its secret label is never disclosed, and its basis is disclosed after storage. For $`k\ge8`$, score $`p\gt2^{-k}`$ forces $`a_k(p)=2k(p-2^{-k})/(1-2^{-k})`$ at every cut, so the same gate and interval inequalities apply. A positive score excess can reflect retained classical information and does not alone demonstrate quantum storage. Existing branchwise fidelity/recovery reductions, with spectral normalization retained, reproduce the convenient mean-rank score floors, including the small-block polygon. The direct floor explains the operational connection with its explicit controller and chronology assumptions. The [moment theorem](moment_processing.md) gives a further consequence in the same model: actual product-noise probabilities contract the logarithm of an exponential rank moment, while each charged gate has the same additive growth bound. Combining this dynamics with a fixed recovery of the averaged channel strengthens the gate and interval ledger. For fixed positive guessing score and fixed $`q`$, along growing challenges and storage durations with $`\ln(n/k)=o(D)`$, its necessary rate approaches $`2k(1-q)/q`$ per round. This improves the fixed-score coefficient of the convenient mean-rank law while preserving the order $`k\gamma D`$ at weak noise. The entering interval reserve must bound the logarithmic moment; a mean-rank reserve cannot automatically be reused. The [inverse ledger](guessing_decay.md) additionally bounds the score itself at finite width and duration. In the growing-family limit it gives an explicit exponent $`E_q(\rho)`$, positive exactly for prescribed T rate $`\rho\lt2(1-q)/q`$. This states how quickly success must vanish; it does not identify an achievable memory capacity.
 
 ## 3. Quantum storage at zero internal T count
 
@@ -86,7 +86,22 @@ m_T=O\bigl(k(\gamma D+1)\ell^\alpha\bigr),
 
 All correction controls are counted quantum registers. The decoded syndrome wires are reset and reused for reencoding, so the construction needs no work qubits beyond the code block. It provides a physical circuit witness inside the ideal processing model, rather than an assumption that classical decoder running time equals coherent gate complexity.
 
-The logarithmic factors and conservative constants remain. This witness does not claim a practical resource estimate, a constant-rate code, or an optimal decoder.
+This five-qubit witness retains logarithmic factors and conservative constants over its stated noise range.
+
+The [Tanner construction](tanner_memory.md) uses a constant-rate, linear-distance code and a fixed number of iterations of the inherited parallel decoder. The iterations need only preserve a correctable residual region; exact return to the code space is deferred to the free endpoint. Every local minimization, maximum-weight choice, decomposition and tie is a fixed finite Boolean table. Reversible compilation and hardwired incidence give linear T count and linear workspace per correction batch. Syndrome and scratch are reset on a fixed schedule and remain part of the noisy width.
+
+For a sufficiently small fixed code-dependent noise range, this gives
+
+```math
+n=O\!\left(k+\ln\frac{J}{\epsilon}\right),
+\qquad m_T=O(nJ),
+\qquad J=O(\gamma D+1),
+\qquad\frac12\|\Lambda-\mathrm{id}_{2^k}\|_\diamond\le\epsilon.
+```
+
+Independent depolarizing noise makes each error component spatially independent within a batch. The X and Z components on a qubit remain correlated; the proof uses a union bound. A bounded-ratio family of code lengths permits arbitrary payloads by fixing unused logical qubits, without puncturing the code.
+
+If $`k=\Omega(\ln(J/\epsilon))`$ and $`\gamma D`$ exceeds the width allowance, the construction and converse have the same $`k\gamma D`$ order at fixed high fidelity. For smaller payloads the additive reliability logarithm remains. The constants depend on local-code tables, degree, expansion and the fixed iteration count, and can be extremely large. This theorem does not import the larger five-qubit noise range or optimize physical constants.
 
 ## 5. More gates do not eliminate the need for width
 
@@ -120,23 +135,23 @@ n\ge\frac{\ln D-\ln[-\ln(1-\eta)]}{|\ln\gamma|}.
 
 When its right side is useful, this makes the width requirement explicit. At fixed $`\gamma`$ and small error, it grows logarithmically in $`D/\epsilon`$. The continuing-processing slope concerns feasible families with adequate width; fixed finite width still has the lifetime ceiling (I1).
 
-The explicit coherent construction uses a power of a logarithm in the storage horizon. Closing that exponent gap, and closing the corresponding gate-count gap, are distinct optimality questions.
+The five-qubit construction uses a power of a logarithm in the storage horizon. In the sufficiently small-noise range of the Tanner construction, its width instead has the additive form $`O(k+\ln(J/\epsilon))`$. At fixed noise and for long durations, this has the same logarithmic reliability order as (I2). The numerical width/work frontier remains open.
 
 ## 6. Endpoints, controllers, and magic states
 
 An arbitrary final decoder may pull a single output Pauli back to many independent input Pauli labels. Its binary support rank can greatly exceed twice the number of logical output qubits. The general theorem therefore starts from $`2n`$, rather than silently using $`2k`$.
 
-When the final decoder is Clifford followed by discarding unused wires, the terminal rank is $`2k`$. Any preceding nonlinear recovery then remains an internal charged operation. If that nonlinear recovery is moved outside the storage interval, its effect must instead be included in the decoder-support rank. This distinction explains why the two constructions can use different endpoint strategies without contradicting the same converse.
+When the final decoder is Clifford followed by discarding unused wires, the terminal rank is $`2k`$. Any preceding nonlinear recovery then remains an internal charged operation. If that nonlinear recovery is moved outside the storage interval, its effect must instead be included in the decoder-support rank. This distinction explains why the constructions can use different endpoint strategies without contradicting the same converse.
 
 An external noiseless classical syndrome decoder changes the model. It can store measurement results and evaluate nonlinear functions between noisy rounds without the counted device implementing those functions coherently. Ordinary measurement-based stabilizer correction is therefore not covered by a claim that it must consume T gates during memory.
 
 Likewise, the theorem is not a magic-state consumption bound. Fresh nonstabilizer states are explicitly allowed as replacement states. Their scalar effect on the backward Pauli coefficients does not expand the binary label space. The charged resource is the internal operation that changes the allowed label dynamics.
 
-## 7. Scientific reach and remaining gap
+## 7. Scientific reach and remaining questions
 
 The [closest predecessor](../references/RELATED_WORK.md) established the qualitative Clifford-memory obstruction and a logarithmic-squared forgetting bound. The rank contraction supplies a single-logarithm bound stable under an arbitrary reference; the constructive archive establishes its quantum lifetime order. The channel-rank floor then turns a qualitative need for non-Clifford gates into a continuing, extensive requirement on their number and placement.
 
-The constructive coherent recovery shows how to meet that requirement up to a power of a logarithm, with explicit finite circuits and a guarantee stronger than the converse's Bell-fidelity premise. The remaining gap is stated at the level of the full operational model: better coherent decoding could improve the achieved resource law. A restriction of this particular concatenated construction would not by itself prove that such an improvement is impossible.
+The five-qubit construction remains a simple finite-circuit witness over its explicit noise range. The Tanner compilation removes its multiplicative reliability logarithm in the sufficiently small-noise, payload-dominant, long-duration regime stated above. This materially tightens the resource comparison within the same model. Gu et al. supply the good code and residual-error mechanism, and prior passive LDPC work already supplies measurement-free correction with resettable ancillas; the added result is the fixed-circuit resource accounting and its matching-order consequence. No optimal numerical processing coefficient, practical threshold or full width/work frontier is established.
 
 All conclusions retain independent depolarizing noise, fixed schedules, counted persistent workspace, and ideal processing between noise layers. Correlated noise, gate faults inside the processing intervals, geometric locality, and an external controller require their own model and analysis.
 
