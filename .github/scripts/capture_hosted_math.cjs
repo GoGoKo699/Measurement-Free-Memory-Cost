@@ -60,8 +60,17 @@ function mathCompiler() {
   const {AllPackages}=require('mathjax-full/js/input/tex/AllPackages.js');
   const {SerializedMmlVisitor}=require('mathjax-full/js/core/MmlTree/SerializedMmlVisitor.js');
   const {STATE}=require('mathjax-full/js/core/MathItem.js');
+  const {CharacterMap}=require('mathjax-full/js/input/tex/SymbolMap.js');
+  const {Configuration}=require('mathjax-full/js/input/tex/Configuration.js');
+  const {default:ParseMethods}=require('mathjax-full/js/input/tex/ParseMethods.js');
   RegisterHTMLHandler(liteAdaptor());
-  const doc=mathjax.document('',{InputJax:new TeX({packages:AllPackages,tags:'none'}),OutputJax:new SVG({fontCache:'none'})});
+  // Mark the original MathJax operator without changing its grouping or
+  // inherited style. A literal ⊥ still uses the unmarked base parser.
+  const provenance='merlin-operator-provenance';
+  new CharacterMap(provenance,ParseMethods.mathchar0mo,{perp:['⊥',{'data-merlin-command':'perp'}]});
+  Configuration.create(provenance,{handler:{macro:[provenance]},priority:0});
+  const doc=mathjax.document('',{InputJax:new TeX({packages:[...AllPackages,provenance],tags:'none'}),
+    OutputJax:new SVG({fontCache:'none'})});
   const visitor=new SerializedMmlVisitor();
   return (tex,display)=>visitor.visitTree(doc.convert(tex,{display,end:STATE.CONVERT}));
 }
@@ -69,18 +78,21 @@ function mathCompiler() {
 // Self-contained function executed inside the hosted page, also exercised by the
 // local-browser regression fixture. It never injects styling or renders TeX there.
 function inspectArticle(root, expected) {
-  function canonical(e, inherited='') {
+  function canonical(e, operators, inherited='') {
     const tag=e.localName;
     if (['annotation','annotation-xml','mspace'].includes(tag)) return [];
     const variant=e.getAttribute('mathvariant') || inherited;
     if (['mi','mo','mn','mtext','ms'].includes(tag)) {
       const text=e.textContent.trim();
-      return text?[[tag,text,variant]]:[];
+      if(!text) return [];
+      const token=[tag,text,variant];
+      if(tag==='mo') operators.push({token,element:e});
+      return [token];
     }
     // Preserve each structural child slot: flattening numerator and denominator
     // together would confuse (a+b)/c with a/(b+c), and similarly for scripts.
     const children=[...e.children].filter(c=>!['annotation','annotation-xml','mspace'].includes(c.localName))
-      .map(c=>canonical(c,variant));
+      .map(c=>canonical(c,operators,variant));
     if (['math','mrow','mstyle','semantics'].includes(tag)) return children.flat();
     const semantic={};
     for (const name of ['notation','accent','accentunder','linethickness','bevelled','open','close','separators']) if(e.hasAttribute(name)) semantic[name]=e.getAttribute(name);
@@ -88,6 +100,28 @@ function inspectArticle(root, expected) {
     // GitHub inserts empty mrow alignment nodes; ignore those inside the cell
     // while preserving the cell and row themselves, including empty cells.
     return [[tag,semantic,tag==='mtd'?children.flat():children]];
+  }
+  function reconcileOperators(expected, actual, tex) {
+    if(expected.length!==actual.length) return [];
+    const aliases=[];
+    for(let i=0;i<expected.length;i++) {
+      const reference=expected[i], hosted=actual[i];
+      const command=hosted.element.getAttribute('data-latex');
+      // Match only the observed alias for an ordinary norm fence. In particular,
+      // MathJax's U+2225 for \parallel has no ordinary-operator class here.
+      if(reference.token[1]==='∥' && hosted.token[1]==='‖' &&
+         reference.element.getAttribute('data-mjx-texclass')==='ORD' && command==='\\|') {
+        hosted.token[1]=reference.token[1];
+        aliases.push('norm-fence');
+      }
+      if(reference.token[1]==='⊥' && hosted.token[1]==='⟂' && command==='\\perp' &&
+         reference.element.getAttribute('data-merlin-command')==='perp' &&
+         typeof tex==='string' && !tex.includes('merlin-command')) {
+        hosted.token[1]=reference.token[1];
+        aliases.push('perpendicular');
+      }
+    }
+    return aliases;
   }
   function plain(math) {
     const copy=math.cloneNode(true);
@@ -113,13 +147,20 @@ function inspectArticle(root, expected) {
     const errors=[];
     if(nodes.length!==1) errors.push('Expected one accessible MathML representation; found '+nodes.length);
     const actual=nodes[0],want=expected[i];
-    let expectedSignature=null,actualSignature=null;
-    if(actual) actualSignature=JSON.stringify(canonical(actual));
+    let expectedSignature=null,operatorAliases=[];
+    const actualOperators=[];
+    const actualTree=actual?canonical(actual,actualOperators):null;
     if(want) {
       const parsed=new DOMParser().parseFromString(want.mml,'application/xml');
       if(parsed.querySelector('parsererror,merror')) errors.push('Source compiler returned invalid/error MathML');
-      else expectedSignature=JSON.stringify(canonical(parsed.documentElement));
+      else {
+        const expectedOperators=[];
+        const expectedTree=canonical(parsed.documentElement,expectedOperators);
+        expectedSignature=JSON.stringify(expectedTree);
+        operatorAliases=reconcileOperators(expectedOperators,actualOperators,want.tex);
+      }
     }
+    const actualSignature=actualTree===null?null:JSON.stringify(actualTree);
     if(!want) errors.push('Unexpected extra hosted expression');
     const match=!!actual && !!expectedSignature && expectedSignature===actualSignature;
     if(!match) errors.push('Source-to-host MathML structure mismatch');
@@ -128,7 +169,8 @@ function inspectArticle(root, expected) {
       errors.push('Display geometry is unmeasurable, overflowing or collapsed');
     return {rendered:!!actual,errors,text_source:'mathml',text:actual?plain(actual):'',
       source_sha256:want?.source_sha256,structural_match:match,
-      expected_signature:expectedSignature,actual_signature:actualSignature,geometry:measure};
+      expected_signature:expectedSignature,actual_signature:actualSignature,
+      operator_aliases:operatorAliases,geometry:measure};
   });
   return {errors:pageErrors,math};
 }
