@@ -6,6 +6,14 @@ This project studies a memory whose data and syndrome records all remain noisy, 
 
 The model permits arbitrary ideal global Clifford operations and input-independent replacement resets between independent depolarizing-noise layers. Fresh reset states may include magic states. Initial encoding and final recovery may be arbitrary. Every internal T/T-dagger gate is counted, and every persistent register belongs to the noisy physical width.
 
+## Run the coherent recovery
+
+1. **Encode.** Choose a code that fits the payload and target reliability. For [Tanner memory](science/tanner_memory.md#7-available-lengths-padding-and-diamond-error), initialize spare logical inputs and apply the outer encoder. The [extended noise-range construction](science/tanner_memory.md#8-constant-inner-concatenation-extends-the-physical-noise-range) also encodes every outer position in a fixed number of five-qubit levels. Data, syndrome slots and idle work all undergo independent depolarizing noise.
+2. **Recover between batches.** At each scheduled ideal gap, including after a shortened final batch, decode and correct the inner blocks when present. The [five-qubit node](science/coherent_recovery.md#1-a-five-qubit-recovery-using-42-t-gates) Clifford-decodes a block, applies its two syndrome polynomials directly as logical X and Z corrections using four controlled Clifford gates, three Toffolis and three controlled-controlled Z gates, then resets the four syndrome wires before reencoding. For Tanner recovery, use the decoded outer wires. Reset outer workspace, extract stabilizer signs coherently, run the fixed [reversible decoder](science/tanner_memory.md#4-coherent-compilation-reset-and-exact-channel), and apply its controlled X and Z corrections. Uncompute decoder work from the retained syndrome, reset the syndrome and restore the inner encoding when used.
+3. **Read the payload.** Apply the final decoder. The returned register preserves the unknown input and its reference correlations within the stated error bound. Internal recovery uses coherent gates and input-independent resets, without measurement or postselection.
+
+Count every noisy slot and every prescribed internal T or T-dagger gate, including uncomputation and rounds with zero syndrome. The Tanner circuit counts fixed lookup tables and assumes ideal global processing in the gaps. The separate [Clifford-only archive](science/clifford_lifetime.md#4-schedule-and-archive-dynamics) stores a noisy syndrome history for final processing.
+
 ## Delayed-basis guessing and processing
 
 [Lattice Memory Certification](https://github.com/GoGoKo699/Lattice-Memory-Certification) bounds exact BB84 whole-string guessing through a quantum-plus-classical bottleneck. Here that bottleneck is supplied by the Pauli algebra of a sampled storage tail. Its unconditional guessing score enforces an expected-rank floor at every cut, which can replace the fidelity premise in the gate and contiguous-interval budgets.
