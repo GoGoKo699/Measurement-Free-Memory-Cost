@@ -57,18 +57,18 @@ Let $`r`$ be the rank of the backward Pauli envelope at an entry cut. The zero e
 
 Indeed, a site that holds $`d`$ of the $`r`$ pivot coordinates, with $`d\in\{1,2\}`$, contributes $`1-q+qz^d\ge(1-q+qz)^d`$ to the generating function for the number of surviving pivots. Site flags are independent conditional on the incoming envelope. The inequality extends to $`z=0`$ with $`0^0=1`$. Across a charged gate the corresponding lower bound is $`z\,z^r`$.
 
-Group $`H=\lceil1/\gamma\rceil`$ successive noise layers into one backward block. Assign each intervening gate to its following noise layer in backward time. Let $`M_j`$ be the charged gate count in block $`j`$, and let $`\ell_g`$ be the number of noise layers in that block preceding gate $`g`$. Iterating the one-step generating function bounds at $`z=0`$ gives, just after layer $`t`$,
+Group $`H=\lceil1/\gamma\rceil`$ successive noise layers into one backward block. Assign each intervening gate to its following noise layer in backward time. Let $`M_j`$ be the charged gate count in block $`j`$, and let $`\ell_g`$ be the number of noise layers in that block preceding gate $`g`$. Let $`G_t`$ be the gates in this block with $`\ell_g<t`$. Iterating the one-step generating function bounds at $`z=0`$ gives, just after layer $`t`$,
 
 ```math
 \Pr(r_t=0\mid V_{\rm entry})
-\ge(1-q^t)^r\prod_{\substack{g\ \mathrm{in\ block}\ j\\\ell_g<t}}
+\ge(1-q^t)^r\prod_{g\in G_t}
        (1-q^{t-\ell_g}).
 ```
 
 Choose a target among $`t=\lceil H/2\rceil,\ldots,H`$. Its entry-rank factor is at least $`e^{-r}`$ because $`1-q^t\ge1-e^{-1/2}>e^{-1}`$. A gate contributes zero negative-log penalty on earlier targets. Its mean penalty is at most
 
 ```math
-\frac2H\sum_{\ell=1}^H-\ln(1-q^\ell)
+\frac{2}{H}\sum_{\ell=1}^H-\ln(1-q^\ell)
 \le 2[1-\ln(1-e^{-1})]<3.
 ```
 
@@ -94,7 +94,7 @@ Skipped gates contribute to the new rank reserve, and the upper bound counts eac
 The second inequality uses the monotonicity of $`A e^{-v/A}`$ for fixed $`v\ge0`$. Consequently
 
 ```math
-m_T\ge\frac15\left[b(B-S)\ln\frac{b(B-S)}{\delta}-4ne^{-S}\right]_+ .
+m_T\ge\frac{1}{5}\left[b(B-S)\ln\frac{b(B-S)}{\delta}-4ne^{-S}\right]_+ .
 ```
 
 The finite bound applies when $`B\ge1`$. It also applies to unconditional delayed-basis BB84 score $`2^{-k}<p<1`$ in the same independent product-noise model with $`\delta=(1-p)/(1-2^{-k})`$, since complete extinction limits that branch's score to chance. Perfect score is impossible at finite width for $`D\ge1`$ because complete physical replacement has positive probability. The [one-layer reliability bounds](reliability_processing.md) remain available for finite comparisons and use more of the commutation structure.
