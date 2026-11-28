@@ -272,7 +272,44 @@ p\le2^{-k}+(1-2^{-k})(1-\gamma^n)^D.
 
 The continuing budget is a necessary law along feasible families, not proof of indefinitely reliable storage at fixed width. The flags in this argument remain mathematical proof aids.
 
-A guessing score does not verify the noise strength, independence, controller restrictions, or absence of side channels. Those remain model premises. Estimating $`p`$ from experimental trials is a separate statistical task. No LWE or remote-preparation wrapper is imported: such a compilation would need its own joint-state, chronology, controller, and resource-preservation reduction. These conclusions establish neither optimal T count nor a hardware certification procedure.
+The noise model, controller restrictions and absence of side channels are physical premises of the score-to-gate inference. Estimating $`p`$ from trials is a separate statistical task. The extensions below give the conditional-erasure and classical-verifier premises. The gate counts are necessary bounds.
+
+## 7. Extensions of the score premise
+
+### Correlated replacement
+
+The mean-rank bound also applies when replacement flags are correlated. In round $`j`$, an exogenous set $`E_j`$ of physical slots is replaced with maximally mixed states. On that trajectory all other slots are left alone. The joint flag law is independent of the challenge and the flags are unavailable to the device. The gate schedule, counted width, endpoint and basis-disclosure rules are those of Section 1. Suppose known $`0\le\gamma_j<1`$ satisfy, for every physical slot $`i`$,
+
+```math
+\Pr(i\in E_j\mid E_{j+1},\ldots,E_D)\ge\gamma_j
+\quad\text{almost surely}.
+```
+
+For example, flags can be shared by all slots in a block, provided the block's conditional probability of replacement is at least $`\gamma_j`$. Conditional probabilities matter when flags are correlated in time.
+
+At a cut, sample the later flags and condition the earlier flag mixture on them. The resulting prefix is CPTP. Independence of the full flag sequence from the challenge preserves the same BB84 ensemble in each conditional prefix. The sampled tail still factors through its Pauli algebra. The branchwise score bounds and their average therefore give the same all-cut rank floor $`a=a_k(p)>0`$ as in Section 3.
+
+Immediately after layer $`j`$ in forward time, the backward envelope and a set of independent pivot columns can be chosen from the later flags alone. If $`r`$ is the incoming backward rank, then the outgoing rank is at most the number of those columns on surviving sites. The conditional erasure bound gives expected outgoing rank at most $`(1-\gamma_j)r`$, even when multiple pivots share a flag. Averaging gives $`R'\le(1-\gamma_j)R`$. Free operations and charged T/T-dagger slots have the same rank updates as before. Applying the individual-gate logarithmic ledger therefore gives
+
+```math
+m_T\ge
+\left\lceil
+\frac{\left[\sum_{j=1}^{D}-\ln(1-\gamma_j)-\ln(2n/a)\right]_+}
+{\ln(1+1/a)}
+\right\rceil.
+```
+
+For a contiguous interval use its conditional erasure parameters and a valid upper bound on its entering mean rank. Each one-step comparison conditions on the actual later flags, including those beyond the interval. The result gives a mean-rank law under conditional marginals. The product-noise moment, block extinction and width laws use additional independence assumptions.
+
+Ordinary round marginals alone cannot yield this bound. For a single slot, draw one Bernoulli$`(\gamma)`$ flag and reuse it for every round. Each round is marginally depolarizing with strength $`\gamma`$, but a device that simply holds the qubit and reads it in the revealed basis scores $`1-\gamma/2`$ for every positive duration, with zero charged gates.
+
+### Classical-verifier composition
+
+The [sister project's LWE-based preparation interface](https://github.com/GoGoKo699/Lattice-Memory-Certification/blob/main/science/cryptographic-certification.md#classical-verifier-composition-for-processing) can transfer the score premise to a classical verifier under additional conditions. Preparation ends before charged storage. The initial encoder may use all preparation systems and records. Any of them that remain accessible across storage must be represented in the counted memory. Fixed public protocol and circuit parameters may be built into the schedule. The fixed continuation and final readout must be efficient for the computational simulation. If their implementation in that comparison requires approximation, include its justified error in the total simulation error $`\eta_{\mathrm{prep}}`$.
+
+The real probability $`p_{\mathrm{real}}`$ counts the joint event of preparation passing and the answer being correct. In the simulation the input is the ideal BB84 challenge and the preparation simulator and the memory interface together serve as the initial encoder. Apply the same storage schedule and endpoint, releasing only the true bases after storage. On failure the real protocol may release dummy bases. Disclosing the true bases on every ideal trial preserves the pass-and-correct contribution and gives an unconditional ideal score $`p_{\mathrm{ideal}}`$ at least as large as that joint probability. Thus $`p_{\mathrm{real}}\le\eta_{\mathrm{prep}}+p_{\mathrm{ideal}}`$.
+
+Apply a monotone ideal score-to-gate bound at $`(p_{\mathrm{real}}-\eta_{\mathrm{prep}})_+`$ when it exceeds the bound's score threshold. The continuation must satisfy the assumptions of that bound, including any independence or conditional erasure premise. The composition charges only the storage interval, and its device premises require evidence separate from the test score.
 
 ## A. Proof that prior recovery already gives the large-block floor
 

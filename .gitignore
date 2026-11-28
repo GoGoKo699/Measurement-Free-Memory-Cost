@@ -1,16 +1,3 @@
 __pycache__/
 *.py[cod]
 .venv/
-
-learning/report/*.aux
-learning/report/*.log
-learning/report/*.toc
-learning/report/*.out
-learning/report/*.fls
-learning/report/*.fdb_latexmk
-learning/report/*version.txt
-learning/report/*.sha256
-learning/report/container-image.txt
-learning/report/report-comparison.json
-learning/report/stored-report-before-build.pdf
-

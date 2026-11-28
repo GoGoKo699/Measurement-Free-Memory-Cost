@@ -210,7 +210,7 @@ Constants do not depend on $`k,D,\gamma,\epsilon`$ within the stated ranges. The
 
 The [gate-budget theorem](control_cost.md) gives an extensive necessary cost proportional to $`k\gamma D`$ after its initial width allowance. This construction realizes that dependence with a power of a logarithm overhead in both width and gate count. For its width, the logarithmic width allowance in the simple converse is only of order $`\gamma^{-1}\ln\ln(k(\gamma D+1)/\epsilon)`$ at fixed fidelity.
 
-The [Tanner construction](tanner_memory.md) and [reliability converse](reliability_processing.md) match processing order at fixed positive noise and width proportional to payload plus reliability logarithm. This five-qubit construction retains its larger polylogarithmic overhead. Optimal numerical coefficients, uniform weak-noise dependence and the unrestricted width/work optimum remain open; decoder running time alone is not a coherent circuit accounting.
+The [Tanner construction](tanner_memory.md) and [reliability converse](reliability_processing.md) match processing order at fixed positive noise and width proportional to payload plus reliability logarithm. This five-qubit construction retains its larger polylogarithmic overhead. The [uniform Tanner analysis](weak_noise_tradeoff.md) determines the long-batch gate order at weak noise. Optimal numerical coefficients and the unrestricted width–gate optimum remain open.
 
 The [zero-non-Clifford construction](clifford_lifetime.md) realizes the alternative resource choice: an exponentially large noisy record of syndrome history and nonlinear recovery deferred to the endpoint. These constructions serve different resource regimes.
 

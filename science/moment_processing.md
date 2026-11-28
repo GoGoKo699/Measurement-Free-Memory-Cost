@@ -290,7 +290,7 @@ The Pauli envelope, fixed primitive charges, CPTP factorization and scalar ledge
 
 The earlier optimality of the rank-only chord does not obstruct this theorem: it applied after replacing the noise distribution by arbitrary mixtures constrained only by $`\mathbb E r`$. Here the actual product-noise transition controls $`\mathbb E z^r`$ before its logarithm is taken.
 
-All persistent-controller, noise independence and endpoint assumptions remain premises. A score verifies none of them. Mathematical flags stay unavailable to the device, and no LWE preparation or resource-preserving compilation is imported. The [verification guide](../verification/README.md) distinguishes exact certificates, finite checks and written all-parameter proofs.
+All persistent-controller, noise independence and endpoint assumptions remain premises. A score verifies none of them. Mathematical flags stay unavailable to the device. Applying the bound through a classical verifier requires the separate [preparation composition](guessing_processing.md#classical-verifier-composition). The [verification guide](../verification/README.md) distinguishes exact certificates, finite checks and written all-parameter proofs.
 
 ## Quantitative decay and a finite guessing refinement
 
