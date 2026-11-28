@@ -22,7 +22,7 @@ and
 
 Here $`n`$ includes data, syndrome, controller and all temporary work qubits. The constants depend on the fixed Tanner family and are independent of $`k,D,\epsilon,\gamma`$ in the stated range. They can be very large. Sections 2–7 retain the original direct Tanner construction, which requires a possibly tiny family-dependent $`\gamma_*\gt0`$. Section 8 proves the extended range by explicit composition with the [five-qubit construction](coherent_recovery.md); it does not assume that the Tanner decoder itself has that physical noise threshold.
 
-At fixed $`\gamma\in(0,1/20]`$, write $`L=\ln(D/\epsilon)`$. The [reliability converse](reliability_processing.md), together with the payload floor, proves that every family with $`D\to\infty`$, $`0\lt\epsilon\le\epsilon_0\lt1/2`$ and $`n\le C(k+L)`$ needs $`m_T=\Omega_{\gamma,C,\epsilon_0}(D(k+L))`$. Equation (T1) attains this order at width $`O(k+L)`$, including fixed $`k`$. For $`k=\Omega(L)`$ it reduces to the payload-dominated order $`k\gamma D`$. This sharpens the resource comparison without altering the inherited decoder or this construction. It does not determine a numerical coefficient, uniform weak-noise law, practical constants, locality or a threshold with faulty processing gates.
+At fixed $`\gamma\in(0,1/20]`$, write $`L=\ln(D/\epsilon)`$. The [reliability converse](reliability_processing.md), together with the payload floor, proves that every family with $`D\to\infty`$, $`0\lt\epsilon\le\epsilon_0\lt1/2`$ and $`n\le C(k+L)`$ needs $`m_T=\Omega_{\gamma,C,\epsilon_0}(D(k+L))`$. Equation (T1) attains this order at width $`O(k+L)`$, including fixed $`k`$. For $`k=\Omega(L)`$ it reduces to the payload-dominated order $`k\gamma D`$. This sharpens the resource comparison without altering the inherited decoder or this construction. The [uniform weak-noise analysis](weak_noise_tradeoff.md) keeps the actual batch-noise exponent to vary the width and gate count and proves a matching long-batch gate order. Numerical coefficients, practical constants, locality and faulty processing gates remain open.
 
 ## 2. Inherited code and decoder statements
 
@@ -118,7 +118,7 @@ T_{\mathrm{epoch}}\le14A_N
 
 This counts both computation and uncomputation. Every slot is prescribed, including for zero syndrome or no successful update. It is not an expected executed cost.
 
-All work returns to zero. Reset the syndrome pool on the same fixed schedule after every epoch. A conservative width bound, including correction masks and reversible gate work, is
+All work returns to zero. After each epoch, reset the retained syndrome once uncomputation finishes. Reset both syndrome and work registers on the fixed schedule before every reuse. A conservative width bound, including correction masks and reversible gate work, is
 
 ```math
 n\le C_WN,\qquad C_W=64(1+t)b2^b.

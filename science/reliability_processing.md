@@ -316,7 +316,7 @@ For the upper bound, the [Tanner construction](tanner_memory.md) has half-diamon
 
 Finally, the lower and upper width estimates identify $`n=O(k+L)`$ with $`n=O(n_{\min}^{\mathrm e})`$ or $`n=O(n_{\min}^{\diamond})`$. Apply Corollary R4 for the processing lower bound. The Tanner construction fits some fixed multiplicative width allowance and has the matching processing upper bound. This does not assert that it fits every chosen allowance, or that any numerical width or gate coefficient is optimal. $`\square`$
 
-At $`D=0`$, both minimum widths are exactly $`k`$ for the stated error range: the same Schmidt-number argument supplies the lower bound, and noiseless identity storage attains it with no interior processing. The logarithmic formula above is stated only for $`D\ge1`$. This corollary does not optimize unrestricted width/work tradeoffs or establish uniform weak-noise constants.
+At $`D=0`$, both minimum widths are exactly $`k`$ for the stated error range: the same Schmidt-number argument supplies the lower bound, and noiseless identity storage attains it with no interior processing. The logarithmic formula above is stated only for $`D\ge1`$. See [the uniform analysis](weak_noise_tradeoff.md) for the minimum width and long-batch gate law when noise varies.
 
 ## 6. Delayed-basis BB84 scores
 
@@ -349,7 +349,7 @@ Every contiguous interval obeys the same formula with $`D,m_T,2n`$ replaced by $
 
 For fixed $`k`$, $`\gamma\gt0`$ and $`p\gt2^{-k}`$, with $`n=O(\ln D)`$, the bound gives $`m_T=\Omega_{\gamma,k,p}(D\ln D)`$ as $`D\to\infty`$. The conclusion may hold below the classical-storage score: noisy classical records also need continuing processing in the stated device model. The general above-chance processing conclusion is not a certificate of quantum storage or a verification of the noise/controller premises. Perfect score $`p=1`$ is impossible at finite width with $`D\ge1`$ for the same complete-replacement reason.
 
-The ideal finite-dimension BB84 guessing theorem is unchanged. Its new consequence is this reliability-sensitive conditional processing witness; no LWE preparation/processing compiler is imported.
+The finite-dimension BB84 guessing theorem supplies this reliability-sensitive conditional processing witness. An efficient counted-memory continuation can use the [classical-verifier composition](guessing_processing.md#classical-verifier-composition) under its additional premises.
 
 ## 7. Certified finite examples
 
@@ -368,4 +368,4 @@ The [standard-library verifier](../verification/verify_reliability.py) checks sm
 
 The stochastic Pauli/envelope framework, CPTP replacement bottleneck, rank and Schmidt-number floors and T-growth ledger are inherited from this repository and its cited antecedents. The first-extinction/Jensen reliability mechanism is closely related to the complete-erasure spacetime argument of Bharti, Haug and Tanggara. The addition is its rank-dependent form under free Clifford/reset processing, the conversion to a charged T budget, the interval/BB84 transfer and its combination with the existing Tanner construction. The finite sharpening retains symplectically paired pivots, the survival product and the exiting-rank term. The literature comparison is scoped; it is not an exhaustive priority certificate.
 
-The finite $`-2n`$ reserve is essential. Exponentially large zero-T archives are not excluded by a result restricted to $`n=O(k+\ln(D/\epsilon))`$. The explicit coefficient contains $`1/\ln(1/\gamma)`$, so fixed-noise matching does not establish a uniform weak-noise optimum. Optimal numerical T coefficients, unrestricted width/work tradeoffs, noisy elementary processing gates, geometric locality and an achievable processing capacity remain open.
+The finite $`-2n`$ reserve is essential. Exponentially large zero-T archives are not excluded by a result restricted to $`n=O(k+\ln(D/\epsilon))`$. The one-layer coefficient contains $`1/\ln(1/\gamma)`$. The [block extinction argument](weak_noise_tradeoff.md#2-extinction-over-a-block-of-noise-rounds) gives a uniform gate lower bound at long-batch width. Optimal numerical T coefficients, unrestricted width/work tradeoffs, noisy elementary processing gates, geometric locality and an achievable processing capacity remain open.
