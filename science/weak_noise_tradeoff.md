@@ -57,7 +57,7 @@ Let $`r`$ be the rank of the backward Pauli envelope at an entry cut. The zero e
 
 Indeed, a site that holds $`d`$ of the $`r`$ pivot coordinates, with $`d\in\{1,2\}`$, contributes $`1-q+qz^d\ge(1-q+qz)^d`$ to the generating function for the number of surviving pivots. Site flags are independent conditional on the incoming envelope. The inequality extends to $`z=0`$ with $`0^0=1`$. Across a charged gate the corresponding lower bound is $`z\,z^r`$.
 
-Group $`H=\lceil1/\gamma\rceil`$ successive noise layers into one backward block. Assign each intervening gate to its following noise layer in backward time. Let $`M_j`$ be the charged gate count in block $`j`$, and let $`\ell_g`$ be the number of noise layers in that block preceding gate $`g`$. Let $`G_t`$ be the gates in this block with $`\ell_g<t`$. Iterating the one-step generating function bounds at $`z=0`$ gives, just after layer $`t`$,
+Group $`H=\lceil1/\gamma\rceil`$ successive noise layers into one backward block. Assign each intervening gate to its following noise layer in backward time. Let $`M_j`$ be the charged gate count in block $`j`$, and let $`\ell_g`$ be the number of noise layers in that block preceding gate $`g`$. Let $`G_t`$ be the gates in this block with $`\ell_g\lt t`$. Iterating the one-step generating function bounds at $`z=0`$ gives, just after layer $`t`$,
 
 ```math
 \Pr(r_t=0\mid V_{\rm entry})
@@ -76,7 +76,7 @@ Here $`1-q^\ell\ge1-e^{-\ell/H}\ge(1-e^{-1})\ell/H`$ and $`\sum_{\ell=1}^H\ln(H/
 
 ## 3. Gate lower bound and matching scale
 
-Put $`B=\lfloor D/H\rfloor`$ and $`b=1-\delta`$. Complete extinction makes the logical channel a replacement on that trajectory, so its total probability is at most $`\delta`$. For any integer $`0\le S<B`$, discard the first $`S`$ complete backward blocks from the survival calculation. If $`R_j`$ is expected rank at block $`j`$ entry, then $`R_{j+1}\le q^H R_j+M_j`$ and $`R_1\le 2n`$. Since $`q^H\le e^{-1}`$,
+Put $`B=\lfloor D/H\rfloor`$ and $`b=1-\delta`$. Complete extinction makes the logical channel a replacement on that trajectory, so its total probability is at most $`\delta`$. For any integer $`0\le S\lt B`$, discard the first $`S`$ complete backward blocks from the survival calculation. If $`R_j`$ is expected rank at block $`j`$ entry, then $`R_{j+1}\le q^H R_j+M_j`$ and $`R_1\le 2n`$. Since $`q^H\le e^{-1}`$,
 
 ```math
 \sum_{j=S+1}^B R_j
@@ -97,7 +97,7 @@ The second inequality uses the monotonicity of $`A e^{-v/A}`$ for fixed $`v\ge0`
 m_T\ge\frac{1}{5}\left[b(B-S)\ln\frac{b(B-S)}{\delta}-4ne^{-S}\right]_+ .
 ```
 
-The finite bound applies when $`B\ge1`$. It also applies to unconditional delayed-basis BB84 score $`2^{-k}<p<1`$ in the same independent product-noise model with $`\delta=(1-p)/(1-2^{-k})`$, since complete extinction limits that branch's score to chance. Perfect score is impossible at finite width for $`D\ge1`$ because complete physical replacement has positive probability. The [one-layer reliability bounds](reliability_processing.md) remain available for finite comparisons and use more of the commutation structure.
+The finite bound applies when $`B\ge1`$. It also applies to unconditional delayed-basis BB84 score $`2^{-k}\lt p\lt 1`$ in the same independent product-noise model with $`\delta=(1-p)/(1-2^{-k})`$, since complete extinction limits that branch's score to chance. Perfect score is impossible at finite width for $`D\ge1`$ because complete physical replacement has positive probability. The [one-layer reliability bounds](reliability_processing.md) remain available for finite comparisons and use more of the commutation structure.
 
 Write $`x=\gamma D`$ and $`L=\ln((1+x)/\epsilon)`$. At width $`n\le C(k+L)`$ for fixed $`C>0`$, the new bound and the [payload law](control_cost.md#4-logarithmic-and-additive-resource-laws) together imply
 
